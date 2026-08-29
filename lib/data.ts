@@ -14,7 +14,7 @@ export const BRC_STAR_INFO = {
   tagline: 'Build Digital Products That Move Your Business Forward.',
   subheadline:
     'From high-performance websites and web applications to mobile apps, enterprise platforms, AI solutions and custom business systems — BRC STAR designs and develops technology around your real business needs.',
-  contactEmail: 'contact@brcstar.com',
+  contactEmail: 'contact@brcstar.in',
   location: 'Engineering Hub • Global Client Delivery',
   availability: 'Accepting select new projects for Q3/Q4',
 };

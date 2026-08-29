@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
+import { TldrSummaryBlock } from '@/components/TldrSummaryBlock';
 import { TrustStrip } from '@/components/TrustStrip';
 import { ProofOfWorkSection } from '@/components/ProofOfWorkSection';
 import { VerificationMethodologySection } from '@/components/VerificationMethodologySection';
@@ -16,6 +17,7 @@ import { ProjectEstimatorSection } from '@/components/ProjectEstimatorSection';
 import { FaqSection } from '@/components/FaqSection';
 import { FinalCtaSection } from '@/components/FinalCtaSection';
 import { Footer } from '@/components/Footer';
+import { StickyCta } from '@/components/StickyCta';
 import { ProjectInquiryModal } from '@/components/ProjectInquiryModal';
 import { ClaimProofDrawer } from '@/components/ClaimProofDrawer';
 import { AUDITED_CLAIMS } from '@/lib/claim-proof-data';
@@ -64,7 +66,10 @@ export default function HomePage() {
           onOpenClaimProof={handleOpenClaimProof}
         />
 
-        {/* 2. Trust & Capabilities Strip */}
+        {/* 2. Executive TL;DR Summary Block */}
+        <TldrSummaryBlock onOpenInquiry={handleOpenInquiry} />
+
+        {/* 3. Trust & Capabilities Strip */}
         <TrustStrip />
 
         {/* 3. Transparent Proof of Work & Live Telemetry Engine */}
@@ -109,6 +114,9 @@ export default function HomePage() {
 
       {/* Footer */}
       <Footer onOpenInquiry={() => handleOpenInquiry()} />
+
+      {/* Persistent Sticky CTA */}
+      <StickyCta onOpenInquiry={handleOpenInquiry} />
 
       {/* Global Interactive Project Intake / Consultation Modal */}
       <ProjectInquiryModal

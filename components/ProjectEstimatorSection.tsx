@@ -51,7 +51,7 @@ export function ProjectEstimatorSection({ onOpenInquiry }: ProjectEstimatorSecti
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-800/40 text-blue-300 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-800/40 text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
             <span>Transparent Project Investment</span>
           </div>
 
@@ -137,7 +137,7 @@ export function ProjectEstimatorSection({ onOpenInquiry }: ProjectEstimatorSecti
               <div className="pt-8 border-t border-slate-800/80 mt-8">
                 <button
                   onClick={() => onOpenInquiry(pkg.title)}
-                  className={`w-full py-3 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                  className={`w-full py-3.5 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer ${
                     pkg.popular
                       ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30'
                       : 'bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white'
@@ -168,15 +168,15 @@ export function ProjectEstimatorSection({ onOpenInquiry }: ProjectEstimatorSecti
         </div>
 
         {/* Interactive Project Scope & Investment Planner Tool */}
-        <div className="rounded-2xl bg-gradient-to-br from-[#0c1426] via-[#0e172c] to-[#0a101e] border border-blue-500/30 p-6 sm:p-10 shadow-2xl space-y-8">
+        <div id="estimator" className="rounded-2xl bg-gradient-to-br from-[#0c1426] via-[#0e172c] to-[#0a101e] border border-blue-500/30 p-5 sm:p-8 lg:p-10 shadow-2xl space-y-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
             <div className="space-y-1">
               <div className="flex items-center gap-2 text-blue-400 text-xs font-bold uppercase tracking-wider">
                 <Calculator className="w-4 h-4" />
                 <span>Interactive Scoping Utility</span>
               </div>
-              <h3 className="text-2xl font-extrabold text-white">
-                Project Scope & Timeline Estimator
+              <h3 className="text-xl sm:text-2xl font-extrabold text-white">
+                Project Scope &amp; Timeline Estimator
               </h3>
               <p className="text-xs sm:text-sm text-slate-400">
                 Configure your project parameters to calculate estimated sprint velocity and milestone requirements.
@@ -187,38 +187,42 @@ export function ProjectEstimatorSection({ onOpenInquiry }: ProjectEstimatorSecti
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Column 1 & 2: Parameters */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Category Selector */}
-              <div className="space-y-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                  1. Select Platform Architecture
+              {/* Step 1: Category Selector */}
+              <div className="space-y-2.5">
+                <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center justify-between">
+                  <span>1. Select Platform Architecture</span>
+                  <span className="text-[11px] font-mono text-blue-400 font-normal">Step 1 of 3</span>
                 </label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   <button
+                    type="button"
                     onClick={() => setSelectedCategory('website')}
-                    className={`p-3 rounded-xl border text-xs font-semibold transition-all ${
+                    className={`p-3.5 min-h-[48px] rounded-xl border text-xs font-semibold transition-all text-center flex items-center justify-center cursor-pointer ${
                       selectedCategory === 'website'
-                        ? 'bg-blue-600 text-white border-blue-400'
-                        : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white'
+                        ? 'bg-blue-600 text-white border-blue-400 shadow-md shadow-blue-600/30'
+                        : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white hover:border-slate-700'
                     }`}
                   >
                     Business Website
                   </button>
                   <button
+                    type="button"
                     onClick={() => setSelectedCategory('webapp')}
-                    className={`p-3 rounded-xl border text-xs font-semibold transition-all ${
+                    className={`p-3.5 min-h-[48px] rounded-xl border text-xs font-semibold transition-all text-center flex items-center justify-center cursor-pointer ${
                       selectedCategory === 'webapp'
-                        ? 'bg-blue-600 text-white border-blue-400'
-                        : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white'
+                        ? 'bg-blue-600 text-white border-blue-400 shadow-md shadow-blue-600/30'
+                        : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white hover:border-slate-700'
                     }`}
                   >
                     Web Application / SaaS
                   </button>
                   <button
+                    type="button"
                     onClick={() => setSelectedCategory('enterprise')}
-                    className={`p-3 rounded-xl border text-xs font-semibold transition-all ${
+                    className={`p-3.5 min-h-[48px] rounded-xl border text-xs font-semibold transition-all text-center flex items-center justify-center cursor-pointer ${
                       selectedCategory === 'enterprise'
-                        ? 'bg-blue-600 text-white border-blue-400'
-                        : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white'
+                        ? 'bg-blue-600 text-white border-blue-400 shadow-md shadow-blue-600/30'
+                        : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white hover:border-slate-700'
                     }`}
                   >
                     Enterprise System
@@ -226,82 +230,86 @@ export function ProjectEstimatorSection({ onOpenInquiry }: ProjectEstimatorSecti
                 </div>
               </div>
 
-              {/* Module Checkboxes */}
-              <div className="space-y-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                  2. Select Required Feature Modules
+              {/* Step 2: Module Checkboxes */}
+              <div className="space-y-2.5">
+                <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center justify-between">
+                  <span>2. Select Required Feature Modules</span>
+                  <span className="text-[11px] font-mono text-blue-400 font-normal">Step 2 of 3</span>
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <label className="flex items-center gap-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800 cursor-pointer hover:border-slate-700">
+                  <label className="flex items-center gap-3 p-3.5 min-h-[48px] rounded-xl bg-slate-900/90 border border-slate-800 cursor-pointer hover:border-slate-700 transition-colors">
                     <input
                       type="checkbox"
                       checked={hasAuth}
                       onChange={(e) => setHasAuth(e.target.checked)}
-                      className="w-4 h-4 rounded text-blue-600 bg-slate-800 border-slate-700"
+                      className="w-4 h-4 rounded text-blue-600 bg-slate-800 border-slate-700 focus:ring-blue-500 shrink-0"
                     />
-                    <span className="text-xs text-slate-200 font-medium">User Authentication & RBAC</span>
+                    <span className="text-xs text-slate-200 font-medium leading-snug">User Authentication &amp; RBAC</span>
                   </label>
-                  <label className="flex items-center gap-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800 cursor-pointer hover:border-slate-700">
+                  <label className="flex items-center gap-3 p-3.5 min-h-[48px] rounded-xl bg-slate-900/90 border border-slate-800 cursor-pointer hover:border-slate-700 transition-colors">
                     <input
                       type="checkbox"
                       checked={hasDatabase}
                       onChange={(e) => setHasDatabase(e.target.checked)}
-                      className="w-4 h-4 rounded text-blue-600 bg-slate-800 border-slate-700"
+                      className="w-4 h-4 rounded text-blue-600 bg-slate-800 border-slate-700 focus:ring-blue-500 shrink-0"
                     />
-                    <span className="text-xs text-slate-200 font-medium">Relational DB & ORM Models</span>
+                    <span className="text-xs text-slate-200 font-medium leading-snug">Relational DB &amp; ORM Models</span>
                   </label>
-                  <label className="flex items-center gap-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800 cursor-pointer hover:border-slate-700">
+                  <label className="flex items-center gap-3 p-3.5 min-h-[48px] rounded-xl bg-slate-900/90 border border-slate-800 cursor-pointer hover:border-slate-700 transition-colors">
                     <input
                       type="checkbox"
                       checked={hasPayments}
                       onChange={(e) => setHasPayments(e.target.checked)}
-                      className="w-4 h-4 rounded text-blue-600 bg-slate-800 border-slate-700"
+                      className="w-4 h-4 rounded text-blue-600 bg-slate-800 border-slate-700 focus:ring-blue-500 shrink-0"
                     />
-                    <span className="text-xs text-slate-200 font-medium">Stripe Payments / Invoicing</span>
+                    <span className="text-xs text-slate-200 font-medium leading-snug">Stripe Payments / Invoicing</span>
                   </label>
-                  <label className="flex items-center gap-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800 cursor-pointer hover:border-slate-700">
+                  <label className="flex items-center gap-3 p-3.5 min-h-[48px] rounded-xl bg-slate-900/90 border border-slate-800 cursor-pointer hover:border-slate-700 transition-colors">
                     <input
                       type="checkbox"
                       checked={hasAi}
                       onChange={(e) => setHasAi(e.target.checked)}
-                      className="w-4 h-4 rounded text-blue-600 bg-slate-800 border-slate-700"
+                      className="w-4 h-4 rounded text-blue-600 bg-slate-800 border-slate-700 focus:ring-blue-500 shrink-0"
                     />
-                    <span className="text-xs text-slate-200 font-medium">AI Copilot / Vector Search (RAG)</span>
+                    <span className="text-xs text-slate-200 font-medium leading-snug">AI Copilot / Vector Search (RAG)</span>
                   </label>
-                  <label className="flex items-center gap-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800 cursor-pointer hover:border-slate-700 sm:col-span-2">
+                  <label className="flex items-center gap-3 p-3.5 min-h-[48px] rounded-xl bg-slate-900/90 border border-slate-800 cursor-pointer hover:border-slate-700 transition-colors sm:col-span-2">
                     <input
                       type="checkbox"
                       checked={hasMobile}
                       onChange={(e) => setHasMobile(e.target.checked)}
-                      className="w-4 h-4 rounded text-blue-600 bg-slate-800 border-slate-700"
+                      className="w-4 h-4 rounded text-blue-600 bg-slate-800 border-slate-700 focus:ring-blue-500 shrink-0"
                     />
-                    <span className="text-xs text-slate-200 font-medium">Companion Mobile App (React Native iOS/Android)</span>
+                    <span className="text-xs text-slate-200 font-medium leading-snug">Companion Mobile App (React Native iOS/Android)</span>
                   </label>
                 </div>
               </div>
 
-              {/* Urgency */}
-              <div className="space-y-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                  3. Delivery Velocity
+              {/* Step 3: Urgency */}
+              <div className="space-y-2.5">
+                <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center justify-between">
+                  <span>3. Delivery Velocity</span>
+                  <span className="text-[11px] font-mono text-blue-400 font-normal">Step 3 of 3</span>
                 </label>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <button
+                    type="button"
                     onClick={() => setTimelineUrgency('standard')}
-                    className={`p-3 rounded-xl border text-xs font-medium transition-all ${
+                    className={`p-3.5 min-h-[48px] rounded-xl border text-xs font-medium transition-all text-center flex items-center justify-center cursor-pointer ${
                       timelineUrgency === 'standard'
-                        ? 'bg-blue-950 border-blue-500 text-blue-300'
-                        : 'bg-slate-900 border-slate-800 text-slate-400'
+                        ? 'bg-blue-950 border-blue-500 text-blue-300 font-semibold shadow-inner'
+                        : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200'
                     }`}
                   >
                     Standard Agile Schedule
                   </button>
                   <button
+                    type="button"
                     onClick={() => setTimelineUrgency('accelerated')}
-                    className={`p-3 rounded-xl border text-xs font-medium transition-all ${
+                    className={`p-3.5 min-h-[48px] rounded-xl border text-xs font-medium transition-all text-center flex items-center justify-center cursor-pointer ${
                       timelineUrgency === 'accelerated'
-                        ? 'bg-blue-950 border-blue-500 text-blue-300'
-                        : 'bg-slate-900 border-slate-800 text-slate-400'
+                        ? 'bg-blue-950 border-blue-500 text-blue-300 font-semibold shadow-inner'
+                        : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200'
                     }`}
                   >
                     Accelerated Sprint Cadence
@@ -342,6 +350,7 @@ export function ProjectEstimatorSection({ onOpenInquiry }: ProjectEstimatorSecti
               </div>
 
               <button
+                type="button"
                 onClick={() => onOpenInquiry(`Custom Scoped ${selectedCategory.toUpperCase()}`)}
                 className="w-full py-3.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 transition-all cursor-pointer"
               >

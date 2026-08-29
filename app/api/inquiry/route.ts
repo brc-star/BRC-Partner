@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error('Error processing inquiry:', error);
     return NextResponse.json(
-      { error: 'An unexpected error occurred while processing your request. Please try again or email contact@brcstar.com directly.' },
+      { error: 'An unexpected error occurred while processing your request. Please try again or email contact@brcstar.in directly.' },
       { status: 500 }
     );
   }

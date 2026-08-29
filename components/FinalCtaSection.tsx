@@ -52,7 +52,7 @@ export function FinalCtaSection({ onOpenInquiry }: FinalCtaSectionProps) {
             </button>
 
             <a
-              href="mailto:contact@brcstar.com"
+              href="mailto:contact@brcstar.in"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-base border border-slate-700 transition-colors"
             >
               <MessageSquare className="w-4 h-4 text-blue-400" />

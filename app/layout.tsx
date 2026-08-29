@@ -2,6 +2,10 @@ import type {Metadata, Viewport} from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://brcpartner.brcstar.in'),
+  alternates: {
+    canonical: 'https://brcpartner.brcstar.in',
+  },
   title: 'BRC STAR • Full-Stack Digital Technology Partner',
   description: 'Expert full-stack technology development partner for businesses. We design, architect, build, and scale modern web applications, mobile platforms, enterprise systems, and AI solutions.',
   keywords: [

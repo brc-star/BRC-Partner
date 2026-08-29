@@ -65,6 +65,14 @@ export function ProjectShowcaseSection({
             Transparent walkthroughs of custom enterprise platforms, cloud web applications, AI copilots, and digital flagships engineered by BRC STAR.
           </p>
 
+          {/* Architectural Demonstration Disclaimer */}
+          <div className="mx-auto max-w-2xl p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-center gap-2.5 text-xs text-slate-300 shadow-inner">
+            <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span className="text-left sm:text-center leading-normal">
+              <strong>Notice:</strong> These are architectural demonstrations built to prove engineering capability — not live client deployments. Real client case studies available on request.
+            </span>
+          </div>
+
           {/* Filter Pills */}
           <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
             {categories.map((cat) => (
