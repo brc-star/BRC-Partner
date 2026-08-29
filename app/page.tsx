@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
 import { TrustStrip } from '@/components/TrustStrip';
+import { ProofOfWorkSection } from '@/components/ProofOfWorkSection';
+import { VerificationMethodologySection } from '@/components/VerificationMethodologySection';
 import { BusinessProblemSection } from '@/components/BusinessProblemSection';
 import { SolutionsSection } from '@/components/SolutionsSection';
 import { ProjectShowcaseSection } from '@/components/ProjectShowcaseSection';
@@ -15,10 +17,16 @@ import { FaqSection } from '@/components/FaqSection';
 import { FinalCtaSection } from '@/components/FinalCtaSection';
 import { Footer } from '@/components/Footer';
 import { ProjectInquiryModal } from '@/components/ProjectInquiryModal';
+import { ClaimProofDrawer } from '@/components/ClaimProofDrawer';
+import { AUDITED_CLAIMS } from '@/lib/claim-proof-data';
 
 export default function HomePage() {
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
   const [initialService, setInitialService] = useState<string | undefined>(undefined);
+
+  // Claim → Proof Drawer State
+  const [selectedClaimId, setSelectedClaimId] = useState<string | null>(null);
+  const [isProofDrawerOpen, setIsProofDrawerOpen] = useState(false);
 
   const handleOpenInquiry = (serviceName?: string) => {
     setInitialService(serviceName);
@@ -30,6 +38,19 @@ export default function HomePage() {
     setInitialService(undefined);
   };
 
+  const handleOpenClaimProof = (claimOrId: string | { id: string }) => {
+    const id = typeof claimOrId === 'string' ? claimOrId : claimOrId.id;
+    setSelectedClaimId(id);
+    setIsProofDrawerOpen(true);
+  };
+
+  const handleCloseClaimProof = () => {
+    setIsProofDrawerOpen(false);
+    setSelectedClaimId(null);
+  };
+
+  const activeClaim = AUDITED_CLAIMS.find((c) => c.id === selectedClaimId) || null;
+
   return (
     <div className="min-h-screen bg-[#060911] text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
       {/* Top Header */}
@@ -38,36 +59,51 @@ export default function HomePage() {
       {/* Main Content Flow */}
       <main className="flex-grow">
         {/* 1. Hero Section with Live Product Mockup */}
-        <Hero onOpenInquiry={() => handleOpenInquiry()} />
+        <Hero
+          onOpenInquiry={() => handleOpenInquiry()}
+          onOpenClaimProof={handleOpenClaimProof}
+        />
 
         {/* 2. Trust & Capabilities Strip */}
         <TrustStrip />
 
-        {/* 3. Business Problem vs. Engineered Solution */}
+        {/* 3. Transparent Proof of Work & Live Telemetry Engine */}
+        <ProofOfWorkSection
+          onOpenClaimProof={handleOpenClaimProof}
+          onOpenInquiry={handleOpenInquiry}
+        />
+
+        {/* 4. 5-Stage Claim Verification Methodology */}
+        <VerificationMethodologySection onOpenInquiry={() => handleOpenInquiry('Verification Protocol')} />
+
+        {/* 5. Business Problem vs. Engineered Solution */}
         <BusinessProblemSection onOpenInquiry={() => handleOpenInquiry('Architecture Audit')} />
 
-        {/* 4. Core Solutions & Services Grid */}
+        {/* 6. Core Solutions & Services Grid */}
         <SolutionsSection onOpenInquiry={handleOpenInquiry} />
 
-        {/* 5. Visual Project Showcase & Deep-Dive Case Studies */}
-        <ProjectShowcaseSection onOpenInquiry={handleOpenInquiry} />
+        {/* 7. Visual Project Showcase & Deep-Dive Case Studies */}
+        <ProjectShowcaseSection
+          onOpenInquiry={handleOpenInquiry}
+          onOpenClaimProof={handleOpenClaimProof}
+        />
 
-        {/* 6. Why BRC STAR & Comparison Matrix */}
+        {/* 8. Why BRC STAR & Comparison Matrix */}
         <WhyBrcStarSection onOpenInquiry={() => handleOpenInquiry()} />
 
-        {/* 7. 6-Stage Engineering Development Lifecycle */}
+        {/* 9. 6-Stage Engineering Development Lifecycle */}
         <DevelopmentProcessSection onOpenInquiry={() => handleOpenInquiry('Stage 01 Discovery')} />
 
-        {/* 8. Modern Technology Stack */}
+        {/* 10. Modern Technology Stack */}
         <TechStackSection onOpenInquiry={() => handleOpenInquiry('Technology Advisory')} />
 
-        {/* 9. Investment Packages & Interactive Scope Estimator */}
+        {/* 11. Investment Packages & Interactive Scope Estimator */}
         <ProjectEstimatorSection onOpenInquiry={handleOpenInquiry} />
 
-        {/* 10. FAQ Section */}
+        {/* 12. FAQ Section */}
         <FaqSection onOpenInquiry={() => handleOpenInquiry()} />
 
-        {/* 11. Final High-Conversion Action Section */}
+        {/* 13. Final High-Conversion Action Section */}
         <FinalCtaSection onOpenInquiry={() => handleOpenInquiry()} />
       </main>
 
@@ -79,6 +115,15 @@ export default function HomePage() {
         isOpen={inquiryModalOpen}
         onClose={handleCloseInquiry}
         initialService={initialService}
+      />
+
+      {/* Interactive Claim → Proof Drawer / Modal */}
+      <ClaimProofDrawer
+        claim={activeClaim}
+        isOpen={isProofDrawerOpen}
+        onClose={handleCloseClaimProof}
+        onOpenInquiry={handleOpenInquiry}
+        onSelectAnotherClaim={handleOpenClaimProof}
       />
     </div>
   );

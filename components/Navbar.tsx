@@ -20,6 +20,7 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
   }, []);
 
   const navLinks = [
+    { label: 'Proof of Work', href: '#proof-of-work' },
     { label: 'Solutions', href: '#solutions' },
     { label: 'Showcase', href: '#showcase' },
     { label: 'Why BRC STAR', href: '#why-us' },

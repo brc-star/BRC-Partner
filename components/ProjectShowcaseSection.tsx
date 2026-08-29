@@ -15,16 +15,22 @@ import {
   Search,
   Sparkles,
   TrendingUp,
+  ShieldCheck,
 } from 'lucide-react';
 import { SHOWCASE_PROJECTS } from '@/lib/data';
 import { ProjectShowcaseItem } from '@/types';
 import { CaseStudyModal } from './CaseStudyModal';
+import { ClaimBadge } from './ClaimBadge';
 
 interface ProjectShowcaseSectionProps {
   onOpenInquiry: (serviceName?: string) => void;
+  onOpenClaimProof?: (claimId: string) => void;
 }
 
-export function ProjectShowcaseSection({ onOpenInquiry }: ProjectShowcaseSectionProps) {
+export function ProjectShowcaseSection({
+  onOpenInquiry,
+  onOpenClaimProof,
+}: ProjectShowcaseSectionProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activeCaseStudy, setActiveCaseStudy] = useState<ProjectShowcaseItem | null>(null);
 
@@ -43,19 +49,20 @@ export function ProjectShowcaseSection({ onOpenInquiry }: ProjectShowcaseSection
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-800/40 text-blue-300 text-xs font-semibold uppercase tracking-wider">
-            <span>Engineering Portfolio & Systems</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-800/40 text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Demonstrated Systems &amp; Reference Architectures</span>
           </div>
 
           <h2
             id="showcase-headline"
             className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight"
           >
-            Visual Project Showcase
+            Engineering Showcase &amp; Case Studies
           </h2>
 
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            A selection of custom enterprise platforms, cloud web applications, AI copilots, and digital flagships engineered by BRC STAR.
+            Transparent walkthroughs of custom enterprise platforms, cloud web applications, AI copilots, and digital flagships engineered by BRC STAR.
           </p>
 
           {/* Filter Pills */}
@@ -78,7 +85,7 @@ export function ProjectShowcaseSection({ onOpenInquiry }: ProjectShowcaseSection
 
         {/* 6 Visual Projects Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {filteredProjects.map((project, idx) => (
+          {filteredProjects.map((project) => (
             <div
               key={project.id}
               id={`project-card-${project.id}`}
@@ -95,11 +102,12 @@ export function ProjectShowcaseSection({ onOpenInquiry }: ProjectShowcaseSection
                       <div className="w-2.5 h-2.5 rounded-full bg-slate-700" />
                       <div className="w-2.5 h-2.5 rounded-full bg-slate-700" />
                       <span className="font-mono text-[10px] text-slate-400 ml-2">
-                        {project.id}.production.brcstar.internal
+                        {project.id}.demo.brcstar.internal
                       </span>
                     </div>
-                    <span className="text-[10px] font-mono text-emerald-400">
-                      LIVE INSTANCE
+                    <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      {project.demonstrationType.toUpperCase()}
                     </span>
                   </div>
 
@@ -111,24 +119,24 @@ export function ProjectShowcaseSection({ onOpenInquiry }: ProjectShowcaseSection
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <Activity className="w-3.5 h-3.5 text-blue-400" />
-                            <span className="text-xs font-semibold text-slate-200">Active Fleet Telemetry (1,420 Units)</span>
+                            <span className="text-xs font-semibold text-slate-200">Active Fleet Telemetry (Simulated Dispatch)</span>
                           </div>
                           <span className="text-[10px] font-mono text-blue-400 bg-blue-950 px-2 py-0.5 rounded border border-blue-800">
-                            Latency 38ms
+                            Latency &lt; 40ms
                           </span>
                         </div>
                         <div className="grid grid-cols-3 gap-2 text-[10px]">
                           <div className="p-2 rounded bg-slate-900/80 border border-slate-800">
-                            <span className="text-slate-500">In Transit</span>
-                            <div className="font-bold text-slate-200 text-xs">894 Trucks</div>
+                            <span className="text-slate-500">Pipeline Type</span>
+                            <div className="font-bold text-slate-200 text-xs">WebSocket Stream</div>
                           </div>
                           <div className="p-2 rounded bg-slate-900/80 border border-slate-800">
-                            <span className="text-slate-500">Avg ETA Precision</span>
-                            <div className="font-bold text-emerald-400 text-xs">99.2%</div>
+                            <span className="text-slate-500">Route Engine</span>
+                            <div className="font-bold text-emerald-400 text-xs">Multi-Stop Graph</div>
                           </div>
                           <div className="p-2 rounded bg-slate-900/80 border border-slate-800">
-                            <span className="text-slate-500">Route Efficiency</span>
-                            <div className="font-bold text-indigo-400 text-xs">+28.4%</div>
+                            <span className="text-slate-500">Data Model</span>
+                            <div className="font-bold text-indigo-400 text-xs">PostGIS Schema</div>
                           </div>
                         </div>
                         <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
@@ -143,25 +151,25 @@ export function ProjectShowcaseSection({ onOpenInquiry }: ProjectShowcaseSection
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <Lock className="w-3.5 h-3.5 text-purple-400" />
-                            <span className="text-xs font-semibold text-slate-200">Multi-Currency Settlement Gateway</span>
+                            <span className="text-xs font-semibold text-slate-200">Multi-Currency Settlement Blueprint</span>
                           </div>
                           <span className="text-[10px] font-mono text-purple-400 bg-purple-950 px-2 py-0.5 rounded border border-purple-800">
-                            SOC2 Encrypted
+                            Zero-Trust Model
                           </span>
                         </div>
                         <div className="grid grid-cols-2 gap-2 text-[10px]">
                           <div className="p-2 rounded bg-slate-900/80 border border-slate-800">
-                            <span className="text-slate-500">Verified Treasury Balance</span>
-                            <div className="font-bold text-emerald-400 text-sm">$4,850,290.00</div>
+                            <span className="text-slate-500">Ledger Validation</span>
+                            <div className="font-bold text-emerald-400 text-sm">Double-Entry ACID</div>
                           </div>
                           <div className="p-2 rounded bg-slate-900/80 border border-slate-800">
-                            <span className="text-slate-500">Daily Batch Clearance</span>
-                            <div className="font-bold text-slate-200 text-sm">Real-Time</div>
+                            <span className="text-slate-500">Tenant Isolation</span>
+                            <div className="font-bold text-slate-200 text-sm">Schema-Per-Partner</div>
                           </div>
                         </div>
                         <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono">
-                          <span>Ledger Checksum: #SHA-256-VALID</span>
-                          <span className="text-emerald-400">0 Reconcile Errors</span>
+                          <span>Ledger Checksum: #SHA-256-VERIFIED</span>
+                          <span className="text-emerald-400">Reconciliation Blueprint</span>
                         </div>
                       </div>
                     )}
@@ -199,21 +207,21 @@ export function ProjectShowcaseSection({ onOpenInquiry }: ProjectShowcaseSection
                             <span className="text-xs font-semibold text-slate-200">Tier-3 Wholesale Contract Price Matrix</span>
                           </div>
                           <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">
-                            ERP Synced
+                            Headless ISR
                           </span>
                         </div>
                         <div className="grid grid-cols-3 gap-2 text-[10px]">
                           <div className="p-2 rounded bg-slate-900 border border-slate-800">
-                            <span className="text-slate-500">Catalog SKUs</span>
-                            <div className="font-bold text-slate-200 text-xs">45,000+</div>
+                            <span className="text-slate-500">Catalog Strategy</span>
+                            <div className="font-bold text-slate-200 text-xs">Edge Caching</div>
                           </div>
                           <div className="p-2 rounded bg-slate-900 border border-slate-800">
-                            <span className="text-slate-500">Lighthouse Score</span>
-                            <div className="font-bold text-emerald-400 text-xs">98/100</div>
+                            <span className="text-slate-500">Pricing Engine</span>
+                            <div className="font-bold text-emerald-400 text-xs">Dynamic Micro-API</div>
                           </div>
                           <div className="p-2 rounded bg-slate-900 border border-slate-800">
                             <span className="text-slate-500">Net Terms</span>
-                            <div className="font-bold text-indigo-400 text-xs">Net-30 / 60</div>
+                            <div className="font-bold text-indigo-400 text-xs">Net-30 / 60 Invoicing</div>
                           </div>
                         </div>
                       </div>
@@ -234,7 +242,7 @@ export function ProjectShowcaseSection({ onOpenInquiry }: ProjectShowcaseSection
                         <div className="p-2 rounded bg-slate-900 border border-slate-800 flex items-center justify-between text-[10px]">
                           <div>
                             <span className="font-bold text-slate-200 block">Unit #748B Inspection Completed</span>
-                            <span className="text-slate-500">Signature captured & timestamped</span>
+                            <span className="text-slate-500">Signature captured &amp; timestamped</span>
                           </div>
                           <span className="text-emerald-400 font-mono">100% Synced</span>
                         </div>
@@ -250,17 +258,17 @@ export function ProjectShowcaseSection({ onOpenInquiry }: ProjectShowcaseSection
                             <span className="text-xs font-semibold text-slate-200">Cybersecurity Infrastructure Flagship</span>
                           </div>
                           <span className="text-[10px] font-mono text-blue-400 bg-blue-950 px-2 py-0.5 rounded border border-blue-800">
-                            Edge Edge-ISR
+                            App Router ISR
                           </span>
                         </div>
                         <div className="grid grid-cols-2 gap-2 text-[10px]">
                           <div className="p-2 rounded bg-slate-900 border border-slate-800">
                             <span className="text-slate-500">Core Web Vitals</span>
-                            <div className="font-bold text-emerald-400 text-xs">0.7s Mobile LCP</div>
+                            <div className="font-bold text-emerald-400 text-xs">Sub-Second LCP</div>
                           </div>
                           <div className="p-2 rounded bg-slate-900 border border-slate-800">
-                            <span className="text-slate-500">Lead Conversion Lift</span>
-                            <div className="font-bold text-blue-400 text-xs">+44% Demo Pipeline</div>
+                            <span className="text-slate-500">Lead Pipeline</span>
+                            <div className="font-bold text-blue-400 text-xs">Sanitized Validation</div>
                           </div>
                         </div>
                       </div>
@@ -272,12 +280,15 @@ export function ProjectShowcaseSection({ onOpenInquiry }: ProjectShowcaseSection
               {/* Project Details */}
               <div className="p-6 sm:p-7 space-y-4">
                 <div className="space-y-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-400 font-mono">
-                      {project.category}
-                    </span>
-                    <span className="text-xs text-slate-400">
-                      {project.type}
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-blue-400 font-mono">
+                        {project.category}
+                      </span>
+                      <ClaimBadge status={project.proofStatus} size="sm" />
+                    </div>
+                    <span className="text-[11px] text-slate-400 font-mono">
+                      {project.demonstrationType}
                     </span>
                   </div>
                   <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
@@ -291,11 +302,11 @@ export function ProjectShowcaseSection({ onOpenInquiry }: ProjectShowcaseSection
                 {/* Challenge & Solution Summary */}
                 <div className="p-3.5 rounded-xl bg-[#070d18] border border-slate-800/80 space-y-2 text-xs">
                   <div>
-                    <strong className="text-amber-400 font-semibold block mb-0.5">Challenge:</strong>
+                    <strong className="text-amber-400 font-semibold block mb-0.5 font-mono">Challenge:</strong>
                     <p className="text-slate-400 line-clamp-2">{project.challenge}</p>
                   </div>
                   <div>
-                    <strong className="text-emerald-400 font-semibold block mb-0.5">Solution:</strong>
+                    <strong className="text-emerald-400 font-semibold block mb-0.5 font-mono">Delivered Solution:</strong>
                     <p className="text-slate-300 line-clamp-2">{project.solution}</p>
                   </div>
                 </div>
@@ -324,12 +335,12 @@ export function ProjectShowcaseSection({ onOpenInquiry }: ProjectShowcaseSection
                     className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
                   >
                     <Eye className="w-4 h-4" />
-                    <span>View Case Study</span>
+                    <span>View Case Study Breakdown</span>
                   </button>
 
                   <button
                     onClick={() => onOpenInquiry(project.title)}
-                    className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors cursor-pointer"
                   >
                     <span>Request Estimate</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -345,8 +356,10 @@ export function ProjectShowcaseSection({ onOpenInquiry }: ProjectShowcaseSection
           project={activeCaseStudy}
           onClose={() => setActiveCaseStudy(null)}
           onOpenInquiry={onOpenInquiry}
+          onOpenClaimProof={onOpenClaimProof}
         />
       </div>
     </section>
   );
 }
+

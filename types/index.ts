@@ -1,3 +1,5 @@
+import { ClaimStatus } from './claim-proof';
+
 export interface SolutionItem {
   id: string;
   title: string;
@@ -9,6 +11,8 @@ export interface SolutionItem {
   problemSolved: string;
   technologies: string[];
   iconName: string;
+  proofStatus?: ClaimStatus;
+  claimId?: string;
 }
 
 export interface ProjectShowcaseItem {
@@ -24,7 +28,12 @@ export interface ProjectShowcaseItem {
   architectureOverview: string;
   mockupType: 'dashboard' | 'fintech' | 'ai-workspace' | 'ecommerce' | 'mobile-app' | 'saas-web';
   badgeColor: string;
-  metrics?: { label: string; value: string }[];
+  proofStatus: ClaimStatus;
+  demonstrationType: 'Engineering Demonstration' | 'Reference Architecture' | 'Verified Capability';
+  claimId?: string;
+  metrics?: { label: string; value: string; note?: string }[];
+  proofEvidence?: string;
+  verificationMethod?: string;
 }
 
 export interface ProcessStage {

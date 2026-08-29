@@ -20,9 +20,10 @@ import {
 
 interface HeroProps {
   onOpenInquiry: () => void;
+  onOpenClaimProof?: (claimId: string) => void;
 }
 
-export function Hero({ onOpenInquiry }: HeroProps) {
+export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
   const [activeTab, setActiveTab] = useState<'architecture' | 'telemetry' | 'ai' | 'mobile'>('architecture');
   const [isSimulatingTraffic, setIsSimulatingTraffic] = useState(false);
 
@@ -369,13 +370,21 @@ export function Hero({ onOpenInquiry }: HeroProps) {
             </div>
 
             {/* Bottom Proof Bar */}
-            <div className="px-5 py-3 bg-[#080d18] border-t border-slate-800/80 flex flex-wrap items-center justify-between text-xs text-slate-400">
+            <div className="px-5 py-3 bg-[#080d18] border-t border-slate-800/80 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-blue-400" />
-                <span>BRC STAR Production Protocol: Zero Templates • 100% Bespoke Engineering</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-slate-300">BRC STAR Integrity Standard: <strong>Claim → Proof Verified</strong></span>
               </div>
-              <div className="font-mono text-slate-500">
-                End-to-End Type Safety (TypeScript + Prisma)
+              <div className="flex items-center gap-3 font-mono text-[11px]">
+                <span className="text-slate-500 hidden sm:inline">TypeScript + Next.js App Router</span>
+                {onOpenClaimProof && (
+                  <button
+                    onClick={() => onOpenClaimProof('system-architecture')}
+                    className="text-blue-400 hover:text-blue-300 underline cursor-pointer"
+                  >
+                    Inspect Architecture Proof →
+                  </button>
+                )}
               </div>
             </div>
           </div>
