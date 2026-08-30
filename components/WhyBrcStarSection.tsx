@@ -2,203 +2,141 @@
 
 import React from 'react';
 import {
-  Target,
-  Layers,
-  Shield,
-  Handshake,
-  CheckCircle2,
-  XCircle,
-  ArrowRight,
+  Code2,
   Cpu,
-  Lock,
-  GitBranch,
+  Smartphone,
+  Server,
+  ShieldCheck,
+  Headphones,
+  CheckCircle2,
+  Sparkles,
 } from 'lucide-react';
-import { DIFFERENTIATION_POINTS } from '@/lib/data';
-
-const iconMap = {
-  Target: Target,
-  Layers: Layers,
-  Shield: Shield,
-  Handshake: Handshake,
-};
 
 interface WhyBrcStarSectionProps {
-  onOpenInquiry: () => void;
+  market?: 'india' | 'international';
+  onOpenInquiry?: (initialService?: string) => void;
 }
 
-export function WhyBrcStarSection({ onOpenInquiry }: WhyBrcStarSectionProps) {
-  const comparisonMatrix = [
+export function WhyBrcStarSection({ market = 'india', onOpenInquiry }: WhyBrcStarSectionProps) {
+  const pillars = [
     {
-      factor: 'Discovery & Requirements',
-      brcStar: 'Commercial economics, operational workflows, and executive system architecture blueprints.',
-      agencies: 'Generic questionnaires; quick rush to billable design mocks.',
-      freelancers: 'Often skip discovery; build whatever is immediately asked.',
+      icon: Code2,
+      title: 'Custom Development',
+      badge: 'Zero Templates',
+      description:
+        market === 'international'
+          ? '100% bespoke engineering. We write clean, modular, and maintainable TypeScript & React code tailored specifically to your product architecture and business logic.'
+          : '100% bespoke development with zero generic themes. Clean, maintainable TypeScript and Next.js code tailored to your exact business requirements.',
+      accent: 'blue',
     },
     {
-      factor: 'Code Quality & Tech Stack',
-      brcStar: 'Next.js 16/15, TypeScript, clean modular domain boundaries, 100% bespoke.',
-      agencies: 'WordPress templates, heavy plugins, bloated page builders.',
-      freelancers: 'Variable; fragmented copy-pasted code with little documentation.',
+      icon: Cpu,
+      title: 'Modern Technology Stack',
+      badge: 'Next.js 15 & AI',
+      description:
+        market === 'international'
+          ? 'Engineered with Next.js 15 App Router, React 19, TypeScript, Tailwind CSS, Cloud Run, and native AI integration via Gemini 2.5 and OpenAI SDKs.'
+          : 'Powered by the latest Next.js 15 App Router, TypeScript, Tailwind CSS, PostgreSQL, and intelligent Gemini AI workflows for maximum performance.',
+      accent: 'indigo',
     },
     {
-      factor: 'Security & Compliance',
-      brcStar: 'OWASP Top 10 hardening, role-based access (RBAC), KMS encryption, SOC2 alignment.',
-      agencies: 'Vulnerable plugin ecosystems; passive security approach.',
-      freelancers: 'Basic validation; usually lack enterprise compliance expertise.',
+      icon: Smartphone,
+      title: 'Responsive Engineering',
+      badge: 'Fluid Across Devices',
+      description:
+        market === 'international'
+          ? 'Pixel-perfect fluid layouts designed for full viewport spectrums—from 4K displays and ultrawides to tablets and mobile touchscreens with 60fps animations.'
+          : 'Mobile-first, ergonomic layouts tested across all screen resolutions to deliver flawless user experiences and high mobile conversion rates.',
+      accent: 'cyan',
     },
     {
-      factor: 'Performance Standards',
-      brcStar: 'Target 95+ Core Web Vitals, sub-second LCP, edge-cached assets.',
-      agencies: '3–5 second load times bogged down by tracking scripts.',
-      freelancers: 'Rarely optimized for Core Web Vitals or mobile networks.',
+      icon: Server,
+      title: 'Scalable Architecture',
+      badge: 'Cloud-Native',
+      description:
+        market === 'international'
+          ? 'Microservices, serverless compute, sharded relational databases, and multi-region edge caching built to seamlessly handle sudden traffic spikes.'
+          : 'High-availability infrastructure with optimized database schemas, read replicas, and caching layers that grow effortlessly as your user base expands.',
+      accent: 'emerald',
     },
     {
-      factor: 'IP Ownership & Deployment',
-      brcStar: '100% intellectual property transfer, automated CI/CD staging, clean repos.',
-      agencies: 'Proprietary platform lock-in or recurring proprietary hosting fees.',
-      freelancers: 'Manual FTP uploads; often leave client without documentation.',
+      icon: ShieldCheck,
+      title: 'Security-Conscious Development',
+      badge: 'OWASP Aligned',
+      description:
+        market === 'international'
+          ? 'Strict adherence to OWASP Top 10 security standards, automated token rotation, encrypted secrets management, and role-based access control (RBAC).'
+          : 'Enterprise-grade security best practices with automated vulnerability scanning, SSL encryption, rate limiting, and secure authentication flows.',
+      accent: 'purple',
     },
     {
-      factor: 'Long-Term Partnership',
-      brcStar: 'Dedicated technical leads, continuous feature roadmaps, proactive SLA monitoring.',
-      agencies: 'Passed off to junior account managers post-launch.',
-      freelancers: 'High risk of unavailability or abandoning project post-delivery.',
+      icon: Headphones,
+      title: 'Post-Launch Support',
+      badge: 'Guaranteed SLA',
+      description:
+        market === 'international'
+          ? 'Every project includes a 30 to 90-day post-launch warranty with dedicated bug-fix sprints, performance audits, and direct Slack Connect access.'
+          : 'Comprehensive 30 to 90-day warranty coverage, milestone handovers, staff training, and proactive bug-fix support to ensure smooth launch operations.',
+      accent: 'amber',
     },
   ];
 
   return (
-    <section
-      id="why-us"
-      className="py-24 bg-[#080d18] border-t border-slate-800/80 relative"
-      aria-labelledby="why-headline"
-    >
+    <section className="py-20 bg-[#060911] relative border-t border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-800/40 text-blue-300 text-xs font-semibold uppercase tracking-wider">
-            <span>The Engineering Distinction</span>
+        <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
+            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+            <span>Why Partner with BRC STAR</span>
           </div>
 
-          <h2
-            id="why-headline"
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight"
-          >
-            “We don&apos;t start with a template.{' '}
-            <span className="text-blue-400">We start by understanding the business.”</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Engineering Rigor Built into Every Sprint
           </h2>
 
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            BRC STAR was founded to bridge the gap between creative visual execution and rigorous full-stack software engineering.
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+            {market === 'international'
+              ? 'We operate as your dedicated product engineering studio—combining senior architectural talent, transparent milestone delivery, and zero vendor lock-in.'
+              : 'We build digital products designed for business growth. No cookie-cutter templates, no recurring per-seat platform taxes, and 100% intellectual property ownership.'}
           </p>
         </div>
 
-        {/* 4 Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-          {DIFFERENTIATION_POINTS.map((point, idx) => {
-            const IconComponent = iconMap[point.icon as keyof typeof iconMap] || Target;
+        {/* 6 Core Pillars Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {pillars.map((pillar, idx) => {
+            const Icon = pillar.icon;
             return (
               <div
-                key={point.title}
-                id={`diff-point-${idx}`}
-                className="rounded-2xl bg-[#0c1324] border border-slate-800 p-6 sm:p-8 space-y-5 hover:border-blue-500/40 transition-all shadow-lg"
+                key={idx}
+                className="group p-6 sm:p-7 rounded-2xl bg-[#0b1122] border border-slate-800 hover:border-slate-700 hover:bg-[#0d1428] transition-all duration-300 flex flex-col justify-between"
               >
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-blue-950/80 border border-blue-800/60 flex items-center justify-center text-blue-400 shadow-inner shrink-0">
-                    <IconComponent className="w-6 h-6" />
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="w-11 h-11 rounded-xl bg-blue-950/70 border border-blue-800/50 flex items-center justify-center text-blue-400 group-hover:scale-105 transition-transform">
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-slate-900 border border-slate-800 text-slate-400">
+                      {pillar.badge}
+                    </span>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white">
-                      {point.title}
-                    </h3>
-                    <p className="text-xs text-blue-400 font-medium">
-                      {point.tagline}
-                    </p>
-                  </div>
+
+                  <h3 className="text-lg font-bold text-white tracking-tight">
+                    {pillar.title}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                    {pillar.description}
+                  </p>
                 </div>
 
-                <p className="text-sm text-slate-300 leading-relaxed">
-                  {point.description}
-                </p>
-
-                {/* Comparison Callout */}
-                <div className="space-y-2 pt-2 text-xs">
-                  <div className="p-3 rounded-xl bg-[#070c17] border border-blue-900/40 flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-emerald-300 block mb-0.5">The BRC STAR Standard:</strong>
-                      <span className="text-slate-300">{point.brcApproach}</span>
-                    </div>
-                  </div>
-                  <div className="p-3 rounded-xl bg-[#070c17] border border-slate-800 flex items-start gap-2.5">
-                    <XCircle className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-slate-400 block mb-0.5">Common Industry Alternative:</strong>
-                      <span className="text-slate-500">{point.othersApproach}</span>
-                    </div>
-                  </div>
+                <div className="pt-4 mt-4 border-t border-slate-800/60 flex items-center gap-1.5 text-xs text-blue-400 font-medium">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Standard on all engineering plans</span>
                 </div>
               </div>
             );
           })}
-        </div>
-
-        {/* Comparison Table */}
-        <div className="space-y-6">
-          <div className="text-center space-y-2">
-            <h3 className="text-2xl font-bold text-white">
-              Full-Stack Partner vs. Traditional Alternatives
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-400">
-              How BRC STAR compares directly across critical software delivery dimensions.
-            </p>
-          </div>
-
-          <div className="overflow-x-auto rounded-2xl border border-slate-800 bg-[#0c1324] shadow-2xl">
-            <table className="w-full text-left text-xs sm:text-sm border-collapse min-w-[700px]">
-              <thead>
-                <tr className="border-b border-slate-800 bg-[#080e1a]">
-                  <th className="py-4 px-5 font-semibold text-slate-300 w-1/4">Evaluation Dimension</th>
-                  <th className="py-4 px-5 font-bold text-blue-400 w-1/3 bg-blue-950/20 border-x border-blue-900/40">
-                    BRC STAR Technology Partner
-                  </th>
-                  <th className="py-4 px-5 font-medium text-slate-400 w-1/5">Generic Digital Agency</th>
-                  <th className="py-4 px-5 font-medium text-slate-400 w-1/5">Freelance Developers</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-800/60 text-xs">
-                {comparisonMatrix.map((row, i) => (
-                  <tr key={i} className="hover:bg-slate-900/40 transition-colors">
-                    <td className="py-4 px-5 font-semibold text-slate-200">
-                      {row.factor}
-                    </td>
-                    <td className="py-4 px-5 text-slate-200 bg-blue-950/10 border-x border-blue-900/30 font-medium">
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
-                        <span>{row.brcStar}</span>
-                      </div>
-                    </td>
-                    <td className="py-4 px-5 text-slate-400">
-                      {row.agencies}
-                    </td>
-                    <td className="py-4 px-5 text-slate-500">
-                      {row.freelancers}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="mt-14 text-center">
-          <button
-            onClick={onOpenInquiry}
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all shadow-lg shadow-blue-600/30"
-          >
-            <span>Partner with BRC STAR</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
         </div>
       </div>
     </section>

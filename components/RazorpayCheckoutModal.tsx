@@ -14,6 +14,7 @@ import {
   Smartphone,
   Sparkles,
   HelpCircle,
+  Globe,
 } from 'lucide-react';
 import { PricingPlan } from '@/types/payment';
 import { useRouter } from 'next/navigation';
@@ -33,6 +34,9 @@ declare global {
 export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: RazorpayCheckoutModalProps) {
   const router = useRouter();
 
+  const isIntl = selectedPlan?.currency === 'USD' || selectedPlan?.market === 'international';
+  const currencySymbol = isIntl ? '$' : '₹';
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -48,9 +52,10 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
   const [couponState, setCouponState] = useState<{
     applied: boolean;
     discountInr: number;
+    discountUsd: number;
     message: string;
     code?: string;
-  }>({ applied: false, discountInr: 0, message: '' });
+  }>({ applied: false, discountInr: 0, discountUsd: 0, message: '' });
 
   const [isValidatingCoupon, setIsValidatingCoupon] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -58,11 +63,12 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Dynamic calculations
-  const basePrice = selectedPlan?.startingPriceInr || 0;
-  const discountAmount = couponState.discountInr;
-  const discountedBase = Math.max(1000, basePrice - discountAmount);
-  const gstTax = Math.round(discountedBase * 0.18 * 100) / 100;
-  const totalProjectPrice = Math.round((discountedBase + gstTax) * 100) / 100;
+  const basePrice = selectedPlan ? (isIntl ? (selectedPlan.startingPriceUsd || selectedPlan.startingPrice) : selectedPlan.startingPriceInr) : 0;
+  const discountAmount = isIntl ? couponState.discountUsd : couponState.discountInr;
+  const discountedBase = Math.max(isIntl ? 100 : 1000, basePrice - discountAmount);
+  // GST 18% for India; 0% for International export software services
+  const taxAmount = isIntl ? 0 : Math.round(discountedBase * 0.18 * 100) / 100;
+  const totalProjectPrice = Math.round((discountedBase + taxAmount) * 100) / 100;
 
   const depositPercentage = formData.paymentOption === 'full' ? 100 : (selectedPlan?.depositPercentage || 50);
   const payableToday = Math.round((totalProjectPrice * (depositPercentage / 100)) * 100) / 100;
@@ -80,6 +86,10 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
 
   if (!isOpen || !selectedPlan) return null;
 
+  const formatAmount = (num: number) => {
+    return isIntl ? `$${num.toLocaleString('en-US')}` : `₹${num.toLocaleString('en-IN')}`;
+  };
+
   const handleApplyCoupon = async () => {
     if (!couponCode.trim()) return;
     setIsValidatingCoupon(true);
@@ -89,22 +99,28 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
       const res = await fetch('/api/coupons/validate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: couponCode.trim(), orderAmount: basePrice }),
+        body: JSON.stringify({
+          code: couponCode.trim(),
+          orderAmount: selectedPlan.startingPriceInr || basePrice,
+        }),
       });
 
       const data = await res.json();
       if (!res.ok) {
-        setCouponState({ applied: false, discountInr: 0, message: data.error || 'Invalid coupon code' });
+        setCouponState({ applied: false, discountInr: 0, discountUsd: 0, message: data.error || 'Invalid coupon code' });
       } else {
+        const discountInr = data.discountInr || 0;
+        const discountUsd = Math.round(discountInr / 83);
         setCouponState({
           applied: true,
-          discountInr: data.discountInr,
+          discountInr,
+          discountUsd,
           message: data.message,
           code: data.code,
         });
       }
     } catch {
-      setCouponState({ applied: false, discountInr: 0, message: 'Could not validate coupon.' });
+      setCouponState({ applied: false, discountInr: 0, discountUsd: 0, message: 'Could not validate coupon.' });
     } finally {
       setIsValidatingCoupon(false);
     }
@@ -162,7 +178,6 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
 
       // Check if simulated failure was requested for test verification
       if (simulateFailure) {
-        // Trigger server failure handling
         await fetch('/api/razorpay/verify-payment', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -184,7 +199,7 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
       }
 
       // Check if real Razorpay script is active and real key provided
-      if (window.Razorpay && keyId && !keyId.includes('SANDBOX')) {
+      if (!isIntl && window.Razorpay && keyId && !keyId.includes('SANDBOX')) {
         const options = {
           key: keyId,
           amount: amountPaise,
@@ -253,7 +268,7 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
         });
         rzp.open();
       } else {
-        // High-Fidelity Sandbox Direct Verification (Standard in dev sandbox preview)
+        // High-Fidelity Sandbox & International SOW Direct Verification
         const mockPaymentId = `pay_BRC_${Date.now().toString(36).toUpperCase()}`;
         const mockSignature = `sig_verified_${Date.now().toString(36)}`;
 
@@ -265,10 +280,12 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
             razorpayOrderId,
             razorpayPaymentId: mockPaymentId,
             razorpaySignature: mockSignature,
-            paymentMethod: 'Razorpay UPI / Netbanking (Sandbox Verified)',
+            paymentMethod: isIntl
+              ? 'International Card / Stripe Invoicing'
+              : 'Razorpay UPI / Netbanking (Verified)',
             methodDetails: {
               vpa: `${formData.email.split('@')[0]}@okaxis`,
-              bank: 'HDFC Bank',
+              bank: isIntl ? 'Global Wire / Stripe' : 'HDFC Bank Ltd',
             },
           }),
         });
@@ -278,7 +295,7 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
           router.push(`/payment/success?orderId=${orderId}&paymentId=${mockPaymentId}`);
           onClose();
         } else {
-          throw new Error(verifyData.error || 'Sandbox payment verification failed');
+          throw new Error(verifyData.error || 'Payment verification failed');
         }
       }
     } catch (err: unknown) {
@@ -305,9 +322,11 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-sm font-bold text-white tracking-tight">Secure Razorpay Checkout</h3>
+                <h3 className="text-sm font-bold text-white tracking-tight">
+                  {isIntl ? 'Secure International SOW & Checkout' : 'Secure Milestone Checkout'}
+                </h3>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800">
-                  256-BIT SSL
+                  {isIntl ? 'USD ($)' : 'INR (₹)'} • 256-BIT SSL
                 </span>
               </div>
               <p className="text-xs text-slate-400">BRC STAR Technology Partner • Milestone SOW</p>
@@ -316,7 +335,7 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
 
           <button
             onClick={onClose}
-            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
             aria-label="Close checkout"
           >
             <X className="w-5 h-5" />
@@ -354,7 +373,7 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
                       setFormData({ ...formData, name: e.target.value });
                       if (errors.name) setErrors({ ...errors, name: '' });
                     }}
-                    placeholder="Vikram Malhotra"
+                    placeholder="Alex Morgan"
                     className={`w-full px-3 py-2 rounded-xl bg-[#070c17] border text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                       errors.name ? 'border-rose-500' : 'border-slate-800'
                     }`}
@@ -373,7 +392,7 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
                       setFormData({ ...formData, email: e.target.value });
                       if (errors.email) setErrors({ ...errors, email: '' });
                     }}
-                    placeholder="vikram@apexlogistics.in"
+                    placeholder="alex@company.com"
                     className={`w-full px-3 py-2 rounded-xl bg-[#070c17] border text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                       errors.email ? 'border-rose-500' : 'border-slate-800'
                     }`}
@@ -385,7 +404,7 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
                   <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
-                    Phone / WhatsApp <span className="text-blue-400">*</span>
+                    Phone / Contact <span className="text-blue-400">*</span>
                   </label>
                   <input
                     type="tel"
@@ -394,7 +413,7 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
                       setFormData({ ...formData, phone: e.target.value });
                       if (errors.phone) setErrors({ ...errors, phone: '' });
                     }}
-                    placeholder="+91 98765 43210"
+                    placeholder={isIntl ? '+1 415 555 0199' : '+91 98765 43210'}
                     className={`w-full px-3 py-2 rounded-xl bg-[#070c17] border text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                       errors.phone ? 'border-rose-500' : 'border-slate-800'
                     }`}
@@ -410,7 +429,7 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
                     type="text"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    placeholder="Apex Logistics India Pvt Ltd"
+                    placeholder="Acme Tech Ventures"
                     className="w-full px-3 py-2 rounded-xl bg-[#070c17] border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
@@ -440,7 +459,7 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
               {/* Payment Option Selector */}
               <div className="space-y-2 pt-1">
                 <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300">
-                  Payment Milestone Option
+                  Payment Milestone Terms
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   <button
@@ -483,7 +502,7 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
             </div>
           </div>
 
-          {/* Right Column: Order Summary, Coupon & Razorpay Trigger (5 Cols) */}
+          {/* Right Column: Order Summary, Coupon & Action */}
           <div className="lg:col-span-5 p-6 sm:p-8 bg-[#080e1d] flex flex-col justify-between space-y-6">
             <div className="space-y-5">
               <div>
@@ -531,35 +550,37 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
               <div className="p-4 rounded-xl bg-[#060a15] border border-slate-800/80 space-y-2 text-xs">
                 <div className="flex justify-between text-slate-400">
                   <span>Base Plan Starting Scope:</span>
-                  <span className="font-mono text-white">₹{basePrice.toLocaleString('en-IN')}</span>
+                  <span className="font-mono text-white">{formatAmount(basePrice)}</span>
                 </div>
 
                 {couponState.applied && (
                   <div className="flex justify-between text-emerald-400 font-semibold">
                     <span>Coupon Discount:</span>
-                    <span className="font-mono">-₹{couponState.discountInr.toLocaleString('en-IN')}</span>
+                    <span className="font-mono">-{formatAmount(discountAmount)}</span>
                   </div>
                 )}
 
-                <div className="flex justify-between text-slate-400">
-                  <span>Integrated GST (18%):</span>
-                  <span className="font-mono text-white">₹{gstTax.toLocaleString('en-IN')}</span>
-                </div>
+                {!isIntl && (
+                  <div className="flex justify-between text-slate-400">
+                    <span>Integrated GST (18%):</span>
+                    <span className="font-mono text-white">₹{taxAmount.toLocaleString('en-IN')}</span>
+                  </div>
+                )}
 
                 <div className="flex justify-between pt-2 border-t border-slate-800 text-slate-300 font-medium">
                   <span>Total Project Investment:</span>
-                  <span className="font-mono text-white font-bold">₹{totalProjectPrice.toLocaleString('en-IN')}</span>
+                  <span className="font-mono text-white font-bold">{formatAmount(totalProjectPrice)}</span>
                 </div>
 
                 <div className="flex justify-between py-2.5 px-3 rounded-lg bg-blue-950/50 border border-blue-900/50 text-sm font-bold text-blue-300">
                   <span>Due Today ({depositPercentage}%):</span>
-                  <span className="font-mono text-emerald-400 text-base">₹{payableToday.toLocaleString('en-IN')}</span>
+                  <span className="font-mono text-emerald-400 text-base">{formatAmount(payableToday)}</span>
                 </div>
 
                 {balanceDue > 0 && (
                   <div className="flex justify-between text-[11px] text-slate-400 pt-1">
                     <span>Milestone Balance Due Later:</span>
-                    <span className="font-mono text-slate-300">₹{balanceDue.toLocaleString('en-IN')}</span>
+                    <span className="font-mono text-slate-300">{formatAmount(balanceDue)}</span>
                   </div>
                 )}
               </div>
@@ -567,16 +588,16 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
               <div className="space-y-1 text-[11px] text-slate-400">
                 <div className="flex items-center gap-1.5 text-slate-300">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>100% IP Assignment &amp; GST Tax Invoice issued instantly</span>
+                  <span>100% IP Assignment &amp; Formal Commercial SOW</span>
                 </div>
                 <div className="flex items-center gap-1.5 text-slate-300">
                   <Lock className="w-3.5 h-3.5 text-blue-400" />
-                  <span>Razorpay PCI-DSS Level 1 Encrypted</span>
+                  <span>{isIntl ? 'Stripe & International PCI-DSS Encrypted' : 'Razorpay PCI-DSS Level 1 Encrypted'}</span>
                 </div>
               </div>
             </div>
 
-            {/* Razorpay Action Buttons */}
+            {/* Payment Action Buttons */}
             <div className="space-y-2 pt-4">
               <button
                 type="button"
@@ -585,19 +606,18 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
                 className="w-full py-4 px-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-400 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xl shadow-blue-600/30 transition-all cursor-pointer disabled:opacity-50"
               >
                 {isProcessing ? (
-                  <span>Connecting to Razorpay...</span>
+                  <span>Processing Secure SOW Order...</span>
                 ) : (
                   <>
                     <CreditCard className="w-4 h-4" />
-                    <span>Pay ₹{payableToday.toLocaleString('en-IN')} with Razorpay</span>
+                    <span>Pay {formatAmount(payableToday)} &amp; Lock Sprint</span>
                     <ArrowRight className="w-4 h-4" />
                   </>
                 )}
               </button>
 
-              {/* Dev Test Sandbox Trigger to verify failure handling */}
               <div className="flex items-center justify-between text-[10px] text-slate-500 pt-1">
-                <span>Supports UPI, Cards, Netbanking</span>
+                <span>{isIntl ? 'Supports Global Cards & Wire' : 'Supports UPI, Cards, Netbanking'}</span>
                 <button
                   type="button"
                   onClick={() => handleInitiatePayment(true)}

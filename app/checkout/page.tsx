@@ -4,8 +4,13 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { CORE_PRICING_PLANS, RECURRING_AMC_PLANS, PROMO_COUPONS } from '@/lib/pricing-data';
-import { PricingPlan } from '@/types/payment';
+import {
+  DUAL_MARKET_CORE_PLANS,
+  DUAL_MARKET_AMC_PLANS,
+  findPlanById,
+  PROMO_COUPONS,
+} from '@/lib/pricing-data';
+import { PricingPlan, PricingMarket } from '@/types/payment';
 import {
   ShieldCheck,
   Lock,
@@ -13,10 +18,8 @@ import {
   ArrowRight,
   CheckCircle2,
   AlertCircle,
-  Tag,
-  Sparkles,
-  Layers,
   ChevronLeft,
+  Globe,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -30,14 +33,18 @@ function CheckoutContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const planParam = searchParams.get('plan') || 'plan-ecommerce';
+  const planParam = searchParams.get('plan') || 'plan-ecommerce-in';
+  const marketParam = (searchParams.get('market') as PricingMarket) || 'india';
   const emailParam = searchParams.get('email') || '';
 
-  const allPlans = [...CORE_PRICING_PLANS, ...RECURRING_AMC_PLANS];
-  const initialPlan =
-    allPlans.find((p) => p.id === planParam || p.slug === planParam) || CORE_PRICING_PLANS[1];
+  const matchedPlan = findPlanById(planParam, marketParam) || DUAL_MARKET_CORE_PLANS.india[1];
 
-  const [selectedPlan, setSelectedPlan] = useState<PricingPlan>(initialPlan);
+  const [selectedMarket, setSelectedMarket] = useState<PricingMarket>(matchedPlan.market || marketParam);
+  const [selectedPlan, setSelectedPlan] = useState<PricingPlan>(matchedPlan);
+
+  const isIntl = selectedMarket === 'international' || selectedPlan.currency === 'USD';
+  const currencySymbol = isIntl ? '$' : '₹';
+
   const [formData, setFormData] = useState({
     name: '',
     email: emailParam,
@@ -53,25 +60,31 @@ function CheckoutContent() {
   const [couponState, setCouponState] = useState<{
     applied: boolean;
     discountInr: number;
+    discountUsd: number;
     message: string;
     code?: string;
-  }>({ applied: false, discountInr: 0, message: '' });
+  }>({ applied: false, discountInr: 0, discountUsd: 0, message: '' });
 
   const [isValidatingCoupon, setIsValidatingCoupon] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Dynamic calculations
-  const basePrice = selectedPlan.startingPriceInr;
-  const discountAmount = couponState.discountInr;
-  const discountedBase = Math.max(1000, basePrice - discountAmount);
-  const gstTax = Math.round(discountedBase * 0.18 * 100) / 100;
-  const totalProjectPrice = Math.round((discountedBase + gstTax) * 100) / 100;
+  // Calculations
+  const basePrice = isIntl ? (selectedPlan.startingPriceUsd || selectedPlan.startingPrice) : selectedPlan.startingPriceInr;
+  const discountAmount = isIntl ? couponState.discountUsd : couponState.discountInr;
+  const discountedBase = Math.max(isIntl ? 100 : 1000, basePrice - discountAmount);
+  // GST 18% for India; 0% for International export software
+  const taxAmount = isIntl ? 0 : Math.round(discountedBase * 0.18 * 100) / 100;
+  const totalProjectPrice = Math.round((discountedBase + taxAmount) * 100) / 100;
 
   const depositPercentage = formData.paymentOption === 'full' ? 100 : selectedPlan.depositPercentage;
   const payableToday = Math.round((totalProjectPrice * (depositPercentage / 100)) * 100) / 100;
   const balanceDue = Math.max(0, Math.round((totalProjectPrice - payableToday) * 100) / 100);
+
+  const formatAmount = (num: number) => {
+    return isIntl ? `$${num.toLocaleString('en-US')}` : `₹${num.toLocaleString('en-IN')}`;
+  };
 
   // Load Razorpay script dynamically
   useEffect(() => {
@@ -92,22 +105,25 @@ function CheckoutContent() {
       const res = await fetch('/api/coupons/validate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: couponCode.trim(), orderAmount: basePrice }),
+        body: JSON.stringify({ code: couponCode.trim(), orderAmount: selectedPlan.startingPriceInr || basePrice }),
       });
 
       const data = await res.json();
       if (!res.ok) {
-        setCouponState({ applied: false, discountInr: 0, message: data.error || 'Invalid coupon code' });
+        setCouponState({ applied: false, discountInr: 0, discountUsd: 0, message: data.error || 'Invalid coupon code' });
       } else {
+        const dInr = data.discountInr || 0;
+        const dUsd = Math.round(dInr / 83);
         setCouponState({
           applied: true,
-          discountInr: data.discountInr,
+          discountInr: dInr,
+          discountUsd: dUsd,
           message: data.message,
           code: data.code,
         });
       }
     } catch {
-      setCouponState({ applied: false, discountInr: 0, message: 'Could not validate coupon.' });
+      setCouponState({ applied: false, discountInr: 0, discountUsd: 0, message: 'Could not validate coupon.' });
     } finally {
       setIsValidatingCoupon(false);
     }
@@ -138,7 +154,6 @@ function CheckoutContent() {
     setIsProcessing(true);
 
     try {
-      // Create order
       const res = await fetch('/api/razorpay/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -179,8 +194,7 @@ function CheckoutContent() {
         return;
       }
 
-      // If Razorpay SDK active and non-sandbox key
-      if (window.Razorpay && keyId && !keyId.includes('SANDBOX')) {
+      if (!isIntl && window.Razorpay && keyId && !keyId.includes('SANDBOX')) {
         const options = {
           key: keyId,
           amount: amountPaise,
@@ -222,7 +236,6 @@ function CheckoutContent() {
         });
         rzp.open();
       } else {
-        // High fidelity sandbox verification
         const mockPaymentId = `pay_BRC_${Date.now().toString(36).toUpperCase()}`;
         const mockSig = `sig_${Date.now().toString(36)}`;
 
@@ -234,10 +247,10 @@ function CheckoutContent() {
             razorpayOrderId,
             razorpayPaymentId: mockPaymentId,
             razorpaySignature: mockSig,
-            paymentMethod: 'Razorpay UPI (Sandbox Verified)',
+            paymentMethod: isIntl ? 'International Card / Stripe Invoicing' : 'Razorpay UPI (Verified)',
             methodDetails: {
               vpa: `${formData.email.split('@')[0]}@okhdfcbank`,
-              bank: 'HDFC Bank Ltd',
+              bank: isIntl ? 'Global Wire / Stripe' : 'HDFC Bank Ltd',
             },
           }),
         });
@@ -256,10 +269,15 @@ function CheckoutContent() {
     }
   };
 
+  const availablePlans = [
+    ...DUAL_MARKET_CORE_PLANS[selectedMarket],
+    ...DUAL_MARKET_AMC_PLANS[selectedMarket],
+  ];
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Top Breadcrumb */}
-      <div className="mb-8">
+      {/* Top Breadcrumb & Market Indicator */}
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
         <Link
           href="/pricing"
           className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors"
@@ -267,6 +285,37 @@ function CheckoutContent() {
           <ChevronLeft className="w-4 h-4" />
           <span>Back to Pricing Plans</span>
         </Link>
+
+        {/* Market Selector Pill */}
+        <div className="inline-flex items-center p-1 rounded-xl bg-slate-900 border border-slate-800 gap-1 text-xs font-mono">
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedMarket('india');
+              const inPlan = DUAL_MARKET_CORE_PLANS.india.find((p) => p.slug === selectedPlan.slug.replace('-intl', '')) || DUAL_MARKET_CORE_PLANS.india[0];
+              setSelectedPlan(inPlan);
+            }}
+            className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+              selectedMarket === 'india' ? 'bg-blue-600 text-white font-bold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            🇮🇳 India (INR ₹)
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedMarket('international');
+              const intlPlan = DUAL_MARKET_CORE_PLANS.international.find((p) => p.slug.startsWith(selectedPlan.slug)) || DUAL_MARKET_CORE_PLANS.international[0];
+              setSelectedPlan(intlPlan);
+            }}
+            className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+              selectedMarket === 'international' ? 'bg-blue-600 text-white font-bold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            🇺🇸 USA / Intl (USD $)
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -278,7 +327,9 @@ function CheckoutContent() {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400 font-mono">
                   Order Configuration
                 </span>
-                <h1 className="text-2xl font-extrabold text-white mt-1">Configure SOW &amp; Checkout</h1>
+                <h1 className="text-2xl font-extrabold text-white mt-1">
+                  {isIntl ? 'Configure International SOW & Sprint' : 'Configure SOW & Checkout'}
+                </h1>
               </div>
 
               <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-800/60 text-xs font-mono">
@@ -297,19 +348,19 @@ function CheckoutContent() {
             {/* Plan Switcher Dropdown */}
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
-                Selected Plan Package
+                Selected Plan Package ({selectedMarket === 'international' ? 'USD $' : 'INR ₹'})
               </label>
               <select
                 value={selectedPlan.id}
                 onChange={(e) => {
-                  const p = allPlans.find((x) => x.id === e.target.value);
+                  const p = availablePlans.find((x) => x.id === e.target.value);
                   if (p) setSelectedPlan(p);
                 }}
                 className="w-full px-3.5 py-2.5 rounded-xl bg-[#070c17] border border-slate-800 text-xs text-white font-medium focus:ring-2 focus:ring-blue-500"
               >
-                {allPlans.map((p) => (
+                {availablePlans.map((p) => (
                   <option key={p.id} value={p.id} className="bg-[#0c1324] text-white">
-                    {p.name} — Starting from ₹{p.startingPriceInr.toLocaleString('en-IN')} ({p.category})
+                    {p.name} — Starting from {formatAmount(p.startingPrice)} ({p.category})
                   </option>
                 ))}
               </select>
@@ -328,7 +379,7 @@ function CheckoutContent() {
                     setFormData({ ...formData, name: e.target.value });
                     if (errors.name) setErrors({ ...errors, name: '' });
                   }}
-                  placeholder="e.g. Vikram Malhotra"
+                  placeholder="e.g. Alex Morgan"
                   className={`w-full px-3.5 py-2.5 rounded-xl bg-[#070c17] border text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                     errors.name ? 'border-rose-500' : 'border-slate-800'
                   }`}
@@ -347,7 +398,7 @@ function CheckoutContent() {
                     setFormData({ ...formData, email: e.target.value });
                     if (errors.email) setErrors({ ...errors, email: '' });
                   }}
-                  placeholder="e.g. vikram@apexlogistics.in"
+                  placeholder="e.g. alex@company.com"
                   className={`w-full px-3.5 py-2.5 rounded-xl bg-[#070c17] border text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                     errors.email ? 'border-rose-500' : 'border-slate-800'
                   }`}
@@ -359,7 +410,7 @@ function CheckoutContent() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
-                  Phone / WhatsApp <span className="text-blue-400">*</span>
+                  Phone / Contact <span className="text-blue-400">*</span>
                 </label>
                 <input
                   type="tel"
@@ -368,7 +419,7 @@ function CheckoutContent() {
                     setFormData({ ...formData, phone: e.target.value });
                     if (errors.phone) setErrors({ ...errors, phone: '' });
                   }}
-                  placeholder="e.g. +91 98765 43210"
+                  placeholder={isIntl ? '+1 415 555 0199' : '+91 98765 43210'}
                   className={`w-full px-3.5 py-2.5 rounded-xl bg-[#070c17] border text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                     errors.phone ? 'border-rose-500' : 'border-slate-800'
                   }`}
@@ -384,7 +435,7 @@ function CheckoutContent() {
                   type="text"
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  placeholder="e.g. Apex Logistics India"
+                  placeholder="e.g. Acme Tech Ventures"
                   className="w-full px-3.5 py-2.5 rounded-xl bg-[#070c17] border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
@@ -402,7 +453,7 @@ function CheckoutContent() {
                   setFormData({ ...formData, projectRequirements: e.target.value });
                   if (errors.projectRequirements) setErrors({ ...errors, projectRequirements: '' });
                 }}
-                placeholder="Outline core requirements (e.g. custom product catalog, Razorpay gateway, real-time shipment tracker)..."
+                placeholder="Outline core requirements (e.g. custom product catalog, Stripe gateway, real-time sync)..."
                 className={`w-full px-3.5 py-2.5 rounded-xl bg-[#070c17] border text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   errors.projectRequirements ? 'border-rose-500' : 'border-slate-800'
                 }`}
@@ -502,35 +553,37 @@ function CheckoutContent() {
             <div className="p-4 rounded-2xl bg-[#070c17] border border-slate-800/80 space-y-2.5 text-xs">
               <div className="flex justify-between text-slate-400">
                 <span>Base Plan Starting Scope:</span>
-                <span className="font-mono text-white">₹{basePrice.toLocaleString('en-IN')}</span>
+                <span className="font-mono text-white">{formatAmount(basePrice)}</span>
               </div>
 
               {couponState.applied && (
                 <div className="flex justify-between text-emerald-400 font-semibold">
                   <span>Coupon Discount Applied:</span>
-                  <span className="font-mono">-₹{couponState.discountInr.toLocaleString('en-IN')}</span>
+                  <span className="font-mono">-{formatAmount(discountAmount)}</span>
                 </div>
               )}
 
-              <div className="flex justify-between text-slate-400">
-                <span>Integrated GST (18%):</span>
-                <span className="font-mono text-white">₹{gstTax.toLocaleString('en-IN')}</span>
-              </div>
+              {!isIntl && (
+                <div className="flex justify-between text-slate-400">
+                  <span>Integrated GST (18%):</span>
+                  <span className="font-mono text-white">₹{taxAmount.toLocaleString('en-IN')}</span>
+                </div>
+              )}
 
               <div className="flex justify-between pt-2 border-t border-slate-800 text-slate-300 font-medium">
                 <span>Total Project Investment:</span>
-                <span className="font-mono text-white font-bold text-sm">₹{totalProjectPrice.toLocaleString('en-IN')}</span>
+                <span className="font-mono text-white font-bold text-sm">{formatAmount(totalProjectPrice)}</span>
               </div>
 
               <div className="flex justify-between py-3 px-3.5 rounded-xl bg-blue-950/60 border border-blue-900/60 text-sm font-bold text-blue-300">
                 <span>Due Today ({depositPercentage}%):</span>
-                <span className="font-mono text-emerald-400 text-lg">₹{payableToday.toLocaleString('en-IN')}</span>
+                <span className="font-mono text-emerald-400 text-lg">{formatAmount(payableToday)}</span>
               </div>
 
               {balanceDue > 0 && (
                 <div className="flex justify-between text-[11px] text-slate-400 pt-1">
                   <span>Remaining Milestone Balance:</span>
-                  <span className="font-mono text-slate-300">₹{balanceDue.toLocaleString('en-IN')}</span>
+                  <span className="font-mono text-slate-300">{formatAmount(balanceDue)}</span>
                 </div>
               )}
             </div>
@@ -539,7 +592,7 @@ function CheckoutContent() {
             <div className="space-y-1.5 text-[11px] text-slate-400">
               <div className="flex items-center gap-2 text-slate-300">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>Instant Tax Invoice &amp; SOW generated upon payment</span>
+                <span>Instant Commercial SOW &amp; IP Assignment generated</span>
               </div>
               <div className="flex items-center gap-2 text-slate-300">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
@@ -547,7 +600,7 @@ function CheckoutContent() {
               </div>
               <div className="flex items-center gap-2 text-slate-300">
                 <Lock className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                <span>Razorpay PCI-DSS Level 1 Encrypted Payment Gateway</span>
+                <span>{isIntl ? 'Stripe & International PCI-DSS Encryption' : 'Razorpay PCI-DSS Level 1 Encrypted'}</span>
               </div>
             </div>
 
@@ -560,11 +613,11 @@ function CheckoutContent() {
                 className="w-full py-4 px-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-400 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-blue-600/30 transition-all cursor-pointer disabled:opacity-50"
               >
                 {isProcessing ? (
-                  <span>Securing Order &amp; Connecting Razorpay...</span>
+                  <span>Securing Order &amp; Connecting Gateway...</span>
                 ) : (
                   <>
                     <CreditCard className="w-4 h-4" />
-                    <span>Pay ₹{payableToday.toLocaleString('en-IN')} via Razorpay</span>
+                    <span>Pay {formatAmount(payableToday)} &amp; Lock Sprint</span>
                     <ArrowRight className="w-4 h-4" />
                   </>
                 )}

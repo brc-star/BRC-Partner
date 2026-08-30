@@ -1,40 +1,76 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   CheckCircle2,
   ArrowRight,
   Sparkles,
   ShieldCheck,
   Zap,
-  Clock,
-  Layers,
   Tag,
-  HelpCircle,
-  Smartphone,
   Globe,
-  Bot,
   ShoppingCart,
+  Smartphone,
+  Bot,
   Server,
   Wrench,
+  Info,
 } from 'lucide-react';
-import { PricingPlan } from '@/types/payment';
-import { CORE_PRICING_PLANS, RECURRING_AMC_PLANS, PROMO_COUPONS } from '@/lib/pricing-data';
+import { PricingPlan, PricingMarket } from '@/types/payment';
+import {
+  getCorePricingPlans,
+  getAmcPlans,
+  PROMO_COUPONS,
+} from '@/lib/pricing-data';
 
 interface PricingCardsSectionProps {
   onSelectPlan: (plan: PricingPlan) => void;
-  onRequestQuote: (serviceName?: string) => void;
+  onRequestQuote: (serviceName?: string, market?: PricingMarket) => void;
+  market?: PricingMarket;
+  onMarketChange?: (market: PricingMarket) => void;
 }
 
-export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCardsSectionProps) {
+export function PricingCardsSection({
+  onSelectPlan,
+  onRequestQuote,
+  market: controlledMarket,
+  onMarketChange,
+}: PricingCardsSectionProps) {
+  const [internalMarket, setInternalMarket] = useState<PricingMarket>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = sessionStorage.getItem('brc_pricing_market') as PricingMarket;
+      if (saved === 'india' || saved === 'international') {
+        return saved;
+      }
+    }
+    return 'india';
+  });
   const [activeTab, setActiveTab] = useState<'core' | 'amc'>('core');
   const [copiedCoupon, setCopiedCoupon] = useState<string | null>(null);
 
-  const handleCopyCoupon = (code: string) => {
-    navigator.clipboard.writeText(code);
-    setCopiedCoupon(code);
-    setTimeout(() => setCopiedCoupon(null), 2500);
+  // Sync market with session storage and parent if controlled
+  const currentMarket: PricingMarket = controlledMarket || internalMarket;
+
+  const handleMarketSelect = (m: PricingMarket) => {
+    setInternalMarket(m);
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('brc_pricing_market', m);
+    }
+    if (onMarketChange) {
+      onMarketChange(m);
+    }
   };
+
+  const handleCopyCoupon = (code: string) => {
+    if (typeof navigator !== 'undefined') {
+      navigator.clipboard.writeText(code);
+      setCopiedCoupon(code);
+      setTimeout(() => setCopiedCoupon(null), 2500);
+    }
+  };
+
+  const currentCorePlans = getCorePricingPlans(currentMarket);
+  const currentAmcPlans = getAmcPlans(currentMarket);
 
   const getPlanIcon = (category: string) => {
     switch (category) {
@@ -51,15 +87,86 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
       case 'Maintenance & AMC':
         return <Wrench className="w-5 h-5 text-cyan-400" />;
       default:
-        return <Layers className="w-5 h-5 text-blue-400" />;
+        return <Sparkles className="w-5 h-5 text-blue-400" />;
     }
   };
 
+  const formatPrice = (price: number, currency: 'INR' | 'USD') => {
+    if (currency === 'INR') {
+      return `₹${price.toLocaleString('en-IN')}`;
+    }
+    return `$${price.toLocaleString('en-US')}`;
+  };
+
   return (
-    <section id="pricing-plans-section" className="py-20 bg-[#060911] relative">
+    <section id="pricing-plans-section" className="py-16 sm:py-20 bg-[#060911] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Market Switcher Banner */}
+        <div className="flex flex-col items-center justify-center space-y-4 mb-10 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono">
+            <span>Select Your Target Region &amp; Currency</span>
+          </div>
+
+          {/* Market Selector Tabs */}
+          <div
+            id="pricing-market-switcher"
+            className="p-1.5 rounded-2xl bg-[#0b1122] border border-slate-700/80 shadow-2xl inline-flex items-center gap-2 max-w-full overflow-x-auto"
+          >
+            <button
+              type="button"
+              id="market-switch-india"
+              onClick={() => handleMarketSelect('india')}
+              className={`px-5 sm:px-7 py-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-200 flex items-center gap-2.5 cursor-pointer shrink-0 ${
+                currentMarket === 'india'
+                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/40 border border-blue-400/40'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+              }`}
+            >
+              <span className="text-base sm:text-lg">🇮🇳</span>
+              <span>India Market (INR ₹)</span>
+              {currentMarket === 'india' && (
+                <span className="text-[10px] bg-blue-950/80 text-blue-200 px-2 py-0.5 rounded-md font-mono hidden sm:inline-block">
+                  Active
+                </span>
+              )}
+            </button>
+
+            <button
+              type="button"
+              id="market-switch-international"
+              onClick={() => handleMarketSelect('international')}
+              className={`px-5 sm:px-7 py-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all duration-200 flex items-center gap-2.5 cursor-pointer shrink-0 ${
+                currentMarket === 'international'
+                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/40 border border-blue-400/40'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+              }`}
+            >
+              <span className="text-base sm:text-lg">🇺🇸</span>
+              <span>USA &amp; International (USD $)</span>
+              {currentMarket === 'international' && (
+                <span className="text-[10px] bg-blue-950/80 text-blue-200 px-2 py-0.5 rounded-md font-mono hidden sm:inline-block">
+                  Active
+                </span>
+              )}
+            </button>
+          </div>
+
+          {/* Market Positioning Context Tagline */}
+          <div className="max-w-2xl text-xs sm:text-sm text-slate-400 pt-1">
+            {currentMarket === 'india' ? (
+              <p>
+                Targeted engineering packages for <strong className="text-slate-200">Startups, Small Businesses, Growing Brands &amp; Indian Enterprises</strong> with transparent milestone billing &amp; GST invoices.
+              </p>
+            ) : (
+              <p>
+                Professional product engineering, custom cloud architecture &amp; dedicated sprint teams for <strong className="text-slate-200">US &amp; Global Enterprises, Tech Ventures &amp; Scale-ups</strong>.
+              </p>
+            )}
+          </div>
+        </div>
+
         {/* Promo Coupons Banner */}
-        <div className="mb-12 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-950/60 via-indigo-950/40 to-[#0c1427] border border-blue-800/40 shadow-xl">
+        <div className="mb-10 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-950/60 via-indigo-950/40 to-[#0c1427] border border-blue-800/40 shadow-xl">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 shrink-0">
@@ -70,7 +177,7 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
                   Verified Partner Promo Codes
                 </span>
                 <p className="text-xs text-slate-300">
-                  Apply during checkout to claim milestone discounts.
+                  Click to copy promotional vouchers for milestone discounts.
                 </p>
               </div>
             </div>
@@ -98,7 +205,7 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
         </div>
 
         {/* Tab Switcher: Core Solutions vs. Recurring AMC */}
-        <div className="flex justify-center mb-14">
+        <div className="flex justify-center mb-10">
           <div className="p-1.5 rounded-2xl bg-[#0b1122] border border-slate-800 inline-flex items-center gap-2 shadow-inner">
             <button
               type="button"
@@ -110,7 +217,7 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
               }`}
             >
               <Zap className="w-4 h-4" />
-              <span>Core Project Engagements</span>
+              <span>Core Project Engagements (5 Plans)</span>
             </button>
 
             <button
@@ -128,27 +235,27 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
           </div>
         </div>
 
-        {/* Dynamic Plans Display */}
+        {/* Core Solutions Grid (5 Cards) */}
         {activeTab === 'core' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {CORE_PRICING_PLANS.map((plan) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {currentCorePlans.map((plan) => (
               <div
                 key={plan.id}
                 id={`plan-card-${plan.id}`}
-                className={`rounded-2xl bg-[#0c1324] border p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 relative ${
+                className={`rounded-2xl bg-[#0c1324] border p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 relative ${
                   plan.popular
-                    ? 'border-blue-500 shadow-2xl shadow-blue-950/60 lg:scale-[1.02]'
-                    : 'border-slate-800 hover:border-slate-700'
+                    ? 'border-blue-500 shadow-2xl shadow-blue-950/70 lg:scale-[1.02] ring-1 ring-blue-500/50'
+                    : 'border-slate-800 hover:border-slate-700 hover:bg-[#0e162a]'
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[11px] font-bold uppercase tracking-wider shadow-md">
-                    Most Popular Engagement
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[11px] font-bold uppercase tracking-wider shadow-lg">
+                    Recommended / Most Popular
                   </div>
                 )}
 
-                <div className="space-y-6">
-                  {/* Plan Category & Title */}
+                <div className="space-y-5">
+                  {/* Category & Duration */}
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
@@ -157,38 +264,47 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
                           {plan.category}
                         </span>
                       </div>
-                      <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400">
+                      <span className="text-[11px] font-mono px-2.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">
                         {plan.typicalDuration}
                       </span>
                     </div>
 
                     <h3 className="text-2xl font-extrabold text-white tracking-tight">{plan.name}</h3>
-                    <p className="text-xs text-blue-400 font-medium mt-1">{plan.tagline}</p>
+                    <p className="text-xs text-blue-400 font-medium mt-1 leading-snug">{plan.tagline}</p>
                   </div>
 
-                  {/* Starting Price Display */}
-                  <div className="p-4 rounded-xl bg-[#070c17] border border-slate-800/80 space-y-1.5">
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-xs text-slate-400 font-medium">Starting from</span>
-                      <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">
-                        ₹{plan.startingPriceInr.toLocaleString('en-IN')}
+                  {/* Starting Price Box */}
+                  <div className="p-4 rounded-xl bg-[#070c17] border border-slate-800/90 space-y-1.5">
+                    <div className="flex items-baseline gap-1.5 flex-wrap">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                        Starting from
                       </span>
+                      <span className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-mono">
+                        {formatPrice(plan.startingPrice, plan.currency)}
+                      </span>
+                      <span className="text-xs font-bold text-blue-400 font-mono">+</span>
                     </div>
                     <p className="text-[11px] text-slate-400 leading-snug">
-                      Milestone pricing with <strong className="text-slate-200">{plan.depositPercentage}% deposit</strong> upon SOW signing.
+                      Milestone-based sprints • <strong className="text-slate-200">{plan.depositPercentage}% kickoff deposit</strong> on SOW signing.
                     </p>
                   </div>
 
-                  {/* Scope Summary */}
-                  <div className="text-xs text-slate-300 bg-slate-900/50 p-3 rounded-lg border border-slate-800/60 leading-relaxed">
-                    <span className="text-slate-400 font-semibold block mb-0.5">Estimated Scope:</span>
+                  {/* Target Audience & Positioning */}
+                  <div className="p-3 rounded-lg bg-blue-950/30 border border-blue-900/40 text-[11px] text-slate-300 leading-relaxed">
+                    <span className="text-blue-300 font-semibold block mb-0.5">Target Scope:</span>
+                    {plan.targetAudience}
+                  </div>
+
+                  {/* Estimated Scope */}
+                  <div className="text-xs text-slate-300 bg-slate-900/60 p-3 rounded-lg border border-slate-800/70 leading-relaxed">
+                    <span className="text-slate-400 font-semibold block mb-0.5">Delivery Scope:</span>
                     {plan.estimatedScope}
                   </div>
 
-                  {/* Deliverables */}
-                  <div className="space-y-2.5">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">
-                      Core Deliverables:
+                  {/* Core Deliverables */}
+                  <div className="space-y-2">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block font-mono">
+                      Key Deliverables:
                     </span>
                     <ul className="space-y-2 text-xs text-slate-300">
                       {plan.deliverables.map((item, i) => (
@@ -200,10 +316,10 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
                     </ul>
                   </div>
 
-                  {/* Architecture Tech Badges */}
+                  {/* Included Architecture */}
                   <div className="space-y-2 pt-2 border-t border-slate-800/80">
                     <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 block font-mono">
-                      Included Architecture:
+                      Included Tech Architecture:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {plan.includedArchitecture.map((arch, i) => (
@@ -218,7 +334,7 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
                   </div>
                 </div>
 
-                {/* Dual Action CTAs */}
+                {/* CTAs */}
                 <div className="pt-6 border-t border-slate-800/80 mt-6 space-y-2.5">
                   <button
                     type="button"
@@ -229,13 +345,13 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
                         : 'bg-slate-800 hover:bg-slate-700 text-white'
                     }`}
                   >
-                    <span>Get Started (Reserve Sprint)</span>
+                    <span>Get Started ({formatPrice(plan.startingPrice, plan.currency)}+)</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
 
                   <button
                     type="button"
-                    onClick={() => onRequestQuote(plan.name)}
+                    onClick={() => onRequestQuote(plan.name, plan.market)}
                     className="w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-slate-300 hover:text-white bg-transparent hover:bg-slate-900/80 border border-slate-800 transition-colors cursor-pointer"
                   >
                     Request Custom Quote
@@ -245,34 +361,35 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {RECURRING_AMC_PLANS.map((plan) => (
+          /* Recurring AMC Grid (3 Cards) */
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+            {currentAmcPlans.map((plan) => (
               <div
                 key={plan.id}
                 id={`amc-card-${plan.id}`}
-                className={`rounded-2xl bg-[#0c1324] border p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 relative ${
+                className={`rounded-2xl bg-[#0c1324] border p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 relative ${
                   plan.popular
-                    ? 'border-blue-500 shadow-2xl shadow-blue-950/60'
+                    ? 'border-blue-500 shadow-2xl shadow-blue-950/70 ring-1 ring-blue-500/50'
                     : 'border-slate-800 hover:border-slate-700'
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[11px] font-bold uppercase tracking-wider shadow-md">
-                    Recommended DevOps Tier
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[11px] font-bold uppercase tracking-wider shadow-lg">
+                    Recommended SLA Retainer
                   </div>
                 )}
 
-                <div className="space-y-6">
+                <div className="space-y-5">
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         {getPlanIcon(plan.category)}
                         <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 font-mono">
-                          Recurring Agreement
+                          Monthly Retainer
                         </span>
                       </div>
                       <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-800/60">
-                        Monthly / Annual
+                        {plan.typicalDuration}
                       </span>
                     </div>
 
@@ -280,10 +397,10 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
                     <p className="text-xs text-blue-400 font-medium mt-1">{plan.tagline}</p>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#070c17] border border-slate-800/80 space-y-1">
+                  <div className="p-4 rounded-xl bg-[#070c17] border border-slate-800/90 space-y-1">
                     <div className="flex items-baseline gap-1.5">
-                      <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">
-                        ₹{plan.startingPriceInr.toLocaleString('en-IN')}
+                      <span className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-mono">
+                        {formatPrice(plan.startingPrice, plan.currency)}
                       </span>
                       <span className="text-xs text-slate-400 font-medium">/ month</span>
                     </div>
@@ -292,9 +409,14 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
                     </p>
                   </div>
 
-                  <div className="space-y-2.5">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block">
-                      Included SLA &amp; Deliverables:
+                  <div className="p-3 rounded-lg bg-emerald-950/20 border border-emerald-900/30 text-[11px] text-slate-300 leading-relaxed">
+                    <span className="text-emerald-300 font-semibold block mb-0.5">Designed For:</span>
+                    {plan.targetAudience}
+                  </div>
+
+                  <div className="space-y-2">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block font-mono">
+                      Included SLA &amp; Support:
                     </span>
                     <ul className="space-y-2 text-xs text-slate-300">
                       {plan.deliverables.map((item, i) => (
@@ -329,13 +451,13 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
                     onClick={() => onSelectPlan(plan)}
                     className="w-full py-3.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 transition-all cursor-pointer"
                   >
-                    <span>Activate Maintenance Retainer</span>
+                    <span>Activate Retainer ({formatPrice(plan.startingPrice, plan.currency)}/mo)</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
 
                   <button
                     type="button"
-                    onClick={() => onRequestQuote(plan.name)}
+                    onClick={() => onRequestQuote(plan.name, plan.market)}
                     className="w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-slate-300 hover:text-white bg-transparent hover:bg-slate-900/80 border border-slate-800 transition-colors cursor-pointer"
                   >
                     Discuss SLA Requirements
@@ -346,44 +468,16 @@ export function PricingCardsSection({ onSelectPlan, onRequestQuote }: PricingCar
           </div>
         )}
 
-        {/* Pricing Transparency Philosophy */}
-        <div className="mt-16 rounded-2xl bg-[#090e1b] border border-slate-800 p-6 sm:p-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="flex items-start gap-3.5">
-              <div className="w-9 h-9 rounded-xl bg-blue-950 border border-blue-800/60 flex items-center justify-center text-blue-400 shrink-0">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div className="space-y-1">
-                <h4 className="text-sm font-bold text-white">100% IP Ownership</h4>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  You own all source code, database schemas, and assets upon final milestone payment. No hostage licenses.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3.5">
-              <div className="w-9 h-9 rounded-xl bg-emerald-950 border border-emerald-800/60 flex items-center justify-center text-emerald-400 shrink-0">
-                <CheckCircle2 className="w-5 h-5" />
-              </div>
-              <div className="space-y-1">
-                <h4 className="text-sm font-bold text-white">Milestone-Based Escrow</h4>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  50% kickoff deposit, balance payable only upon reviewed staging deployment and acceptance.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3.5">
-              <div className="w-9 h-9 rounded-xl bg-purple-950 border border-purple-800/60 flex items-center justify-center text-purple-400 shrink-0">
-                <Clock className="w-5 h-5" />
-              </div>
-              <div className="space-y-1">
-                <h4 className="text-sm font-bold text-white">Post-Launch Warranty</h4>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Every project includes 30 to 90 days of guaranteed bug fixes and performance SLA support.
-                </p>
-              </div>
-            </div>
+        {/* Mandatory Explicit Pricing Scope Footnote */}
+        <div className="mt-12 p-4 sm:p-5 rounded-2xl bg-[#090e1b] border border-blue-900/50 flex items-start gap-3.5 text-xs text-slate-300 shadow-md">
+          <Info className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+          <div className="space-y-1">
+            <span className="font-bold text-white uppercase tracking-wider font-mono text-[11px]">
+              Important Estimation Notice &amp; Scope Policy
+            </span>
+            <p className="leading-relaxed text-slate-300">
+              All prices listed above are baseline <strong className="text-white">“Starting from”</strong> benchmarks for foundational deliverables and standard MVP velocity. Final pricing depends on project scope, custom features, third-party integrations, design complexity, technology requirements, timeline velocity, and deployment requirements. Following initial technical discovery, you will receive an itemized, fixed-price SOW.
+            </p>
           </div>
         </div>
       </div>

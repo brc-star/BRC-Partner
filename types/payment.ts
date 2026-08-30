@@ -3,6 +3,7 @@ export type OrderStatus = 'PENDING' | 'PROCESSING' | 'PAID' | 'IN_DEVELOPMENT' |
 export type BillingCycle = 'ONE_TIME' | 'MONTHLY' | 'YEARLY';
 export type SubscriptionStatus = 'ACTIVE' | 'PAST_DUE' | 'CANCELLED' | 'GRACE_PERIOD';
 export type MilestoneStatus = 'PENDING' | 'IN_PROGRESS' | 'COMPLETED' | 'ON_HOLD';
+export type PricingMarket = 'india' | 'international';
 
 export interface Customer {
   id: string;
@@ -12,6 +13,7 @@ export interface Customer {
   company?: string;
   address?: string;
   gstin?: string;
+  country?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -21,11 +23,16 @@ export interface PricingPlan {
   slug: string;
   name: string;
   category: 'Website' | 'E-Commerce' | 'Mobile App' | 'AI & Automation' | 'Custom Enterprise' | 'Maintenance & AMC';
-  startingPriceInr: number;
-  currency: string;
+  market: PricingMarket;
+  startingPrice: number; // e.g. 29999 (INR) or 2999 (USD)
+  startingPriceInr: number; // for backwards compatibility with existing order logic
+  startingPriceUsd?: number;
+  currency: 'INR' | 'USD';
+  currencySymbol: string; // '₹' | '$'
   billingType: BillingCycle;
   popular?: boolean;
   tagline: string;
+  targetAudience: string;
   estimatedScope: string;
   typicalDuration: string;
   depositPercentage: number; // e.g. 50% deposit for kickoff
@@ -33,6 +40,7 @@ export interface PricingPlan {
   features: string[];
   includedArchitecture: string[];
   recommendedFor: string;
+  scopeHighlights?: string[];
 }
 
 export interface Coupon {

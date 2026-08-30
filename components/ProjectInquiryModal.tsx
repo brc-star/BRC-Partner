@@ -7,16 +7,18 @@ interface ProjectInquiryModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialService?: string;
+  market?: 'india' | 'international';
 }
 
-export function ProjectInquiryModal({ isOpen, onClose, initialService }: ProjectInquiryModalProps) {
+export function ProjectInquiryModal({ isOpen, onClose, initialService, market = 'india' }: ProjectInquiryModalProps) {
   if (!isOpen) return null;
 
   return (
     <ProjectInquiryModalContent
-      key={initialService || 'default'}
+      key={`${initialService || 'default'}-${market}`}
       onClose={onClose}
       initialService={initialService}
+      market={market}
     />
   );
 }
@@ -24,15 +26,21 @@ export function ProjectInquiryModal({ isOpen, onClose, initialService }: Project
 function ProjectInquiryModalContent({
   onClose,
   initialService,
+  market = 'india',
 }: {
   onClose: () => void;
   initialService?: string;
+  market?: 'india' | 'international';
 }) {
+  const [activeMarket, setActiveMarket] = useState<'india' | 'international'>(market);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [companyName, setCompanyName] = useState('');
-  const [projectType, setProjectType] = useState(initialService || 'Custom Web Application');
-  const [budgetRange, setBudgetRange] = useState('Standard Milestone ($10k - $25k)');
+  const [projectType, setProjectType] = useState(initialService || 'Website Development');
+  const [budgetRange, setBudgetRange] = useState(
+    market === 'international' ? '$5,000 – $10,000' : '₹50,000 – ₹1,00,000'
+  );
   const [timeline, setTimeline] = useState('Within 1–2 Months');
   const [projectDescription, setProjectDescription] = useState('');
   const [selectedServices, setSelectedServices] = useState<string[]>(
@@ -41,6 +49,22 @@ function ProjectInquiryModalContent({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [submittedData, setSubmittedData] = useState<any | null>(null);
+
+  const budgetOptionsInr = [
+    '₹29,999 – ₹59,999',
+    '₹59,999 – ₹99,999',
+    '₹99,999 – ₹2,49,999',
+    '₹2,49,999 – ₹4,99,999',
+    '₹5,00,000+ (Enterprise Milestone)',
+  ];
+
+  const budgetOptionsUsd = [
+    '$2,999 – $5,999',
+    '$5,999 – $9,999',
+    '$9,999 – $24,999',
+    '$24,999 – $49,999',
+    '$50,000+ (Enterprise Sprint)',
+  ];
 
   const availableServices = [
     'Website Development',
@@ -190,12 +214,43 @@ function ProjectInquiryModalContent({
           /* Intake Form View */
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2 pr-8">
-              <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-blue-400 font-mono">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>BRC STAR Technical Consultation</span>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-blue-400 font-mono">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>BRC STAR Technical Consultation</span>
+                </div>
+
+                {/* Market Switcher in Modal */}
+                <div className="inline-flex items-center p-1 rounded-xl bg-slate-900 border border-slate-800 gap-1 text-[11px] font-mono">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveMarket('india');
+                      setBudgetRange(budgetOptionsInr[1]);
+                    }}
+                    className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                      activeMarket === 'india' ? 'bg-blue-600 text-white font-bold' : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    🇮🇳 India (INR ₹)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveMarket('international');
+                      setBudgetRange(budgetOptionsUsd[1]);
+                    }}
+                    className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+                      activeMarket === 'international' ? 'bg-blue-600 text-white font-bold' : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    🇺🇸 USA / Intl (USD $)
+                  </button>
+                </div>
               </div>
+
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-                Start Your Project
+                Request Custom Proposal
               </h3>
               <p className="text-xs sm:text-sm text-slate-300">
                 Tell us about your product goals, workflows, and timelines. We&apos;ll assess technical feasibility and respond within 24 hours.
@@ -243,19 +298,23 @@ function ProjectInquiryModalContent({
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Company */}
+              {/* Budget Range Dropdown */}
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
                   <Building className="w-3.5 h-3.5 text-blue-400" />
-                  <span>Company / Organization</span>
+                  <span>Target Budget ({activeMarket === 'international' ? 'USD $' : 'INR ₹'})</span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="e.g. Acme Ventures"
-                  value={companyName}
-                  onChange={(e) => setCompanyName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
-                />
+                <select
+                  value={budgetRange}
+                  onChange={(e) => setBudgetRange(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:outline-none focus:border-blue-500 transition-colors"
+                >
+                  {(activeMarket === 'international' ? budgetOptionsUsd : budgetOptionsInr).map((opt) => (
+                    <option key={opt} value={opt} className="bg-slate-900 text-white">
+                      {opt}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               {/* Timeline */}

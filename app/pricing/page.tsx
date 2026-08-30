@@ -4,24 +4,17 @@ import React, { useState } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { PricingCardsSection } from '@/components/PricingCardsSection';
+import { WhyBrcStarSection } from '@/components/WhyBrcStarSection';
+import { PricingFaqSection } from '@/components/PricingFaqSection';
 import { ProjectInquiryForm } from '@/components/ProjectInquiryForm';
 import { RazorpayCheckoutModal } from '@/components/RazorpayCheckoutModal';
 import { ProjectInquiryModal } from '@/components/ProjectInquiryModal';
-import { PricingPlan } from '@/types/payment';
-import { CORE_PRICING_PLANS } from '@/lib/pricing-data';
-import {
-  ShieldCheck,
-  CheckCircle2,
-  Clock,
-  HelpCircle,
-  Sparkles,
-  Layers,
-  ArrowRight,
-  Terminal,
-  FileCode2,
-} from 'lucide-react';
+import { PricingPlan, PricingMarket } from '@/types/payment';
+import { Sparkles, ShieldCheck, CheckCircle2, ArrowRight } from 'lucide-react';
+import Script from 'next/script';
 
 export default function PricingPage() {
+  const [market, setMarket] = useState<PricingMarket>('india');
   const [selectedPlanForCheckout, setSelectedPlanForCheckout] = useState<PricingPlan | null>(null);
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
   const [inquiryInitialService, setInquiryInitialService] = useState('Website Development');
@@ -30,36 +23,164 @@ export default function PricingPage() {
     setSelectedPlanForCheckout(plan);
   };
 
-  const handleOpenInquiry = (serviceName?: string) => {
+  const handleOpenInquiry = (serviceName?: string, inquiryMarket?: PricingMarket) => {
     setInquiryInitialService(serviceName || 'Website Development');
+    if (inquiryMarket) {
+      setMarket(inquiryMarket);
+    }
     setInquiryModalOpen(true);
+  };
+
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Software Development & Architecture',
+    provider: {
+      '@type': 'Organization',
+      name: 'BRC STAR',
+      url: 'https://brcpartner.brcstar.in',
+      logo: 'https://brcpartner.brcstar.in/icon.png',
+    },
+    areaServed: ['IN', 'US', 'GB', 'AE', 'SG', 'CA', 'AU'],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'BRC STAR Software Engineering Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Website Development',
+            description: 'Next.js 15 High-Performance Custom Business Platform',
+          },
+          priceSpecification: [
+            {
+              '@type': 'PriceSpecification',
+              price: '29999',
+              priceCurrency: 'INR',
+            },
+            {
+              '@type': 'PriceSpecification',
+              price: '2999',
+              priceCurrency: 'USD',
+            },
+          ],
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'E-Commerce Development',
+            description: 'Custom D2C Storefront & Global Multi-Currency Checkout',
+          },
+          priceSpecification: [
+            {
+              '@type': 'PriceSpecification',
+              price: '59999',
+              priceCurrency: 'INR',
+            },
+            {
+              '@type': 'PriceSpecification',
+              price: '5999',
+              priceCurrency: 'USD',
+            },
+          ],
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Mobile App Development',
+            description: 'Cross-Platform React Native iOS & Android Suite',
+          },
+          priceSpecification: [
+            {
+              '@type': 'PriceSpecification',
+              price: '99999',
+              priceCurrency: 'INR',
+            },
+            {
+              '@type': 'PriceSpecification',
+              price: '9999',
+              priceCurrency: 'USD',
+            },
+          ],
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'AI & Automation',
+            description: 'Enterprise RAG Architecture & Autonomous Agent Workflows',
+          },
+          priceSpecification: [
+            {
+              '@type': 'PriceSpecification',
+              price: '99999',
+              priceCurrency: 'INR',
+            },
+            {
+              '@type': 'PriceSpecification',
+              price: '7999',
+              priceCurrency: 'USD',
+            },
+          ],
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Enterprise Solutions',
+            description: 'Mission-Critical Cloud Systems, Microservices & Custom Portals',
+          },
+          priceSpecification: [
+            {
+              '@type': 'PriceSpecification',
+              price: '299999',
+              priceCurrency: 'INR',
+            },
+            {
+              '@type': 'PriceSpecification',
+              price: '24999',
+              priceCurrency: 'USD',
+            },
+          ],
+        },
+      ],
+    },
   };
 
   return (
     <div className="min-h-screen bg-[#050811] text-slate-100 font-sans selection:bg-blue-600 selection:text-white flex flex-col">
+      <Script
+        id="pricing-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       <Navbar onOpenInquiry={handleOpenInquiry} />
 
       <main className="flex-grow pt-28 sm:pt-36">
         {/* Page Hero */}
-        <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center space-y-6 pb-12">
+        <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center space-y-6 pb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
             <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>Transparent Investment Frameworks</span>
+            <span>Dual-Market Investment Framework</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.15] max-w-4xl mx-auto">
-            Engineered Software Engagements with <span className="text-blue-400">Zero Hidden Retainers</span>
+            Transparent Product Engineering with <span className="text-blue-400">Zero Hidden Surcharges</span>
           </h1>
 
           <p className="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Choose a verified engineering plan or configure custom sprint milestones. Every project includes 100% intellectual property ownership, milestone-based payments, and a 30 to 90-day post-launch warranty.
+            Choose your market currency, inspect starting benchmarks, or request a custom milestone scope. Every engagement delivers 100% intellectual property ownership, milestone-based escrow billing, and a guaranteed 30 to 90-day post-launch warranty.
           </p>
 
           {/* Quick Metrics Strip */}
-          <div className="pt-4 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto text-left">
+          <div className="pt-2 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto text-left">
             <div className="p-3.5 rounded-xl bg-[#0a101f] border border-slate-800 space-y-1">
               <span className="text-[11px] text-slate-400 font-mono">Payment Standard</span>
-              <p className="text-xs font-bold text-white">50% Escrow Milestone</p>
+              <p className="text-xs font-bold text-white">Milestone Sprints</p>
             </div>
             <div className="p-3.5 rounded-xl bg-[#0a101f] border border-slate-800 space-y-1">
               <span className="text-[11px] text-slate-400 font-mono">Source Code</span>
@@ -76,25 +197,30 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* Pricing Cards Section */}
+        {/* Pricing Cards Section with Market Switcher & 5 Cards */}
         <PricingCardsSection
+          market={market}
+          onMarketChange={(newMarket) => setMarket(newMarket)}
           onSelectPlan={handleSelectPlan}
           onRequestQuote={handleOpenInquiry}
         />
 
-        {/* Comparison Matrix / Deliverables Table */}
+        {/* Comparison Matrix / Deliverables Table with Dynamic Prices */}
         <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="text-center space-y-3 mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono">
+              <span>{market === 'india' ? '🇮🇳 India Market Benchmarks' : '🇺🇸 USA & Global Benchmarks'}</span>
+            </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
               Plan Deliverables &amp; Technical Capabilities Matrix
             </h2>
             <p className="text-xs sm:text-sm text-slate-400 max-w-2xl mx-auto">
-              Compare included engineering standards across all 5 core service tiers.
+              Compare included engineering specifications and technical architecture across all 5 core service tiers.
             </p>
           </div>
 
           <div className="overflow-x-auto rounded-2xl border border-slate-800 bg-[#090e1c] shadow-2xl">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-xs min-w-[700px]">
               <thead>
                 <tr className="border-b border-slate-800 text-slate-300 font-semibold uppercase tracking-wider bg-[#060a14]">
                   <th className="py-4 px-4 sm:px-6">Engineering Standard</th>
@@ -108,11 +234,21 @@ export default function PricingPage() {
               <tbody className="divide-y divide-slate-800/60 text-slate-300">
                 <tr>
                   <td className="py-3.5 px-4 sm:px-6 font-medium text-white">Starting Price</td>
-                  <td className="py-3.5 px-3 text-center font-mono font-bold text-white">₹24,999</td>
-                  <td className="py-3.5 px-3 text-center font-mono font-bold text-blue-400">₹49,999</td>
-                  <td className="py-3.5 px-3 text-center font-mono font-bold text-white">₹79,999</td>
-                  <td className="py-3.5 px-3 text-center font-mono font-bold text-white">₹64,999</td>
-                  <td className="py-3.5 px-3 text-center font-mono font-bold text-white">₹1,49,999</td>
+                  <td className="py-3.5 px-3 text-center font-mono font-bold text-white">
+                    {market === 'india' ? '₹29,999+' : '$2,999+'}
+                  </td>
+                  <td className="py-3.5 px-3 text-center font-mono font-bold text-blue-400">
+                    {market === 'india' ? '₹59,999+' : '$5,999+'}
+                  </td>
+                  <td className="py-3.5 px-3 text-center font-mono font-bold text-white">
+                    {market === 'india' ? '₹99,999+' : '$9,999+'}
+                  </td>
+                  <td className="py-3.5 px-3 text-center font-mono font-bold text-white">
+                    {market === 'india' ? '₹99,999+' : '$7,999+'}
+                  </td>
+                  <td className="py-3.5 px-3 text-center font-mono font-bold text-white">
+                    {market === 'india' ? '₹2,99,999+' : '$24,999+'}
+                  </td>
                 </tr>
                 <tr>
                   <td className="py-3.5 px-4 sm:px-6 font-medium text-white">Typical Timeline</td>
@@ -124,17 +260,17 @@ export default function PricingPage() {
                 </tr>
                 <tr>
                   <td className="py-3.5 px-4 sm:px-6 font-medium text-white">Database &amp; Schemas</td>
-                  <td className="py-3.5 px-3 text-center">MDX / Headless</td>
-                  <td className="py-3.5 px-3 text-center text-emerald-400">✓ PostgreSQL</td>
-                  <td className="py-3.5 px-3 text-center text-emerald-400">✓ PostgreSQL</td>
-                  <td className="py-3.5 px-3 text-center text-emerald-400">✓ pgvector / RAG</td>
+                  <td className="py-3.5 px-3 text-center">MDX / Headless CMS</td>
+                  <td className="py-3.5 px-3 text-center text-emerald-400">✓ PostgreSQL / Prisma</td>
+                  <td className="py-3.5 px-3 text-center text-emerald-400">✓ PostgreSQL / SQLite</td>
+                  <td className="py-3.5 px-3 text-center text-emerald-400">✓ pgvector / Supabase</td>
                   <td className="py-3.5 px-3 text-center text-emerald-400">✓ Cloud SQL / Sharded</td>
                 </tr>
                 <tr>
-                  <td className="py-3.5 px-4 sm:px-6 font-medium text-white">Payment Integration</td>
+                  <td className="py-3.5 px-4 sm:px-6 font-medium text-white">Payment &amp; Billing</td>
                   <td className="py-3.5 px-3 text-center text-slate-500">—</td>
-                  <td className="py-3.5 px-3 text-center text-emerald-400">✓ Razorpay / Stripe</td>
-                  <td className="py-3.5 px-3 text-center text-emerald-400">✓ In-App / Gateway</td>
+                  <td className="py-3.5 px-3 text-center text-emerald-400">✓ {market === 'india' ? 'Razorpay (UPI/Cards)' : 'Stripe & Apple Pay'}</td>
+                  <td className="py-3.5 px-3 text-center text-emerald-400">✓ StoreKit / Gateway</td>
                   <td className="py-3.5 px-3 text-center text-slate-500">—</td>
                   <td className="py-3.5 px-3 text-center text-emerald-400">✓ Multi-Gateway &amp; ERP</td>
                 </tr>
@@ -159,8 +295,17 @@ export default function PricingPage() {
           </div>
         </section>
 
+        {/* Why BRC STAR Section (6 Pillars) */}
+        <WhyBrcStarSection market={market} />
+
+        {/* FAQ Section */}
+        <PricingFaqSection
+          market={market}
+          onRequestQuote={handleOpenInquiry}
+        />
+
         {/* Embedded Project Inquiry Section */}
-        <section id="custom-inquiry-section" className="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <section id="custom-inquiry-section" className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
           <div className="text-center space-y-3 mb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-800/40 text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
               <span>Have a Custom Specification?</span>
@@ -179,7 +324,7 @@ export default function PricingPage() {
 
       <Footer onOpenInquiry={handleOpenInquiry} />
 
-      {/* Razorpay Checkout Modal */}
+      {/* Checkout Modal */}
       <RazorpayCheckoutModal
         isOpen={Boolean(selectedPlanForCheckout)}
         onClose={() => setSelectedPlanForCheckout(null)}
@@ -191,6 +336,7 @@ export default function PricingPage() {
         isOpen={inquiryModalOpen}
         onClose={() => setInquiryModalOpen(false)}
         initialService={inquiryInitialService}
+        market={market}
       />
     </div>
   );
