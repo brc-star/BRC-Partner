@@ -13,6 +13,7 @@ import { ProjectShowcaseSection } from '@/components/ProjectShowcaseSection';
 import { WhyBrcStarSection } from '@/components/WhyBrcStarSection';
 import { DevelopmentProcessSection } from '@/components/DevelopmentProcessSection';
 import { TechStackSection } from '@/components/TechStackSection';
+import { HomepagePricingPreview } from '@/components/HomepagePricingPreview';
 import { ProjectEstimatorSection } from '@/components/ProjectEstimatorSection';
 import { FaqSection } from '@/components/FaqSection';
 import { FinalCtaSection } from '@/components/FinalCtaSection';
@@ -102,7 +103,10 @@ export default function HomePage() {
         {/* 10. Modern Technology Stack */}
         <TechStackSection onOpenInquiry={() => handleOpenInquiry('Technology Advisory')} />
 
-        {/* 11. Investment Packages & Interactive Scope Estimator */}
+        {/* 11. Clean Starting Pricing Preview */}
+        <HomepagePricingPreview />
+
+        {/* 12. Investment Packages & Interactive Scope Estimator */}
         <ProjectEstimatorSection onOpenInquiry={handleOpenInquiry} />
 
         {/* 12. FAQ Section */}

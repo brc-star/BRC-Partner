@@ -1528,3 +1528,55 @@ export const DEMO_SAMPLE_SUBSCRIPTIONS: Subscription[] = [
     updatedAt: '2026-08-15T14:30:00Z',
   },
 ];
+
+export interface HomepagePricingPreviewItem {
+  id: string;
+  category: PricingCategory;
+  name: string;
+  startingPrice: number;
+  formattedStartingPrice: string;
+  tagline: string;
+}
+
+export const HOMEPAGE_PRICING_PREVIEW: HomepagePricingPreviewItem[] = [
+  {
+    id: 'hp-web-development',
+    category: 'Web Development',
+    name: 'Web Development',
+    startingPrice: 29999,
+    formattedStartingPrice: '₹29,999',
+    tagline: 'Custom Next.js & React Web Platforms',
+  },
+  {
+    id: 'hp-ecommerce',
+    category: 'E-Commerce',
+    name: 'E-Commerce',
+    startingPrice: 69999,
+    formattedStartingPrice: '₹69,999',
+    tagline: 'High-Converting Online Stores & Checkouts',
+  },
+  {
+    id: 'hp-mobile-app',
+    category: 'Mobile App',
+    name: 'Mobile App',
+    startingPrice: 119999,
+    formattedStartingPrice: '₹1,19,999',
+    tagline: 'Cross-Platform iOS & Android Apps',
+  },
+  {
+    id: 'hp-ai-automation',
+    category: 'AI & Automation',
+    name: 'AI & Automation',
+    startingPrice: 149999,
+    formattedStartingPrice: '₹1,49,999',
+    tagline: 'AI Agents, RAG Pipelines & Workflows',
+  },
+  {
+    id: 'hp-saas-web-app',
+    category: 'SaaS / Web Application',
+    name: 'SaaS / Web Application',
+    startingPrice: 249999,
+    formattedStartingPrice: '₹2,49,999',
+    tagline: 'Multi-Tenant SaaS & Scalable Cloud Systems',
+  },
+];
