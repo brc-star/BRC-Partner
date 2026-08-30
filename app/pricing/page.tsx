@@ -34,7 +34,7 @@ export default function PricingPage() {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    serviceType: 'Software Development & Architecture',
+    serviceType: 'Software Development & Engineering',
     provider: {
       '@type': 'Organization',
       name: 'BRC STAR',
@@ -50,101 +50,66 @@ export default function PricingPage() {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: 'Website Development',
-            description: 'Next.js 15 High-Performance Custom Business Platform',
+            name: 'Web Development',
+            description: 'Custom Next.js & React Web Platforms (Inclusive of 18% GST)',
           },
-          priceSpecification: [
-            {
-              '@type': 'PriceSpecification',
-              price: '29999',
-              priceCurrency: 'INR',
-            },
-            {
-              '@type': 'PriceSpecification',
-              price: '2999',
-              priceCurrency: 'USD',
-            },
-          ],
+          priceSpecification: {
+            '@type': 'PriceSpecification',
+            price: '29999',
+            priceCurrency: 'INR',
+          },
         },
         {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
             name: 'E-Commerce Development',
-            description: 'Custom D2C Storefront & Global Multi-Currency Checkout',
+            description: 'Full-Stack E-Commerce & Storefront Architecture (Inclusive of 18% GST)',
           },
-          priceSpecification: [
-            {
-              '@type': 'PriceSpecification',
-              price: '59999',
-              priceCurrency: 'INR',
-            },
-            {
-              '@type': 'PriceSpecification',
-              price: '5999',
-              priceCurrency: 'USD',
-            },
-          ],
+          priceSpecification: {
+            '@type': 'PriceSpecification',
+            price: '69999',
+            priceCurrency: 'INR',
+          },
         },
         {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
             name: 'Mobile App Development',
-            description: 'Cross-Platform React Native iOS & Android Suite',
+            description: 'Cross-Platform React Native iOS & Android Development (Inclusive of 18% GST)',
           },
-          priceSpecification: [
-            {
-              '@type': 'PriceSpecification',
-              price: '99999',
-              priceCurrency: 'INR',
-            },
-            {
-              '@type': 'PriceSpecification',
-              price: '9999',
-              priceCurrency: 'USD',
-            },
-          ],
+          priceSpecification: {
+            '@type': 'PriceSpecification',
+            price: '119999',
+            priceCurrency: 'INR',
+          },
         },
         {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
             name: 'AI & Automation',
-            description: 'Enterprise RAG Architecture & Autonomous Agent Workflows',
+            description: 'Enterprise AI Agents, RAG Pipelines & Workflow Automation (Inclusive of 18% GST)',
           },
-          priceSpecification: [
-            {
-              '@type': 'PriceSpecification',
-              price: '99999',
-              priceCurrency: 'INR',
-            },
-            {
-              '@type': 'PriceSpecification',
-              price: '7999',
-              priceCurrency: 'USD',
-            },
-          ],
+          priceSpecification: {
+            '@type': 'PriceSpecification',
+            price: '149999',
+            priceCurrency: 'INR',
+          },
         },
         {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: 'Enterprise Solutions',
-            description: 'Mission-Critical Cloud Systems, Microservices & Custom Portals',
+            name: 'SaaS / Web Application',
+            description: 'Multi-Tenant SaaS, B2B Portals & High-Scale Systems (Inclusive of 18% GST)',
           },
-          priceSpecification: [
-            {
-              '@type': 'PriceSpecification',
-              price: '299999',
-              priceCurrency: 'INR',
-            },
-            {
-              '@type': 'PriceSpecification',
-              price: '24999',
-              priceCurrency: 'USD',
-            },
-          ],
+          priceSpecification: {
+            '@type': 'PriceSpecification',
+            price: '249999',
+            priceCurrency: 'INR',
+          },
         },
       ],
     },
@@ -165,7 +130,7 @@ export default function PricingPage() {
         <section className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center space-y-6 pb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
             <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>Dual-Market Investment Framework</span>
+            <span>5 Core Engineering Categories</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.15] max-w-4xl mx-auto">
@@ -173,7 +138,7 @@ export default function PricingPage() {
           </h1>
 
           <p className="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Choose your market currency, inspect starting benchmarks, or request a custom milestone scope. Every engagement delivers 100% intellectual property ownership, milestone-based escrow billing, and a guaranteed 30 to 90-day post-launch warranty.
+            Transparent starting rates across Web Development, E-Commerce, Mobile Apps, AI &amp; Automation, and SaaS Web Applications. All customer-facing prices are inclusive of 18% GST with 100% intellectual property ownership and dedicated post-launch support.
           </p>
 
           {/* Quick Metrics Strip */}
@@ -224,30 +189,30 @@ export default function PricingPage() {
               <thead>
                 <tr className="border-b border-slate-800 text-slate-300 font-semibold uppercase tracking-wider bg-[#060a14]">
                   <th className="py-4 px-4 sm:px-6">Engineering Standard</th>
-                  <th className="py-4 px-3 text-center">Website</th>
+                  <th className="py-4 px-3 text-center">Web Development</th>
                   <th className="py-4 px-3 text-center text-blue-400">E-Commerce</th>
                   <th className="py-4 px-3 text-center">Mobile App</th>
                   <th className="py-4 px-3 text-center">AI &amp; Automation</th>
-                  <th className="py-4 px-3 text-center">Enterprise</th>
+                  <th className="py-4 px-3 text-center">SaaS / Web App</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800/60 text-slate-300">
                 <tr>
-                  <td className="py-3.5 px-4 sm:px-6 font-medium text-white">Starting Price</td>
+                  <td className="py-3.5 px-4 sm:px-6 font-medium text-white">Starting Price (Incl. 18% GST)</td>
                   <td className="py-3.5 px-3 text-center font-mono font-bold text-white">
-                    {market === 'india' ? '₹29,999+' : '$2,999+'}
+                    ₹29,999
                   </td>
                   <td className="py-3.5 px-3 text-center font-mono font-bold text-blue-400">
-                    {market === 'india' ? '₹59,999+' : '$5,999+'}
+                    ₹69,999
                   </td>
                   <td className="py-3.5 px-3 text-center font-mono font-bold text-white">
-                    {market === 'india' ? '₹99,999+' : '$9,999+'}
+                    ₹1,19,999
                   </td>
                   <td className="py-3.5 px-3 text-center font-mono font-bold text-white">
-                    {market === 'india' ? '₹99,999+' : '$7,999+'}
+                    ₹1,49,999
                   </td>
                   <td className="py-3.5 px-3 text-center font-mono font-bold text-white">
-                    {market === 'india' ? '₹2,99,999+' : '$24,999+'}
+                    ₹2,49,999
                   </td>
                 </tr>
                 <tr>

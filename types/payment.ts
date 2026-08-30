@@ -22,7 +22,7 @@ export interface PricingPlan {
   id: string;
   slug: string;
   name: string;
-  category: 'Website' | 'E-Commerce' | 'Mobile App' | 'AI & Automation' | 'Custom Enterprise' | 'Maintenance & AMC';
+  category: 'Web Development' | 'E-Commerce' | 'Mobile App' | 'AI & Automation' | 'SaaS / Web Application' | 'Website' | 'Custom Enterprise' | 'Maintenance & AMC';
   market: PricingMarket;
   startingPrice: number; // e.g. 29999 (INR) or 2999 (USD)
   startingPriceInr: number; // for backwards compatibility with existing order logic
@@ -31,16 +31,21 @@ export interface PricingPlan {
   currencySymbol: string; // '₹' | '$'
   billingType: BillingCycle;
   popular?: boolean;
+  badgeText?: string; // e.g. 'MOST POPULAR'
   tagline: string;
   targetAudience: string;
+  bestFor?: string;
   estimatedScope: string;
   typicalDuration: string;
+  supportDuration?: string;
   depositPercentage: number; // e.g. 50% deposit for kickoff
   deliverables: string[];
   features: string[];
   includedArchitecture: string[];
   recommendedFor: string;
   scopeHighlights?: string[];
+  ctaLabel?: string; // e.g. 'Get Started', 'Get a Quote', 'Talk to an Expert'
+  isStartingFromPlus?: boolean; // For enterprise '+' pricing
 }
 
 export interface Coupon {

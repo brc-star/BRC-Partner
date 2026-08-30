@@ -62,13 +62,15 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Dynamic calculations
+  // Dynamic calculations (Prices are inclusive of 18% GST for India)
   const basePrice = selectedPlan ? (isIntl ? (selectedPlan.startingPriceUsd || selectedPlan.startingPrice) : selectedPlan.startingPriceInr) : 0;
   const discountAmount = isIntl ? couponState.discountUsd : couponState.discountInr;
-  const discountedBase = Math.max(isIntl ? 100 : 1000, basePrice - discountAmount);
-  // GST 18% for India; 0% for International export software services
-  const taxAmount = isIntl ? 0 : Math.round(discountedBase * 0.18 * 100) / 100;
-  const totalProjectPrice = Math.round((discountedBase + taxAmount) * 100) / 100;
+  const discountedTotal = Math.max(isIntl ? 100 : 1000, basePrice - discountAmount);
+  
+  // Tax breakdown (GST included in total)
+  const totalProjectPrice = discountedTotal;
+  const taxableBase = isIntl ? discountedTotal : Math.round((discountedTotal / 1.18) * 100) / 100;
+  const taxAmount = isIntl ? 0 : Math.round((discountedTotal - taxableBase) * 100) / 100;
 
   const depositPercentage = formData.paymentOption === 'full' ? 100 : (selectedPlan?.depositPercentage || 50);
   const payableToday = Math.round((totalProjectPrice * (depositPercentage / 100)) * 100) / 100;
@@ -549,7 +551,7 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
               {/* Price Breakdown Table */}
               <div className="p-4 rounded-xl bg-[#060a15] border border-slate-800/80 space-y-2 text-xs">
                 <div className="flex justify-between text-slate-400">
-                  <span>Base Plan Starting Scope:</span>
+                  <span>Total Plan Starting Scope:</span>
                   <span className="font-mono text-white">{formatAmount(basePrice)}</span>
                 </div>
 
@@ -562,8 +564,8 @@ export function RazorpayCheckoutModal({ isOpen, onClose, selectedPlan }: Razorpa
 
                 {!isIntl && (
                   <div className="flex justify-between text-slate-400">
-                    <span>Integrated GST (18%):</span>
-                    <span className="font-mono text-white">₹{taxAmount.toLocaleString('en-IN')}</span>
+                    <span>Included 18% GST:</span>
+                    <span className="font-mono text-emerald-400">₹{taxAmount.toLocaleString('en-IN')}</span>
                   </div>
                 )}
 

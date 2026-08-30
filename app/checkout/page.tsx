@@ -70,13 +70,14 @@ function CheckoutContent() {
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Calculations
+  // Calculations (Inclusive of 18% GST for India)
   const basePrice = isIntl ? (selectedPlan.startingPriceUsd || selectedPlan.startingPrice) : selectedPlan.startingPriceInr;
   const discountAmount = isIntl ? couponState.discountUsd : couponState.discountInr;
-  const discountedBase = Math.max(isIntl ? 100 : 1000, basePrice - discountAmount);
-  // GST 18% for India; 0% for International export software
-  const taxAmount = isIntl ? 0 : Math.round(discountedBase * 0.18 * 100) / 100;
-  const totalProjectPrice = Math.round((discountedBase + taxAmount) * 100) / 100;
+  const discountedTotal = Math.max(isIntl ? 100 : 1000, basePrice - discountAmount);
+  
+  const totalProjectPrice = discountedTotal;
+  const taxableBase = isIntl ? discountedTotal : Math.round((discountedTotal / 1.18) * 100) / 100;
+  const taxAmount = isIntl ? 0 : Math.round((discountedTotal - taxableBase) * 100) / 100;
 
   const depositPercentage = formData.paymentOption === 'full' ? 100 : selectedPlan.depositPercentage;
   const payableToday = Math.round((totalProjectPrice * (depositPercentage / 100)) * 100) / 100;
@@ -552,7 +553,7 @@ function CheckoutContent() {
             {/* Financial Breakdown */}
             <div className="p-4 rounded-2xl bg-[#070c17] border border-slate-800/80 space-y-2.5 text-xs">
               <div className="flex justify-between text-slate-400">
-                <span>Base Plan Starting Scope:</span>
+                <span>Total Plan Starting Scope:</span>
                 <span className="font-mono text-white">{formatAmount(basePrice)}</span>
               </div>
 
@@ -565,8 +566,8 @@ function CheckoutContent() {
 
               {!isIntl && (
                 <div className="flex justify-between text-slate-400">
-                  <span>Integrated GST (18%):</span>
-                  <span className="font-mono text-white">₹{taxAmount.toLocaleString('en-IN')}</span>
+                  <span>Included 18% GST:</span>
+                  <span className="font-mono text-emerald-400">₹{taxAmount.toLocaleString('en-IN')}</span>
                 </div>
               )}
 

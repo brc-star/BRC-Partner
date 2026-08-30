@@ -48,23 +48,24 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Selected plan was not found in our catalog.' }, { status: 404 });
     }
 
-    const baseAmountInr = plan.startingPriceInr;
+    const grossAmountInr = plan.startingPriceInr;
     let discountInr = 0;
     let appliedCoupon: string | undefined = undefined;
 
     // Validate and calculate coupon discount
     if (couponCode && couponCode.trim()) {
-      const couponCheck = db.validateCoupon(couponCode, baseAmountInr);
+      const couponCheck = db.validateCoupon(couponCode, grossAmountInr);
       if (couponCheck.valid) {
         discountInr = couponCheck.discountInr;
         appliedCoupon = couponCheck.coupon?.code;
       }
     }
 
-    const discountedBaseInr = Math.max(1000, baseAmountInr - discountInr);
-    // 18% GST calculation
-    const taxGstInr = Math.round(discountedBaseInr * 0.18 * 100) / 100;
-    const amountTotalInr = Math.round((discountedBaseInr + taxGstInr) * 100) / 100;
+    const discountedTotalInr = Math.max(1000, grossAmountInr - discountInr);
+    // Inclusive 18% GST calculation (GST is already included in the displayed customer price)
+    const baseBeforeTaxInr = Math.round((discountedTotalInr / 1.18) * 100) / 100;
+    const taxGstInr = Math.round((discountedTotalInr - baseBeforeTaxInr) * 100) / 100;
+    const amountTotalInr = discountedTotalInr;
 
     // Determine deposit vs full payment
     const depositPct = paymentOption === 'full' ? 100 : plan.depositPercentage;
@@ -90,7 +91,7 @@ export async function POST(req: NextRequest) {
       planName: plan.name,
       serviceCategory: plan.category,
       billingType: plan.billingType,
-      amountBaseInr: baseAmountInr,
+      amountBaseInr: baseBeforeTaxInr,
       couponCode: appliedCoupon,
       discountInr,
       taxGstInr,
