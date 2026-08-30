@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { ArrowUp, Terminal, Shield, Mail, MapPin, Globe, Sparkles } from 'lucide-react';
 import { BRC_STAR_INFO } from '@/lib/data';
 
@@ -158,40 +159,45 @@ export function Footer({ onOpenInquiry }: FooterProps) {
           {/* Col 5: Company & Direct */}
           <div className="space-y-3">
             <h4 className="font-bold text-xs uppercase tracking-wider text-white">
-              Company & Process
+              Pricing &amp; Portal
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="#why-us" className="hover:text-blue-400 transition-colors">
+                <Link href="/pricing" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
+                  Pricing &amp; Milestone Plans →
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard" className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors">
+                  Client Project Dashboard →
+                </Link>
+              </li>
+              <li>
+                <Link href="/#why-us" className="hover:text-blue-400 transition-colors">
                   Why BRC STAR
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#process" className="hover:text-blue-400 transition-colors">
+                <Link href="/#process" className="hover:text-blue-400 transition-colors">
                   6-Stage Lifecycle
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#showcase" className="hover:text-blue-400 transition-colors">
+                <Link href="/#showcase" className="hover:text-blue-400 transition-colors">
                   Visual Case Studies
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#investment" className="hover:text-blue-400 transition-colors">
-                  Investment & Scoping
-                </a>
-              </li>
-              <li>
-                <a href="#faq" className="hover:text-blue-400 transition-colors">
-                  FAQ & Engagements
-                </a>
+                <Link href="/#faq" className="hover:text-blue-400 transition-colors">
+                  FAQ &amp; Engagements
+                </Link>
               </li>
               <li>
                 <button
                   onClick={onOpenInquiry}
                   className="text-blue-400 hover:text-blue-300 font-semibold text-left cursor-pointer"
                 >
-                  Start a Project →
+                  Start a Project (Inquiry) →
                 </button>
               </li>
             </ul>

@@ -20,14 +20,15 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
   }, []);
 
   const navLinks = [
-    { label: 'Proof of Work', href: '#proof-of-work' },
-    { label: 'Solutions', href: '#solutions' },
-    { label: 'Showcase', href: '#showcase' },
-    { label: 'Why BRC STAR', href: '#why-us' },
-    { label: 'Process', href: '#process' },
-    { label: 'Tech Stack', href: '#tech-stack' },
-    { label: 'Investment', href: '#investment' },
-    { label: 'FAQ', href: '#faq' },
+    { label: 'Pricing & Plans', href: '/pricing' },
+    { label: 'Client Dashboard', href: '/dashboard' },
+    { label: 'Proof of Work', href: '/#proof-of-work' },
+    { label: 'Solutions', href: '/#solutions' },
+    { label: 'Showcase', href: '/#showcase' },
+    { label: 'Why BRC STAR', href: '/#why-us' },
+    { label: 'Process', href: '/#process' },
+    { label: 'Tech Stack', href: '/#tech-stack' },
+    { label: 'FAQ', href: '/#faq' },
   ];
 
   return (

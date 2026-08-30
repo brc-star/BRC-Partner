@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import {
   CheckCircle2,
   ArrowRight,
@@ -65,6 +66,22 @@ export function ProjectEstimatorSection({ onOpenInquiry }: ProjectEstimatorSecti
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
             We partner with businesses through milestone-based proposals and dedicated engineering sprints. No hidden retainers, no per-seat hostage fees, and 100% IP ownership.
           </p>
+
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/pricing"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white shadow-lg shadow-blue-600/30 transition-all"
+            >
+              <span>Explore All 5 Solution Plans &amp; Razorpay Checkout</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 hover:text-white transition-all border border-slate-700"
+            >
+              <span>Client Portal Dashboard</span>
+            </Link>
+          </div>
         </div>
 
         {/* Pricing Packages Grid */}

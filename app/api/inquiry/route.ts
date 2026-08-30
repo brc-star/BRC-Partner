@@ -1,76 +1,72 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
+import { db } from '@/lib/db';
+import { emailService } from '@/lib/email-service';
+
+const inquirySchema = z.object({
+  fullName: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Please enter a valid email address'),
+  phone: z.string().optional().default(''),
+  companyName: z.string().optional().default(''),
+  projectType: z.string().min(1, 'Please select a service'),
+  budgetRange: z.string().optional().default('To be estimated'),
+  timeline: z.string().optional().default('Standard Agile Cadence'),
+  projectDescription: z.string().min(10, 'Project requirements must be at least 10 characters'),
+  servicesNeeded: z.array(z.string()).optional().default([]),
+});
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const {
-      fullName,
-      email,
-      companyName,
-      projectType,
-      budgetRange,
-      timeline,
-      projectDescription,
-      servicesNeeded,
-    } = body;
+    const result = inquirySchema.safeParse(body);
 
-    // Server-side validation
-    if (!fullName || typeof fullName !== 'string' || fullName.trim().length < 2) {
-      return NextResponse.json(
-        { error: 'Please provide a valid full name (minimum 2 characters).' },
-        { status: 400 }
-      );
+    if (!result.success) {
+      const errorMsg = result.error.issues[0]?.message || 'Invalid form input.';
+      return NextResponse.json({ error: errorMsg, details: result.error.format() }, { status: 400 });
     }
 
-    if (!email || typeof email !== 'string' || !email.includes('@') || !email.includes('.')) {
-      return NextResponse.json(
-        { error: 'Please provide a valid business email address.' },
-        { status: 400 }
-      );
-    }
+    const { fullName, email, phone, companyName, projectType, budgetRange, timeline, projectDescription } =
+      result.data;
 
-    if (!projectDescription || typeof projectDescription !== 'string' || projectDescription.trim().length < 10) {
-      return NextResponse.json(
-        { error: 'Please provide a brief project description (at least 10 characters).' },
-        { status: 400 }
-      );
-    }
+    // Create inquiry record in db
+    const savedInquiry = db.createInquiry({
+      name: fullName.trim(),
+      email: email.toLowerCase().trim(),
+      phone: phone.trim() || 'Not specified',
+      company: companyName.trim() || 'Direct Venture',
+      service: projectType,
+      budgetRange: budgetRange,
+      timeline: timeline,
+      requirements: projectDescription.trim(),
+    });
 
-    // In a production setup, this would dispatch to a CRM/Slack/Email notification webhook.
-    const inquiryId = `BRC-${Date.now().toString(36).toUpperCase()}`;
-    const receivedAt = new Date().toISOString();
+    // Create or update customer record
+    db.createOrUpdateCustomer({
+      name: fullName.trim(),
+      email: email.toLowerCase().trim(),
+      phone: phone.trim() || 'N/A',
+      company: companyName.trim(),
+    });
 
-    const simulatedAssessment = {
-      inquiryId,
-      receivedAt,
-      client: {
-        fullName: fullName.trim(),
-        email: email.trim(),
-        companyName: companyName ? companyName.trim() : 'Private Venture / Direct',
-      },
-      project: {
-        type: projectType || 'Custom Technology Project',
-        budget: budgetRange || 'To be discussed during discovery',
-        timeline: timeline || 'Standard Agile Schedule',
-        services: servicesNeeded || [],
-        description: projectDescription.trim(),
-      },
-      nextStep: 'A senior technical architect from BRC STAR will review your requirements and respond within 24 business hours to coordinate an initial discovery consultation.',
-    };
+    // Dispatch automated confirmation email
+    await emailService.sendInquiryReceivedEmail(savedInquiry);
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: 'Inquiry received successfully. Our engineering leadership will contact you shortly.',
-        data: simulatedAssessment,
-      },
-      { status: 200 }
-    );
+    return NextResponse.json({
+      success: true,
+      message: 'Inquiry received successfully. Our Lead Systems Architect will review your requirements and respond within 24 business hours.',
+      inquiryId: savedInquiry.id,
+      data: savedInquiry,
+    });
   } catch (error) {
     console.error('Error processing inquiry:', error);
     return NextResponse.json(
-      { error: 'An unexpected error occurred while processing your request. Please try again or email contact@brcstar.in directly.' },
+      { error: 'An unexpected error occurred while processing your request. Please try again or email contact@brcstar.in.' },
       { status: 500 }
     );
   }
+}
+
+export async function GET() {
+  const inquiries = db.getAllInquiries();
+  return NextResponse.json({ inquiries });
 }
