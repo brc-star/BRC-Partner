@@ -3,8 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-// 1. Procedural High-Intensity Particle Texture:
-// Features a solid white-hot piercing core surrounded by a tight, luminous neon halo
+// 1. Procedural High-Intensity Particle Texture (Piercing white-hot center with tight neon aura)
 function createSharpParticleTexture(): THREE.CanvasTexture {
   const canvas = document.createElement('canvas');
   canvas.width = 128;
@@ -16,12 +15,11 @@ function createSharpParticleTexture(): THREE.CanvasTexture {
     const cy = 64;
 
     const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 64);
-    // Solid white-hot center for authentic neon illumination
     grad.addColorStop(0.0, 'rgba(255, 255, 255, 1.0)');
-    grad.addColorStop(0.18, 'rgba(255, 255, 255, 1.0)');
-    grad.addColorStop(0.35, 'rgba(255, 255, 255, 0.85)');
-    grad.addColorStop(0.55, 'rgba(255, 255, 255, 0.45)');
-    grad.addColorStop(0.78, 'rgba(255, 255, 255, 0.12)');
+    grad.addColorStop(0.2, 'rgba(255, 255, 255, 1.0)');
+    grad.addColorStop(0.4, 'rgba(255, 255, 255, 0.85)');
+    grad.addColorStop(0.65, 'rgba(255, 255, 255, 0.4)');
+    grad.addColorStop(0.85, 'rgba(255, 255, 255, 0.1)');
     grad.addColorStop(1.0, 'rgba(255, 255, 255, 0.0)');
 
     ctx.fillStyle = grad;
@@ -35,8 +33,63 @@ function createSharpParticleTexture(): THREE.CanvasTexture {
   return texture;
 }
 
-// 2. Procedural Vertical Anamorphic Laser Flare Texture:
-// Recreates the vertical light streaks and flare crowns seen in the reference
+// 2. Procedural Speed Rain Streak Texture (Bright bottom head fading upward into a smooth motion trail)
+function createSpeedStreakTexture(): THREE.CanvasTexture {
+  const canvas = document.createElement('canvas');
+  canvas.width = 64;
+  canvas.height = 256;
+  const ctx = canvas.getContext('2d');
+
+  if (ctx) {
+    const cx = 32;
+
+    // Glowing motion trail tapering upward
+    const trailGrad = ctx.createLinearGradient(0, 256, 0, 0);
+    trailGrad.addColorStop(0.0, 'rgba(255, 255, 255, 1.0)');
+    trailGrad.addColorStop(0.08, 'rgba(255, 255, 255, 0.95)');
+    trailGrad.addColorStop(0.3, 'rgba(255, 255, 255, 0.6)');
+    trailGrad.addColorStop(0.7, 'rgba(255, 255, 255, 0.15)');
+    trailGrad.addColorStop(1.0, 'rgba(255, 255, 255, 0.0)');
+
+    ctx.fillStyle = trailGrad;
+    ctx.beginPath();
+    ctx.moveTo(cx - 16, 230);
+    ctx.lineTo(cx + 16, 230);
+    ctx.lineTo(cx + 4, 10);
+    ctx.lineTo(cx - 4, 10);
+    ctx.closePath();
+    ctx.fill();
+
+    // Sharp bright needle core
+    const coreGrad = ctx.createLinearGradient(0, 256, 0, 0);
+    coreGrad.addColorStop(0.0, 'rgba(255, 255, 255, 1.0)');
+    coreGrad.addColorStop(0.2, 'rgba(255, 255, 255, 1.0)');
+    coreGrad.addColorStop(0.6, 'rgba(255, 255, 255, 0.7)');
+    coreGrad.addColorStop(1.0, 'rgba(255, 255, 255, 0.0)');
+
+    ctx.fillStyle = coreGrad;
+    ctx.fillRect(cx - 2, 10, 4, 230);
+
+    // Bright head dot
+    const headGrad = ctx.createRadialGradient(cx, 235, 0, cx, 235, 16);
+    headGrad.addColorStop(0.0, 'rgba(255, 255, 255, 1.0)');
+    headGrad.addColorStop(0.4, 'rgba(255, 255, 255, 0.9)');
+    headGrad.addColorStop(0.8, 'rgba(255, 255, 255, 0.3)');
+    headGrad.addColorStop(1.0, 'rgba(255, 255, 255, 0.0)');
+    ctx.fillStyle = headGrad;
+    ctx.beginPath();
+    ctx.arc(cx, 235, 16, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.generateMipmaps = true;
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  return texture;
+}
+
+// 3. Procedural Vertical Anamorphic Laser Flare Texture (For long neon beam auras)
 function createVerticalFlareTexture(): THREE.CanvasTexture {
   const canvas = document.createElement('canvas');
   canvas.width = 128;
@@ -47,12 +100,11 @@ function createVerticalFlareTexture(): THREE.CanvasTexture {
     const cx = 64;
     const cy = 256;
 
-    // Outer soft glow
     const outerGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 256);
     outerGrad.addColorStop(0.0, 'rgba(255, 255, 255, 1.0)');
-    outerGrad.addColorStop(0.15, 'rgba(255, 255, 255, 0.7)');
-    outerGrad.addColorStop(0.4, 'rgba(255, 255, 255, 0.25)');
-    outerGrad.addColorStop(0.8, 'rgba(255, 255, 255, 0.04)');
+    outerGrad.addColorStop(0.15, 'rgba(255, 255, 255, 0.75)');
+    outerGrad.addColorStop(0.45, 'rgba(255, 255, 255, 0.3)');
+    outerGrad.addColorStop(0.8, 'rgba(255, 255, 255, 0.05)');
     outerGrad.addColorStop(1.0, 'rgba(255, 255, 255, 0.0)');
 
     ctx.save();
@@ -67,13 +119,6 @@ function createVerticalFlareTexture(): THREE.CanvasTexture {
     coreGrad.addColorStop(0.5, 'rgba(255, 255, 255, 1.0)');
     coreGrad.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
 
-    const vFade = ctx.createLinearGradient(0, 0, 0, 512);
-    vFade.addColorStop(0, 'rgba(255, 255, 255, 0.0)');
-    vFade.addColorStop(0.3, 'rgba(255, 255, 255, 0.8)');
-    vFade.addColorStop(0.5, 'rgba(255, 255, 255, 1.0)');
-    vFade.addColorStop(0.7, 'rgba(255, 255, 255, 0.8)');
-    vFade.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
-
     ctx.fillStyle = coreGrad;
     ctx.fillRect(cx - 3, 0, 6, 512);
   }
@@ -85,7 +130,7 @@ function createVerticalFlareTexture(): THREE.CanvasTexture {
   return texture;
 }
 
-// 3. Procedural Large Bokeh Orb Texture (Cinematic out-of-focus glowing disc)
+// 4. Procedural Bokeh Orb Texture (Out-of-focus luminous discs)
 function createBokehOrbTexture(): THREE.CanvasTexture {
   const canvas = document.createElement('canvas');
   canvas.width = 128;
@@ -98,8 +143,8 @@ function createBokehOrbTexture(): THREE.CanvasTexture {
     const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 64);
     grad.addColorStop(0.0, 'rgba(255, 255, 255, 0.95)');
     grad.addColorStop(0.45, 'rgba(255, 255, 255, 0.8)');
-    grad.addColorStop(0.75, 'rgba(255, 255, 255, 0.5)');
-    grad.addColorStop(0.9, 'rgba(255, 255, 255, 0.2)');
+    grad.addColorStop(0.75, 'rgba(255, 255, 255, 0.45)');
+    grad.addColorStop(0.9, 'rgba(255, 255, 255, 0.15)');
     grad.addColorStop(1.0, 'rgba(255, 255, 255, 0.0)');
 
     ctx.fillStyle = grad;
@@ -113,8 +158,7 @@ function createBokehOrbTexture(): THREE.CanvasTexture {
   return texture;
 }
 
-// Ultra-Vibrant Neon Palette directly from the visual reference image:
-// Electric Cyan, Neon Blue, Magenta / Hot Pink, Violet, Neon Green / Lime, Sunburst Yellow, Neon Orange
+// Ultra-Vibrant Neon Palette
 const NEON_PALETTE = [
   new THREE.Color('#00f0ff'), // 0: Pure Vivid Cyan
   new THREE.Color('#00d2ff'), // 1: Sky Electric Blue
@@ -152,7 +196,7 @@ export default function NeonParticleBackground() {
     );
     camera.position.z = 500;
 
-    // WebGL Renderer with High Dynamic Range Color Space
+    // WebGL Renderer
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: !isMobile,
@@ -165,27 +209,28 @@ export default function NeonParticleBackground() {
     renderer.setPixelRatio(dpr);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.setClearColor(0x000000, 0); // Transparent so DOM background provides rich contrast
+    renderer.setClearColor(0x000000, 0);
 
     const container = containerRef.current;
     container.appendChild(renderer.domElement);
 
     // Textures
     const sharpParticleTex = createSharpParticleTexture();
+    const speedStreakTex = createSpeedStreakTexture();
     const verticalFlareTex = createVerticalFlareTexture();
     const bokehOrbTex = createBokehOrbTexture();
 
     // Bounds in 3D world space
-    const boundX = isMobile ? 480 : 850;
-    const boundY = 750;
+    const boundX = isMobile ? 500 : 900;
+    const boundY = 780;
     const boundZ = 450;
 
     // =========================================================================
-    // 1. VERTICAL NEON LIGHT STREAMS & LASER TRAILS (The Key Visual Element)
+    // 1. FAST VERTICAL NEON LIGHT STREAMS (High-speed downward laser beams)
     // =========================================================================
-    const streamCount = isMobile ? 140 : isTablet ? 260 : 420;
+    const streamCount = isMobile ? 130 : isTablet ? 250 : 380;
 
-    // 1A. Sharp Core Laser Lines (LineSegments)
+    // 1A. Sharp Core Laser Lines (LineSegments: [Head at y, Tail at y + length])
     const streamPositions = new Float32Array(streamCount * 2 * 3);
     const streamColors = new Float32Array(streamCount * 2 * 3);
     const streamSpeeds = new Float32Array(streamCount);
@@ -193,26 +238,52 @@ export default function NeonParticleBackground() {
     const streamX = new Float32Array(streamCount);
     const streamY = new Float32Array(streamCount);
     const streamZ = new Float32Array(streamCount);
-    const streamColorObjs: THREE.Color[] = [];
 
-    // 1B. Luminous Flare Heads (Points at the tip of each stream)
+    // 1B. Flare Heads (Points at tip of each stream)
     const flareHeadPositions = new Float32Array(streamCount * 3);
     const flareHeadColors = new Float32Array(streamCount * 3);
     const flareHeadSizes = new Float32Array(streamCount);
 
-    // 1C. Glowing Stream Aura Ribbons (Points with vertical streak texture)
+    // 1C. Vertical Glow Flares (Anamorphic aura trailing behind head)
     const auraPositions = new Float32Array(streamCount * 3);
     const auraColors = new Float32Array(streamCount * 3);
     const auraSizes = new Float32Array(streamCount);
 
+    const setStreamColor = (index: number, col: THREE.Color, depthMultiplier: number) => {
+      const idxHead = index * 2;
+      const idxTail = index * 2 + 1;
+
+      // Head vertex: White-hot neon intense core
+      streamColors[idxHead * 3 + 0] = Math.min(col.r * 2.5 * depthMultiplier, 3.5);
+      streamColors[idxHead * 3 + 1] = Math.min(col.g * 2.5 * depthMultiplier, 3.5);
+      streamColors[idxHead * 3 + 2] = Math.min(col.b * 2.5 * depthMultiplier, 3.5);
+
+      // Tail vertex: Smooth fading trailing glow
+      streamColors[idxTail * 3 + 0] = col.r * 0.05;
+      streamColors[idxTail * 3 + 1] = col.g * 0.05;
+      streamColors[idxTail * 3 + 2] = col.b * 0.05;
+
+      // Flare head dot
+      flareHeadColors[index * 3 + 0] = Math.min(col.r * 3.0 * depthMultiplier, 4.0);
+      flareHeadColors[index * 3 + 1] = Math.min(col.g * 3.0 * depthMultiplier, 4.0);
+      flareHeadColors[index * 3 + 2] = Math.min(col.b * 3.0 * depthMultiplier, 4.0);
+
+      // Aura ribbon
+      auraColors[index * 3 + 0] = col.r * 1.6 * depthMultiplier;
+      auraColors[index * 3 + 1] = col.g * 1.6 * depthMultiplier;
+      auraColors[index * 3 + 2] = col.b * 1.6 * depthMultiplier;
+    };
+
     for (let i = 0; i < streamCount; i++) {
-      const x = (Math.random() - 0.5) * boundX * 2.1;
-      const y = (Math.random() - 0.5) * boundY * 2.2;
+      const x = (Math.random() - 0.5) * boundX * 2.2;
+      // Distribute evenly along Y on startup so falling motion is active instantly
+      const y = (Math.random() - 0.5) * boundY * 2.4;
       const z = (Math.random() - 0.5) * boundZ * 2.0;
 
-      // Varied lengths: from short streaks to long dramatic cascades
-      const length = 45 + Math.random() * (isMobile ? 120 : 260);
-      const speed = (1.2 + Math.random() * 3.2) * (prefersReducedMotion ? 0.08 : 1.0);
+      // Varied lengths: fast streams have dynamic trails
+      const length = 55 + Math.random() * (isMobile ? 130 : 280);
+      // High-velocity multiplier for fast continuous falling
+      const speed = (2.2 + Math.random() * 5.8) * (prefersReducedMotion ? 0.1 : 1.0);
 
       streamX[i] = x;
       streamY[i] = y;
@@ -220,60 +291,21 @@ export default function NeonParticleBackground() {
       streamLengths[i] = length;
       streamSpeeds[i] = speed;
 
-      const col = NEON_PALETTE[Math.floor(Math.random() * NEON_PALETTE.length)].clone();
-      streamColorObjs.push(col);
+      const col = NEON_PALETTE[Math.floor(Math.random() * NEON_PALETTE.length)];
+      const depthMultiplier = 0.8 + ((z + boundZ) / (boundZ * 2)) * 0.85;
 
-      // Depth brightness multiplier (closer = even brighter)
-      const depthMultiplier = 0.8 + ((z + boundZ) / (boundZ * 2)) * 0.8;
+      setStreamColor(i, col, depthMultiplier);
 
-      // Line Head (Bright white-neon leading point)
-      const idxHead = i * 2;
-      streamPositions[idxHead * 3 + 0] = x;
-      streamPositions[idxHead * 3 + 1] = y;
-      streamPositions[idxHead * 3 + 2] = z;
-
-      streamColors[idxHead * 3 + 0] = Math.min(col.r * 2.2 * depthMultiplier, 3.0);
-      streamColors[idxHead * 3 + 1] = Math.min(col.g * 2.2 * depthMultiplier, 3.0);
-      streamColors[idxHead * 3 + 2] = Math.min(col.b * 2.2 * depthMultiplier, 3.0);
-
-      // Line Tail (Fades softly upward)
-      const idxTail = i * 2 + 1;
-      streamPositions[idxTail * 3 + 0] = x;
-      streamPositions[idxTail * 3 + 1] = y + length;
-      streamPositions[idxTail * 3 + 2] = z;
-
-      streamColors[idxTail * 3 + 0] = col.r * 0.08;
-      streamColors[idxTail * 3 + 1] = col.g * 0.08;
-      streamColors[idxTail * 3 + 2] = col.b * 0.08;
-
-      // Flare Head Dot
-      flareHeadPositions[i * 3 + 0] = x;
-      flareHeadPositions[i * 3 + 1] = y;
-      flareHeadPositions[i * 3 + 2] = z;
-
-      flareHeadColors[i * 3 + 0] = Math.min(col.r * 2.8 * depthMultiplier, 3.5);
-      flareHeadColors[i * 3 + 1] = Math.min(col.g * 2.8 * depthMultiplier, 3.5);
-      flareHeadColors[i * 3 + 2] = Math.min(col.b * 2.8 * depthMultiplier, 3.5);
-
-      flareHeadSizes[i] = (16 + Math.random() * 26) * (isMobile ? 0.8 : 1.0);
-
-      // Vertical Streak Aura (centered slightly behind head)
-      auraPositions[i * 3 + 0] = x;
-      auraPositions[i * 3 + 1] = y + length * 0.4;
-      auraPositions[i * 3 + 2] = z;
-
-      auraColors[i * 3 + 0] = col.r * 1.5 * depthMultiplier;
-      auraColors[i * 3 + 1] = col.g * 1.5 * depthMultiplier;
-      auraColors[i * 3 + 2] = col.b * 1.5 * depthMultiplier;
-
-      auraSizes[i] = (length * 0.8) * (isMobile ? 0.75 : 1.0);
+      flareHeadSizes[i] = (18 + Math.random() * 26) * (isMobile ? 0.8 : 1.0);
+      auraSizes[i] = (length * 0.85) * (isMobile ? 0.75 : 1.0);
     }
 
-    // 1A. LineSegments Geometry & Material (Crisp laser lines)
+    // 1A. LineSegments Geometry & Material
     const streamGeometry = new THREE.BufferGeometry();
     const streamPosAttr = new THREE.BufferAttribute(streamPositions, 3);
+    const streamColAttr = new THREE.BufferAttribute(streamColors, 3);
     streamGeometry.setAttribute('position', streamPosAttr);
-    streamGeometry.setAttribute('color', new THREE.BufferAttribute(streamColors, 3));
+    streamGeometry.setAttribute('color', streamColAttr);
 
     const streamMaterial = new THREE.LineBasicMaterial({
       vertexColors: true,
@@ -285,15 +317,16 @@ export default function NeonParticleBackground() {
     const streamLines = new THREE.LineSegments(streamGeometry, streamMaterial);
     scene.add(streamLines);
 
-    // 1B. Flare Heads (Points with circular sharp glow)
+    // 1B. Flare Heads (Points)
     const flareHeadGeometry = new THREE.BufferGeometry();
     const flareHeadPosAttr = new THREE.BufferAttribute(flareHeadPositions, 3);
+    const flareHeadColAttr = new THREE.BufferAttribute(flareHeadColors, 3);
     flareHeadGeometry.setAttribute('position', flareHeadPosAttr);
-    flareHeadGeometry.setAttribute('color', new THREE.BufferAttribute(flareHeadColors, 3));
+    flareHeadGeometry.setAttribute('color', flareHeadColAttr);
     flareHeadGeometry.setAttribute('size', new THREE.BufferAttribute(flareHeadSizes, 1));
 
     const flareHeadMaterial = new THREE.PointsMaterial({
-      size: isMobile ? 24 : 36,
+      size: isMobile ? 26 : 38,
       map: sharpParticleTex,
       vertexColors: true,
       transparent: true,
@@ -304,15 +337,16 @@ export default function NeonParticleBackground() {
     const flareHeadPoints = new THREE.Points(flareHeadGeometry, flareHeadMaterial);
     scene.add(flareHeadPoints);
 
-    // 1C. Vertical Glow Flares (Anamorphic vertical laser flares)
+    // 1C. Vertical Glow Flares (Points with vertical texture)
     const auraGeometry = new THREE.BufferGeometry();
     const auraPosAttr = new THREE.BufferAttribute(auraPositions, 3);
+    const auraColAttr = new THREE.BufferAttribute(auraColors, 3);
     auraGeometry.setAttribute('position', auraPosAttr);
-    auraGeometry.setAttribute('color', new THREE.BufferAttribute(auraColors, 3));
+    auraGeometry.setAttribute('color', auraColAttr);
     auraGeometry.setAttribute('size', new THREE.BufferAttribute(auraSizes, 1));
 
     const auraMaterial = new THREE.PointsMaterial({
-      size: isMobile ? 55 : 95,
+      size: isMobile ? 65 : 105,
       map: verticalFlareTex,
       vertexColors: true,
       transparent: true,
@@ -324,18 +358,103 @@ export default function NeonParticleBackground() {
     scene.add(auraPoints);
 
     // =========================================================================
-    // 2. DENSE FIELD OF LUMINOUS NEON PARTICLES (Sharp Points & Nodes)
+    // 2. FAST DIGITAL RAIN NEEDLE STREAKS (High-Speed Motion Trail Particles)
     // =========================================================================
-    const particleCount = isMobile ? 1100 : isTablet ? 1900 : 3000;
+    const rainCount = isMobile ? 450 : isTablet ? 850 : 1300;
+    const rainPositions = new Float32Array(rainCount * 2 * 3);
+    const rainColors = new Float32Array(rainCount * 2 * 3);
+    const rainSpeeds = new Float32Array(rainCount);
+    const rainLengths = new Float32Array(rainCount);
+    const rainX = new Float32Array(rainCount);
+    const rainY = new Float32Array(rainCount);
+    const rainZ = new Float32Array(rainCount);
+
+    const setRainColor = (index: number, col: THREE.Color, depthMultiplier: number) => {
+      const idxHead = index * 2;
+      const idxTail = index * 2 + 1;
+
+      // Head: Bright vivid neon
+      rainColors[idxHead * 3 + 0] = Math.min(col.r * 2.8 * depthMultiplier, 3.5);
+      rainColors[idxHead * 3 + 1] = Math.min(col.g * 2.8 * depthMultiplier, 3.5);
+      rainColors[idxHead * 3 + 2] = Math.min(col.b * 2.8 * depthMultiplier, 3.5);
+
+      // Tail: Fast tapering luminous streak
+      rainColors[idxTail * 3 + 0] = col.r * 0.08;
+      rainColors[idxTail * 3 + 1] = col.g * 0.08;
+      rainColors[idxTail * 3 + 2] = col.b * 0.08;
+    };
+
+    for (let i = 0; i < rainCount; i++) {
+      const x = (Math.random() - 0.5) * boundX * 2.3;
+      const y = (Math.random() - 0.5) * boundY * 2.4;
+      const z = (Math.random() - 0.5) * boundZ * 2.2;
+
+      // High variation in speed: extremely fast needle rain to medium streaks
+      const speedTier = Math.random();
+      let speed = 3.5 + Math.random() * 6.0; // Medium-fast default
+      let length = 20 + Math.random() * 50;
+
+      if (speedTier > 0.75) {
+        // High-speed laser needle
+        speed = 8.0 + Math.random() * 9.5;
+        length = 60 + Math.random() * 90;
+      } else if (speedTier < 0.25) {
+        // Slower background streak
+        speed = 2.0 + Math.random() * 3.0;
+        length = 15 + Math.random() * 30;
+      }
+
+      speed *= prefersReducedMotion ? 0.1 : 1.0;
+
+      rainX[i] = x;
+      rainY[i] = y;
+      rainZ[i] = z;
+      rainLengths[i] = length;
+      rainSpeeds[i] = speed;
+
+      const col = NEON_PALETTE[Math.floor(Math.random() * NEON_PALETTE.length)];
+      const depthMultiplier = 0.7 + ((z + boundZ) / (boundZ * 2)) * 0.85;
+
+      setRainColor(i, col, depthMultiplier);
+    }
+
+    const rainGeometry = new THREE.BufferGeometry();
+    const rainPosAttr = new THREE.BufferAttribute(rainPositions, 3);
+    const rainColAttr = new THREE.BufferAttribute(rainColors, 3);
+    rainGeometry.setAttribute('position', rainPosAttr);
+    rainGeometry.setAttribute('color', rainColAttr);
+
+    const rainMaterial = new THREE.LineBasicMaterial({
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.95,
+      blending: THREE.AdditiveBlending,
+      linewidth: 1.5,
+    });
+    const rainLines = new THREE.LineSegments(rainGeometry, rainMaterial);
+    scene.add(rainLines);
+
+    // =========================================================================
+    // 3. LUMINOUS NEON PARTICLES & NODES (Continuously falling stardust & sparks)
+    // =========================================================================
+    const particleCount = isMobile ? 800 : isTablet ? 1400 : 2200;
     const partPositions = new Float32Array(particleCount * 3);
     const partColors = new Float32Array(particleCount * 3);
     const partSizes = new Float32Array(particleCount);
-    const partVelocities = new Float32Array(particleCount);
+    const partSpeeds = new Float32Array(particleCount);
     const partTwinklePhase = new Float32Array(particleCount);
+    const partSwaySpeed = new Float32Array(particleCount);
+    const partSwayAmp = new Float32Array(particleCount);
+
+    const setPartColor = (index: number, col: THREE.Color, depthMultiplier: number) => {
+      partColors[index * 3 + 0] = Math.min(col.r * 2.2 * depthMultiplier, 3.0);
+      partColors[index * 3 + 1] = Math.min(col.g * 2.2 * depthMultiplier, 3.0);
+      partColors[index * 3 + 2] = Math.min(col.b * 2.2 * depthMultiplier, 3.0);
+    };
 
     for (let i = 0; i < particleCount; i++) {
       const x = (Math.random() - 0.5) * boundX * 2.3;
-      const y = (Math.random() - 0.5) * boundY * 2.3;
+      const y = (Math.random() - 0.5) * boundY * 2.4;
       const z = (Math.random() - 0.5) * boundZ * 2.2;
 
       partPositions[i * 3 + 0] = x;
@@ -344,33 +463,36 @@ export default function NeonParticleBackground() {
 
       const col = NEON_PALETTE[Math.floor(Math.random() * NEON_PALETTE.length)];
       const depthMultiplier = 0.65 + ((z + boundZ) / (boundZ * 2)) * 0.9;
+      setPartColor(i, col, depthMultiplier);
 
-      partColors[i * 3 + 0] = col.r * 1.8 * depthMultiplier;
-      partColors[i * 3 + 1] = col.g * 1.8 * depthMultiplier;
-      partColors[i * 3 + 2] = col.b * 1.8 * depthMultiplier;
-
-      // Particle size distribution: dense pinprick stars + distinct bright nodes
+      // Particle size distribution
       const r = Math.random();
-      let size = 4 + Math.random() * 8;
-      if (r > 0.85) {
-        size = 15 + Math.random() * 20; // Medium glowing star
+      let size = 6 + Math.random() * 10;
+      if (r > 0.82) {
+        size = 18 + Math.random() * 22; // Glowing spark
       } else if (r > 0.96) {
-        size = 28 + Math.random() * 38; // Bright luminous node
+        size = 32 + Math.random() * 42; // Radiant neon node
       }
 
       partSizes[i] = size * (isMobile ? 0.75 : 1.0);
-      partVelocities[i] = (0.3 + Math.random() * 1.1) * (prefersReducedMotion ? 0.05 : 1.0);
+
+      // Speed variation
+      const spd = (1.8 + Math.random() * 4.5) * (prefersReducedMotion ? 0.1 : 1.0);
+      partSpeeds[i] = spd;
       partTwinklePhase[i] = Math.random() * Math.PI * 2;
+      partSwaySpeed[i] = 1.0 + Math.random() * 2.5;
+      partSwayAmp[i] = 0.15 + Math.random() * 0.45;
     }
 
     const particleGeometry = new THREE.BufferGeometry();
     const particlePosAttr = new THREE.BufferAttribute(partPositions, 3);
+    const particleColAttr = new THREE.BufferAttribute(partColors, 3);
     particleGeometry.setAttribute('position', particlePosAttr);
-    particleGeometry.setAttribute('color', new THREE.BufferAttribute(partColors, 3));
+    particleGeometry.setAttribute('color', particleColAttr);
     particleGeometry.setAttribute('size', new THREE.BufferAttribute(partSizes, 1));
 
     const particleMaterial = new THREE.PointsMaterial({
-      size: isMobile ? 16 : 24,
+      size: isMobile ? 18 : 26,
       map: sharpParticleTex,
       vertexColors: true,
       transparent: true,
@@ -382,9 +504,9 @@ export default function NeonParticleBackground() {
     scene.add(particles);
 
     // =========================================================================
-    // 3. LARGE BOKEH ORBS (Foreground & Midground depth layers)
+    // 4. LARGE BOKEH ORBS (Foreground & Midground glowing discs falling gracefully)
     // =========================================================================
-    const bokehCount = isMobile ? 35 : 75;
+    const bokehCount = isMobile ? 30 : 65;
     const bokehPositions = new Float32Array(bokehCount * 3);
     const bokehColors = new Float32Array(bokehCount * 3);
     const bokehSizes = new Float32Array(bokehCount);
@@ -393,20 +515,20 @@ export default function NeonParticleBackground() {
 
     for (let i = 0; i < bokehCount; i++) {
       const x = (Math.random() - 0.5) * boundX * 2.0;
-      const y = (Math.random() - 0.5) * boundY * 2.0;
-      const z = -150 + Math.random() * 350;
+      const y = (Math.random() - 0.5) * boundY * 2.2;
+      const z = -120 + Math.random() * 320;
 
       bokehPositions[i * 3 + 0] = x;
       bokehPositions[i * 3 + 1] = y;
       bokehPositions[i * 3 + 2] = z;
 
       const col = NEON_PALETTE[Math.floor(Math.random() * NEON_PALETTE.length)];
-      bokehColors[i * 3 + 0] = col.r * 1.6;
-      bokehColors[i * 3 + 1] = col.g * 1.6;
-      bokehColors[i * 3 + 2] = col.b * 1.6;
+      bokehColors[i * 3 + 0] = col.r * 1.7;
+      bokehColors[i * 3 + 1] = col.g * 1.7;
+      bokehColors[i * 3 + 2] = col.b * 1.7;
 
-      bokehSizes[i] = (45 + Math.random() * 75) * (isMobile ? 0.7 : 1.0);
-      bokehSpeeds[i] = (0.2 + Math.random() * 0.7) * (prefersReducedMotion ? 0.05 : 1.0);
+      bokehSizes[i] = (45 + Math.random() * 85) * (isMobile ? 0.7 : 1.0);
+      bokehSpeeds[i] = (1.2 + Math.random() * 2.8) * (prefersReducedMotion ? 0.1 : 1.0);
       bokehPhase[i] = Math.random() * Math.PI * 2;
     }
 
@@ -417,7 +539,7 @@ export default function NeonParticleBackground() {
     bokehGeometry.setAttribute('size', new THREE.BufferAttribute(bokehSizes, 1));
 
     const bokehMaterial = new THREE.PointsMaterial({
-      size: isMobile ? 55 : 85,
+      size: isMobile ? 60 : 90,
       map: bokehOrbTex,
       vertexColors: true,
       transparent: true,
@@ -466,7 +588,7 @@ export default function NeonParticleBackground() {
     window.addEventListener('resize', handleResize);
 
     // =========================================================================
-    // RENDER / ANIMATION LOOP
+    // FAST TOP-TO-BOTTOM CONTINUOUS RENDER / ANIMATION LOOP
     // =========================================================================
     let animationFrameId: number;
     const clock = new THREE.Clock();
@@ -475,57 +597,72 @@ export default function NeonParticleBackground() {
       animationFrameId = requestAnimationFrame(animate);
 
       const elapsedTime = clock.getElapsedTime();
-      const delta = Math.min(clock.getDelta(), 0.08);
+      const delta = Math.min(clock.getDelta(), 0.06);
 
-      // Smooth inertia parallax
+      // Smooth inertia parallax (horizontal sway & slight tilt without changing downward direction)
       mouseX += (targetMouseX - mouseX) * 0.05;
       mouseY += (targetMouseY - mouseY) * 0.05;
       scrollY += (targetScrollY - scrollY) * 0.06;
 
-      camera.position.x = mouseX * 55;
-      camera.position.y = -mouseY * 40 - (scrollY * 0.15) % 400;
-      camera.lookAt(0, -scrollY * 0.06, 0);
+      camera.position.x = mouseX * 45;
+      camera.position.y = -mouseY * 30 - (scrollY * 0.12) % 300;
+      camera.lookAt(0, -scrollY * 0.05, 0);
 
-      // 1. Update Vertical Streams (Laser Lines + Flare Heads + Auras)
+      // -----------------------------------------------------------------------
+      // 1. UPDATE VERTICAL NEON STREAMS (High speed falling from TOP to BOTTOM)
+      // -----------------------------------------------------------------------
       const sPosArr = streamPosAttr.array as Float32Array;
       const fPosArr = flareHeadPosAttr.array as Float32Array;
       const aPosArr = auraPosAttr.array as Float32Array;
+      let streamColorsChanged = false;
 
       for (let i = 0; i < streamCount; i++) {
         const speed = streamSpeeds[i];
         const length = streamLengths[i];
 
-        // Move head downward
-        streamY[i] -= speed * 75 * delta;
+        // Active fast downward travel (TOP -> BOTTOM)
+        streamY[i] -= speed * 125 * delta;
 
-        // Reset when passing bottom boundary
-        if (streamY[i] < -boundY) {
-          streamY[i] = boundY + Math.random() * 150;
-          streamX[i] = (Math.random() - 0.5) * boundX * 2.1;
+        // Infinite loop recycling: when head passes below bottom boundary
+        if (streamY[i] + length < -boundY * 1.1) {
+          // Immediately recycle to the top with randomized offset
+          streamY[i] = boundY * 1.1 + Math.random() * 220;
+          streamX[i] = (Math.random() - 0.5) * boundX * 2.2;
+          streamZ[i] = (Math.random() - 0.5) * boundZ * 2.0;
+
+          // Randomize velocity and length for natural variation
+          streamLengths[i] = 55 + Math.random() * (isMobile ? 130 : 280);
+          streamSpeeds[i] = (2.2 + Math.random() * 5.8) * (prefersReducedMotion ? 0.1 : 1.0);
+
+          // Randomize color on respawn
+          const col = NEON_PALETTE[Math.floor(Math.random() * NEON_PALETTE.length)];
+          const depthMultiplier = 0.8 + ((streamZ[i] + boundZ) / (boundZ * 2)) * 0.85;
+          setStreamColor(i, col, depthMultiplier);
+          streamColorsChanged = true;
         }
 
         const x = streamX[i];
         const y = streamY[i];
         const z = streamZ[i];
 
-        // Head vertex
+        // Head vertex (Bottom of the traveling streak)
         const idxHead = i * 2;
         sPosArr[idxHead * 3 + 0] = x;
         sPosArr[idxHead * 3 + 1] = y;
         sPosArr[idxHead * 3 + 2] = z;
 
-        // Tail vertex
+        // Tail vertex (Trailing behind above the head)
         const idxTail = i * 2 + 1;
         sPosArr[idxTail * 3 + 0] = x;
         sPosArr[idxTail * 3 + 1] = y + length;
         sPosArr[idxTail * 3 + 2] = z;
 
-        // Flare head point
+        // Flare head point (at the traveling head)
         fPosArr[i * 3 + 0] = x;
         fPosArr[i * 3 + 1] = y;
         fPosArr[i * 3 + 2] = z;
 
-        // Aura ribbon
+        // Aura ribbon (centered along the trail)
         aPosArr[i * 3 + 0] = x;
         aPosArr[i * 3 + 1] = y + length * 0.45;
         aPosArr[i * 3 + 2] = z;
@@ -534,34 +671,113 @@ export default function NeonParticleBackground() {
       streamPosAttr.needsUpdate = true;
       flareHeadPosAttr.needsUpdate = true;
       auraPosAttr.needsUpdate = true;
+      if (streamColorsChanged) {
+        streamColAttr.needsUpdate = true;
+        flareHeadColAttr.needsUpdate = true;
+        auraColAttr.needsUpdate = true;
+      }
 
-      // 2. Update Glowing Particles Field (Subtle vertical drift + lateral twinkle sway)
+      // -----------------------------------------------------------------------
+      // 2. UPDATE FAST DIGITAL RAIN STREAKS (High-speed downward needles)
+      // -----------------------------------------------------------------------
+      const rPosArr = rainPosAttr.array as Float32Array;
+      let rainColorsChanged = false;
+
+      for (let i = 0; i < rainCount; i++) {
+        const speed = rainSpeeds[i];
+        const length = rainLengths[i];
+
+        // Fast downward fall
+        rainY[i] -= speed * 110 * delta;
+
+        // Infinite loop recycling
+        if (rainY[i] + length < -boundY * 1.15) {
+          rainY[i] = boundY * 1.15 + Math.random() * 200;
+          rainX[i] = (Math.random() - 0.5) * boundX * 2.3;
+          rainZ[i] = (Math.random() - 0.5) * boundZ * 2.2;
+
+          const speedTier = Math.random();
+          let newSpeed = 3.5 + Math.random() * 6.0;
+          let newLength = 20 + Math.random() * 50;
+
+          if (speedTier > 0.75) {
+            newSpeed = 8.0 + Math.random() * 9.5;
+            newLength = 60 + Math.random() * 90;
+          } else if (speedTier < 0.25) {
+            newSpeed = 2.0 + Math.random() * 3.0;
+            newLength = 15 + Math.random() * 30;
+          }
+
+          rainSpeeds[i] = newSpeed * (prefersReducedMotion ? 0.1 : 1.0);
+          rainLengths[i] = newLength;
+
+          const col = NEON_PALETTE[Math.floor(Math.random() * NEON_PALETTE.length)];
+          const depthMultiplier = 0.7 + ((rainZ[i] + boundZ) / (boundZ * 2)) * 0.85;
+          setRainColor(i, col, depthMultiplier);
+          rainColorsChanged = true;
+        }
+
+        const x = rainX[i];
+        const y = rainY[i];
+        const z = rainZ[i];
+
+        const idxHead = i * 2;
+        rPosArr[idxHead * 3 + 0] = x;
+        rPosArr[idxHead * 3 + 1] = y;
+        rPosArr[idxHead * 3 + 2] = z;
+
+        const idxTail = i * 2 + 1;
+        rPosArr[idxTail * 3 + 0] = x;
+        rPosArr[idxTail * 3 + 1] = y + length;
+        rPosArr[idxTail * 3 + 2] = z;
+      }
+
+      rainPosAttr.needsUpdate = true;
+      if (rainColorsChanged) {
+        rainColAttr.needsUpdate = true;
+      }
+
+      // -----------------------------------------------------------------------
+      // 3. UPDATE LUMINOUS PARTICLES (Continuous downward shower with sparkle)
+      // -----------------------------------------------------------------------
       const pPosArr = particlePosAttr.array as Float32Array;
       for (let i = 0; i < particleCount; i++) {
-        const v = partVelocities[i];
-        pPosArr[i * 3 + 1] -= v * 45 * delta;
+        const speed = partSpeeds[i];
+        // Continuous downward movement (TOP -> BOTTOM)
+        pPosArr[i * 3 + 1] -= speed * 95 * delta;
 
-        const phase = partTwinklePhase[i] + elapsedTime * 1.2;
-        pPosArr[i * 3 + 0] += Math.sin(phase) * 0.22;
+        // Subtle lateral sway as it falls
+        const phase = partTwinklePhase[i] + elapsedTime * partSwaySpeed[i];
+        pPosArr[i * 3 + 0] += Math.sin(phase) * partSwayAmp[i];
 
+        // Immediate recycle from bottom to top
         if (pPosArr[i * 3 + 1] < -boundY * 1.15) {
-          pPosArr[i * 3 + 1] = boundY * 1.15;
+          pPosArr[i * 3 + 1] = boundY * 1.15 + Math.random() * 100;
           pPosArr[i * 3 + 0] = (Math.random() - 0.5) * boundX * 2.3;
+          pPosArr[i * 3 + 2] = (Math.random() - 0.5) * boundZ * 2.2;
+          partSpeeds[i] = (1.8 + Math.random() * 4.5) * (prefersReducedMotion ? 0.1 : 1.0);
         }
       }
       particlePosAttr.needsUpdate = true;
 
-      // 3. Update Large Bokeh Orbs (Gentle floating motion)
+      // -----------------------------------------------------------------------
+      // 4. UPDATE LARGE BOKEH ORBS (Descending smooth depth layer)
+      // -----------------------------------------------------------------------
       const bPosArr = bokehPosAttr.array as Float32Array;
       for (let i = 0; i < bokehCount; i++) {
-        const spd = bokehSpeeds[i];
-        bPosArr[i * 3 + 1] -= spd * 35 * delta;
-        const phase = bokehPhase[i] + elapsedTime * 0.6;
-        bPosArr[i * 3 + 0] += Math.cos(phase) * 0.35;
+        const speed = bokehSpeeds[i];
+        // Continuous downward motion
+        bPosArr[i * 3 + 1] -= speed * 70 * delta;
 
+        const phase = bokehPhase[i] + elapsedTime * 0.8;
+        bPosArr[i * 3 + 0] += Math.cos(phase) * 0.4;
+
+        // Immediate recycle from bottom to top
         if (bPosArr[i * 3 + 1] < -boundY * 1.15) {
-          bPosArr[i * 3 + 1] = boundY * 1.15;
+          bPosArr[i * 3 + 1] = boundY * 1.15 + Math.random() * 120;
           bPosArr[i * 3 + 0] = (Math.random() - 0.5) * boundX * 2.0;
+          bPosArr[i * 3 + 2] = -120 + Math.random() * 320;
+          bokehSpeeds[i] = (1.2 + Math.random() * 2.8) * (prefersReducedMotion ? 0.1 : 1.0);
         }
       }
       bokehPosAttr.needsUpdate = true;
@@ -583,16 +799,19 @@ export default function NeonParticleBackground() {
       streamGeometry.dispose();
       flareHeadGeometry.dispose();
       auraGeometry.dispose();
+      rainGeometry.dispose();
       particleGeometry.dispose();
       bokehGeometry.dispose();
 
       streamMaterial.dispose();
       flareHeadMaterial.dispose();
       auraMaterial.dispose();
+      rainMaterial.dispose();
       particleMaterial.dispose();
       bokehMaterial.dispose();
 
       sharpParticleTex.dispose();
+      speedStreakTex.dispose();
       verticalFlareTex.dispose();
       bokehOrbTex.dispose();
 
