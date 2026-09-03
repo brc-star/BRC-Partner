@@ -35,14 +35,9 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
   return (
     <section
       id="hero-section"
-      className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#060911] tech-grid-pattern"
+      className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-transparent tech-grid-pattern"
       aria-labelledby="hero-headline"
     >
-      {/* Background glow effects */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-tr from-blue-600/15 via-indigo-600/10 to-purple-600/10 rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute top-10 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Hero Header */}
         <div className="max-w-4xl mx-auto text-center space-y-6">

@@ -1,8 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
+
+const NeonParticleBackground = dynamic(
+  () => import('@/components/three/NeonParticleBackground'),
+  { ssr: false }
+);
 import { TldrSummaryBlock } from '@/components/TldrSummaryBlock';
 import { TrustStrip } from '@/components/TrustStrip';
 import { ProofOfWorkSection } from '@/components/ProofOfWorkSection';
@@ -55,12 +61,15 @@ export default function HomePage() {
   const activeClaim = AUDITED_CLAIMS.find((c) => c.id === selectedClaimId) || null;
 
   return (
-    <div className="min-h-screen bg-[#060911] text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
+    <div className="relative min-h-screen bg-[#060911] text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
+      {/* 3D Animated Neon Particle & Vertical Light Stream Background */}
+      <NeonParticleBackground />
+
       {/* Top Header */}
       <Navbar onOpenInquiry={handleOpenInquiry} />
 
       {/* Main Content Flow */}
-      <main className="flex-grow">
+      <main className="relative z-10 flex-grow">
         {/* 1. Hero Section with Live Product Mockup */}
         <Hero
           onOpenInquiry={() => handleOpenInquiry()}
