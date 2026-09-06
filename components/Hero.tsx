@@ -40,28 +40,34 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Hero Header */}
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          {/* Eyebrow badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider shadow-inner shadow-blue-500/10">
-            <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
-            <span>BRC STAR • FULL-STACK DIGITAL TECHNOLOGY PARTNER</span>
-          </div>
-
-          {/* Bold Headline */}
-          <h1
-            id="hero-headline"
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.1]"
+        <div className="max-w-5xl mx-auto text-center space-y-8">
+          {/* Subtle Glass Backdrop Container for Hero Text Content */}
+          <div
+            id="hero-content-backdrop"
+            className="relative px-5 py-8 sm:px-8 sm:py-10 md:px-12 md:py-12 rounded-2xl sm:rounded-3xl bg-[#060911]/70 sm:bg-[#060911]/65 backdrop-blur-md border border-slate-800/80 shadow-2xl shadow-blue-950/20 ring-1 ring-white/5 space-y-6"
           >
-            Build Digital Products That{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
-              Move Your Business Forward.
-            </span>
-          </h1>
+            {/* Eyebrow badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider shadow-inner shadow-blue-500/10">
+              <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
+              <span>BRC STAR • FULL-STACK DIGITAL TECHNOLOGY PARTNER</span>
+            </div>
 
-          {/* Supporting Message */}
-          <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
-            From high-performance websites and web applications to mobile apps, enterprise platforms, AI solutions and custom business systems — <strong className="font-semibold text-white">BRC STAR</strong> designs and develops technology around your real business needs.
-          </p>
+            {/* Bold Headline - 2 balanced lines on desktop */}
+            <h1
+              id="hero-headline"
+              className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15] max-w-4xl mx-auto"
+            >
+              <span className="block lg:inline">Build Digital Products That </span>
+              <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent block lg:inline whitespace-normal lg:whitespace-nowrap">
+                Move Your Business Forward.
+              </span>
+            </h1>
+
+            {/* Supporting Message */}
+            <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
+              From high-performance websites and web applications to mobile apps, enterprise platforms, AI solutions and custom business systems — <strong className="font-semibold text-white">BRC STAR</strong> designs and develops technology around your real business needs.
+            </p>
+          </div>
 
           {/* CTAs */}
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
