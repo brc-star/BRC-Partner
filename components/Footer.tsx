@@ -204,24 +204,62 @@ export function Footer({ onOpenInquiry }: FooterProps) {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+        {/* Legal Links Bar */}
+        <div className="mt-12 pt-6 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-2 text-slate-300 font-medium">
+            <Link
+              href="/privacy-policy"
+              className="text-slate-300 hover:text-blue-400 transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <span className="text-slate-600 select-none" aria-hidden="true">|</span>
+            <Link
+              href="/terms-and-conditions"
+              className="text-slate-300 hover:text-blue-400 transition-colors"
+            >
+              Terms &amp; Conditions
+            </Link>
+            <span className="text-slate-600 select-none" aria-hidden="true">|</span>
+            <Link
+              href="/disclaimer"
+              className="text-slate-300 hover:text-blue-400 transition-colors"
+            >
+              Disclaimer
+            </Link>
+            <span className="text-slate-600 select-none" aria-hidden="true">|</span>
+            <Link
+              href="/cookies-policy"
+              className="text-slate-300 hover:text-blue-400 transition-colors"
+            >
+              Cookies Policy
+            </Link>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 text-[11px] text-slate-400">
+            <span className="inline-flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              SOC2 / GDPR Compliant Patterns
+            </span>
+            <span className="hidden sm:inline text-slate-700">•</span>
+            <span>WCAG AA Accessibility</span>
+          </div>
+        </div>
+
+        {/* Bottom Copyright & Back to Top Bar */}
+        <div className="mt-6 pt-6 border-t border-slate-800/50 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <div>
             © {new Date().getFullYear()} BRC STAR. All rights reserved. Full-Stack Digital Technology Partner.
           </div>
 
-          <div className="flex items-center gap-6">
-            <span>SOC2 / GDPR Compliant Patterns</span>
-            <span>WCAG AA Accessibility</span>
-            <button
-              onClick={scrollToTop}
-              className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer"
-              aria-label="Scroll back to top"
-            >
-              <span>Back to Top</span>
-              <ArrowUp className="w-3.5 h-3.5" />
-            </button>
-          </div>
+          <button
+            onClick={scrollToTop}
+            className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer"
+            aria-label="Scroll back to top"
+          >
+            <span>Back to Top</span>
+            <ArrowUp className="w-3.5 h-3.5" />
+          </button>
         </div>
       </div>
     </footer>
