@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { Subtle3DHeadline } from './Subtle3DHeadline';
 import {
   ArrowRight,
   Sparkles,
@@ -24,6 +25,7 @@ interface HeroProps {
 }
 
 export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
+  const heroSectionRef = useRef<HTMLElement>(null);
   const [activeTab, setActiveTab] = useState<'architecture' | 'telemetry' | 'ai' | 'mobile'>('architecture');
   const [isSimulatingTraffic, setIsSimulatingTraffic] = useState(false);
 
@@ -34,6 +36,7 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
 
   return (
     <section
+      ref={heroSectionRef}
       id="hero-section"
       className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-transparent tech-grid-pattern"
       aria-labelledby="hero-headline"
@@ -52,16 +55,8 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
               <span>BRC STAR • FULL-STACK DIGITAL TECHNOLOGY PARTNER</span>
             </div>
 
-            {/* Bold Headline - 2 balanced lines on desktop */}
-            <h1
-              id="hero-headline"
-              className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15] max-w-4xl mx-auto"
-            >
-              <span className="block lg:inline">Build Digital Products That </span>
-              <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent block lg:inline whitespace-normal lg:whitespace-nowrap">
-                Move Your Business Forward.
-              </span>
-            </h1>
+            {/* Subtle 3D Futuristic Animated Headline */}
+            <Subtle3DHeadline heroRef={heroSectionRef} />
 
             {/* Supporting Message */}
             <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
