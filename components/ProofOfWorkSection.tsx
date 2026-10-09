@@ -132,24 +132,29 @@ export function ProofOfWorkSection({ onOpenClaimProof, onOpenInquiry }: ProofOfW
   return (
     <section
       id="proof-of-work"
-      className="py-24 bg-[#050811] border-t border-slate-800/80 relative z-10"
+      className="py-20 sm:py-24 bg-[#050811] border-t border-slate-800/80 relative z-10 overflow-x-clip"
       aria-labelledby="proof-headline"
     >
       {/* Background ambient lighting */}
       <div className="absolute top-1/3 right-10 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute bottom-10 left-10 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
+      {/* Section Pre-Badge */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-5 sm:mb-6">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono shadow-inner">
+          <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <span>BRC STAR • Transparent Proof of Work</span>
+        </div>
+      </div>
+
+      {/* Full-Width Edge-to-Edge Portfolio / Work Showcase Slider */}
+      <div className="w-full px-2 sm:px-4 md:px-6 lg:px-8 mb-8 sm:mb-12">
+        <ProofOfWorkSlider />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-4xl mx-auto text-center space-y-4 mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono shadow-inner">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>BRC STAR • Transparent Proof of Work</span>
-          </div>
-
-          {/* 10-Slot Empty Proof of Work Carousel */}
-          <ProofOfWorkSlider />
-
           <h2
             id="proof-headline"
             className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight"

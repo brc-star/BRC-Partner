@@ -198,37 +198,37 @@ export function ProofOfWorkSlider({
   return (
     <div
       ref={containerRef}
-      className={`w-full max-w-5xl mx-auto my-6 sm:my-8 text-left ${className}`}
+      className={`w-full text-left focus:outline-none ${className}`}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="region"
       aria-label="Proof of Work Showcase Carousel"
     >
       {/* Outer Card with Refined Border and Ambient Dark-Mode Glow */}
-      <div className="relative rounded-2xl bg-gradient-to-b from-[#0a1020] to-[#050811] border border-slate-800/90 shadow-[0_12px_40px_rgba(2,6,23,0.7)] p-2 sm:p-3 md:p-4 transition-all duration-300 hover:border-slate-700/80 focus-within:border-cyan-500/50 focus-within:ring-1 focus-within:ring-cyan-500/30 outline-none">
+      <div className="relative w-full rounded-2xl bg-gradient-to-b from-[#0a1020] to-[#050811] border border-slate-800/90 shadow-[0_16px_48px_rgba(2,6,23,0.8)] p-2.5 sm:p-4 md:p-5 transition-all duration-300 hover:border-slate-700/80 focus-within:border-cyan-500/50 focus-within:ring-1 focus-within:ring-cyan-500/30 outline-none">
         {/* Subtle Tech Header Bar inside Slider Box */}
-        <div className="flex items-center justify-between px-3 py-2 border-b border-slate-800/70 mb-3 text-xs">
-          <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="font-mono text-cyan-300 font-semibold tracking-wider text-[11px] uppercase">
+        <div className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-2.5 border-b border-slate-800/70 mb-3 sm:mb-4 text-xs">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse shrink-0" />
+            <span className="font-mono text-cyan-300 font-semibold tracking-wider text-[11px] sm:text-xs uppercase">
               Slot {String(currentIndex + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
             </span>
             <span className="text-slate-600 hidden sm:inline">•</span>
-            <span className="text-slate-400 font-medium hidden sm:inline truncate max-w-[240px] md:max-w-md">
+            <span className="text-slate-400 font-medium hidden sm:inline truncate max-w-xs sm:max-w-md lg:max-w-2xl">
               {currentSlide.category}
             </span>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-900/90 border border-slate-800 text-[10px] font-mono text-slate-400">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-[10px] sm:text-xs font-mono text-slate-400">
               {hasImage ? (
                 <>
-                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                   <span>Image Loaded</span>
                 </>
               ) : (
                 <>
-                  <ImageIcon className="w-3 h-3 text-cyan-400" />
+                  <ImageIcon className="w-3.5 h-3.5 text-cyan-400" />
                   <span>Empty Slot</span>
                 </>
               )}
@@ -263,32 +263,32 @@ export function ProofOfWorkSlider({
                 alt={currentSlide.altText || currentSlide.title}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1024px"
+                sizes="100vw"
                 priority={currentIndex === 0}
                 referrerPolicy="no-referrer"
               />
             </div>
           ) : (
             /* Clean, Elegant Placeholder for Empty Slot */
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10">
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 sm:p-10 text-center z-10">
               {/* Subtle Icon Badge */}
               <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-2xl bg-[#0b1329] border border-cyan-900/50 shadow-[0_0_25px_rgba(6,182,212,0.12)] flex items-center justify-center text-cyan-400 mb-4 transition-transform duration-300 group-hover:scale-105">
                 <ImageIcon className="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 text-cyan-400/90" strokeWidth={1.5} />
               </div>
 
               {/* Required Exact Placeholder Text */}
-              <h3 className="text-base sm:text-lg md:text-xl font-bold text-white tracking-tight">
+              <h3 className="text-base sm:text-xl md:text-2xl font-bold text-white tracking-tight">
                 Project Screenshot Coming Soon.
               </h3>
 
               {/* Slot Details & Meta */}
-              <p className="text-xs sm:text-sm text-slate-400 max-w-md mt-1.5 leading-relaxed">
+              <p className="text-xs sm:text-sm md:text-base text-slate-400 max-w-lg mt-2 leading-relaxed">
                 {currentSlide.description || 'Verified production system screenshot and architectural verification.'}
               </p>
 
               {/* Helper Tag for Easy Customization */}
-              <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-800 text-[11px] text-slate-400 font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+              <div className="mt-4 sm:mt-5 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-[11px] sm:text-xs text-slate-400 font-mono">
+                <span className="w-2 h-2 rounded-full bg-cyan-400" />
                 <span>Slot {String(currentSlide.slotNumber).padStart(2, '0')}: {currentSlide.title}</span>
               </div>
             </div>
@@ -298,7 +298,7 @@ export function ProofOfWorkSlider({
           <button
             onClick={prevSlide}
             aria-label="Previous slide"
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-950/80 hover:bg-cyan-950/90 border border-slate-800 hover:border-cyan-500/60 text-slate-300 hover:text-cyan-300 flex items-center justify-center backdrop-blur-md transition-all shadow-lg hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-pointer"
+            className="absolute left-3 sm:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-950/85 hover:bg-cyan-950/90 border border-slate-800 hover:border-cyan-500/60 text-slate-300 hover:text-cyan-300 flex items-center justify-center backdrop-blur-md transition-all shadow-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-pointer"
           >
             <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
@@ -307,26 +307,26 @@ export function ProofOfWorkSlider({
           <button
             onClick={nextSlide}
             aria-label="Next slide"
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-950/80 hover:bg-cyan-950/90 border border-slate-800 hover:border-cyan-500/60 text-slate-300 hover:text-cyan-300 flex items-center justify-center backdrop-blur-md transition-all shadow-lg hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-pointer"
+            className="absolute right-3 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-950/85 hover:bg-cyan-950/90 border border-slate-800 hover:border-cyan-500/60 text-slate-300 hover:text-cyan-300 flex items-center justify-center backdrop-blur-md transition-all shadow-xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-pointer"
           >
             <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
         </div>
 
         {/* Carousel Bottom Controls & Pagination Indicators */}
-        <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 px-2">
+        <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 px-3 sm:px-4">
           {/* Slide Indicator Label */}
-          <div className="text-xs text-slate-400 font-mono flex items-center gap-2 order-2 sm:order-1">
+          <div className="text-xs sm:text-sm text-slate-400 font-mono flex items-center gap-2 order-2 sm:order-1">
             <span className="text-cyan-400 font-semibold">Slot {String(currentIndex + 1).padStart(2, '0')}</span>
             <span className="text-slate-600">/</span>
             <span className="text-slate-400">{String(totalSlides).padStart(2, '0')}</span>
             <span className="text-slate-600 mx-1 hidden md:inline">•</span>
-            <span className="text-slate-400 hidden md:inline truncate max-w-xs">{currentSlide.title}</span>
+            <span className="text-slate-400 hidden md:inline truncate max-w-sm lg:max-w-md">{currentSlide.title}</span>
           </div>
 
           {/* 10 Pagination Indicators (All 10 slots clickable) */}
           <div
-            className="flex items-center gap-1.5 sm:gap-2 order-1 sm:order-2"
+            className="flex items-center gap-1.5 sm:gap-2.5 order-1 sm:order-2"
             role="tablist"
             aria-label="Slide indicators"
           >
@@ -341,8 +341,8 @@ export function ProofOfWorkSlider({
                   aria-label={`Go to slide ${idx + 1}: ${slide.title}`}
                   className={`transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-pointer ${
                     isActive
-                      ? 'w-6 sm:w-8 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_8px_rgba(6,182,212,0.6)]'
-                      : 'w-2 h-2 bg-slate-700 hover:bg-slate-500 hover:scale-110'
+                      ? 'w-7 sm:w-10 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_10px_rgba(6,182,212,0.6)]'
+                      : 'w-2 sm:w-2.5 h-2 bg-slate-700 hover:bg-slate-500 hover:scale-110'
                   }`}
                 />
               );
@@ -350,11 +350,11 @@ export function ProofOfWorkSlider({
           </div>
 
           {/* Quick Prev / Next Text Navigation for Mobile & Accessibility */}
-          <div className="flex items-center gap-1 order-3">
+          <div className="flex items-center gap-1.5 order-3">
             <button
               onClick={prevSlide}
               aria-label="Previous slide"
-              className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono text-slate-300 hover:text-white hover:border-slate-700 transition-colors flex items-center gap-1 cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-[11px] sm:text-xs font-mono text-slate-300 hover:text-white hover:border-slate-700 transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <ChevronLeft className="w-3.5 h-3.5" />
               <span>Prev</span>
@@ -362,7 +362,7 @@ export function ProofOfWorkSlider({
             <button
               onClick={nextSlide}
               aria-label="Next slide"
-              className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono text-slate-300 hover:text-white hover:border-slate-700 transition-colors flex items-center gap-1 cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-[11px] sm:text-xs font-mono text-slate-300 hover:text-white hover:border-slate-700 transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <span>Next</span>
               <ChevronRight className="w-3.5 h-3.5" />
