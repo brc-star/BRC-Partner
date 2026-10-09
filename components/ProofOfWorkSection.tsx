@@ -29,6 +29,7 @@ import {
 import { AUDITED_CLAIMS, CLAIM_STATUS_CONFIG, SECURITY_PRACTICES_MATRIX } from '@/lib/claim-proof-data';
 import { ClaimItem, ClaimStatus } from '@/types/claim-proof';
 import { ClaimBadge } from './ClaimBadge';
+import { ProofOfWorkSlider } from './ProofOfWorkSlider';
 
 interface ProofOfWorkSectionProps {
   onOpenClaimProof: (claim: ClaimItem | string) => void;
@@ -145,6 +146,9 @@ export function ProofOfWorkSection({ onOpenClaimProof, onOpenInquiry }: ProofOfW
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
             <span>BRC STAR • Transparent Proof of Work</span>
           </div>
+
+          {/* 10-Slot Empty Proof of Work Carousel */}
+          <ProofOfWorkSlider />
 
           <h2
             id="proof-headline"
