@@ -447,7 +447,7 @@ export const db = {
     };
 
     store.payments.set(id, payment);
-    if (data.razorpayPaymentId) {
+    if (data.razorpayPaymentId && data.status === 'PAID') {
       store.processedPaymentIds.add(data.razorpayPaymentId);
     }
     return payment;

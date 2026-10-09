@@ -8,15 +8,34 @@ export async function POST(req: NextRequest) {
     const rawBody = await req.text();
     const signature = req.headers.get('x-razorpay-signature') || '';
 
-    // Verify webhook signature
-    const isValid = verifyRazorpayWebhookSignature({
-      rawBody,
-      signature,
-    });
+    const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;
 
-    if (!isValid && process.env.RAZORPAY_WEBHOOK_SECRET) {
-      console.warn('Invalid Razorpay webhook signature received');
-      return NextResponse.json({ error: 'Invalid webhook signature' }, { status: 400 });
+    // Verify webhook signature when secret is configured or signature is provided
+    if (webhookSecret) {
+      if (!signature) {
+        return NextResponse.json({ error: 'Missing x-razorpay-signature header' }, { status: 400 });
+      }
+      const isValid = verifyRazorpayWebhookSignature({
+        rawBody,
+        signature,
+        webhookSecret,
+      });
+
+      if (!isValid) {
+        console.warn('Invalid Razorpay webhook signature received');
+        return NextResponse.json({ error: 'Invalid webhook signature' }, { status: 400 });
+      }
+    } else if (signature) {
+      // Secret not configured in env, verify against default fallback if signature provided
+      const isValid = verifyRazorpayWebhookSignature({
+        rawBody,
+        signature,
+      });
+
+      if (!isValid) {
+        console.warn('Invalid Razorpay webhook signature received against fallback');
+        return NextResponse.json({ error: 'Invalid webhook signature' }, { status: 400 });
+      }
     }
 
     let payload: any = {};
