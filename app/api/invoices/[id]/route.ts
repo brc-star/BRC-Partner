@@ -19,7 +19,7 @@ export async function GET(
     order,
     companyDetails: {
       name: 'BRC STAR Technology Partner',
-      legalEntity: 'BRC STAR Digital Systems & Solutions',
+      legalEntity: 'BRC STAR (OPC) PRIVATE LIMITED',
       gstin: '07AAACB1234F1Z9',
       address: 'Tower 4, Level 9, Cyber City, Gurugram, Haryana, 122002, India',
       email: 'contact@brcstar.in',

@@ -74,7 +74,7 @@ export function InvoiceViewerModal({ isOpen, onClose, invoice, order }: InvoiceV
                 Full-Stack Systems &amp; Software Engineering
               </p>
               <div className="text-[11px] text-slate-400 print:text-slate-600 mt-2 space-y-0.5">
-                <p>BRC STAR Digital Systems India Pvt. Ltd.</p>
+                <p>BRC STAR (OPC) PRIVATE LIMITED</p>
                 <p>DLF Cyber City, Tower 4, Level 9, Gurugram, India</p>
                 <p className="font-mono">GSTIN: 07AAACB1234F1Z9</p>
                 <p>contact@brcstar.in • https://brcpartner.brcstar.in</p>
