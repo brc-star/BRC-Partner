@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Navbar } from '@/components/Navbar';
+import { HomepageSlider } from '@/components/HomepageSlider';
 import { Hero } from '@/components/Hero';
 
 const NeonParticleBackground = dynamic(
@@ -70,6 +71,9 @@ export default function HomePage() {
 
       {/* Main Content Flow */}
       <main className="relative z-10 flex-grow">
+        {/* 10-Image Optimized Showcase Slider */}
+        <HomepageSlider onOpenInquiry={handleOpenInquiry} />
+
         {/* 1. Hero Section with Live Product Mockup */}
         <Hero
           onOpenInquiry={() => handleOpenInquiry()}
