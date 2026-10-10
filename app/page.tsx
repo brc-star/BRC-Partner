@@ -88,6 +88,16 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Empty White Container Section Above Executive Summary */}
+        <section
+          aria-hidden="true"
+          className="w-full flex justify-center items-center bg-transparent py-4 sm:py-6"
+        >
+          <div
+            className="w-full max-w-[1774px] h-[887px] bg-[#FFFFFF]"
+          />
+        </section>
+
         {/* 2. Executive TL;DR Summary Block */}
         <TldrSummaryBlock onOpenInquiry={handleOpenInquiry} />
 
