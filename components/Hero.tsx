@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { Subtle3DHeadline } from './Subtle3DHeadline';
 import {
   ArrowRight,
   Sparkles,
@@ -42,63 +41,23 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
       aria-labelledby="hero-headline"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Hero Header */}
-        <div className="max-w-5xl mx-auto text-center space-y-8">
-          {/* Subtle Glass Backdrop Container for Hero Text Content */}
-          <div
-            id="hero-content-backdrop"
-            className="relative px-5 py-8 sm:px-8 sm:py-10 md:px-12 md:py-12 rounded-2xl sm:rounded-3xl bg-[#060911]/70 sm:bg-[#060911]/65 backdrop-blur-md border border-slate-800/80 shadow-2xl shadow-blue-950/20 ring-1 ring-white/5 space-y-6"
+        {/* Hero Section Technical Focus Header */}
+        <div className="max-w-4xl mx-auto text-center space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider shadow-inner shadow-blue-500/10">
+            <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
+            <span>Interactive Engineering Console • Live Production Telemetry</span>
+          </div>
+
+          <h1
+            id="hero-headline"
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight"
           >
-            {/* Eyebrow badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider shadow-inner shadow-blue-500/10">
-              <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
-              <span>BRC STAR • FULL-STACK DIGITAL TECHNOLOGY PARTNER</span>
-            </div>
+            Real-Time Systems Architecture &amp; Telemetry
+          </h1>
 
-            {/* Subtle 3D Futuristic Animated Headline */}
-            <Subtle3DHeadline heroRef={heroSectionRef} />
-
-            {/* Supporting Message */}
-            <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
-              From high-performance websites and web applications to mobile apps, enterprise platforms, AI solutions and custom business systems — <strong className="font-semibold text-white">BRC STAR</strong> designs and develops technology around your real business needs.
-            </p>
-          </div>
-
-          {/* CTAs */}
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              id="hero-primary-cta"
-              onClick={onOpenInquiry}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 bg-size-200 hover:bg-right hover:shadow-xl hover:shadow-blue-600/30 text-white font-semibold text-base border border-blue-400/40 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              <span>Start a Project</span>
-              <ArrowRight className="w-5 h-5" />
-            </button>
-
-            <a
-              id="hero-secondary-cta"
-              href="#solutions"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-base border border-slate-700/80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-400"
-            >
-              <span>Explore Our Solutions</span>
-            </a>
-          </div>
-
-          {/* Quick value props pill */}
-          <div className="pt-3 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs text-slate-400">
-            <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-blue-400" />
-              <span>Full-Stack Engineering</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-indigo-400" />
-              <span>Enterprise-Grade Security</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-purple-400" />
-              <span>Dedicated Technical Support</span>
-            </div>
-          </div>
+          <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
+            Inspect our live interactive architecture console, multi-cloud edge layers, automated microservices, and client telemetry engine below.
+          </p>
         </div>
 
         {/* Realistic Interactive Digital Product UI Mockup */}

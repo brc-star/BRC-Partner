@@ -10,6 +10,7 @@ import {
   Headphones,
   CheckCircle2,
   Sparkles,
+  ArrowRight,
 } from 'lucide-react';
 
 interface WhyBrcStarSectionProps {
@@ -84,7 +85,85 @@ export function WhyBrcStarSection({ market = 'india', onOpenInquiry }: WhyBrcSta
   return (
     <section id="why-us" className="py-20 bg-[#060911] relative border-t border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* ============================================================== */}
+        {/* TRANSFERRED HERO SHOWCASE & TECHNOLOGY PARTNER HERO BANNER    */}
+        {/* ============================================================== */}
+        <div className="mb-20 space-y-12">
+          {/* Transferred Hero Content Header */}
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            {/* Transferred Eyebrow Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider shadow-inner shadow-blue-500/10">
+              <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
+              <span>BRC STAR • FULL-STACK DIGITAL TECHNOLOGY PARTNER</span>
+            </div>
+
+            {/* Transferred Main Headline */}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
+              Build Digital Products That{' '}
+              <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
+                Move Your Business Forward.
+              </span>
+            </h2>
+
+            {/* Transferred Descriptive Paragraph */}
+            <p className="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              From high-performance websites and web applications to mobile apps, enterprise platforms, AI solutions and custom business systems — <strong className="font-semibold text-white">BRC STAR</strong> designs and develops technology around your real business needs.
+            </p>
+
+            {/* Transferred CTAs */}
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+              {onOpenInquiry && (
+                <button
+                  onClick={() => onOpenInquiry('General Inquiry')}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 bg-size-200 hover:bg-right hover:shadow-xl hover:shadow-blue-600/30 text-white font-semibold text-base border border-blue-400/40 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400"
+                >
+                  <span>Start a Project</span>
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              )}
+
+              <a
+                href="#solutions"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-base border border-slate-700/80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-400"
+              >
+                <span>Explore Our Solutions</span>
+              </a>
+            </div>
+
+            {/* Transferred Quick Value Props */}
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs text-slate-400">
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-blue-400" />
+                <span>Full-Stack Engineering</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-indigo-400" />
+                <span>Enterprise-Grade Security</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-purple-400" />
+                <span>Dedicated Technical Support</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Technology Partner Hero Banner Presentation Card (Clean White Background with Blue/Purple/Pink Accents) */}
+          <div className="relative mx-auto max-w-[1774px] rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 shadow-2xl shadow-blue-950/40">
+            <div className="relative w-full aspect-[1774/887] max-h-[887px] bg-[#FFFFFF] rounded-[calc(1rem-1px)] sm:rounded-[calc(1.5rem-1px)] overflow-hidden flex items-center justify-center">
+              <img
+                src="/images/brc-star-technology-partner-hero-banner.jpg"
+                alt="BRC STAR Technology Partner Hero Banner - Multi-device responsive software engineering showcase across laptop, tablet, and mobile"
+                loading="lazy"
+                decoding="async"
+                className="block w-full h-full object-contain object-center"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* ============================================================== */}
+        {/* EXISTING ABOUT / WHY BRC STAR SECTION HEADER & PILLARS GRID   */}
+        {/* ============================================================== */}
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
             <Sparkles className="w-3.5 h-3.5 text-blue-400" />
