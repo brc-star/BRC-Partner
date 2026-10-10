@@ -88,14 +88,20 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Empty White Container Section Above Executive Summary */}
+        {/* White Container Section with DAXY Diamond Luxury Showcase Above Executive Summary */}
         <section
-          aria-hidden="true"
+          aria-label="DAXY Diamond Luxury Showcase"
           className="w-full flex justify-center items-center bg-transparent py-4 sm:py-6"
         >
-          <div
-            className="w-full max-w-[1774px] h-[887px] bg-[#FFFFFF]"
-          />
+          <div className="w-full max-w-[1774px] h-[887px] bg-[#FFFFFF] flex items-center justify-center overflow-hidden">
+            <img
+              src="/Images/DAXY Diamond Luxury Showcase-optimized.jpg"
+              alt="DAXY Diamond Luxury Showcase portfolio project by BRC STAR Partner"
+              loading="lazy"
+              decoding="async"
+              className="block w-full h-full object-contain object-center"
+            />
+          </div>
         </section>
 
         {/* 2. Executive TL;DR Summary Block */}
