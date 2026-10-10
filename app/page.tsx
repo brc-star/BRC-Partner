@@ -9,6 +9,7 @@ const NeonParticleBackground = dynamic(
   () => import('@/components/three/NeonParticleBackground'),
   { ssr: false }
 );
+import { HomepageSlider } from '@/components/HomepageSlider';
 import { TldrSummaryBlock } from '@/components/TldrSummaryBlock';
 import { TrustStrip } from '@/components/TrustStrip';
 import { ProofOfWorkSection } from '@/components/ProofOfWorkSection';
@@ -76,14 +77,15 @@ export default function HomePage() {
           onOpenClaimProof={handleOpenClaimProof}
         />
 
-        {/* Empty Container Section Below Hero */}
+        {/* Portfolio Showcase Slider Container Section Below Hero */}
         <section
-          aria-hidden="true"
-          className="w-full flex justify-center items-center bg-transparent pointer-events-none"
+          id="portfolio-slider-section"
+          aria-label="Portfolio Showcase"
+          className="w-full flex justify-center items-center bg-transparent px-4 sm:px-6 lg:px-8 py-6 sm:py-8"
         >
-          <div
-            className="w-full max-w-[1774px] aspect-[1774/887] bg-transparent"
-          />
+          <div className="w-full max-w-[1774px] aspect-[1774/887]">
+            <HomepageSlider />
+          </div>
         </section>
 
         {/* 2. Executive TL;DR Summary Block */}
