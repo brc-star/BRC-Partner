@@ -38,7 +38,7 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
     <section
       ref={heroSectionRef}
       id="hero-section"
-      className="relative pt-12 pb-20 md:pt-16 md:pb-28 overflow-hidden bg-transparent tech-grid-pattern"
+      className="relative pt-28 sm:pt-32 md:pt-36 pb-20 md:pb-28 overflow-hidden bg-transparent tech-grid-pattern"
       aria-labelledby="hero-headline"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -29,7 +29,6 @@ import {
 import { AUDITED_CLAIMS, CLAIM_STATUS_CONFIG, SECURITY_PRACTICES_MATRIX } from '@/lib/claim-proof-data';
 import { ClaimItem, ClaimStatus } from '@/types/claim-proof';
 import { ClaimBadge } from './ClaimBadge';
-import { ProofOfWorkSlider } from './ProofOfWorkSlider';
 
 interface ProofOfWorkSectionProps {
   onOpenClaimProof: (claim: ClaimItem | string) => void;
@@ -145,11 +144,6 @@ export function ProofOfWorkSection({ onOpenClaimProof, onOpenInquiry }: ProofOfW
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
           <span>BRC STAR • Transparent Proof of Work</span>
         </div>
-      </div>
-
-      {/* Full-Width Edge-to-Edge Portfolio / Work Showcase Slider */}
-      <div className="w-full px-2 sm:px-4 md:px-6 lg:px-8 mb-8 sm:mb-12">
-        <ProofOfWorkSlider />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
