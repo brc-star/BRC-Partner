@@ -20,7 +20,7 @@ export const PORTFOLIO_SLIDES: PortfolioSlide[] = [
     title: 'DAXY Diamond Luxury Showcase',
     badge: 'LUXURY JEWELLERY & DIAMONDS',
     category: 'Ultra-Luxury E-Commerce & Virtual Concierge',
-    imageSrc: '/Images/DAXY Diamond Luxury Showcase.png',
+    imageSrc: '/images/DAXY Diamond Luxury Showcase.png',
     altText: 'DAXY Diamond Luxury Showcase portfolio project by BRC STAR Partner',
   },
   {
@@ -29,7 +29,7 @@ export const PORTFOLIO_SLIDES: PortfolioSlide[] = [
     title: 'DXMO Jewellery Website Luxury Showcase',
     badge: 'FINE JEWELLERY BOUTIQUE',
     category: 'High-Converting Digital Flagship & Custom Catalog',
-    imageSrc: '/Images/DXMO Jewellery Website Luxury Mockup.png',
+    imageSrc: '/images/DXMO Jewellery Website Luxury Mockup.png',
     altText: 'DXMO Jewellery Website Luxury Showcase portfolio project by BRC STAR Partner',
   },
   {
@@ -38,7 +38,7 @@ export const PORTFOLIO_SLIDES: PortfolioSlide[] = [
     title: 'DXMO Industrial Machinery Website Showcase',
     badge: 'INDUSTRIAL ENGINEERING & B2B',
     category: 'Heavy Equipment Portal & Interactive Spec Matrix',
-    imageSrc: '/Images/DXMO Industrial Machinery Website Showcase.png',
+    imageSrc: '/images/DXMO Industrial Machinery Website Showcase.png',
     altText: 'DXMO Industrial Machinery Website Showcase portfolio project by BRC STAR Partner',
   },
   {
@@ -47,7 +47,7 @@ export const PORTFOLIO_SLIDES: PortfolioSlide[] = [
     title: 'DXMO Real Estate Device Showcase',
     badge: 'PROPTECH & LUXURY REAL ESTATE',
     category: 'Interactive Floorplans & Dynamic Property Engine',
-    imageSrc: '/Images/DXMO Real Estate Device Showcase.png',
+    imageSrc: '/images/DXMO Real Estate Device Showcase.png',
     altText: 'DXMO Real Estate Device Showcase portfolio project by BRC STAR Partner',
   },
   {
@@ -56,7 +56,7 @@ export const PORTFOLIO_SLIDES: PortfolioSlide[] = [
     title: 'DXMO Fashion Responsive Showcase',
     badge: 'DTC HIGH-FASHION APPAREL',
     category: 'Omnichannel Apparel Storefront & Lookbook Engine',
-    imageSrc: '/Images/DXMO Fashion Responsive Showcase.png',
+    imageSrc: '/images/DXMO Fashion Responsive Showcase.png',
     altText: 'DXMO Fashion Responsive Showcase portfolio project by BRC STAR Partner',
   },
   {
@@ -65,7 +65,7 @@ export const PORTFOLIO_SLIDES: PortfolioSlide[] = [
     title: 'BRCtex Responsive Textile Website Showcase',
     badge: 'GLOBAL TEXTILE MANUFACTURING',
     category: 'B2B Yarn & Fabric Sourcing Enterprise Platform',
-    imageSrc: '/Images/Brctex Responsive Textile Website Showcase.png',
+    imageSrc: '/images/Brctex Responsive Textile Website Showcase.png',
     altText: 'BRCtex Responsive Textile Website Showcase portfolio project by BRC STAR Partner',
   },
   {
@@ -74,7 +74,7 @@ export const PORTFOLIO_SLIDES: PortfolioSlide[] = [
     title: 'Embroidery Website Device Showcase',
     badge: 'BESPOKE ARTISAN CRAFTSMANSHIP',
     category: 'Custom Needlework & High-Precision Pattern Studio',
-    imageSrc: '/Images/Embroidery Website Device Showcase.png',
+    imageSrc: '/images/Embroidery Website Device Showcase.png',
     altText: 'Embroidery Website Device Showcase portfolio project by BRC STAR Partner',
   },
   {
@@ -83,7 +83,7 @@ export const PORTFOLIO_SLIDES: PortfolioSlide[] = [
     title: 'Pastel Beauty and Wellness Website Mockup',
     badge: 'WELLNESS & ORGANIC COSMETICS',
     category: 'Clean Aesthetic Lifestyle Brand & Booking Suite',
-    imageSrc: '/Images/Pastel Beauty and Wellness Website Mockup.png',
+    imageSrc: '/images/Pastel Beauty and Wellness Website Mockup.png',
     altText: 'Pastel Beauty and Wellness Website Mockup portfolio project by BRC STAR Partner',
   },
   {
@@ -92,7 +92,7 @@ export const PORTFOLIO_SLIDES: PortfolioSlide[] = [
     title: 'Responsive Dental Clinic Website Showcase',
     badge: 'HEALTHCARE & CLINICAL DENTISTRY',
     category: 'Patient Onboarding & Real-Time Tele-Appointment Hub',
-    imageSrc: '/Images/Responsive Dental Clinic Website Showcase.png',
+    imageSrc: '/images/Responsive Dental Clinic Website Showcase.png',
     altText: 'Responsive Dental Clinic Website Showcase portfolio project by BRC STAR Partner',
   },
   {
@@ -101,7 +101,7 @@ export const PORTFOLIO_SLIDES: PortfolioSlide[] = [
     title: 'TEXMO Fashion Across Every Screen',
     badge: 'MULTI-DEVICE APPAREL COMMERCE',
     category: 'Adaptive Viewport Grid & Next-Gen Style Navigator',
-    imageSrc: '/Images/TEXMO Fashion Across Every Screen.png',
+    imageSrc: '/images/TEXMO Fashion Across Every Screen.png',
     altText: 'TEXMO Fashion Across Every Screen portfolio project by BRC STAR Partner',
   },
 ];

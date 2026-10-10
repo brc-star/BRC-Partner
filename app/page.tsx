@@ -93,9 +93,9 @@ export default function HomePage() {
           aria-label="DAXY Diamond Luxury Showcase"
           className="w-full flex justify-center items-center bg-transparent py-4 sm:py-6"
         >
-          <div className="w-full max-w-[1774px] h-[887px] bg-[#FFFFFF] flex items-center justify-center overflow-hidden">
+          <div className="w-full max-w-[1774px] aspect-[1774/887] max-h-[887px] bg-[#FFFFFF] flex items-center justify-center overflow-hidden">
             <img
-              src="/Images/DAXY Diamond Luxury Showcase-optimized.jpg"
+              src="/images/DAXY Diamond Luxury Showcase-optimized.jpg"
               alt="DAXY Diamond Luxury Showcase portfolio project by BRC STAR Partner"
               loading="lazy"
               decoding="async"
