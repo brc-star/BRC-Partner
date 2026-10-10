@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export interface PortfolioSlide {
@@ -198,38 +197,23 @@ export function HomepageSlider() {
             aria-roledescription="slide"
             aria-label={`${slide.number} of ${totalSlides}: ${slide.title}`}
             aria-hidden={idx !== currentIndex}
-            className="relative min-w-full w-full h-full flex-shrink-0"
+            className="relative min-w-full w-full h-full flex-shrink-0 flex items-center justify-center overflow-hidden bg-black/40"
           >
-            <Image
+            {/* Standard img tag with uncompressed original source preserving 1774x887 resolution */}
+            <img
               src={slide.imageSrc}
               alt={slide.altText}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1774px"
-              priority={idx === 0}
               loading={idx === 0 ? 'eager' : 'lazy'}
-              quality={90}
-              className="object-contain sm:object-cover object-center w-full h-full pointer-events-none"
+              decoding="async"
+              className="block w-full h-full object-contain object-center select-none pointer-events-none"
               draggable={false}
             />
 
-            {/* Subtle Vignette & Bottom Gradient for Premium Contrast */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent pointer-events-none" />
-
-            {/* Slide Information Overlay */}
-            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-3 pointer-events-none">
-              <div className="max-w-2xl">
-                <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold bg-blue-600/30 text-cyan-300 border border-blue-500/40 backdrop-blur-md">
-                    {slide.badge}
-                  </span>
-                  <span className="hidden sm:inline-block text-xs text-slate-400 font-medium">
-                    {slide.category}
-                  </span>
-                </div>
-                <h3 className="text-base sm:text-xl lg:text-2xl font-bold text-white tracking-tight drop-shadow-md">
-                  {slide.title}
-                </h3>
-              </div>
+            {/* Slide Title Tag in Bottom Left */}
+            <div className="absolute bottom-3 left-4 sm:bottom-5 sm:left-6 z-10 pointer-events-none">
+              <span className="px-3 py-1 rounded-md text-xs sm:text-sm font-semibold bg-slate-950/80 text-white border border-slate-700/60 backdrop-blur-md shadow-lg">
+                {slide.title}
+              </span>
             </div>
           </div>
         ))}

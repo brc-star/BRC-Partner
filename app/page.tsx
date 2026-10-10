@@ -81,9 +81,9 @@ export default function HomePage() {
         <section
           id="portfolio-slider-section"
           aria-label="Portfolio Showcase"
-          className="w-full flex justify-center items-center bg-transparent px-4 sm:px-6 lg:px-8 py-6 sm:py-8"
+          className="w-full flex justify-center items-center bg-transparent py-4 sm:py-6"
         >
-          <div className="w-full max-w-[1774px] aspect-[1774/887]">
+          <div className="w-full max-w-[1774px] aspect-[1774/887] relative overflow-hidden">
             <HomepageSlider />
           </div>
         </section>
