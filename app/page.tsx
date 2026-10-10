@@ -76,6 +76,16 @@ export default function HomePage() {
           onOpenClaimProof={handleOpenClaimProof}
         />
 
+        {/* Empty Container Section Below Hero */}
+        <section
+          aria-hidden="true"
+          className="w-full flex justify-center items-center bg-transparent pointer-events-none"
+        >
+          <div
+            className="w-full max-w-[1774px] aspect-[1774/887] bg-transparent"
+          />
+        </section>
+
         {/* 2. Executive TL;DR Summary Block */}
         <TldrSummaryBlock onOpenInquiry={handleOpenInquiry} />
 
