@@ -60,6 +60,21 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
           </p>
         </div>
 
+        {/* Technology Partner Hero Banner Showcase Card (Clean White Presentation with Blue/Purple/Pink Accents) */}
+        <div className="mt-10 max-w-5xl mx-auto">
+          <div className="relative rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-r from-blue-500/35 via-purple-500/35 to-pink-500/35 shadow-2xl shadow-blue-950/40">
+            <div className="relative w-full aspect-[1774/887] max-h-[887px] bg-[#FFFFFF] rounded-[calc(1rem-1px)] sm:rounded-[calc(1.5rem-1px)] overflow-hidden flex items-center justify-center">
+              <img
+                src="/images/brc-star-technology-partner-hero-banner.jpg"
+                alt="BRC STAR Technology Partner Hero Banner - Multi-device responsive software engineering showcase across laptop, tablet, and mobile"
+                loading="eager"
+                decoding="async"
+                className="block w-full h-full object-contain object-center"
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Realistic Interactive Digital Product UI Mockup */}
         <div className="mt-14 max-w-5xl mx-auto">
           <div className="relative rounded-2xl bg-[#0b1120] border border-slate-800 shadow-2xl shadow-blue-950/40 overflow-hidden">
