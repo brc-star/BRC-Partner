@@ -36,7 +36,7 @@ export function StickyCta({ onOpenInquiry }: StickyCtaProps) {
       {/* Desktop Floating Pill (Bottom-Right) */}
       <aside
         aria-label="Quick Project Inquiry"
-        className="hidden md:flex fixed bottom-6 right-6 z-40 items-center gap-3 p-2 pl-4 rounded-2xl bg-[#0a1122]/95 border border-blue-500/40 shadow-2xl shadow-blue-950/60 backdrop-blur-md animate-in slide-in-from-bottom-5 duration-300"
+        className="hidden md:flex fixed bottom-6 right-24 z-40 items-center gap-3 p-2 pl-4 rounded-2xl bg-[#0a1122]/95 border border-blue-500/40 shadow-2xl shadow-blue-950/60 backdrop-blur-md animate-in slide-in-from-bottom-5 duration-300"
       >
         <div className="flex items-center gap-2">
           <span className="relative flex h-2.5 w-2.5">
