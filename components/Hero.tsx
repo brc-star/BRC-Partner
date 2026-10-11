@@ -93,85 +93,82 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
     <section
       ref={heroSectionRef}
       id="hero-section"
-      className="relative pt-28 sm:pt-32 md:pt-36 pb-20 md:pb-28 overflow-hidden bg-transparent tech-grid-pattern"
+      className="relative pt-[72px] md:pt-[101px] pb-20 md:pb-28 overflow-hidden bg-transparent tech-grid-pattern"
       aria-labelledby="hero-headline"
     >
-      <div className="max-w-[1774px] mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Full-Size Interactive Hero Showcase Slider */}
-        <div className="w-full mx-auto">
+      {/* Full-Width Interactive Hero Showcase Slider (No Blank Space Top, Left, Right) */}
+      <div
+        className="w-full relative select-none"
+        onMouseEnter={() => setIsHeroHovered(true)}
+        onMouseLeave={() => setIsHeroHovered(false)}
+      >
+        <div
+          className="relative w-full aspect-[1774/887] bg-[#FFFFFF] overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          {/* Carousel Track */}
           <div
-            className="relative rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-r from-blue-500/35 via-purple-500/35 to-pink-500/35 shadow-2xl shadow-blue-950/40"
-            onMouseEnter={() => setIsHeroHovered(true)}
-            onMouseLeave={() => setIsHeroHovered(false)}
+            className="w-full h-full flex transition-transform duration-700 ease-in-out"
+            style={{ transform: `translateX(-${currentHeroSlide * 100}%)` }}
           >
-            <div
-              className="relative w-full aspect-[1774/887] max-h-[887px] bg-[#FFFFFF] rounded-[calc(1rem-1px)] sm:rounded-[calc(1.5rem-1px)] overflow-hidden select-none"
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-            >
-              {/* Carousel Track */}
+            {heroSlides.map((slide, idx) => (
               <div
-                className="w-full h-full flex transition-transform duration-700 ease-in-out"
-                style={{ transform: `translateX(-${currentHeroSlide * 100}%)` }}
+                key={slide.id}
+                className="w-full h-full flex-shrink-0 flex items-center justify-center bg-[#FFFFFF]"
               >
-                {heroSlides.map((slide, idx) => (
-                  <div
-                    key={slide.id}
-                    className="w-full h-full flex-shrink-0 flex items-center justify-center bg-[#FFFFFF]"
-                  >
-                    <img
-                      src={slide.src}
-                      alt={slide.alt}
-                      loading={idx === 0 ? 'eager' : 'lazy'}
-                      decoding="async"
-                      className="block w-full h-full object-contain object-center pointer-events-none"
-                    />
-                  </div>
-                ))}
+                <img
+                  src={slide.src}
+                  alt={slide.alt}
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  className="block w-full h-full object-contain object-center pointer-events-none"
+                />
               </div>
+            ))}
+          </div>
 
-              {/* Prev Slide Navigation Button */}
+          {/* Prev Slide Navigation Button */}
+          <button
+            type="button"
+            onClick={prevHeroSlide}
+            aria-label="Previous showcase slide"
+            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-slate-900/65 hover:bg-slate-900/90 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 shadow-lg shadow-black/25 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
+          </button>
+
+          {/* Next Slide Navigation Button */}
+          <button
+            type="button"
+            onClick={nextHeroSlide}
+            aria-label="Next showcase slide"
+            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-slate-900/65 hover:bg-slate-900/90 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 shadow-lg shadow-black/25 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
+          </button>
+
+          {/* Slide Indicator Dots */}
+          <div className="absolute bottom-2.5 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 rounded-full bg-slate-900/50 backdrop-blur-md border border-white/15">
+            {heroSlides.map((slide, idx) => (
               <button
+                key={slide.id}
                 type="button"
-                onClick={prevHeroSlide}
-                aria-label="Previous showcase slide"
-                className="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-slate-900/65 hover:bg-slate-900/90 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 shadow-lg shadow-black/25 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              >
-                <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
-              </button>
-
-              {/* Next Slide Navigation Button */}
-              <button
-                type="button"
-                onClick={nextHeroSlide}
-                aria-label="Next showcase slide"
-                className="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-slate-900/65 hover:bg-slate-900/90 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 shadow-lg shadow-black/25 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              >
-                <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
-              </button>
-
-              {/* Slide Indicator Dots */}
-              <div className="absolute bottom-2.5 sm:bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 sm:gap-2.5 px-3 py-1.5 rounded-full bg-slate-900/50 backdrop-blur-md border border-white/15">
-                {heroSlides.map((slide, idx) => (
-                  <button
-                    key={slide.id}
-                    type="button"
-                    onClick={() => setCurrentHeroSlide(idx)}
-                    aria-label={`Go to slide ${idx + 1}: ${slide.title}`}
-                    className={`transition-all duration-300 rounded-full ${
-                      currentHeroSlide === idx
-                        ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-gradient-to-r from-blue-400 to-purple-400 shadow-sm'
-                        : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/50 hover:bg-white/80'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
+                onClick={() => setCurrentHeroSlide(idx)}
+                aria-label={`Go to slide ${idx + 1}: ${slide.title}`}
+                className={`transition-all duration-300 rounded-full ${
+                  currentHeroSlide === idx
+                    ? 'w-6 sm:w-8 h-2 sm:h-2.5 bg-gradient-to-r from-blue-400 to-purple-400 shadow-sm'
+                    : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/50 hover:bg-white/80'
+                }`}
+              />
+            ))}
           </div>
         </div>
+      </div>
 
-        {/* Realistic Interactive Digital Product UI Mockup */}
-        <div className="mt-14 max-w-5xl mx-auto">
+      {/* Realistic Interactive Digital Product UI Mockup */}
+      <div className="mt-14 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative rounded-2xl bg-[#0b1120] border border-slate-800 shadow-2xl shadow-blue-950/40 overflow-hidden">
             {/* Top Chrome / Window Header */}
             <div className="flex flex-wrap items-center justify-between px-4 py-3 bg-[#080d18] border-b border-slate-800/80 gap-3">
@@ -454,7 +451,6 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 }
