@@ -11,20 +11,20 @@ export function FinalCtaSection({ onOpenInquiry }: FinalCtaSectionProps) {
   return (
     <section
       id="final-conversion"
-      className="py-24 bg-[#060911] relative overflow-hidden"
+      className="py-24 bg-[#f8fafc] dark:bg-[#060911] relative overflow-hidden transition-colors"
       aria-labelledby="cta-headline"
     >
       {/* Glow Orbs */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-gradient-to-r from-blue-600/15 via-indigo-600/15 to-purple-600/15 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="rounded-3xl bg-gradient-to-b from-[#0e162a] to-[#090f1d] border border-blue-500/30 p-8 sm:p-14 shadow-2xl space-y-8 relative overflow-hidden">
+        <div className="rounded-3xl bg-white dark:bg-gradient-to-b dark:from-[#0e162a] dark:to-[#090f1d] border border-slate-200 dark:border-blue-500/30 p-8 sm:p-14 shadow-xl dark:shadow-2xl space-y-8 relative overflow-hidden">
           {/* Subtle top geometric line */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
 
           {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-700/50 text-blue-300 text-xs font-semibold uppercase tracking-wider shadow-inner">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-700/50 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider shadow-inner">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
             <span>Ready for the Next Step?</span>
           </div>
 
@@ -32,11 +32,11 @@ export function FinalCtaSection({ onOpenInquiry }: FinalCtaSectionProps) {
           <div className="space-y-4 max-w-3xl mx-auto">
             <h2
               id="cta-headline"
-              className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight"
             >
               Have a Business Challenge or Digital Product in Mind?
             </h2>
-            <p className="text-base sm:text-xl text-slate-300 font-normal leading-relaxed">
+            <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 font-normal leading-relaxed">
               Let&apos;s turn your requirement into a scalable digital solution. Partner with an engineering team that builds with precision, speed, and business clarity.
             </p>
           </div>
@@ -53,9 +53,9 @@ export function FinalCtaSection({ onOpenInquiry }: FinalCtaSectionProps) {
 
             <a
               href="mailto:contact@brcstar.in"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-base border border-slate-700 transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 hover:text-slate-900 border border-slate-300 dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-slate-200 dark:hover:text-white dark:border-slate-700 font-semibold text-base transition-colors"
             >
-              <MessageSquare className="w-4 h-4 text-blue-400" />
+              <MessageSquare className="w-4 h-4 text-blue-500 dark:text-blue-400" />
               <span>Talk to BRC STAR</span>
             </a>
           </div>

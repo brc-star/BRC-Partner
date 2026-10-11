@@ -827,10 +827,10 @@ export default function NeonParticleBackground() {
       ref={containerRef}
       id="neon-three-background"
       aria-hidden="true"
-      className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
+      className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-20 dark:opacity-100 transition-opacity duration-300"
     >
-      {/* Subtle targeted center vignette: dampens only directly behind the central hero text zone, keeping sides, top, and surrounding animation crystal clear and bright */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_45%_at_50%_35%,rgba(6,9,17,0.45)_0%,rgba(6,9,17,0.15)_65%,transparent_100%)] pointer-events-none" />
+      {/* Subtle targeted center vignette for dark mode */}
+      <div className="hidden dark:block absolute inset-0 bg-[radial-gradient(ellipse_60%_45%_at_50%_35%,rgba(6,9,17,0.45)_0%,rgba(6,9,17,0.15)_65%,transparent_100%)] pointer-events-none" />
     </div>
   );
 }

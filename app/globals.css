@@ -76,13 +76,173 @@
   animation: headline3dEntrance 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .headline-3d-entrance {
-    animation: none !important;
-    opacity: 1 !important;
-    filter: none !important;
-    transform: none !important;
-  }
+/* =========================================================================
+   SITE-WIDE LIGHT MODE ARCHITECTURAL CASCADE ENGINE
+   Automatically transforms dark-hardcoded surfaces into clean, high-contrast
+   light themes when .dark is removed, leaving 100% of dark mode intact.
+   ========================================================================= */
+
+html:not(.dark) {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* 1. Main Page & Section Backgrounds in Light Mode */
+html:not(.dark) .bg-\[\#060911\],
+html:not(.dark) .bg-\[\#080d18\],
+html:not(.dark) .bg-\[\#070c18\],
+html:not(.dark) .bg-\[\#080d1a\],
+html:not(.dark) .bg-\[\#050811\],
+html:not(.dark) .bg-\[\#04060c\] {
+  background-color: #f8fafc !important;
+}
+
+/* Alternating subtle section tint */
+html:not(.dark) section#trust-expertise-strip,
+html:not(.dark) section#tldr-summary,
+html:not(.dark) section#solutions,
+html:not(.dark) section#tech-stack,
+html:not(.dark) section#faq,
+html:not(.dark) footer#main-footer {
+  background-color: #f1f5f9 !important;
+}
+
+/* 2. Container & Card Surfaces in Light Mode */
+html:not(.dark) .bg-\[\#0c1324\],
+html:not(.dark) .bg-\[\#0b1120\],
+html:not(.dark) .bg-\[\#0a0f1d\],
+html:not(.dark) .bg-\[\#0c1322\],
+html:not(.dark) .bg-\[\#0a101d\],
+html:not(.dark) .bg-\[\#0e162a\],
+html:not(.dark) .bg-\[\#091020\],
+html:not(.dark) .bg-\[\#070b14\],
+html:not(.dark) .bg-\[\#080d19\] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04) !important;
+}
+
+/* Inset cards & secondary containers */
+html:not(.dark) .bg-\[\#090e1a\],
+html:not(.dark) .bg-slate-900,
+html:not(.dark) .bg-slate-900\/40,
+html:not(.dark) .bg-slate-900\/60,
+html:not(.dark) .bg-slate-900\/80,
+html:not(.dark) .bg-slate-950,
+html:not(.dark) .bg-slate-950\/40,
+html:not(.dark) .bg-slate-950\/60,
+html:not(.dark) .bg-slate-950\/80 {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* 3. Border Mappings in Light Mode */
+html:not(.dark) .border-slate-800,
+html:not(.dark) .border-slate-800\/40,
+html:not(.dark) .border-slate-800\/60,
+html:not(.dark) .border-slate-800\/80,
+html:not(.dark) .border-slate-800\/90,
+html:not(.dark) .border-slate-700,
+html:not(.dark) .border-slate-700\/40,
+html:not(.dark) .border-slate-700\/60,
+html:not(.dark) .border-slate-700\/80 {
+  border-color: #e2e8f0 !important;
+}
+
+/* 4. Text Contrast Adjustments in Light Mode */
+html:not(.dark) h1:not(.keep-white),
+html:not(.dark) h2:not(.keep-white),
+html:not(.dark) h3:not(.keep-white),
+html:not(.dark) h4:not(.keep-white),
+html:not(.dark) .text-white:not(button *):not(a *):not(.badge-text):not(.keep-white) {
+  color: #0f172a !important;
+}
+
+html:not(.dark) .text-slate-100 {
+  color: #0f172a !important;
+}
+
+html:not(.dark) .text-slate-200 {
+  color: #1e293b !important;
+}
+
+html:not(.dark) .text-slate-300 {
+  color: #475569 !important;
+}
+
+html:not(.dark) .text-slate-400 {
+  color: #64748b !important;
+}
+
+/* Preserve crisp white text on buttons & gradients */
+html:not(.dark) .bg-blue-600,
+html:not(.dark) .bg-blue-600 *,
+html:not(.dark) .bg-gradient-to-r,
+html:not(.dark) .bg-gradient-to-r *,
+html:not(.dark) .bg-gradient-to-br,
+html:not(.dark) .bg-gradient-to-br *,
+html:not(.dark) #nav-cta-button,
+html:not(.dark) #nav-cta-button * {
+  color: #ffffff !important;
+}
+
+/* 5. Badge Adaptations in Light Mode */
+html:not(.dark) .bg-blue-950,
+html:not(.dark) .bg-blue-950\/50,
+html:not(.dark) .bg-blue-950\/60,
+html:not(.dark) .bg-blue-950\/80 {
+  background-color: #eff6ff !important;
+  color: #1d4ed8 !important;
+  border-color: #bfdbfe !important;
+}
+
+html:not(.dark) .bg-emerald-950,
+html:not(.dark) .bg-emerald-950\/40,
+html:not(.dark) .bg-emerald-950\/50 {
+  background-color: #ecfdf5 !important;
+  color: #047857 !important;
+  border-color: #a7f3d0 !important;
+}
+
+html:not(.dark) .bg-amber-950,
+html:not(.dark) .bg-amber-950\/50 {
+  background-color: #fffbeb !important;
+  color: #b45309 !important;
+  border-color: #fde68a !important;
+}
+
+html:not(.dark) .bg-purple-950,
+html:not(.dark) .bg-purple-950\/50 {
+  background-color: #faf5ff !important;
+  color: #7e22ce !important;
+  border-color: #e9d5ff !important;
+}
+
+/* 6. Form Inputs & Modals in Light Mode */
+html:not(.dark) input:not([type="checkbox"]):not([type="radio"]),
+html:not(.dark) select,
+html:not(.dark) textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* 7. Three.js Background Dimming in Light Mode */
+html:not(.dark) #neon-three-background {
+  opacity: 0.18 !important;
+  filter: saturate(1.2);
+}
+
+html:not(.dark) #neon-three-background > div {
+  display: none !important;
 }
 
 

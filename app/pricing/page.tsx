@@ -116,7 +116,7 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050811] text-slate-100 font-sans selection:bg-blue-600 selection:text-white flex flex-col">
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 dark:bg-[#050811] dark:text-slate-100 font-sans selection:bg-blue-600 selection:text-white flex flex-col transition-colors duration-200">
       <Script
         id="pricing-schema"
         type="application/ld+json"

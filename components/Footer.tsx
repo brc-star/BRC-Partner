@@ -17,7 +17,7 @@ export function Footer({ onOpenInquiry }: FooterProps) {
   return (
     <footer
       id="main-footer"
-      className="bg-[#04060c] border-t border-slate-800/80 text-slate-400 text-xs relative z-20"
+      className="bg-slate-100 dark:bg-[#04060c] border-t border-slate-200 dark:border-slate-800/80 text-slate-600 dark:text-slate-400 text-xs relative z-20"
       aria-label="Footer Navigation"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -26,7 +26,7 @@ export function Footer({ onOpenInquiry }: FooterProps) {
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 p-[1.5px]">
-                <div className="w-full h-full bg-[#070b14] rounded-[6.5px] flex items-center justify-center">
+                <div className="w-full h-full bg-slate-900 dark:bg-[#070b14] rounded-[6.5px] flex items-center justify-center">
                   <svg
                     className="w-4 h-4 text-blue-400"
                     viewBox="0 0 24 24"
@@ -43,44 +43,44 @@ export function Footer({ onOpenInquiry }: FooterProps) {
                 </div>
               </div>
               <div>
-                <span className="font-bold text-base text-white tracking-tight">
+                <span className="font-bold text-base text-slate-900 dark:text-white tracking-tight">
                   BRC STAR
                 </span>
-                <span className="text-[10px] text-blue-400 block font-mono">
+                <span className="text-[10px] text-blue-600 dark:text-blue-400 block font-mono">
                   Full-Stack Technology Partner
                 </span>
               </div>
             </div>
 
-            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
               We design, build, deploy and support high-performance digital products, custom web applications, mobile platforms, and AI architectures for ambitious businesses.
             </p>
 
-            <div className="space-y-1.5 pt-2 font-mono text-[11px] text-slate-400">
+            <div className="space-y-1.5 pt-2 font-mono text-[11px] text-slate-600 dark:text-slate-400">
               <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-blue-400" />
-                <a href={`mailto:${BRC_STAR_INFO.contactEmail}`} className="hover:text-blue-400 transition-colors">
+                <Mail className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
+                <a href={`mailto:${BRC_STAR_INFO.contactEmail}`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                   {BRC_STAR_INFO.contactEmail}
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-indigo-400" />
+                <MapPin className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
                 <span>{BRC_STAR_INFO.location}</span>
               </div>
             </div>
 
             {/* System Status Pill */}
             <div className="pt-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-[11px]">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-slate-300 font-medium">All Engineering Systems Operational</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200/80 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-[11px]">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
+                <span className="text-slate-700 dark:text-slate-300 font-medium">All Engineering Systems Operational</span>
               </div>
             </div>
           </div>
 
           {/* Col 3: Solutions */}
           <div className="space-y-3">
-            <h4 className="font-bold text-xs uppercase tracking-wider text-white">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-slate-900 dark:text-white">
               Solutions
             </h4>
             <ul className="space-y-2">

@@ -169,28 +169,28 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
 
       {/* Realistic Interactive Digital Product UI Mockup */}
       <div className="mt-14 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-2xl bg-[#0b1120] border border-slate-800 shadow-2xl shadow-blue-950/40 overflow-hidden">
+          <div className="relative rounded-2xl bg-white dark:bg-[#0b1120] border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-blue-950/40 overflow-hidden">
             {/* Top Chrome / Window Header */}
-            <div className="flex flex-wrap items-center justify-between px-4 py-3 bg-[#080d18] border-b border-slate-800/80 gap-3">
+            <div className="flex flex-wrap items-center justify-between px-4 py-3 bg-slate-100 dark:bg-[#080d18] border-b border-slate-200 dark:border-slate-800/80 gap-3">
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
                 </div>
-                <span className="text-xs text-slate-400 font-mono pl-2 border-l border-slate-800">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-mono pl-2 border-l border-slate-300 dark:border-slate-800">
                   brc-star-core-production // v4.8.2
                 </span>
               </div>
 
               {/* View Switcher Tabs */}
-              <div className="flex items-center gap-1 bg-[#0e1629] p-1 rounded-lg border border-slate-800 text-xs">
+              <div className="flex items-center gap-1 bg-slate-200/70 dark:bg-[#0e1629] p-1 rounded-lg border border-slate-300 dark:border-slate-800 text-xs">
                 <button
                   onClick={() => setActiveTab('architecture')}
                   className={`px-3 py-1 rounded-md font-medium transition-all ${
                     activeTab === 'architecture'
                       ? 'bg-blue-600 text-white shadow-sm'
-                      : 'text-slate-400 hover:text-slate-200'
+                      : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
                   }`}
                 >
                   Architecture
@@ -200,7 +200,7 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
                   className={`px-3 py-1 rounded-md font-medium transition-all ${
                     activeTab === 'telemetry'
                       ? 'bg-blue-600 text-white shadow-sm'
-                      : 'text-slate-400 hover:text-slate-200'
+                      : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
                   }`}
                 >
                   Live Metrics
@@ -210,7 +210,7 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
                   className={`px-3 py-1 rounded-md font-medium transition-all ${
                     activeTab === 'ai'
                       ? 'bg-blue-600 text-white shadow-sm'
-                      : 'text-slate-400 hover:text-slate-200'
+                      : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
                   }`}
                 >
                   AI Intelligence
@@ -220,7 +220,7 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
                   className={`px-3 py-1 rounded-md font-medium transition-all ${
                     activeTab === 'mobile'
                       ? 'bg-blue-600 text-white shadow-sm'
-                      : 'text-slate-400 hover:text-slate-200'
+                      : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
                   }`}
                 >
                   Mobile Platform
@@ -232,20 +232,20 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
                 <button
                   onClick={handleSimulate}
                   title="Simulate load test"
-                  className="flex items-center gap-1 text-[11px] px-2 py-1 rounded bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors"
+                  className="flex items-center gap-1 text-[11px] px-2 py-1 rounded bg-slate-200 hover:bg-slate-300 text-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-700 transition-colors"
                 >
-                  <RefreshCw className={`w-3 h-3 ${isSimulatingTraffic ? 'animate-spin text-blue-400' : ''}`} />
+                  <RefreshCw className={`w-3 h-3 ${isSimulatingTraffic ? 'animate-spin text-blue-500' : ''}`} />
                   <span>{isSimulatingTraffic ? 'Simulating...' : 'Test Cluster'}</span>
                 </button>
-                <span className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-mono bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-800/40">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="inline-flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-mono bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800/40">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
                   Cluster Healthy
                 </span>
               </div>
             </div>
 
             {/* Main Interactive Screen Content */}
-            <div className="p-5 sm:p-7 bg-gradient-to-b from-[#0b1120] to-[#070b14]">
+            <div className="p-5 sm:p-7 bg-slate-50 dark:bg-gradient-to-b dark:from-[#0b1120] dark:to-[#070b14]">
               {/* Tab 1: Architecture View */}
               {activeTab === 'architecture' && (
                 <div className="space-y-6 animate-in fade-in duration-200">
@@ -432,10 +432,10 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
             </div>
 
             {/* Bottom Proof Bar */}
-            <div className="px-5 py-3 bg-[#080d18] border-t border-slate-800/80 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2">
+            <div className="px-5 py-3 bg-slate-100 dark:bg-[#080d18] border-t border-slate-200 dark:border-slate-800/80 flex flex-wrap items-center justify-between text-xs text-slate-600 dark:text-slate-400 gap-2">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-slate-300">BRC STAR Integrity Standard: <strong>Claim → Proof Verified</strong></span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
+                <span className="text-slate-700 dark:text-slate-300">BRC STAR Integrity Standard: <strong>Claim → Proof Verified</strong></span>
               </div>
               <div className="flex items-center gap-3 font-mono text-[11px]">
                 <span className="text-slate-500 hidden sm:inline">TypeScript + Next.js App Router</span>

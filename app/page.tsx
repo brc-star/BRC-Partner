@@ -62,7 +62,7 @@ export default function HomePage() {
   const activeClaim = AUDITED_CLAIMS.find((c) => c.id === selectedClaimId) || null;
 
   return (
-    <div className="relative min-h-screen bg-[#060911] text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
+    <div className="relative min-h-screen bg-[#f8fafc] text-slate-900 dark:bg-[#060911] dark:text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white transition-colors duration-200">
       {/* 3D Animated Neon Particle & Vertical Light Stream Background */}
       <NeonParticleBackground />
 
