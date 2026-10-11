@@ -654,7 +654,7 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
               </div>
 
               {/* Start a Project CTA Button */}
-              <div className="pt-3 border-t border-slate-800/80">
+              <div className="pt-3 border-t border-slate-200 dark:border-slate-800/80">
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
