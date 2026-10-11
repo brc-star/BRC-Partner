@@ -40,28 +40,9 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
       className="relative pt-28 sm:pt-32 md:pt-36 pb-20 md:pb-28 overflow-hidden bg-transparent tech-grid-pattern"
       aria-labelledby="hero-headline"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Section Technical Focus Header */}
-        <div className="max-w-4xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider shadow-inner shadow-blue-500/10">
-            <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
-            <span>Interactive Engineering Console • Live Production Telemetry</span>
-          </div>
-
-          <h1
-            id="hero-headline"
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight"
-          >
-            Real-Time Systems Architecture &amp; Telemetry
-          </h1>
-
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
-            Inspect our live interactive architecture console, multi-cloud edge layers, automated microservices, and client telemetry engine below.
-          </p>
-        </div>
-
-        {/* Technology Partner Hero Banner Showcase Card (Clean White Presentation with Blue/Purple/Pink Accents) */}
-        <div className="mt-10 max-w-5xl mx-auto">
+      <div className="max-w-[1774px] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Full-Size Technology Partner Hero Banner Showcase */}
+        <div className="w-full mx-auto">
           <div className="relative rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-r from-blue-500/35 via-purple-500/35 to-pink-500/35 shadow-2xl shadow-blue-950/40">
             <div className="relative w-full aspect-[1774/887] max-h-[887px] bg-[#FFFFFF] rounded-[calc(1rem-1px)] sm:rounded-[calc(1.5rem-1px)] overflow-hidden flex items-center justify-center">
               <img
