@@ -99,7 +99,7 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
   // 7. Contact — Link to /#final-conversion or inquiry modal
   const primaryNavLinks = [
     { label: 'Home', href: '/' },
-    { label: 'About', href: '/#why-us' },
+    { label: 'About', href: '/about' },
     { label: 'Services', href: '/#solutions' },
     { label: 'Portfolio', href: '/#showcase' },
     { label: 'Process', href: '/#process' },
@@ -146,8 +146,8 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
           icon: CreditCard,
         },
         {
-          name: 'Client Project Dashboard',
-          href: '/dashboard',
+          name: 'Client Login',
+          href: '/login',
           description: 'Track orders, invoices, milestone releases & documents',
           badge: 'Portal',
           icon: LayoutDashboard,
@@ -178,7 +178,7 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
         {
           name: 'Security & Legal Compliance',
           href: '/privacy-policy',
-          description: 'SOC2 & GDPR-aligned policies, terms & security practices',
+          description: 'OWASP-aligned policies, terms & security practices',
           badge: 'Legal',
           icon: Lock,
         },
@@ -202,24 +202,24 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
           <div className="flex items-center gap-5">
             <span className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
-              <span>SOC2 / GDPR-Aligned Architecture</span>
+              <span>Security Best Practices Aligned to OWASP</span>
             </span>
             <span className="text-slate-300 dark:text-slate-700">•</span>
             <span className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
               <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
-              <span>WCAG AA Accessible Standards</span>
+              <span>Built to WCAG 2.1 AA Guidelines</span>
             </span>
             <span className="text-slate-300 dark:text-slate-700">•</span>
             <span className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
               <Clock className="w-3.5 h-3.5 text-purple-500 dark:text-purple-400" />
-              <span>24h Architect Response Guaranteed</span>
+              <span>Typical Response Within 1 Business Day</span>
             </span>
           </div>
 
           <div className="flex items-center gap-3 font-mono text-[10px]">
             <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
-              Accepting Q3/Q4 Projects
+              Accepting Q4 2026 / Q1 2027 projects
             </span>
             <span className="text-slate-300 dark:text-slate-600">|</span>
             <a
@@ -302,7 +302,7 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
 
               {/* About */}
               <Link
-                href="/#why-us"
+                href="/about"
                 className="px-3 py-1.5 text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/40 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 About
@@ -502,15 +502,15 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
               <div className="grid grid-cols-1 gap-2 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300">
                 <span className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
-                  <span>SOC2 / GDPR-Aligned</span>
+                  <span>OWASP Security Best Practices</span>
                 </span>
                 <span className="flex items-center gap-2">
                   <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
-                  <span>WCAG AA Accessibility</span>
+                  <span>WCAG 2.1 AA Guidelines</span>
                 </span>
                 <span className="flex items-center gap-2">
                   <Clock className="w-3.5 h-3.5 text-purple-500 dark:text-purple-400" />
-                  <span>24h Response Guaranteed</span>
+                  <span>1 Business Day Response</span>
                 </span>
               </div>
 
@@ -529,7 +529,7 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
                 </span>
                 <span className="text-[11px] text-emerald-400 font-medium flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  Accepting Q3/Q4 Projects
+                  Accepting Q4 2026 / Q1 2027 projects
                 </span>
               </div>
 
@@ -546,7 +546,7 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
 
                 {/* About */}
                 <Link
-                  href="/#why-us"
+                  href="/about"
                   onClick={handleLinkClick}
                   className="px-3 py-2.5 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800/60 dark:hover:text-blue-400 font-medium text-sm transition-colors"
                 >

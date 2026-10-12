@@ -1,6 +1,6 @@
 'use client';
-
 import React, { useState } from 'react';
+import Link from 'next/link';
 import {
   CheckCircle2,
   ArrowRight,
@@ -26,7 +26,6 @@ import {
   PricingCategory,
   DUAL_MARKET_CORE_PLANS,
   DUAL_MARKET_AMC_PLANS,
-  PROMO_COUPONS,
 } from '@/lib/pricing-data';
 
 interface PricingCardsSectionProps {
@@ -54,7 +53,6 @@ export function PricingCardsSection({
 
   const [selectedCategory, setSelectedCategory] = useState<PricingCategory>('Web Development');
   const [viewType, setViewType] = useState<'categories' | 'amc'>('categories');
-  const [copiedCoupon, setCopiedCoupon] = useState<string | null>(null);
 
   const currentMarket: PricingMarket = controlledMarket || internalMarket;
 
@@ -105,9 +103,38 @@ export function PricingCardsSection({
 
   const amcPlans = DUAL_MARKET_AMC_PLANS.india;
 
-  const handleCtaClick = (plan: PricingPlan) => {
-    const cta = plan.ctaLabel || 'Get Started';
-    if (cta === 'Get Started') {
+  const getPlanCtaDetails = (plan: PricingPlan) => {
+    // Option A: Only fixed-scope basic plan has immediate Pay Now
+    if (plan.id === 'plan-webdev-basic-in') {
+      return {
+        label: 'Pay Now (Fixed-Scope 5 Pages)',
+        mode: 'pay' as const,
+      };
+    }
+    // E-Commerce starter has Pay Advance
+    if (plan.category === 'E-Commerce' && plan.name === 'Starter') {
+      return {
+        label: 'Pay Advance / Book Discovery',
+        mode: 'advance' as const,
+      };
+    }
+    // High-value or complex tiers require proposal / quote
+    if (plan.startingPrice >= 149999 || plan.category === 'AI & Automation' || plan.category === 'SaaS / Web Application' || plan.category === 'Mobile App') {
+      return {
+        label: 'Get a Quote / Scope SOW',
+        mode: 'quote' as const,
+      };
+    }
+    // Other fixed tiers
+    return {
+      label: 'Pay Advance / Book Slot',
+      mode: 'advance' as const,
+    };
+  };
+
+  const handlePlanCta = (plan: PricingPlan) => {
+    const details = getPlanCtaDetails(plan);
+    if (details.mode === 'pay' || details.mode === 'advance') {
       onSelectPlan(plan);
     } else {
       onRequestQuote(`${selectedCategory} - ${plan.name} Plan`, currentMarket);
@@ -132,45 +159,6 @@ export function PricingCardsSection({
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 text-xs font-mono">
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
             <span className="font-semibold">All prices are inclusive of 18% GST</span>
-          </div>
-        </div>
-
-        {/* Promo Coupons Banner */}
-        <div className="mb-10 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-blue-950/60 via-indigo-950/40 to-[#0c1427] border border-blue-800/40 shadow-xl">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 shrink-0">
-                <Tag className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-blue-400 font-mono">
-                  Verified Partner Promo Codes
-                </span>
-                <p className="text-xs text-slate-300">
-                  Click to copy promotional discount vouchers for milestone deductions.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              {PROMO_COUPONS.map((cpn) => (
-                <button
-                  key={cpn.code}
-                  type="button"
-                  onClick={() => handleCopyCoupon(cpn.code)}
-                  className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800 hover:border-blue-500 text-xs font-mono text-slate-200 hover:text-white transition-all cursor-pointer"
-                  title={cpn.description}
-                >
-                  <span className="font-bold text-blue-400 group-hover:text-blue-300">{cpn.code}</span>
-                  <span className="text-[10px] text-slate-400">
-                    ({cpn.discountType === 'PERCENTAGE' ? `${cpn.discountValue}% OFF` : `₹${cpn.discountValue} OFF`})
-                  </span>
-                  {copiedCoupon === cpn.code && (
-                    <span className="text-[10px] text-emerald-400 font-semibold animate-in fade-in">✓ Copied</span>
-                  )}
-                </button>
-              ))}
-            </div>
           </div>
         </div>
 
@@ -339,23 +327,36 @@ export function PricingCardsSection({
                         <span>Support: <strong>{plan.supportDuration || '30 days support'}</strong></span>
                       </div>
 
-                      {/* Primary CTA Button */}
-                      <button
-                        type="button"
-                        onClick={() => handleCtaClick(plan)}
-                        className={`w-full py-3 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                          isPopular
-                            ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50'
-                            : ctaLabel === 'Talk to an Expert'
-                            ? 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-md'
-                            : ctaLabel === 'Get a Quote'
-                            ? 'bg-slate-800 hover:bg-slate-700 text-white border border-slate-700'
-                            : 'bg-blue-600 hover:bg-blue-500 text-white'
-                        }`}
-                      >
-                        <span>{ctaLabel}</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
+                      {/* Primary CTA Button & Refund Link */}
+                      {(() => {
+                        const ctaInfo = getPlanCtaDetails(plan);
+                        return (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => handlePlanCta(plan)}
+                              className={`w-full py-3 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                                isPopular
+                                  ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50'
+                                  : ctaInfo.mode === 'quote'
+                                  ? 'bg-slate-800 hover:bg-slate-700 text-white border border-slate-700'
+                                  : 'bg-blue-600 hover:bg-blue-500 text-white'
+                              }`}
+                            >
+                              <span>{ctaInfo.label}</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </button>
+                            <div className="text-center pt-1">
+                              <Link
+                                href="/refund-cancellation-policy"
+                                className="text-[10px] text-slate-400 hover:text-blue-400 underline transition-colors"
+                              >
+                                Covered by Refund &amp; Cancellation Policy
+                              </Link>
+                            </div>
+                          </>
+                        );
+                      })()}
                     </div>
                   </div>
                 );
@@ -456,6 +457,15 @@ export function PricingCardsSection({
                       >
                         Discuss SLA Scope
                       </button>
+
+                      <div className="text-center pt-1">
+                        <Link
+                          href="/refund-cancellation-policy"
+                          className="text-[10px] text-slate-400 hover:text-blue-400 underline transition-colors"
+                        >
+                          Covered by Refund &amp; Cancellation Policy
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 );
@@ -476,7 +486,11 @@ export function PricingCardsSection({
                 Final pricing depends on project scope, complexity, integrations, technology requirements, content, third-party services and deployment requirements.
               </p>
               <p className="text-[11px] text-slate-400 leading-relaxed pt-1 border-t border-slate-800/60">
-                All customer-facing figures represent starting investment benchmarks for standard sprint deliverables. Following technical discovery and requirements alignment, you will receive an itemized commercial Statement of Work (SOW).
+                All customer-facing figures represent starting investment benchmarks for standard sprint deliverables. Following technical discovery and requirements alignment, you will receive an itemized commercial Statement of Work (SOW). Review our{' '}
+                <Link href="/refund-cancellation-policy" className="text-blue-400 underline hover:text-blue-300">
+                  Refund &amp; Cancellation Policy
+                </Link>{' '}
+                and commercial handover terms.
               </p>
             </div>
           </div>

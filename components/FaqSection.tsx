@@ -55,12 +55,29 @@ export function FaqSection({ onOpenInquiry }: FaqSectionProps) {
     return matchesCategory && matchesSearch;
   });
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_DATA.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.answer,
+      },
+    })),
+  };
+
   return (
     <section
       id="faq"
       className="py-24 bg-[#080d18] border-t border-slate-800/80 relative"
       aria-labelledby="faq-headline"
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center space-y-4 mb-10">

@@ -229,6 +229,9 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
 
               {/* Live Status indicator */}
               <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700">
+                  Simulated demo data
+                </span>
                 <button
                   onClick={handleSimulate}
                   title="Simulate load test"

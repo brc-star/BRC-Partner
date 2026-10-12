@@ -15,8 +15,8 @@ export const BRC_STAR_INFO = {
   subheadline:
     'From high-performance websites and web applications to mobile apps, enterprise platforms, AI solutions and custom business systems — BRC STAR designs and develops technology around your real business needs.',
   contactEmail: 'contact@brcstar.in',
-  location: 'Engineering Hub • Global Client Delivery',
-  availability: 'Accepting select new projects for Q3/Q4',
+  location: 'Engineering Hub • Ahmedabad, Gujarat, India',
+  availability: 'Accepting select new projects for Q4 2026 / Q1 2027',
 };
 
 export const TRUST_PILLARS = [
@@ -32,22 +32,22 @@ export const TRUST_PILLARS = [
   },
   {
     title: 'Performance Focused',
-    desc: 'Optimized rendering, minimal bundle footprints, sub-second LCP.',
+    desc: 'Optimized rendering, minimal bundle footprints, sub-2.5s LCP target.',
     icon: 'Gauge',
   },
   {
     title: 'Security Conscious',
-    desc: 'Role-based access, data encryption, and zero-trust safeguards.',
+    desc: 'Role-based access control and encrypted transport.',
     icon: 'ShieldCheck',
   },
   {
     title: 'Responsive & Accessible',
-    desc: 'WCAG compliant, fluid mobile-first layouts across every device.',
+    desc: 'Built to WCAG 2.1 AA guidelines across every device.',
     icon: 'Smartphone',
   },
   {
     title: 'Long-Term Partnership',
-    desc: 'Continuous post-launch evolution, monitoring, and technical maintenance.',
+    desc: 'Post-launch support 30–90 days as defined in your SOW.',
     icon: 'LifeBuoy',
   },
 ];

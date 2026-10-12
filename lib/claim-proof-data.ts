@@ -53,7 +53,7 @@ export const AUDITED_CLAIMS: ClaimItem[] = [
     businessSummary: 'Fast, search-engine optimized, and responsive digital experience built on modern web foundations.',
     proof: 'The application runs on Next.js with React 19, utilizing the App Router architecture, Server Components for non-interactive content, and client boundaries strictly where interactivity is needed.',
     verification: 'Inspect package.json, route hierarchy in app/layout.tsx and app/page.tsx, and production build artifact logs.',
-    context: 'Directly verified in this codebase. package.json specifies next (^15.4.9/16 baseline), react (^19.2.1), and typescript (^5.9.3). Build compiles with 0 type errors.',
+    context: 'Directly verified in this codebase. package.json specifies next (^15.4.9), react (^19.2.1), and typescript (^5.9.3). Build compiles with 0 type errors.',
     technicalDetails: [
       'Server Components by default in App Router',
       'Client components strictly guarded with "use client"',

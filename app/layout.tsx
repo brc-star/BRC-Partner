@@ -1,13 +1,17 @@
-import type {Metadata, Viewport} from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import { SITE } from '@/lib/site-config';
+import { ThemeProvider } from '@/lib/theme-context';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://brcpartner.brcstar.in'),
-  alternates: {
-    canonical: 'https://brcpartner.brcstar.in',
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: 'BRC STAR • Full-Stack Digital Technology Partner',
+    template: '%s | BRC STAR',
   },
-  title: 'BRC STAR • Full-Stack Digital Technology Partner',
-  description: 'Expert full-stack technology development partner for businesses. We design, architect, build, and scale modern web applications, mobile platforms, enterprise systems, and AI solutions.',
+  description:
+    'Custom websites, web apps, mobile apps and AI solutions for Indian businesses. Transparent pricing, 100% code ownership.',
   keywords: [
     'BRC STAR',
     'Full-Stack Technology Partner',
@@ -16,7 +20,7 @@ export const metadata: Metadata = {
     'Mobile App Development',
     'AI Solutions Architecture',
     'Next.js Development Partner',
-    'Scalable Cloud Systems'
+    'Scalable Cloud Systems',
   ],
   authors: [{ name: 'BRC STAR Engineering Team' }],
   creator: 'BRC STAR',
@@ -27,15 +31,17 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'BRC STAR • Full-Stack Digital Technology Partner',
-    description: 'Build digital products that move your business forward. Specialist engineering for web applications, mobile platforms, enterprise systems, and AI solutions.',
+    description:
+      'Custom websites, web apps, mobile apps and AI solutions for Indian businesses. Transparent pricing, 100% code ownership.',
     type: 'website',
     siteName: 'BRC STAR',
-    locale: 'en_US',
+    locale: 'en_IN',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'BRC STAR • Full-Stack Digital Technology Partner',
-    description: 'Build digital products that move your business forward. Specialist engineering for web applications, mobile platforms, enterprise systems, and AI solutions.',
+    description:
+      'Custom websites, web apps, mobile apps and AI solutions for Indian businesses. Transparent pricing, 100% code ownership.',
   },
   robots: {
     index: true,
@@ -50,13 +56,32 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-import { ThemeProvider } from '@/lib/theme-context';
-import { WhatsAppButton } from '@/components/WhatsAppButton';
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  legalName: SITE.legalName,
+  url: SITE.url,
+  email: SITE.email,
+  telephone: SITE.phone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.address.street,
+    addressLocality: SITE.address.city,
+    addressRegion: SITE.address.state,
+    postalCode: SITE.address.postalCode,
+    addressCountry: 'IN',
+  },
+};
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
+    <html lang="en-IN" className="dark scroll-smooth" suppressHydrationWarning>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -78,7 +103,10 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           }}
         />
       </head>
-      <body className="min-h-screen bg-[#f8fafc] text-slate-900 dark:bg-[#060911] dark:text-slate-100 antialiased selection:bg-blue-600 selection:text-white transition-colors duration-200" suppressHydrationWarning>
+      <body
+        className="min-h-screen bg-[#f8fafc] text-slate-900 dark:bg-[#060911] dark:text-slate-100 antialiased selection:bg-blue-600 selection:text-white transition-colors duration-200"
+        suppressHydrationWarning
+      >
         <ThemeProvider>
           {children}
           <WhatsAppButton />

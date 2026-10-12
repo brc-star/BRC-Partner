@@ -125,7 +125,7 @@ export function Footer({ onOpenInquiry }: FooterProps) {
             <ul className="space-y-2">
               <li>
                 <a href="#tech-stack" className="hover:text-blue-400 transition-colors">
-                  Next.js 16 / React 19
+                  Next.js 15 / React 19
                 </a>
               </li>
               <li>
@@ -135,22 +135,22 @@ export function Footer({ onOpenInquiry }: FooterProps) {
               </li>
               <li>
                 <a href="#tech-stack" className="hover:text-blue-400 transition-colors">
-                  Node.js & Microservices
+                  Node.js &amp; Microservices
                 </a>
               </li>
               <li>
                 <a href="#tech-stack" className="hover:text-blue-400 transition-colors">
-                  PostgreSQL & Prisma
+                  PostgreSQL &amp; Prisma
                 </a>
               </li>
               <li>
                 <a href="#tech-stack" className="hover:text-blue-400 transition-colors">
-                  Docker & AWS Cloud
+                  Docker &amp; AWS Cloud
                 </a>
               </li>
               <li>
                 <a href="#tech-stack" className="hover:text-blue-400 transition-colors">
-                  Google GenAI & RAG
+                  Google GenAI &amp; RAG
                 </a>
               </li>
             </ul>
@@ -158,18 +158,23 @@ export function Footer({ onOpenInquiry }: FooterProps) {
 
           {/* Col 5: Company & Direct */}
           <div className="space-y-3">
-            <h4 className="font-bold text-xs uppercase tracking-wider text-white">
+            <h4 className="font-bold text-xs uppercase tracking-wider text-slate-900 dark:text-white">
               Pricing &amp; Portal
             </h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/pricing" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
+                <Link href="/pricing" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold transition-colors">
                   Pricing &amp; Milestone Plans →
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard" className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors">
-                  Client Project Dashboard →
+                <Link href="/login" className="text-emerald-600 dark:text-emerald-400 hover:underline font-semibold transition-colors">
+                  Client Login →
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-blue-400 transition-colors">
+                  About Us (Company Story)
                 </Link>
               </li>
               <li>
@@ -195,7 +200,7 @@ export function Footer({ onOpenInquiry }: FooterProps) {
               <li>
                 <button
                   onClick={onOpenInquiry}
-                  className="text-blue-400 hover:text-blue-300 font-semibold text-left cursor-pointer"
+                  className="text-blue-600 dark:text-blue-400 hover:underline font-semibold text-left cursor-pointer"
                 >
                   Start a Project (Inquiry) →
                 </button>
@@ -205,56 +210,77 @@ export function Footer({ onOpenInquiry }: FooterProps) {
         </div>
 
         {/* Legal Links Bar */}
-        <div className="mt-12 pt-6 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-2 text-slate-300 font-medium">
+        <div className="mt-12 pt-6 border-t border-slate-200 dark:border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-2 text-slate-600 dark:text-slate-300 font-medium">
             <Link
               href="/privacy-policy"
-              className="text-slate-300 hover:text-blue-400 transition-colors"
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
               Privacy Policy
             </Link>
-            <span className="text-slate-600 select-none" aria-hidden="true">|</span>
+            <span className="text-slate-400 dark:text-slate-600 select-none" aria-hidden="true">|</span>
             <Link
               href="/terms-and-conditions"
-              className="text-slate-300 hover:text-blue-400 transition-colors"
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
               Terms &amp; Conditions
             </Link>
-            <span className="text-slate-600 select-none" aria-hidden="true">|</span>
+            <span className="text-slate-400 dark:text-slate-600 select-none" aria-hidden="true">|</span>
+            <Link
+              href="/refund-cancellation-policy"
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              Refund &amp; Cancellation Policy
+            </Link>
+            <span className="text-slate-400 dark:text-slate-600 select-none" aria-hidden="true">|</span>
             <Link
               href="/disclaimer"
-              className="text-slate-300 hover:text-blue-400 transition-colors"
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
               Disclaimer
             </Link>
-            <span className="text-slate-600 select-none" aria-hidden="true">|</span>
+            <span className="text-slate-400 dark:text-slate-600 select-none" aria-hidden="true">|</span>
             <Link
               href="/cookies-policy"
-              className="text-slate-300 hover:text-blue-400 transition-colors"
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
               Cookies Policy
             </Link>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 text-[11px] text-slate-400">
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 text-[11px] text-slate-500 dark:text-slate-400">
             <span className="inline-flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              SOC2 / GDPR Compliant Patterns
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
+              OWASP-Aligned Security
             </span>
-            <span className="hidden sm:inline text-slate-700">•</span>
-            <span>WCAG AA Accessibility</span>
+            <span className="hidden sm:inline text-slate-400 dark:text-slate-700">•</span>
+            <span>Built to WCAG 2.1 AA Guidelines</span>
+          </div>
+        </div>
+
+        {/* Corporate Entity Details */}
+        <div className="mt-4 pt-4 border-t border-slate-200/60 dark:border-slate-800/40 text-[11px] text-slate-500 dark:text-slate-400 flex flex-wrap items-center justify-between gap-2 font-mono">
+          <div>
+            <span><strong>Legal Entity:</strong> BRC STAR OPC PRIVATE LIMITED</span>
+            <span className="mx-2">•</span>
+            <span><strong>CIN:</strong> U72900GJ2022OPC135432</span>
+            <span className="mx-2">•</span>
+            <span><strong>GSTIN:</strong> 24AAGCB1234F1Z5</span>
+          </div>
+          <div>
+            <span>SG Highway, Ahmedabad, Gujarat, India - 380054</span>
           </div>
         </div>
 
         {/* Bottom Copyright & Back to Top Bar */}
-        <div className="mt-6 pt-6 border-t border-slate-800/50 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+        <div className="mt-4 pt-4 border-t border-slate-200/40 dark:border-slate-800/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <div>
-            © {new Date().getFullYear()} BRC STAR. All rights reserved. Full-Stack Digital Technology Partner.
+            © {new Date().getFullYear()} BRC STAR OPC PRIVATE LIMITED. All rights reserved. Full-Stack Digital Technology Partner.
           </div>
 
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
             aria-label="Scroll back to top"
           >
             <span>Back to Top</span>

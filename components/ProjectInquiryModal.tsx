@@ -201,7 +201,17 @@ function ProjectInquiryModalContent({
               </div>
             </div>
 
-            <div className="pt-4 flex justify-center">
+              <div className="p-3.5 rounded-xl bg-gradient-to-r from-blue-950/70 to-indigo-950/60 border border-blue-700/50 text-left text-xs space-y-1 max-w-lg mx-auto">
+                <div className="flex items-center gap-1.5 text-blue-300 font-bold font-mono">
+                  <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+                  <span>Exclusive Partner Privilege Unlocked</span>
+                </div>
+                <p className="text-[11px] text-slate-300">
+                  Quote voucher code <strong className="text-white font-mono bg-blue-900/60 px-1.5 py-0.5 rounded border border-blue-600/40">WELCOME10</strong> during your discovery consultation for 10% milestone deduction.
+                </p>
+              </div>
+
+            <div className="pt-2 flex justify-center">
               <button
                 onClick={resetForm}
                 className="px-8 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-colors shadow-lg shadow-blue-600/30 cursor-pointer"
