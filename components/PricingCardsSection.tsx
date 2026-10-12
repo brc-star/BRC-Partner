@@ -56,6 +56,8 @@ export function PricingCardsSection({
 
   const currentMarket: PricingMarket = controlledMarket || internalMarket;
 
+  const [copiedCoupon, setCopiedCoupon] = useState<string | null>(null);
+
   const handleMarketSelect = (m: PricingMarket) => {
     setInternalMarket(m);
     if (typeof window !== 'undefined') {
