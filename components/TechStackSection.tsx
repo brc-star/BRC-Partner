@@ -69,7 +69,7 @@ export function TechStackSection({ onOpenInquiry }: TechStackSectionProps) {
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                   isActive
                     ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 border border-blue-400/40'
-                    : 'bg-[#0e172a] text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800'
+                    : 'bg-white dark:bg-[#0e172a] text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 shadow-2xs'
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -80,17 +80,17 @@ export function TechStackSection({ onOpenInquiry }: TechStackSectionProps) {
         </div>
 
         {/* Active Tech Category Detailed Breakdown */}
-        <div className="rounded-2xl bg-[#0c1324] border border-slate-800 p-6 sm:p-10 shadow-2xl space-y-6 animate-in fade-in duration-300">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+        <div className="rounded-2xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800 p-6 sm:p-10 shadow-lg dark:shadow-2xl space-y-6 animate-in fade-in duration-300">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-200 dark:border-slate-800">
             <div>
-              <h3 className="text-2xl font-bold text-white">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
                 {TECH_STACK[activeCategory].category}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
                 {TECH_STACK[activeCategory].description}
               </p>
             </div>
-            <span className="text-xs font-mono px-3 py-1.5 rounded-lg bg-blue-950/80 text-blue-400 border border-blue-800/60 w-fit">
+            <span className="text-xs font-mono px-3 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/80 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800/60 w-fit">
               100% Production Supported
             </span>
           </div>
@@ -101,30 +101,30 @@ export function TechStackSection({ onOpenInquiry }: TechStackSectionProps) {
                 key={skill.name}
                 className={`p-4 rounded-xl border transition-all ${
                   skill.highlight
-                    ? 'bg-gradient-to-br from-[#0f1d38] to-[#0d162b] border-blue-500/50 shadow-md shadow-blue-950/40'
-                    : 'bg-[#080d1a] border-slate-800/80 hover:border-slate-700'
+                    ? 'bg-blue-50/70 dark:bg-gradient-to-br dark:from-[#0f1d38] dark:to-[#0d162b] border-blue-300 dark:border-blue-500/50 shadow-sm dark:shadow-md dark:shadow-blue-950/40'
+                    : 'bg-slate-50 dark:bg-[#080d1a] border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700'
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
-                  <span className="font-bold text-sm text-white">{skill.name}</span>
+                  <span className="font-bold text-sm text-slate-900 dark:text-white">{skill.name}</span>
                   <span
                     className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded ${
                       skill.highlight
-                        ? 'bg-blue-600/40 text-blue-300 border border-blue-500/40 font-semibold'
-                        : 'bg-slate-800 text-slate-400'
+                        ? 'bg-blue-100 dark:bg-blue-600/40 text-blue-700 dark:text-blue-300 border border-blue-300 dark:border-blue-500/40 font-semibold'
+                        : 'bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-400'
                     }`}
                   >
                     {skill.level}
                   </span>
                 </div>
-                <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
                   {skill.description}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+          <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
             <span>Need a custom technology evaluation or legacy migration?</span>
             <button
               onClick={onOpenInquiry}

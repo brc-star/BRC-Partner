@@ -57,44 +57,44 @@ export function VerificationMethodologySection({
               <div
                 key={step.step}
                 id={`methodology-step-${step.step}`}
-                className="rounded-2xl bg-[#0c1324] border border-slate-800 hover:border-blue-500/40 p-5 flex flex-col justify-between space-y-4 transition-all group shadow-xl hover:shadow-2xl hover:shadow-blue-950/20"
+                className="rounded-2xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500/40 p-5 flex flex-col justify-between space-y-4 transition-all group shadow-sm hover:shadow-lg dark:shadow-xl dark:hover:shadow-2xl"
               >
                 <div className="space-y-3">
                   {/* Step Number & Icon */}
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl font-black font-mono text-blue-500/80 group-hover:text-blue-400 transition-colors">
+                    <span className="text-2xl font-black font-mono text-blue-600 dark:text-blue-500/80 group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">
                       {step.step}
                     </span>
-                    <div className="w-9 h-9 rounded-xl bg-blue-950/80 border border-blue-800/40 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                    <div className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/40 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
                       <IconComp className="w-4 h-4" />
                     </div>
                   </div>
 
                   {/* Title & Subtitle */}
                   <div>
-                    <h3 className="text-base font-bold text-white group-hover:text-blue-300 transition-colors">
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">
                       {step.title}
                     </h3>
-                    <p className="text-[11px] text-blue-400 font-medium mt-0.5">
+                    <p className="text-[11px] text-blue-600 dark:text-blue-400 font-medium mt-0.5">
                       {step.subtitle}
                     </p>
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                     {step.description}
                   </p>
 
                   {/* Methodology Points */}
-                  <div className="pt-2 border-t border-slate-800/80 space-y-1.5 text-[11px] text-slate-400">
-                    <span className="font-semibold text-slate-300 block font-mono text-[10px] uppercase">
+                  <div className="pt-2 border-t border-slate-200 dark:border-slate-800/80 space-y-1.5 text-[11px] text-slate-500 dark:text-slate-400">
+                    <span className="font-semibold text-slate-700 dark:text-slate-300 block font-mono text-[10px] uppercase">
                       Core Disciplines:
                     </span>
                     <ul className="space-y-1">
                       {step.methodology.map((m, i) => (
                         <li key={i} className="flex items-start gap-1.5">
-                          <span className="text-emerald-400 font-bold">•</span>
-                          <span>{m}</span>
+                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
+                          <span className="text-slate-600 dark:text-slate-400">{m}</span>
                         </li>
                       ))}
                     </ul>
@@ -102,7 +102,7 @@ export function VerificationMethodologySection({
                 </div>
 
                 {/* Tangible Output Deliverable */}
-                <div className="pt-3 border-t border-slate-800/80 text-[11px] font-mono text-emerald-300 bg-[#070c18] p-2.5 rounded-lg border border-slate-800">
+                <div className="pt-3 border-t border-slate-200 dark:border-slate-800/80 text-[11px] font-mono text-emerald-700 dark:text-emerald-300 bg-slate-50 dark:bg-[#070c18] p-2.5 rounded-lg border border-slate-200 dark:border-slate-800">
                   <span className="text-slate-500 block text-[9px] uppercase">Tangible Output:</span>
                   <span className="font-semibold">{step.output}</span>
                 </div>
@@ -112,12 +112,12 @@ export function VerificationMethodologySection({
         </div>
 
         {/* Commitment Banner */}
-        <div className="mt-12 rounded-2xl bg-gradient-to-r from-blue-950/40 via-[#0a101f] to-indigo-950/40 border border-blue-800/40 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="mt-12 rounded-2xl bg-white dark:bg-gradient-to-r dark:from-blue-950/40 dark:via-[#0a101f] dark:to-indigo-950/40 border border-slate-200 dark:border-blue-800/40 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm dark:shadow-none">
           <div className="space-y-1 text-center sm:text-left">
-            <h3 className="text-lg sm:text-xl font-bold text-white">
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               Transparent Engineering. Zero Marketing Guesswork.
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
               We don&apos;t ask you to believe everything we say. We show you how we work and provide tangible proof for every deliverable.
             </p>
           </div>

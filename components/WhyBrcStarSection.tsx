@@ -188,29 +188,29 @@ export function WhyBrcStarSection({ market = 'india', onOpenInquiry }: WhyBrcSta
             return (
               <div
                 key={idx}
-                className="group p-6 sm:p-7 rounded-2xl bg-[#0b1122] border border-slate-800 hover:border-slate-700 hover:bg-[#0d1428] transition-all duration-300 flex flex-col justify-between"
+                className="group p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#0b1122] border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-[#0d1428] shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <div className="w-11 h-11 rounded-xl bg-blue-950/70 border border-blue-800/50 flex items-center justify-center text-blue-400 group-hover:scale-105 transition-transform">
+                    <div className="w-11 h-11 rounded-xl bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800/50 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-105 transition-transform">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-slate-900 border border-slate-800 text-slate-400">
+                    <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400">
                       {pillar.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold text-white tracking-tight">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">
                     {pillar.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                     {pillar.description}
                   </p>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-slate-800/60 flex items-center gap-1.5 text-xs text-blue-400 font-medium">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <div className="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800/60 flex items-center gap-1.5 text-xs text-blue-600 dark:text-blue-400 font-medium">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                   <span>Standard on all engineering plans</span>
                 </div>
               </div>

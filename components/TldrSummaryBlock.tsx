@@ -62,21 +62,21 @@ export function TldrSummaryBlock({ onOpenInquiry }: TldrSummaryBlockProps) {
       aria-label="BRC STAR Executive Summary TL;DR"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-2xl bg-gradient-to-r from-[#091020] via-[#0c1428] to-[#091020] border border-blue-500/20 p-5 sm:p-7 shadow-xl">
+        <div className="rounded-2xl bg-white dark:bg-gradient-to-r dark:from-[#091020] dark:via-[#0c1428] dark:to-[#091020] border border-slate-200 dark:border-blue-500/20 p-5 sm:p-7 shadow-lg dark:shadow-xl">
           {/* Header Row */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-5 border-b border-slate-800/80">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-5 border-b border-slate-200 dark:border-slate-800/80">
             <div className="flex items-center gap-2.5">
-              <span className="px-2.5 py-1 rounded-md bg-blue-950 text-blue-400 border border-blue-800 font-mono text-xs font-bold uppercase tracking-wider">
+              <span className="px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800 font-mono text-xs font-bold uppercase tracking-wider">
                 TL;DR Executive Summary
               </span>
-              <span className="text-xs text-slate-400 hidden sm:inline">
+              <span className="text-xs text-slate-500 dark:text-slate-400 hidden sm:inline">
                 At-a-Glance Partnership Overview
               </span>
             </div>
 
             <button
               onClick={() => onOpenInquiry('Executive Consultation')}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors cursor-pointer"
             >
               <span>Schedule Senior Architect Call</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -90,7 +90,7 @@ export function TldrSummaryBlock({ onOpenInquiry }: TldrSummaryBlockProps) {
               return (
                 <div
                   key={idx}
-                  className="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 space-y-2 hover:border-slate-700 transition-colors"
+                  className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 space-y-2 hover:border-blue-300 dark:hover:border-slate-700 transition-colors shadow-xs"
                 >
                   <div className="flex items-center justify-between">
                     <span
@@ -101,11 +101,11 @@ export function TldrSummaryBlock({ onOpenInquiry }: TldrSummaryBlockProps) {
                     <IconComp className={`w-4 h-4 ${pt.iconColor}`} />
                   </div>
 
-                  <h3 className="text-sm font-bold text-white leading-snug">
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white leading-snug">
                     {pt.heading}
                   </h3>
 
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                     {pt.description}
                   </p>
                 </div>

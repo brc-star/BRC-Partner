@@ -97,10 +97,10 @@ export function ProjectShowcaseSection({
             <div
               key={project.id}
               id={`project-card-${project.id}`}
-              className="rounded-2xl bg-[#0a101d] border border-slate-800 hover:border-blue-500/40 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-xl group"
+              className="rounded-2xl bg-white dark:bg-[#0a101d] border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500/40 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md dark:shadow-xl group"
             >
               {/* Realistic Visual Interface Mockup Header */}
-              <div className="p-4 sm:p-5 bg-[#070c17] border-b border-slate-800/80">
+              <div className="p-4 sm:p-5 bg-slate-50 dark:bg-[#070c17] border-b border-slate-200 dark:border-slate-800/80">
                 {/* Mockup Container */}
                 <div className="rounded-xl bg-[#0e172a] border border-slate-800 overflow-hidden shadow-inner font-sans">
                   {/* Mockup Window Chrome */}
@@ -308,14 +308,14 @@ export function ProjectShowcaseSection({
                 </div>
 
                 {/* Challenge & Solution Summary */}
-                <div className="p-3.5 rounded-xl bg-[#070d18] border border-slate-800/80 space-y-2 text-xs">
+                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#070d18] border border-slate-200 dark:border-slate-800/80 space-y-2 text-xs">
                   <div>
-                    <strong className="text-amber-400 font-semibold block mb-0.5 font-mono">Challenge:</strong>
-                    <p className="text-slate-400 line-clamp-2">{project.challenge}</p>
+                    <strong className="text-amber-600 dark:text-amber-400 font-semibold block mb-0.5 font-mono">Challenge:</strong>
+                    <p className="text-slate-600 dark:text-slate-400 line-clamp-2">{project.challenge}</p>
                   </div>
                   <div>
-                    <strong className="text-emerald-400 font-semibold block mb-0.5 font-mono">Delivered Solution:</strong>
-                    <p className="text-slate-300 line-clamp-2">{project.solution}</p>
+                    <strong className="text-emerald-600 dark:text-emerald-400 font-semibold block mb-0.5 font-mono">Delivered Solution:</strong>
+                    <p className="text-slate-700 dark:text-slate-300 line-clamp-2">{project.solution}</p>
                   </div>
                 </div>
 
@@ -324,23 +324,23 @@ export function ProjectShowcaseSection({
                   {project.technologies.slice(0, 4).map((tech) => (
                     <span
                       key={tech}
-                      className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400"
+                      className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400"
                     >
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 4 && (
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-500">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-500">
                       +{project.technologies.length - 4} more
                     </span>
                   )}
                 </div>
 
                 {/* Bottom Card Action */}
-                <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between">
                   <button
                     onClick={() => setActiveCaseStudy(project)}
-                    className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors cursor-pointer"
                   >
                     <Eye className="w-4 h-4" />
                     <span>View Case Study Breakdown</span>
@@ -348,7 +348,7 @@ export function ProjectShowcaseSection({
 
                   <button
                     onClick={() => onOpenInquiry(project.title)}
-                    className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
                   >
                     <span>Request Estimate</span>
                     <ArrowRight className="w-3.5 h-3.5" />

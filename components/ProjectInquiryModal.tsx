@@ -155,13 +155,13 @@ function ProjectInquiryModalContent({
     >
       <div
         id="inquiry-modal-panel"
-        className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#0b1120] border border-slate-700 shadow-2xl p-6 sm:p-10 space-y-6 text-left animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#0b1120] border border-slate-200 dark:border-slate-700 shadow-2xl p-6 sm:p-10 space-y-6 text-left animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors focus:outline-none"
+          className="absolute top-6 right-6 p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-700 transition-colors focus:outline-none cursor-pointer"
           aria-label="Close Inquiry Form"
         >
           <X className="w-5 h-5" />
@@ -170,46 +170,46 @@ function ProjectInquiryModalContent({
         {/* Successful Confirmation View */}
         {submittedData ? (
           <div className="space-y-6 text-center py-6 animate-in fade-in duration-300">
-            <div className="w-16 h-16 rounded-full bg-emerald-950/80 border border-emerald-500/50 flex items-center justify-center text-emerald-400 mx-auto shadow-lg shadow-emerald-950/40">
+            <div className="w-16 h-16 rounded-full bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-500/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mx-auto shadow-md">
               <CheckCircle2 className="w-8 h-8" />
             </div>
 
             <div className="space-y-2">
-              <span className="text-xs font-mono font-bold px-3 py-1 rounded bg-blue-950 text-blue-400 border border-blue-800">
+              <span className="text-xs font-mono font-bold px-3 py-1 rounded bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
                 INQUIRY REFERENCE: {submittedData.inquiryId}
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
                 Project Discovery Initiated
               </h3>
-              <p className="text-sm text-slate-300 max-w-md mx-auto">
-                Thank you, <strong className="text-white">{submittedData.client.fullName}</strong>. Your project brief has been received and routed to BRC STAR&apos;s senior architecture leads.
+              <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
+                Thank you, <strong className="text-slate-900 dark:text-white">{submittedData.client.fullName}</strong>. Your project brief has been received and routed to BRC STAR&apos;s senior architecture leads.
               </p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-[#070c17] border border-slate-800 text-left text-xs space-y-2.5 max-w-lg mx-auto">
-              <div className="flex justify-between border-b border-slate-800 pb-2">
-                <span className="text-slate-400">Target Deliverable:</span>
-                <span className="font-semibold text-white">{submittedData.project.type}</span>
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#070c17] border border-slate-200 dark:border-slate-800 text-left text-xs space-y-2.5 max-w-lg mx-auto">
+              <div className="flex justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+                <span className="text-slate-500 dark:text-slate-400">Target Deliverable:</span>
+                <span className="font-semibold text-slate-900 dark:text-white">{submittedData.project.type}</span>
               </div>
-              <div className="flex justify-between border-b border-slate-800 pb-2">
-                <span className="text-slate-400">Contact Email:</span>
-                <span className="font-semibold text-blue-400">{submittedData.client.email}</span>
+              <div className="flex justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+                <span className="text-slate-500 dark:text-slate-400">Contact Email:</span>
+                <span className="font-semibold text-blue-600 dark:text-blue-400">{submittedData.client.email}</span>
               </div>
-              <div className="pt-1 text-slate-300 leading-relaxed">
-                <strong className="text-emerald-400 block mb-0.5">Next Step:</strong>
+              <div className="pt-1 text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong className="text-emerald-600 dark:text-emerald-400 block mb-0.5">Next Step:</strong>
                 {submittedData.nextStep}
               </div>
             </div>
 
-              <div className="p-3.5 rounded-xl bg-gradient-to-r from-blue-950/70 to-indigo-950/60 border border-blue-700/50 text-left text-xs space-y-1 max-w-lg mx-auto">
-                <div className="flex items-center gap-1.5 text-blue-300 font-bold font-mono">
-                  <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-                  <span>Exclusive Partner Privilege Unlocked</span>
-                </div>
-                <p className="text-[11px] text-slate-300">
-                  Quote voucher code <strong className="text-white font-mono bg-blue-900/60 px-1.5 py-0.5 rounded border border-blue-600/40">WELCOME10</strong> during your discovery consultation for 10% milestone deduction.
-                </p>
+            <div className="p-3.5 rounded-xl bg-blue-50/80 dark:bg-gradient-to-r dark:from-blue-950/70 dark:to-indigo-950/60 border border-blue-200 dark:border-blue-700/50 text-left text-xs space-y-1 max-w-lg mx-auto">
+              <div className="flex items-center gap-1.5 text-blue-700 dark:text-blue-300 font-bold font-mono">
+                <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                <span>Exclusive Partner Privilege Unlocked</span>
               </div>
+              <p className="text-[11px] text-slate-700 dark:text-slate-300">
+                Quote voucher code <strong className="text-blue-900 dark:text-white font-mono bg-blue-100 dark:bg-blue-900/60 px-1.5 py-0.5 rounded border border-blue-300 dark:border-blue-600/40">WELCOME10</strong> during your discovery consultation for 10% milestone deduction.
+              </p>
+            </div>
 
             <div className="pt-2 flex justify-center">
               <button
@@ -225,13 +225,13 @@ function ProjectInquiryModalContent({
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2 pr-8">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-blue-400 font-mono">
+                <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 font-mono">
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>BRC STAR Technical Consultation</span>
                 </div>
 
                 {/* Market Switcher in Modal */}
-                <div className="inline-flex items-center p-1 rounded-xl bg-slate-900 border border-slate-800 gap-1 text-[11px] font-mono">
+                <div className="inline-flex items-center p-1 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 gap-1 text-[11px] font-mono">
                   <button
                     type="button"
                     onClick={() => {
@@ -259,16 +259,16 @@ function ProjectInquiryModalContent({
                 </div>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
                 Request Custom Proposal
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
                 Tell us about your product goals, workflows, and timelines. We&apos;ll assess technical feasibility and respond within 24 hours.
               </p>
             </div>
 
             {errorMessage && (
-              <div className="p-3 rounded-xl bg-red-950/60 border border-red-800 text-red-300 text-xs flex items-center gap-2">
+              <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 text-xs flex items-center gap-2">
                 <span>{errorMessage}</span>
               </div>
             )}
@@ -276,8 +276,8 @@ function ProjectInquiryModalContent({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Full Name */}
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                  <User className="w-3.5 h-3.5 text-blue-400" />
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                  <User className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                   <span>Full Name *</span>
                 </label>
                 <input
@@ -286,14 +286,14 @@ function ProjectInquiryModalContent({
                   placeholder="e.g. Alex Morgan"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-xs placeholder:text-slate-400 focus:outline-none focus:border-blue-500 transition-colors"
                 />
               </div>
 
               {/* Email */}
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                  <Mail className="w-3.5 h-3.5 text-blue-400" />
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                   <span>Business Email *</span>
                 </label>
                 <input
@@ -302,7 +302,7 @@ function ProjectInquiryModalContent({
                   placeholder="e.g. alex@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-xs placeholder:text-slate-400 focus:outline-none focus:border-blue-500 transition-colors"
                 />
               </div>
             </div>
@@ -310,17 +310,17 @@ function ProjectInquiryModalContent({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Budget Range Dropdown */}
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                  <Building className="w-3.5 h-3.5 text-blue-400" />
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                  <Building className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                   <span>Target Budget ({activeMarket === 'international' ? 'USD $' : 'INR ₹'})</span>
                 </label>
                 <select
                   value={budgetRange}
                   onChange={(e) => setBudgetRange(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-blue-500 transition-colors"
                 >
                   {(activeMarket === 'international' ? budgetOptionsUsd : budgetOptionsInr).map((opt) => (
-                    <option key={opt} value={opt} className="bg-slate-900 text-white">
+                    <option key={opt} value={opt} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
                       {opt}
                     </option>
                   ))}
@@ -329,14 +329,14 @@ function ProjectInquiryModalContent({
 
               {/* Timeline */}
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-blue-400" />
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                   <span>Target Launch Timeline</span>
                 </label>
                 <select
                   value={timeline}
                   onChange={(e) => setTimeline(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-blue-500 transition-colors"
                 >
                   <option value="Immediate (Next 2–4 Weeks)">Immediate (Next 2–4 Weeks)</option>
                   <option value="Within 1–2 Months">Within 1–2 Months</option>
@@ -348,7 +348,7 @@ function ProjectInquiryModalContent({
 
             {/* Multi-Service Pill Selector */}
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-slate-300 block">
+              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block">
                 Services Required (Select all that apply)
               </label>
               <div className="flex flex-wrap gap-1.5">
@@ -359,10 +359,10 @@ function ProjectInquiryModalContent({
                       type="button"
                       key={svc}
                       onClick={() => toggleService(svc)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                         isSelected
                           ? 'bg-blue-600 text-white border border-blue-400 shadow-sm'
-                          : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+                          : 'bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
                       {svc}
@@ -374,8 +374,8 @@ function ProjectInquiryModalContent({
 
             {/* Project Description */}
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                <FileText className="w-3.5 h-3.5 text-blue-400" />
+              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                <FileText className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                 <span>Project Description & Business Objective *</span>
               </label>
               <textarea
@@ -384,13 +384,13 @@ function ProjectInquiryModalContent({
                 placeholder="Briefly describe what you are building, your users, key workflows, or current technical bottlenecks..."
                 value={projectDescription}
                 onChange={(e) => setProjectDescription(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs placeholder:text-slate-500 focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white text-xs placeholder:text-slate-400 focus:outline-none focus:border-blue-500 transition-colors resize-none"
               />
             </div>
 
             {/* Security Note */}
-            <div className="flex items-center gap-2 text-[11px] text-slate-400">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <div className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               <span>All information protected under strict mutual NDA confidentiality standards.</span>
             </div>
 

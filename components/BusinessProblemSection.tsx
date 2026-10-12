@@ -55,40 +55,40 @@ export function BusinessProblemSection({ onOpenInquiry }: BusinessProblemSection
               id={`problem-card-${idx}`}
               onMouseEnter={() => setActiveCard(idx)}
               onMouseLeave={() => setActiveCard(null)}
-              className="rounded-2xl bg-[#0a101d] border border-slate-800 p-6 sm:p-8 hover:border-blue-500/40 transition-all duration-300 shadow-lg flex flex-col justify-between"
+              className="rounded-2xl bg-white dark:bg-[#0a101d] border border-slate-200 dark:border-slate-800 p-6 sm:p-8 hover:border-blue-400 dark:hover:border-blue-500/40 transition-all duration-300 shadow-sm hover:shadow-md dark:shadow-lg flex flex-col justify-between"
             >
               <div className="space-y-5">
                 {/* Header */}
                 <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-xl bg-red-950/40 border border-red-800/40 text-red-400 shrink-0">
+                  <div className="p-2.5 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800/40 text-red-600 dark:text-red-400 shrink-0">
                     <XCircle className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-red-400">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-red-600 dark:text-red-400">
                       The Common Frustration
                     </span>
-                    <h3 className="text-lg font-bold text-white mt-1">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-1">
                       {item.problem}
                     </h3>
                   </div>
                 </div>
 
                 {/* Problem Description */}
-                <p className="text-sm text-slate-300 leading-relaxed pl-13">
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-13">
                   {item.painPoint}
                 </p>
 
                 {/* The BRC STAR Engineered Fix */}
-                <div className="mt-4 pt-5 border-t border-slate-800/80 bg-gradient-to-r from-blue-950/30 to-purple-950/20 p-4 rounded-xl border border-blue-900/30">
+                <div className="mt-4 pt-5 border-t border-slate-200 dark:border-slate-800/80 bg-blue-50/60 dark:bg-gradient-to-r dark:from-blue-950/30 dark:to-purple-950/20 p-4 rounded-xl border border-blue-200/60 dark:border-blue-900/30">
                   <div className="flex items-start gap-3">
-                    <div className="p-1.5 rounded-lg bg-blue-600/30 text-blue-400 shrink-0 mt-0.5">
+                    <div className="p-1.5 rounded-lg bg-blue-600/10 dark:bg-blue-600/30 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5">
                       <CheckCircle2 className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="text-xs font-bold uppercase tracking-wider text-blue-300">
+                      <span className="text-xs font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300">
                         The BRC STAR Solution
                       </span>
-                      <p className="text-sm text-slate-200 mt-1 leading-relaxed">
+                      <p className="text-sm text-slate-700 dark:text-slate-200 mt-1 leading-relaxed">
                         {item.solution}
                       </p>
                     </div>
@@ -100,18 +100,18 @@ export function BusinessProblemSection({ onOpenInquiry }: BusinessProblemSection
         </div>
 
         {/* Bottom Banner Positioning */}
-        <div className="mt-12 rounded-2xl bg-gradient-to-r from-[#0d1424] via-[#101b33] to-[#0d1424] border border-blue-500/20 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="mt-12 rounded-2xl bg-white dark:bg-gradient-to-r dark:from-[#0d1424] dark:via-[#101b33] dark:to-[#0d1424] border border-slate-200 dark:border-blue-500/20 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm dark:shadow-none">
           <div className="space-y-1 text-center sm:text-left">
-            <h3 className="text-lg font-bold text-white">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
               Ready to replace disconnected workarounds with engineered digital systems?
             </h3>
-            <p className="text-sm text-slate-300">
+            <p className="text-sm text-slate-600 dark:text-slate-300">
               BRC STAR starts with a technical and workflow discovery session to map your exact requirements.
             </p>
           </div>
           <button
             onClick={onOpenInquiry}
-            className="shrink-0 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm transition-colors flex items-center gap-2 shadow-lg shadow-blue-600/25"
+            className="shrink-0 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm transition-colors flex items-center gap-2 shadow-lg shadow-blue-600/25 cursor-pointer"
           >
             <span>Request Architecture Audit</span>
             <ArrowRight className="w-4 h-4" />

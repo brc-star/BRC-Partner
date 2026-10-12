@@ -163,8 +163,8 @@ export function FaqSection({ onOpenInquiry }: FaqSectionProps) {
                   id={`faq-item-${itemIdx}`}
                   className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
                     isOpen
-                      ? 'bg-[#0c1324] border-blue-500/50 shadow-lg shadow-blue-950/30'
-                      : 'bg-[#0a0f1d] border-slate-800/80 hover:border-slate-700'
+                      ? 'bg-white dark:bg-[#0c1324] border-blue-400 dark:border-blue-500/50 shadow-md dark:shadow-lg dark:shadow-blue-950/30'
+                      : 'bg-white dark:bg-[#0a0f1d] border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 shadow-2xs'
                   }`}
                 >
                   <button
@@ -176,10 +176,10 @@ export function FaqSection({ onOpenInquiry }: FaqSectionProps) {
                     id={`faq-btn-${itemIdx}`}
                   >
                     <div className="space-y-1.5 pr-2">
-                      <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-blue-400 bg-blue-950/70 border border-blue-800/60 px-2 py-0.5 rounded inline-block">
+                      <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800/60 px-2 py-0.5 rounded inline-block">
                         {faq.category}
                       </span>
-                      <h3 className="font-bold text-sm sm:text-base text-white leading-snug">
+                      <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white leading-snug">
                         {faq.question}
                       </h3>
                     </div>
@@ -188,7 +188,7 @@ export function FaqSection({ onOpenInquiry }: FaqSectionProps) {
                       className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 mt-1 ${
                         isOpen
                           ? 'rotate-180 bg-blue-600 text-white shadow-md shadow-blue-600/30'
-                          : 'bg-slate-800/90 text-slate-400 hover:text-white'
+                          : 'bg-slate-100 dark:bg-slate-800/90 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
                       <ChevronDown className="w-4 h-4" />
@@ -202,7 +202,7 @@ export function FaqSection({ onOpenInquiry }: FaqSectionProps) {
                       aria-labelledby={`faq-btn-${itemIdx}`}
                       className="px-5 pb-6 sm:px-6 sm:pb-6 pt-0 animate-in fade-in duration-200"
                     >
-                      <div className="pt-4 border-t border-slate-800/80 text-xs sm:text-sm text-slate-300 leading-relaxed space-y-3">
+                      <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed space-y-3">
                         <p>{faq.answer}</p>
                         
                         {/* Quick Trust Highlights per question category */}

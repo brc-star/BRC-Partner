@@ -34,16 +34,16 @@ export function TrustStrip() {
               <div
                 key={pillar.title}
                 id={`trust-pillar-${idx}`}
-                className="group p-4 rounded-xl bg-[#0c1322] border border-slate-800/80 hover:border-blue-500/50 hover:bg-[#10192e] transition-all duration-200 flex flex-col items-start gap-2.5"
+                className="group p-4 rounded-xl bg-white dark:bg-[#0c1322] border border-slate-200 dark:border-slate-800/80 hover:border-blue-400 dark:hover:border-blue-500/50 hover:bg-slate-50 dark:hover:bg-[#10192e] shadow-xs hover:shadow-md transition-all duration-200 flex flex-col items-start gap-2.5"
               >
-                <div className="w-8 h-8 rounded-lg bg-blue-950/60 border border-blue-800/40 flex items-center justify-center text-blue-400 group-hover:text-blue-300 group-hover:scale-105 transition-all">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/40 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 group-hover:scale-105 transition-all">
                   <IconComponent className="w-4 h-4" />
                 </div>
                 <div>
-                  <h2 className="text-xs font-bold text-slate-200 group-hover:text-white transition-colors">
+                  <h2 className="text-xs font-bold text-slate-900 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-white transition-colors">
                     {pillar.title}
                   </h2>
-                  <p className="text-[11px] text-slate-400 leading-snug mt-1 line-clamp-2">
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-snug mt-1 line-clamp-2">
                     {pillar.desc}
                   </p>
                 </div>

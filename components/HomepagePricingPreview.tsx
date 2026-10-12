@@ -87,37 +87,37 @@ export function HomepagePricingPreview() {
             <div
               key={item.id}
               id={`hp-pricing-${item.id}`}
-              className="group rounded-2xl bg-[#0c1324] border border-slate-800/90 hover:border-blue-500/50 p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:bg-[#0e172d] hover:-translate-y-1 shadow-lg"
+              className="group rounded-2xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800/90 hover:border-blue-400 dark:hover:border-blue-500/50 p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:bg-slate-50 dark:hover:bg-[#0e172d] hover:-translate-y-1 shadow-sm hover:shadow-md dark:shadow-lg"
             >
               <div className="space-y-4">
                 {/* Category Icon & Name */}
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-center shrink-0 group-hover:border-blue-500/40 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-slate-900/90 border border-blue-200 dark:border-slate-800 flex items-center justify-center shrink-0 group-hover:border-blue-400 dark:group-hover:border-blue-500/40 text-blue-600 dark:text-blue-400 transition-colors">
                     {getCategoryIcon(item.name)}
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-white tracking-tight leading-snug">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
                     {item.name}
                   </h3>
                 </div>
 
                 {/* Tagline */}
-                <p className="text-xs text-slate-400 leading-relaxed min-h-[32px]">
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed min-h-[32px]">
                   {item.tagline}
                 </p>
 
                 {/* Price Display */}
-                <div className="pt-3 border-t border-slate-800/60 space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 font-mono block">
+                <div className="pt-3 border-t border-slate-200 dark:border-slate-800/60 space-y-1">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono block">
                     From
                   </span>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">
+                  <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight font-mono">
                     {item.formattedStartingPrice}
                   </div>
                 </div>
               </div>
 
               {/* Pay Now & Detail Actions */}
-              <div className="pt-5 mt-4 border-t border-slate-800/80 space-y-2.5">
+              <div className="pt-5 mt-4 border-t border-slate-200 dark:border-slate-800/80 space-y-2.5">
                 <button
                   type="button"
                   id={`pay-now-btn-${item.id}`}
@@ -128,13 +128,13 @@ export function HomepagePricingPreview() {
                   <span>Pay Now</span>
                 </button>
 
-                <div className="flex items-center justify-between text-[11px] text-slate-400 font-mono">
-                  <span className="flex items-center gap-1 text-[10px] text-emerald-400">
-                    <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                  <span className="flex items-center gap-1 text-[10px] text-emerald-600 dark:text-emerald-400">
+                    <ShieldCheck className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                     <span>Incl. 18% GST</span>
                   </span>
-                  <span className="flex items-center gap-1 text-[10px] text-slate-400">
-                    <Lock className="w-2.5 h-2.5 text-slate-400" />
+                  <span className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-slate-400">
+                    <Lock className="w-2.5 h-2.5 text-slate-500 dark:text-slate-400" />
                     <span>Razorpay</span>
                   </span>
                 </div>
@@ -146,8 +146,8 @@ export function HomepagePricingPreview() {
         {/* GST Notice & CTA Action Area */}
         <div className="flex flex-col items-center justify-center space-y-5 text-center">
           {/* GST Supporting Message */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0a101e] border border-slate-800 text-slate-300 text-xs sm:text-sm font-medium">
-            <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-[#0a101e] border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium shadow-xs">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <span>All prices are inclusive of 18% GST.</span>
           </div>
 

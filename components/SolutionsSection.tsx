@@ -99,39 +99,39 @@ export function SolutionsSection({ onOpenInquiry }: SolutionsSectionProps) {
               <div
                 key={solution.id}
                 id={`solution-card-${solution.id}`}
-                className="rounded-2xl bg-[#0c1324] border border-slate-800/90 hover:border-blue-500/40 transition-all duration-300 p-6 sm:p-8 flex flex-col justify-between group shadow-xl hover:shadow-2xl hover:shadow-blue-950/20"
+                className="rounded-2xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800/90 hover:border-blue-400 dark:hover:border-blue-500/40 transition-all duration-300 p-6 sm:p-8 flex flex-col justify-between group shadow-sm hover:shadow-lg dark:shadow-xl dark:hover:shadow-2xl"
               >
                 <div className="space-y-6">
                   {/* Top bar with icon and title */}
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-center gap-3.5">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-950 to-indigo-950 border border-blue-700/40 flex items-center justify-center text-blue-400 group-hover:text-blue-300 group-hover:scale-105 transition-all shadow-inner">
+                      <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-gradient-to-br dark:from-blue-950 dark:to-indigo-950 border border-blue-200 dark:border-blue-700/40 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:scale-105 transition-all shadow-xs dark:shadow-inner">
                         <IconComponent className="w-6 h-6" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">
                           {solution.title}
                         </h3>
-                        <p className="text-xs text-blue-400 font-medium mt-0.5">
+                        <p className="text-xs text-blue-600 dark:text-blue-400 font-medium mt-0.5">
                           {solution.tagline}
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-sm text-slate-300 leading-relaxed">
+                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                     {solution.description}
                   </p>
 
                   {/* Structured Details: What we build */}
                   <div className="space-y-2.5 pt-1">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-400">
                       What We Build:
                     </span>
-                    <ul className="space-y-1.5 text-xs text-slate-300">
+                    <ul className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
                       {solution.whatWeBuild.map((item, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -140,13 +140,13 @@ export function SolutionsSection({ onOpenInquiry }: SolutionsSectionProps) {
 
                   {/* Who it is for & Problem Solved */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
-                    <div className="p-3 rounded-xl bg-[#090e1a] border border-slate-800/80">
-                      <span className="font-semibold text-slate-300 block mb-1">Target Audience:</span>
-                      <span className="text-slate-400 leading-snug">{solution.whoItIsFor}</span>
+                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#090e1a] border border-slate-200 dark:border-slate-800/80">
+                      <span className="font-semibold text-slate-900 dark:text-slate-300 block mb-1">Target Audience:</span>
+                      <span className="text-slate-600 dark:text-slate-400 leading-snug">{solution.whoItIsFor}</span>
                     </div>
-                    <div className="p-3 rounded-xl bg-[#090e1a] border border-slate-800/80">
-                      <span className="font-semibold text-slate-300 block mb-1">Business Impact:</span>
-                      <span className="text-slate-400 leading-snug">{solution.problemSolved}</span>
+                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#090e1a] border border-slate-200 dark:border-slate-800/80">
+                      <span className="font-semibold text-slate-900 dark:text-slate-300 block mb-1">Business Impact:</span>
+                      <span className="text-slate-600 dark:text-slate-400 leading-snug">{solution.problemSolved}</span>
                     </div>
                   </div>
 
@@ -155,7 +155,7 @@ export function SolutionsSection({ onOpenInquiry }: SolutionsSectionProps) {
                     {solution.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-400"
+                        className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400"
                       >
                         {tech}
                       </span>
@@ -164,11 +164,11 @@ export function SolutionsSection({ onOpenInquiry }: SolutionsSectionProps) {
                 </div>
 
                 {/* Card CTA */}
-                <div className="mt-8 pt-5 border-t border-slate-800/80 flex items-center justify-between">
-                  <span className="text-xs text-slate-400">Bespoke Architecture</span>
+                <div className="mt-8 pt-5 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between">
+                  <span className="text-xs text-slate-500 dark:text-slate-400">Bespoke Architecture</span>
                   <button
                     onClick={() => onOpenInquiry(solution.title)}
-                    className="inline-flex items-center gap-2 text-xs font-semibold text-blue-400 hover:text-blue-300 hover:gap-3 transition-all cursor-pointer"
+                    className="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:gap-3 transition-all cursor-pointer"
                   >
                     <span>Discuss This Solution</span>
                     <ArrowRight className="w-4 h-4" />

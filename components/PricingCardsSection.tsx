@@ -199,7 +199,7 @@ export function PricingCardsSection({
             <div className="flex justify-center mb-10 overflow-x-auto pb-2 scrollbar-none">
               <div
                 id="service-category-tabs"
-                className="p-1.5 rounded-2xl bg-[#0a101e] border border-slate-800 shadow-xl inline-flex items-center gap-1.5 max-w-full"
+                className="p-1.5 rounded-2xl bg-white dark:bg-[#0a101e] border border-slate-200 dark:border-slate-800 shadow-md dark:shadow-xl inline-flex items-center gap-1.5 max-w-full"
               >
                 {PRICING_CATEGORIES.map((cat) => {
                   const isSelected = selectedCategory === cat;
@@ -211,10 +211,10 @@ export function PricingCardsSection({
                       className={`px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center gap-2 cursor-pointer shrink-0 ${
                         isSelected
                           ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/30 border border-blue-400/40'
-                          : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/50'
                       }`}
                     >
-                      <span className={isSelected ? 'text-white' : 'text-slate-400'}>
+                      <span className={isSelected ? 'text-white' : 'text-slate-500 dark:text-slate-400'}>
                         {getCategoryIcon(cat)}
                       </span>
                       <span>{cat}</span>
@@ -225,21 +225,21 @@ export function PricingCardsSection({
             </div>
 
             {/* Category Header Badge */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800/80">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200 dark:border-slate-800/80">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-600/20 border border-blue-200 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
                   {getCategoryIcon(selectedCategory)}
                 </div>
                 <div>
-                  <h3 className="text-xl font-extrabold text-white">{selectedCategory} Plans</h3>
-                  <p className="text-xs text-slate-400">
+                  <h3 className="text-xl font-extrabold text-slate-900 dark:text-white">{selectedCategory} Plans</h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400">
                     4 structured development tiers from foundational MVPs to high-scale enterprise architecture
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-xs font-mono text-slate-400 bg-slate-900/90 px-3 py-1.5 rounded-xl border border-slate-800 shrink-0">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <div className="flex items-center gap-2 text-xs font-mono text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-900/90 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 shrink-0">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span>18% GST Included in all tiers</span>
               </div>
             </div>
@@ -254,10 +254,10 @@ export function PricingCardsSection({
                   <div
                     key={plan.id}
                     id={`plan-card-${plan.id}`}
-                    className={`rounded-2xl bg-[#0c1324] border flex flex-col justify-between transition-all duration-300 relative ${
+                    className={`rounded-2xl bg-white dark:bg-[#0c1324] border flex flex-col justify-between transition-all duration-300 relative shadow-sm ${
                       isPopular
-                        ? 'border-blue-500 shadow-2xl shadow-blue-950/70 lg:-translate-y-1.5 ring-1 ring-blue-500/50 bg-gradient-to-b from-[#0f1a33] to-[#0c1324]'
-                        : 'border-slate-800 hover:border-slate-700 hover:bg-[#0e162a]'
+                        ? 'border-blue-500 shadow-xl dark:shadow-2xl dark:shadow-blue-950/70 lg:-translate-y-1.5 ring-1 ring-blue-500/50 bg-white dark:bg-gradient-to-b dark:from-[#0f1a33] dark:to-[#0c1324]'
+                        : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-[#0e162a]'
                     }`}
                   >
                     {/* MOST POPULAR Badge */}
@@ -271,33 +271,33 @@ export function PricingCardsSection({
                       {/* Plan Name & Tagline */}
                       <div>
                         <div className="flex items-center justify-between mb-1">
-                          <h4 className="text-xl font-extrabold text-white tracking-tight">{plan.name}</h4>
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900/90 border border-slate-800 text-slate-300">
+                          <h4 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">{plan.name}</h4>
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
                             {plan.typicalDuration}
                           </span>
                         </div>
-                        <p className="text-xs text-blue-400 font-medium leading-snug">{plan.tagline}</p>
+                        <p className="text-xs text-blue-600 dark:text-blue-400 font-medium leading-snug">{plan.tagline}</p>
                       </div>
 
                       {/* Starting Price Box */}
-                      <div className="p-3.5 rounded-xl bg-[#070c17] border border-slate-800/90 space-y-1">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
+                      <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#070c17] border border-slate-200 dark:border-slate-800/90 space-y-1">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block font-mono">
                           Starting from
                         </span>
                         <div className="flex items-baseline gap-1">
-                          <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">
+                          <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight font-mono">
                             {formatPrice(plan.startingPrice, plan.isStartingFromPlus)}
                           </span>
                         </div>
-                        <p className="text-[10px] text-emerald-400 font-mono flex items-center gap-1 pt-0.5">
-                          <Check className="w-3 h-3 text-emerald-400 shrink-0" />
+                        <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-mono flex items-center gap-1 pt-0.5">
+                          <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400 shrink-0" />
                           <span>Includes 18% GST</span>
                         </p>
                       </div>
 
                       {/* Best For Section */}
-                      <div className="p-2.5 rounded-lg bg-blue-950/30 border border-blue-900/40 text-[11px] text-slate-300 leading-relaxed">
-                        <span className="text-blue-300 font-semibold block text-[10px] uppercase font-mono mb-0.5">
+                      <div className="p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/40 text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed">
+                        <span className="text-blue-700 dark:text-blue-300 font-semibold block text-[10px] uppercase font-mono mb-0.5">
                           Best for:
                         </span>
                         <span>{plan.bestFor || plan.targetAudience}</span>
@@ -305,14 +305,14 @@ export function PricingCardsSection({
 
                       {/* Features List */}
                       <div className="space-y-2 pt-1">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 block font-mono">
                           Included Features ({plan.features.length}):
                         </span>
-                        <ul className="space-y-1.5 text-xs text-slate-300">
+                        <ul className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
                           {plan.features.map((feat, idx) => (
                             <li key={idx} className="flex items-start gap-2">
-                              <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
-                              <span className="leading-snug text-[11px] sm:text-xs text-slate-200">{feat}</span>
+                              <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+                              <span className="leading-snug text-[11px] sm:text-xs text-slate-700 dark:text-slate-200">{feat}</span>
                             </li>
                           ))}
                         </ul>
@@ -380,10 +380,10 @@ export function PricingCardsSection({
                   <div
                     key={plan.id}
                     id={`amc-card-${plan.id}`}
-                    className={`rounded-2xl bg-[#0c1324] border p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 relative ${
+                    className={`rounded-2xl bg-white dark:bg-[#0c1324] border p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 relative shadow-sm ${
                       isPopular
-                        ? 'border-blue-500 shadow-2xl shadow-blue-950/70 ring-1 ring-blue-500/50 bg-gradient-to-b from-[#0f1a33] to-[#0c1324]'
-                        : 'border-slate-800 hover:border-slate-700'
+                        ? 'border-blue-500 shadow-xl dark:shadow-2xl dark:shadow-blue-950/70 ring-1 ring-blue-500/50 bg-white dark:bg-gradient-to-b dark:from-[#0f1a33] dark:to-[#0c1324]'
+                        : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
                     }`}
                   >
                     {isPopular && (
@@ -395,45 +395,45 @@ export function PricingCardsSection({
                     <div className="space-y-4">
                       <div>
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 font-mono">
+                          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
                             Monthly Retainer
                           </span>
-                          <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-800/60">
+                          <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60">
                             {plan.typicalDuration}
                           </span>
                         </div>
-                        <h4 className="text-xl font-extrabold text-white tracking-tight">{plan.name}</h4>
-                        <p className="text-xs text-blue-400 font-medium mt-0.5">{plan.tagline}</p>
+                        <h4 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">{plan.name}</h4>
+                        <p className="text-xs text-blue-600 dark:text-blue-400 font-medium mt-0.5">{plan.tagline}</p>
                       </div>
 
-                      <div className="p-3.5 rounded-xl bg-[#070c17] border border-slate-800/90 space-y-1">
+                      <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#070c17] border border-slate-200 dark:border-slate-800/90 space-y-1">
                         <div className="flex items-baseline gap-1.5">
-                          <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">
+                          <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight font-mono">
                             ₹{plan.startingPrice.toLocaleString('en-IN')}
                           </span>
-                          <span className="text-xs text-slate-400 font-medium">/ month</span>
+                          <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">/ month</span>
                         </div>
-                        <p className="text-[10px] text-emerald-400 font-mono">
+                        <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-mono">
                           Inclusive of 18% GST • Cancel anytime with 30-day notice
                         </p>
                       </div>
 
-                      <div className="p-2.5 rounded-lg bg-emerald-950/20 border border-emerald-900/30 text-[11px] text-slate-300 leading-relaxed">
-                        <span className="text-emerald-300 font-semibold block mb-0.5 text-[10px] uppercase font-mono">
+                      <div className="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/30 text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed">
+                        <span className="text-emerald-700 dark:text-emerald-300 font-semibold block mb-0.5 text-[10px] uppercase font-mono">
                           Best For:
                         </span>
                         {plan.bestFor || plan.targetAudience}
                       </div>
 
                       <div className="space-y-2">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 block font-mono">
                           Included SLA &amp; Support:
                         </span>
-                        <ul className="space-y-1.5 text-xs text-slate-300">
+                        <ul className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
                           {plan.deliverables.map((item, i) => (
                             <li key={i} className="flex items-start gap-2">
-                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                              <span className="leading-snug text-[11px] text-slate-200">{item}</span>
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                              <span className="leading-snug text-[11px] text-slate-700 dark:text-slate-200">{item}</span>
                             </li>
                           ))}
                         </ul>
