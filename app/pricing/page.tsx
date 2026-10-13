@@ -51,7 +51,7 @@ export default function PricingPage() {
           itemOffered: {
             '@type': 'Service',
             name: 'Web Development',
-            description: 'Custom Next.js & React Web Platforms (Inclusive of 18% GST)',
+            description: 'Custom Next.js & React Web Platforms',
           },
           priceSpecification: {
             '@type': 'PriceSpecification',
@@ -64,7 +64,7 @@ export default function PricingPage() {
           itemOffered: {
             '@type': 'Service',
             name: 'E-Commerce Development',
-            description: 'Full-Stack E-Commerce & Storefront Architecture (Inclusive of 18% GST)',
+            description: 'Full-Stack E-Commerce & Storefront Architecture',
           },
           priceSpecification: {
             '@type': 'PriceSpecification',
@@ -77,7 +77,7 @@ export default function PricingPage() {
           itemOffered: {
             '@type': 'Service',
             name: 'Mobile App Development',
-            description: 'Cross-Platform React Native iOS & Android Development (Inclusive of 18% GST)',
+            description: 'Cross-Platform React Native iOS & Android Development',
           },
           priceSpecification: {
             '@type': 'PriceSpecification',
@@ -90,7 +90,7 @@ export default function PricingPage() {
           itemOffered: {
             '@type': 'Service',
             name: 'AI & Automation',
-            description: 'Enterprise AI Agents, RAG Pipelines & Workflow Automation (Inclusive of 18% GST)',
+            description: 'Enterprise AI Agents, RAG Pipelines & Workflow Automation',
           },
           priceSpecification: {
             '@type': 'PriceSpecification',
@@ -103,7 +103,7 @@ export default function PricingPage() {
           itemOffered: {
             '@type': 'Service',
             name: 'SaaS / Web Application',
-            description: 'Multi-Tenant SaaS, B2B Portals & High-Scale Systems (Inclusive of 18% GST)',
+            description: 'Multi-Tenant SaaS, B2B Portals & High-Scale Systems',
           },
           priceSpecification: {
             '@type': 'PriceSpecification',
@@ -138,7 +138,7 @@ export default function PricingPage() {
           </h1>
 
           <p className="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Transparent starting rates across Web Development, E-Commerce, Mobile Apps, AI &amp; Automation, and SaaS Web Applications. All customer-facing prices are inclusive of 18% GST with 100% intellectual property ownership and dedicated post-launch support.
+            Transparent starting rates across Web Development, E-Commerce, Mobile Apps, AI &amp; Automation, and SaaS Web Applications. Milestone-based sprint delivery with 100% intellectual property ownership and dedicated post-launch support.
           </p>
 
           {/* Quick Metrics Strip */}
@@ -198,7 +198,7 @@ export default function PricingPage() {
               </thead>
               <tbody className="divide-y divide-slate-800/60 text-slate-300">
                 <tr>
-                  <td className="py-3.5 px-4 sm:px-6 font-medium text-white">Starting Price (Incl. 18% GST)</td>
+                  <td className="py-3.5 px-4 sm:px-6 font-medium text-white">Starting Price</td>
                   <td className="py-3.5 px-3 text-center font-mono font-bold text-white">
                     ₹29,999
                   </td>

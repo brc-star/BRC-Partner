@@ -131,7 +131,7 @@ export function HomepagePricingPreview() {
                 <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono">
                   <span className="flex items-center gap-1 text-[10px] text-emerald-600 dark:text-emerald-400">
                     <ShieldCheck className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-                    <span>Incl. 18% GST</span>
+                    <span>Secure Checkout</span>
                   </span>
                   <span className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-slate-400">
                     <Lock className="w-2.5 h-2.5 text-slate-500 dark:text-slate-400" />
@@ -143,12 +143,12 @@ export function HomepagePricingPreview() {
           ))}
         </div>
 
-        {/* GST Notice & CTA Action Area */}
+        {/* Supporting Message & CTA Action Area */}
         <div className="flex flex-col items-center justify-center space-y-5 text-center">
-          {/* GST Supporting Message */}
+          {/* Supporting Message */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-[#0a101e] border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium shadow-xs">
             <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-            <span>All prices are inclusive of 18% GST.</span>
+            <span>Transparent milestone-based pricing with zero hidden fees.</span>
           </div>
 
           {/* Primary CTA button linking to /pricing */}
