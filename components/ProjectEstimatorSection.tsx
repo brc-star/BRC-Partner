@@ -77,7 +77,7 @@ export function ProjectEstimatorSection({ onOpenInquiry }: ProjectEstimatorSecti
             </Link>
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 hover:text-white transition-all border border-slate-700"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-800 hover:text-slate-900 border border-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-bold dark:text-slate-200 dark:hover:text-white transition-all dark:border-slate-700 shadow-2xs"
             >
               <span>Client Portal Dashboard</span>
             </Link>

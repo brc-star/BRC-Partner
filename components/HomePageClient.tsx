@@ -127,15 +127,15 @@ export function HomePageClient() {
           id="sme-business-showcase"
           className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
         >
-          <div className="rounded-3xl bg-gradient-to-r from-blue-900/40 via-indigo-900/30 to-[#0c1324] border border-blue-700/40 p-6 sm:p-10 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="rounded-3xl bg-white dark:bg-gradient-to-r dark:from-blue-900/40 dark:via-indigo-900/30 dark:to-[#0c1324] border border-slate-200 dark:border-blue-700/40 p-6 sm:p-10 shadow-lg dark:shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="space-y-3 max-w-2xl text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950 border border-blue-700/60 text-blue-300 text-xs font-mono">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-700/60 text-blue-700 dark:text-blue-300 text-xs font-mono">
                 <span>🇮🇳 For Indian Business Owners &amp; SMEs</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Apna Business Online Laana Hai? ₹29,999 se Website, WhatsApp aur Google Maps ke Saath
               </h2>
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
                 Local business, retail store, factory ya service provider—hum banate hain ultra-fast, mobile-friendly websites with direct WhatsApp lead capture, Google Business Profile integration, and 100% complete source code ownership. Zero monthly template lock-in.
               </p>
             </div>

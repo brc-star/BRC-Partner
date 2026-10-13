@@ -127,6 +127,7 @@ html:not(.dark) .bg-\[\#0a101e\],
 html:not(.dark) .bg-\[\#0a101f\],
 html:not(.dark) .bg-\[\#0a1020\],
 html:not(.dark) .bg-\[\#0a1122\],
+html:not(.dark) .bg-\[\#0a1122\]\/95,
 html:not(.dark) .bg-\[\#0a1428\],
 html:not(.dark) .bg-\[\#0b101d\],
 html:not(.dark) .bg-\[\#0b1120\],
@@ -138,10 +139,13 @@ html:not(.dark) .bg-\[\#0d1426\],
 html:not(.dark) .bg-\[\#0d1428\],
 html:not(.dark) .bg-\[\#0d1527\],
 html:not(.dark) .bg-\[\#0e1628\],
+html:not(.dark) .bg-\[\#0e1628\]\/60,
 html:not(.dark) .bg-\[\#0e1629\],
 html:not(.dark) .bg-\[\#0e162a\],
 html:not(.dark) .bg-\[\#0e172a\],
 html:not(.dark) .bg-\[\#0e172d\],
+html:not(.dark) .bg-\[\#0f172a\],
+html:not(.dark) .bg-\[\#0f172a\]\/90,
 html:not(.dark) .bg-\[\#0f1b36\],
 html:not(.dark) .bg-\[\#10192e\] {
   background-color: #ffffff !important;
@@ -151,6 +155,7 @@ html:not(.dark) .bg-\[\#10192e\] {
 }
 
 /* Inset cards & secondary containers */
+html:not(.dark) .bg-\[\#080d19\]\/95,
 html:not(.dark) .bg-\[\#090d19\],
 html:not(.dark) .bg-\[\#090e1a\],
 html:not(.dark) .bg-\[\#090e1b\],
@@ -162,11 +167,13 @@ html:not(.dark) .bg-slate-900,
 html:not(.dark) .bg-slate-900\/40,
 html:not(.dark) .bg-slate-900\/60,
 html:not(.dark) .bg-slate-900\/80,
+html:not(.dark) .bg-slate-900\/90,
 html:not(.dark) .bg-slate-950,
 html:not(.dark) .bg-slate-950\/40,
 html:not(.dark) .bg-slate-950\/60,
-html:not(.dark) .bg-slate-950\/80 {
-  background-color: #f8fafc !important;
+html:not(.dark) .bg-slate-950\/80,
+html:not(.dark) .bg-slate-950\/90 {
+  background-color: #ffffff !important;
   border-color: #e2e8f0 !important;
 }
 
@@ -188,8 +195,12 @@ html:not(.dark) h1:not(.keep-white),
 html:not(.dark) h2:not(.keep-white),
 html:not(.dark) h3:not(.keep-white),
 html:not(.dark) h4:not(.keep-white),
-html:not(.dark) .text-white:not(button *):not(a *):not(.badge-text):not(.keep-white) {
+html:not(.dark) .text-white:not(button *):not(a *):not(.badge-text):not(.keep-white):not(.bg-clip-text) {
   color: #0f172a !important;
+}
+
+html:not(.dark) .bg-clip-text.text-transparent {
+  color: transparent !important;
 }
 
 html:not(.dark) .text-slate-100 {
@@ -197,24 +208,50 @@ html:not(.dark) .text-slate-100 {
 }
 
 html:not(.dark) .text-slate-200 {
-  color: #1e293b !important;
+  color: #0f172a !important;
 }
 
 html:not(.dark) .text-slate-300 {
-  color: #475569 !important;
+  color: #334155 !important;
 }
 
 html:not(.dark) .text-slate-400 {
-  color: #64748b !important;
+  color: #475569 !important;
 }
 
-/* Preserve crisp white text on buttons & gradients */
+html:not(.dark) .text-blue-300 {
+  color: #1d4ed8 !important;
+}
+
+html:not(.dark) .text-emerald-300 {
+  color: #047857 !important;
+}
+
+html:not(.dark) .text-purple-300 {
+  color: #7e22ce !important;
+}
+
+html:not(.dark) .text-indigo-300 {
+  color: #4338ca !important;
+}
+
+html:not(.dark) .text-amber-300 {
+  color: #b45309 !important;
+}
+
+/* Preserve crisp white text on solid CTA buttons & explicit keep-white badges */
 html:not(.dark) .bg-blue-600,
 html:not(.dark) .bg-blue-600 *,
-html:not(.dark) .bg-gradient-to-r,
-html:not(.dark) .bg-gradient-to-r *,
-html:not(.dark) .bg-gradient-to-br,
-html:not(.dark) .bg-gradient-to-br *,
+html:not(.dark) .bg-emerald-600,
+html:not(.dark) .bg-emerald-600 *,
+html:not(.dark) .bg-indigo-600,
+html:not(.dark) .bg-indigo-600 *,
+html:not(.dark) button.bg-gradient-to-r,
+html:not(.dark) button.bg-gradient-to-r *,
+html:not(.dark) a.bg-gradient-to-r,
+html:not(.dark) a.bg-gradient-to-r *,
+html:not(.dark) .keep-white,
+html:not(.dark) .keep-white *,
 html:not(.dark) #nav-cta-button,
 html:not(.dark) #nav-cta-button * {
   color: #ffffff !important;
@@ -230,23 +267,34 @@ html:not(.dark) .bg-blue-950\/80 {
   border-color: #bfdbfe !important;
 }
 
+html:not(.dark) .bg-indigo-950,
+html:not(.dark) .bg-indigo-950\/50,
+html:not(.dark) .bg-indigo-950\/80 {
+  background-color: #eef2ff !important;
+  color: #4338ca !important;
+  border-color: #c7d2fe !important;
+}
+
 html:not(.dark) .bg-emerald-950,
 html:not(.dark) .bg-emerald-950\/40,
-html:not(.dark) .bg-emerald-950\/50 {
+html:not(.dark) .bg-emerald-950\/50,
+html:not(.dark) .bg-emerald-950\/80 {
   background-color: #ecfdf5 !important;
   color: #047857 !important;
   border-color: #a7f3d0 !important;
 }
 
 html:not(.dark) .bg-amber-950,
-html:not(.dark) .bg-amber-950\/50 {
+html:not(.dark) .bg-amber-950\/50,
+html:not(.dark) .bg-amber-950\/80 {
   background-color: #fffbeb !important;
   color: #b45309 !important;
   border-color: #fde68a !important;
 }
 
 html:not(.dark) .bg-purple-950,
-html:not(.dark) .bg-purple-950\/50 {
+html:not(.dark) .bg-purple-950\/50,
+html:not(.dark) .bg-purple-950\/80 {
   background-color: #faf5ff !important;
   color: #7e22ce !important;
   border-color: #e9d5ff !important;

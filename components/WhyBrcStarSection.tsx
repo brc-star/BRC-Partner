@@ -83,7 +83,7 @@ export function WhyBrcStarSection({ market = 'india', onOpenInquiry }: WhyBrcSta
   ];
 
   return (
-    <section id="why-us" className="py-20 bg-[#060911] relative border-t border-slate-800/80">
+    <section id="why-us" className="py-20 bg-[#f8fafc] dark:bg-[#060911] relative border-t border-slate-200 dark:border-slate-800/80 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ============================================================== */}
         {/* TRANSFERRED HERO SHOWCASE & TECHNOLOGY PARTNER HERO BANNER    */}
@@ -92,22 +92,22 @@ export function WhyBrcStarSection({ market = 'india', onOpenInquiry }: WhyBrcSta
           {/* Transferred Hero Content Header */}
           <div className="max-w-4xl mx-auto text-center space-y-6">
             {/* Transferred Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider shadow-inner shadow-blue-500/10">
-              <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-slate-900/90 border border-blue-200 dark:border-blue-500/30 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider shadow-xs dark:shadow-inner dark:shadow-blue-500/10">
+              <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 animate-ping" />
               <span>BRC STAR • FULL-STACK DIGITAL TECHNOLOGY PARTNER</span>
             </div>
 
             {/* Transferred Main Headline */}
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.15]">
               Build Digital Products That{' '}
-              <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-300 dark:to-purple-400 bg-clip-text text-transparent">
                 Move Your Business Forward.
               </span>
             </h2>
 
             {/* Transferred Descriptive Paragraph */}
-            <p className="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-              From high-performance websites and web applications to mobile apps, enterprise platforms, AI solutions and custom business systems — <strong className="font-semibold text-white">BRC STAR</strong> designs and develops technology around your real business needs.
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              From high-performance websites and web applications to mobile apps, enterprise platforms, AI solutions and custom business systems — <strong className="font-semibold text-slate-900 dark:text-white">BRC STAR</strong> designs and develops technology around your real business needs.
             </p>
 
             {/* Transferred CTAs */}
@@ -124,31 +124,31 @@ export function WhyBrcStarSection({ market = 'india', onOpenInquiry }: WhyBrcSta
 
               <a
                 href="#solutions"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-base border border-slate-700/80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-400"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-slate-800 hover:text-slate-900 border border-slate-300 dark:bg-slate-900/90 dark:hover:bg-slate-800 dark:text-slate-200 dark:hover:text-white dark:border-slate-700/80 font-semibold text-base shadow-xs transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-400"
               >
                 <span>Explore Our Solutions</span>
               </a>
             </div>
 
             {/* Transferred Quick Value Props */}
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs text-slate-400">
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs text-slate-600 dark:text-slate-400">
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-blue-400" />
+                <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 <span>Full-Stack Engineering</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-indigo-400" />
+                <CheckCircle2 className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                 <span>Enterprise-Grade Security</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-purple-400" />
+                <CheckCircle2 className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                 <span>Dedicated Technical Support</span>
               </div>
             </div>
           </div>
 
           {/* Technology Partner Hero Banner Presentation Card (Clean White Background with Blue/Purple/Pink Accents) */}
-          <div className="relative mx-auto max-w-[1774px] rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 shadow-2xl shadow-blue-950/40">
+          <div className="relative mx-auto max-w-[1774px] rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 shadow-xl shadow-slate-200/80 dark:shadow-2xl dark:shadow-blue-950/40">
             <div className="relative w-full aspect-[1774/887] max-h-[887px] bg-[#FFFFFF] rounded-[calc(1rem-1px)] sm:rounded-[calc(1.5rem-1px)] overflow-hidden flex items-center justify-center">
               <img
                 src="/images/brc-star-technology-partner-hero-banner.jpg"
@@ -165,16 +165,16 @@ export function WhyBrcStarSection({ market = 'india', onOpenInquiry }: WhyBrcSta
         {/* EXISTING ABOUT / WHY BRC STAR SECTION HEADER & PILLARS GRID   */}
         {/* ============================================================== */}
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
-            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/60 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
+            <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>Why Partner with BRC STAR</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Engineering Rigor Built into Every Sprint
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
             {market === 'international'
               ? 'We operate as your dedicated product engineering studio—combining senior architectural talent, transparent milestone delivery, and zero vendor lock-in.'
               : 'We build digital products designed for business growth. No cookie-cutter templates, no recurring per-seat platform taxes, and 100% intellectual property ownership.'}

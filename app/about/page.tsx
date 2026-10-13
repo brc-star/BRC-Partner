@@ -91,7 +91,7 @@ export default function AboutPage() {
 
             <div className="lg:col-span-5 p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-blue-600/30">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white keep-white font-black text-2xl shadow-lg shadow-blue-600/30">
                   BS
                 </div>
                 <div>
@@ -130,14 +130,14 @@ export default function AboutPage() {
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
                 Our Engineering Core Values
               </h2>
-              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                 Four unyielding technical standards that protect your software investment.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950 flex items-center justify-center text-blue-600 dark:text-blue-400">
+              <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800/50 flex items-center justify-center text-blue-600 dark:text-blue-400">
                   <Code2 className="w-5 h-5" />
                 </div>
                 <h3 className="font-bold text-slate-900 dark:text-white text-base">100% IP Ownership</h3>
@@ -146,8 +146,8 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+              <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <h3 className="font-bold text-slate-900 dark:text-white text-base">OWASP-Aligned Security</h3>
@@ -156,18 +156,18 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
-                <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-950 flex items-center justify-center text-purple-600 dark:text-purple-400">
+              <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950 border border-purple-200 dark:border-purple-800/50 flex items-center justify-center text-purple-600 dark:text-purple-400">
                   <Cpu className="w-5 h-5" />
                 </div>
                 <h3 className="font-bold text-slate-900 dark:text-white text-base">Claim → Proof Auditing</h3>
                 <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                  We don't ask you to trust claims. We audit performance against real PageSpeed telemetry, type compilation, and production builds.
+                  We don&apos;t ask you to trust claims. We audit performance against real PageSpeed telemetry, type compilation, and production builds.
                 </p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800 shadow-md space-y-3">
-                <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950 flex items-center justify-center text-amber-600 dark:text-amber-400">
+              <div className="p-6 rounded-2xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800/50 flex items-center justify-center text-amber-600 dark:text-amber-400">
                   <Layers className="w-5 h-5" />
                 </div>
                 <h3 className="font-bold text-slate-900 dark:text-white text-base">Transparent Milestones</h3>
@@ -179,17 +179,19 @@ export default function AboutPage() {
           </div>
 
           {/* Conversion CTA Block */}
-          <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-gradient-to-r dark:from-blue-600 dark:to-indigo-600 border border-slate-200 dark:border-transparent text-slate-900 dark:text-white shadow-xl dark:shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="space-y-2 max-w-xl text-left">
-              <h2 className="text-2xl sm:text-3xl font-extrabold">Ready to Build With a Dedicated Partner?</h2>
-              <p className="text-blue-100 text-sm">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+                Ready to Build With a Dedicated Partner?
+              </h2>
+              <p className="text-slate-600 dark:text-blue-100 text-sm">
                 Discuss your product architecture with our engineering leads. Receive a structured technical scope and milestone SOW.
               </p>
             </div>
             <button
               type="button"
               onClick={() => setInquiryModalOpen(true)}
-              className="px-8 py-3.5 rounded-xl bg-white text-blue-600 hover:bg-slate-100 font-bold text-sm shadow-lg transition-colors shrink-0 cursor-pointer flex items-center gap-2"
+              className="px-8 py-3.5 rounded-xl bg-blue-600 text-white hover:bg-blue-500 dark:bg-white dark:text-blue-600 dark:hover:bg-slate-100 font-bold text-sm shadow-lg shadow-blue-600/25 dark:shadow-lg transition-colors shrink-0 cursor-pointer flex items-center gap-2"
             >
               <span>Schedule Technical Discovery</span>
               <ArrowRight className="w-4 h-4" />

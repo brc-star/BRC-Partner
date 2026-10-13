@@ -43,31 +43,31 @@ export function ProjectShowcaseSection({
   return (
     <section
       id="showcase"
-      className="py-24 bg-[#060911] relative overflow-hidden"
+      className="py-24 bg-[#f8fafc] dark:bg-[#060911] relative overflow-hidden transition-colors"
       aria-labelledby="showcase-headline"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-800/40 text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/40 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
             <span>Demonstrated Systems &amp; Reference Architectures</span>
           </div>
 
           <h2
             id="showcase-headline"
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight"
           >
             Engineering Showcase &amp; Case Studies
           </h2>
 
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
             Transparent walkthroughs of custom enterprise platforms, cloud web applications, AI copilots, and digital flagships engineered by BRC STAR.
           </p>
 
           {/* Architectural Demonstration Disclaimer */}
-          <div className="mx-auto max-w-2xl p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-center gap-2.5 text-xs text-slate-300 shadow-inner">
-            <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+          <div className="mx-auto max-w-2xl p-3.5 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 flex items-center justify-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 shadow-xs dark:shadow-inner">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <span className="text-left sm:text-center leading-normal">
               <strong>Notice:</strong> These are architectural demonstrations built to prove engineering capability — not live client deployments. Real client case studies available on request.
             </span>
@@ -79,10 +79,10 @@ export function ProjectShowcaseSection({
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   selectedCategory === cat
                     ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30'
-                    : 'bg-[#0e1628] text-slate-400 hover:text-white border border-slate-800'
+                    : 'bg-white dark:bg-[#0e1628] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-800 hover:border-blue-300 dark:hover:border-slate-700 shadow-2xs'
                 }`}
               >
                 {cat}
@@ -102,52 +102,52 @@ export function ProjectShowcaseSection({
               {/* Realistic Visual Interface Mockup Header */}
               <div className="p-4 sm:p-5 bg-slate-50 dark:bg-[#070c17] border-b border-slate-200 dark:border-slate-800/80">
                 {/* Mockup Container */}
-                <div className="rounded-xl bg-[#0e172a] border border-slate-800 overflow-hidden shadow-inner font-sans">
+                <div className="rounded-xl bg-white dark:bg-[#0e172a] border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs dark:shadow-inner font-sans">
                   {/* Mockup Window Chrome */}
-                  <div className="flex items-center justify-between px-3 py-2 bg-[#090f1d] border-b border-slate-800 text-[11px] text-slate-400">
+                  <div className="flex items-center justify-between px-3 py-2 bg-slate-100 dark:bg-[#090f1d] border-b border-slate-200 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400">
                     <div className="flex items-center gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-slate-700" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-slate-700" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-slate-700" />
-                      <span className="font-mono text-[10px] text-slate-400 ml-2">
+                      <div className="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700" />
+                      <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400 ml-2">
                         {project.id}.demo.brcstar.internal
                       </span>
                     </div>
-                    <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
                       {project.demonstrationType.toUpperCase()}
                     </span>
                   </div>
 
                   {/* Mockup Specific Interactive Body */}
-                  <div className="p-4 bg-gradient-to-b from-[#0e172a] to-[#0a101e] min-h-[170px] flex flex-col justify-between">
+                  <div className="p-4 bg-white dark:bg-gradient-to-b dark:from-[#0e172a] dark:to-[#0a101e] min-h-[170px] flex flex-col justify-between">
                     {/* Mockup 1: Logistics Fleet Dashboard */}
                     {project.mockupType === 'dashboard' && (
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <Activity className="w-3.5 h-3.5 text-blue-400" />
-                            <span className="text-xs font-semibold text-slate-200">Active Fleet Telemetry (Simulated Dispatch)</span>
+                            <Activity className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Active Fleet Telemetry (Simulated Dispatch)</span>
                           </div>
-                          <span className="text-[10px] font-mono text-blue-400 bg-blue-950 px-2 py-0.5 rounded border border-blue-800">
+                          <span className="text-[10px] font-mono text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800">
                             Latency &lt; 40ms
                           </span>
                         </div>
                         <div className="grid grid-cols-3 gap-2 text-[10px]">
-                          <div className="p-2 rounded bg-slate-900/80 border border-slate-800">
+                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
                             <span className="text-slate-500">Pipeline Type</span>
-                            <div className="font-bold text-slate-200 text-xs">WebSocket Stream</div>
+                            <div className="font-bold text-slate-800 dark:text-slate-200 text-xs">WebSocket Stream</div>
                           </div>
-                          <div className="p-2 rounded bg-slate-900/80 border border-slate-800">
+                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
                             <span className="text-slate-500">Route Engine</span>
-                            <div className="font-bold text-emerald-400 text-xs">Multi-Stop Graph</div>
+                            <div className="font-bold text-emerald-600 dark:text-emerald-400 text-xs">Multi-Stop Graph</div>
                           </div>
-                          <div className="p-2 rounded bg-slate-900/80 border border-slate-800">
+                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
                             <span className="text-slate-500">Data Model</span>
-                            <div className="font-bold text-indigo-400 text-xs">PostGIS Schema</div>
+                            <div className="font-bold text-indigo-600 dark:text-indigo-400 text-xs">PostGIS Schema</div>
                           </div>
                         </div>
-                        <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+                        <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                           <div className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 w-3/4" />
                         </div>
                       </div>
@@ -158,26 +158,26 @@ export function ProjectShowcaseSection({
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <Lock className="w-3.5 h-3.5 text-purple-400" />
-                            <span className="text-xs font-semibold text-slate-200">Multi-Currency Settlement Blueprint</span>
+                            <Lock className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
+                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Multi-Currency Settlement Blueprint</span>
                           </div>
-                          <span className="text-[10px] font-mono text-purple-400 bg-purple-950 px-2 py-0.5 rounded border border-purple-800">
+                          <span className="text-[10px] font-mono text-purple-700 dark:text-purple-400 bg-purple-50 dark:bg-purple-950 px-2 py-0.5 rounded border border-purple-200 dark:border-purple-800">
                             Zero-Trust Model
                           </span>
                         </div>
                         <div className="grid grid-cols-2 gap-2 text-[10px]">
-                          <div className="p-2 rounded bg-slate-900/80 border border-slate-800">
+                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
                             <span className="text-slate-500">Ledger Validation</span>
-                            <div className="font-bold text-emerald-400 text-sm">Double-Entry ACID</div>
+                            <div className="font-bold text-emerald-600 dark:text-emerald-400 text-sm">Double-Entry ACID</div>
                           </div>
-                          <div className="p-2 rounded bg-slate-900/80 border border-slate-800">
+                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
                             <span className="text-slate-500">Tenant Isolation</span>
-                            <div className="font-bold text-slate-200 text-sm">Schema-Per-Partner</div>
+                            <div className="font-bold text-slate-800 dark:text-slate-200 text-sm">Schema-Per-Partner</div>
                           </div>
                         </div>
-                        <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                        <div className="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 font-mono">
                           <span>Ledger Checksum: #SHA-256-VERIFIED</span>
-                          <span className="text-emerald-400">Reconciliation Blueprint</span>
+                          <span className="text-emerald-600 dark:text-emerald-400">Reconciliation Blueprint</span>
                         </div>
                       </div>
                     )}
@@ -187,19 +187,19 @@ export function ProjectShowcaseSection({
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-                            <span className="text-xs font-semibold text-slate-200">Semantic RAG Regulatory Query Console</span>
+                            <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Semantic RAG Regulatory Query Console</span>
                           </div>
-                          <span className="text-[10px] font-mono text-blue-400 bg-blue-950 px-2 py-0.5 rounded border border-blue-800">
+                          <span className="text-[10px] font-mono text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800">
                             pgvector Index
                           </span>
                         </div>
-                        <div className="p-2 rounded bg-slate-900/80 border border-slate-800 space-y-1">
-                          <div className="flex items-center gap-1.5 text-[10px] text-slate-300 font-mono">
-                            <Search className="w-3 h-3 text-blue-400" />
+                        <div className="p-2 rounded bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1">
+                          <div className="flex items-center gap-1.5 text-[10px] text-slate-700 dark:text-slate-300 font-mono">
+                            <Search className="w-3 h-3 text-blue-600 dark:text-blue-400" />
                             <span>&quot;What are the compliance mandates for cross-border data transfer?&quot;</span>
                           </div>
-                          <div className="text-[10px] text-emerald-300 bg-emerald-950/30 p-1.5 rounded border border-emerald-900/40">
+                          <div className="text-[10px] text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/30 p-1.5 rounded border border-emerald-200 dark:border-emerald-900/40">
                             Answer grounded in 4 verified manual bylaws (Citations #8, #14).
                           </div>
                         </div>
@@ -211,25 +211,25 @@ export function ProjectShowcaseSection({
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <TrendingUp className="w-3.5 h-3.5 text-purple-400" />
-                            <span className="text-xs font-semibold text-slate-200">Tier-3 Wholesale Contract Price Matrix</span>
+                            <TrendingUp className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
+                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Tier-3 Wholesale Contract Price Matrix</span>
                           </div>
-                          <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">
+                          <span className="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
                             Headless ISR
                           </span>
                         </div>
                         <div className="grid grid-cols-3 gap-2 text-[10px]">
-                          <div className="p-2 rounded bg-slate-900 border border-slate-800">
+                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
                             <span className="text-slate-500">Catalog Strategy</span>
-                            <div className="font-bold text-slate-200 text-xs">Edge Caching</div>
+                            <div className="font-bold text-slate-800 dark:text-slate-200 text-xs">Edge Caching</div>
                           </div>
-                          <div className="p-2 rounded bg-slate-900 border border-slate-800">
+                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
                             <span className="text-slate-500">Pricing Engine</span>
-                            <div className="font-bold text-emerald-400 text-xs">Dynamic Micro-API</div>
+                            <div className="font-bold text-emerald-600 dark:text-emerald-400 text-xs">Dynamic Micro-API</div>
                           </div>
-                          <div className="p-2 rounded bg-slate-900 border border-slate-800">
+                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
                             <span className="text-slate-500">Net Terms</span>
-                            <div className="font-bold text-indigo-400 text-xs">Net-30 / 60 Invoicing</div>
+                            <div className="font-bold text-indigo-600 dark:text-indigo-400 text-xs">Net-30 / 60 Invoicing</div>
                           </div>
                         </div>
                       </div>
@@ -240,19 +240,19 @@ export function ProjectShowcaseSection({
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <Smartphone className="w-3.5 h-3.5 text-blue-400" />
-                            <span className="text-xs font-semibold text-slate-200">Field Diagnostics (Offline-First)</span>
+                            <Smartphone className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Field Diagnostics (Offline-First)</span>
                           </div>
-                          <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">
+                          <span className="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
                             Local SQLite Sync
                           </span>
                         </div>
-                        <div className="p-2 rounded bg-slate-900 border border-slate-800 flex items-center justify-between text-[10px]">
+                        <div className="p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-[10px]">
                           <div>
-                            <span className="font-bold text-slate-200 block">Unit #748B Inspection Completed</span>
+                            <span className="font-bold text-slate-800 dark:text-slate-200 block">Unit #748B Inspection Completed</span>
                             <span className="text-slate-500">Signature captured &amp; timestamped</span>
                           </div>
-                          <span className="text-emerald-400 font-mono">100% Synced</span>
+                          <span className="text-emerald-600 dark:text-emerald-400 font-mono">100% Synced</span>
                         </div>
                       </div>
                     )}
@@ -262,21 +262,21 @@ export function ProjectShowcaseSection({
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <Cpu className="w-3.5 h-3.5 text-indigo-400" />
-                            <span className="text-xs font-semibold text-slate-200">Cybersecurity Infrastructure Flagship</span>
+                            <Cpu className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Cybersecurity Infrastructure Flagship</span>
                           </div>
-                          <span className="text-[10px] font-mono text-blue-400 bg-blue-950 px-2 py-0.5 rounded border border-blue-800">
+                          <span className="text-[10px] font-mono text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800">
                             App Router ISR
                           </span>
                         </div>
                         <div className="grid grid-cols-2 gap-2 text-[10px]">
-                          <div className="p-2 rounded bg-slate-900 border border-slate-800">
+                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
                             <span className="text-slate-500">Core Web Vitals</span>
-                            <div className="font-bold text-emerald-400 text-xs">Sub-Second LCP</div>
+                            <div className="font-bold text-emerald-600 dark:text-emerald-400 text-xs">Sub-Second LCP</div>
                           </div>
-                          <div className="p-2 rounded bg-slate-900 border border-slate-800">
+                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
                             <span className="text-slate-500">Lead Pipeline</span>
-                            <div className="font-bold text-blue-400 text-xs">Sanitized Validation</div>
+                            <div className="font-bold text-blue-600 dark:text-blue-400 text-xs">Sanitized Validation</div>
                           </div>
                         </div>
                       </div>
@@ -290,19 +290,19 @@ export function ProjectShowcaseSection({
                 <div className="space-y-1">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-wider text-blue-400 font-mono">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 font-mono">
                         {project.category}
                       </span>
                       <ClaimBadge status={project.proofStatus} size="sm" />
                     </div>
-                    <span className="text-[11px] text-slate-400 font-mono">
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
                       {project.demonstrationType}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                     {project.tagline}
                   </p>
                 </div>

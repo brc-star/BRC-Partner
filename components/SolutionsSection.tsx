@@ -58,18 +58,18 @@ export function SolutionsSection({ onOpenInquiry }: SolutionsSectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/60 border border-blue-800/50 text-blue-300 text-xs font-semibold uppercase tracking-wider">
-            <span>Capabilities & Engineering Disciplines</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/50 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider">
+            <span>Capabilities &amp; Engineering Disciplines</span>
           </div>
 
           <h2
             id="solutions-headline"
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight"
           >
             Engineered Digital Solutions for Real Business Demands
           </h2>
 
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
             We design, build, deploy, and support end-to-end software systems. Every solution is architected with modern, scalable, and type-safe foundations.
           </p>
 
@@ -79,10 +79,10 @@ export function SolutionsSection({ onOpenInquiry }: SolutionsSectionProps) {
               <button
                 key={tab.id}
                 onClick={() => setActiveFilter(tab.id as any)}
-                className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
                   activeFilter === tab.id
                     ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30 border border-blue-400/40'
-                    : 'bg-[#0f172a] text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800'
+                    : 'bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 shadow-2xs'
                 }`}
               >
                 {tab.label}

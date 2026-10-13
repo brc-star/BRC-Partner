@@ -254,90 +254,90 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
                 <div className="space-y-6 animate-in fade-in duration-200">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {/* Component 1: Edge & Client */}
-                    <div className="p-4 rounded-xl bg-[#0f172a]/90 border border-slate-800 hover:border-blue-500/40 transition-all space-y-3">
+                    <div className="p-4 rounded-xl bg-white dark:bg-[#0f172a]/90 border border-slate-200 dark:border-slate-800 hover:border-blue-500/40 transition-all space-y-3 shadow-xs">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <Globe className="w-4 h-4 text-blue-400" />
-                          <span className="text-xs font-semibold uppercase text-slate-300">Client & Edge Layer</span>
+                          <Globe className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                          <span className="text-xs font-semibold uppercase text-slate-800 dark:text-slate-300">Client &amp; Edge Layer</span>
                         </div>
-                        <span className="text-[11px] text-blue-400 font-mono">Global CDN</span>
+                        <span className="text-[11px] text-blue-600 dark:text-blue-400 font-mono">Global CDN</span>
                       </div>
-                      <div className="space-y-2 text-xs text-slate-400">
-                        <div className="flex justify-between py-1 border-b border-slate-800/60">
+                      <div className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                        <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/60">
                           <span>Framework</span>
-                          <span className="font-semibold text-slate-200">Next.js 16 (App Router)</span>
+                          <span className="font-semibold text-slate-900 dark:text-slate-200">Next.js 16 (App Router)</span>
                         </div>
-                        <div className="flex justify-between py-1 border-b border-slate-800/60">
+                        <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/60">
                           <span>Rendering</span>
-                          <span className="font-semibold text-slate-200">Hybrid SSR / Streaming</span>
+                          <span className="font-semibold text-slate-900 dark:text-slate-200">Hybrid SSR / Streaming</span>
                         </div>
                         <div className="flex justify-between py-1">
                           <span>Type Safety</span>
-                          <span className="font-semibold text-emerald-400">Strict TypeScript</span>
+                          <span className="font-semibold text-emerald-600 dark:text-emerald-400">Strict TypeScript</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Component 2: API & Microservices */}
-                    <div className="p-4 rounded-xl bg-[#0f172a]/90 border border-slate-800 hover:border-indigo-500/40 transition-all space-y-3">
+                    <div className="p-4 rounded-xl bg-white dark:bg-[#0f172a]/90 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/40 transition-all space-y-3 shadow-xs">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <Server className="w-4 h-4 text-indigo-400" />
-                          <span className="text-xs font-semibold uppercase text-slate-300">Micro-API Services</span>
+                          <Server className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                          <span className="text-xs font-semibold uppercase text-slate-800 dark:text-slate-300">Micro-API Services</span>
                         </div>
-                        <span className="text-[11px] text-indigo-400 font-mono">Auto-Scaled</span>
+                        <span className="text-[11px] text-indigo-600 dark:text-indigo-400 font-mono">Auto-Scaled</span>
                       </div>
-                      <div className="space-y-2 text-xs text-slate-400">
-                        <div className="flex justify-between py-1 border-b border-slate-800/60">
+                      <div className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                        <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/60">
                           <span>Runtime</span>
-                          <span className="font-semibold text-slate-200">Node.js / Docker</span>
+                          <span className="font-semibold text-slate-900 dark:text-slate-200">Node.js / Docker</span>
                         </div>
-                        <div className="flex justify-between py-1 border-b border-slate-800/60">
+                        <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/60">
                           <span>Protocol</span>
-                          <span className="font-semibold text-slate-200">REST & WebSockets</span>
+                          <span className="font-semibold text-slate-900 dark:text-slate-200">REST &amp; WebSockets</span>
                         </div>
                         <div className="flex justify-between py-1">
                           <span>Security</span>
-                          <span className="font-semibold text-emerald-400">JWT + RBAC Shield</span>
+                          <span className="font-semibold text-emerald-600 dark:text-emerald-400">JWT + RBAC Shield</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Component 3: Data & State */}
-                    <div className="p-4 rounded-xl bg-[#0f172a]/90 border border-slate-800 hover:border-purple-500/40 transition-all space-y-3">
+                    <div className="p-4 rounded-xl bg-white dark:bg-[#0f172a]/90 border border-slate-200 dark:border-slate-800 hover:border-purple-500/40 transition-all space-y-3 shadow-xs">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <Database className="w-4 h-4 text-purple-400" />
-                          <span className="text-xs font-semibold uppercase text-slate-300">Data & Persistence</span>
+                          <Database className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                          <span className="text-xs font-semibold uppercase text-slate-800 dark:text-slate-300">Data &amp; Persistence</span>
                         </div>
-                        <span className="text-[11px] text-purple-400 font-mono">ACID Compliant</span>
+                        <span className="text-[11px] text-purple-600 dark:text-purple-400 font-mono">ACID Compliant</span>
                       </div>
-                      <div className="space-y-2 text-xs text-slate-400">
-                        <div className="flex justify-between py-1 border-b border-slate-800/60">
+                      <div className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+                        <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/60">
                           <span>Primary DB</span>
-                          <span className="font-semibold text-slate-200">PostgreSQL (Prisma)</span>
+                          <span className="font-semibold text-slate-900 dark:text-slate-200">PostgreSQL (Prisma)</span>
                         </div>
-                        <div className="flex justify-between py-1 border-b border-slate-800/60">
+                        <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/60">
                           <span>In-Memory</span>
-                          <span className="font-semibold text-slate-200">Redis Cache Pool</span>
+                          <span className="font-semibold text-slate-900 dark:text-slate-200">Redis Cache Pool</span>
                         </div>
                         <div className="flex justify-between py-1">
                           <span>Replication</span>
-                          <span className="font-semibold text-emerald-400">Multi-Region Sync</span>
+                          <span className="font-semibold text-emerald-600 dark:text-emerald-400">Multi-Region Sync</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
                   {/* Flow connection bar */}
-                  <div className="p-4 rounded-xl bg-[#0e1628]/60 border border-blue-900/30 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-300">
+                  <div className="p-4 rounded-xl bg-white dark:bg-[#0e1628]/60 border border-slate-200 dark:border-blue-900/30 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-700 dark:text-slate-300 shadow-xs">
                     <div className="flex items-center gap-3">
                       <div className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping" />
-                      <span className="font-mono text-slate-200">
-                        Active pipeline: <strong className="text-blue-400">Client Request</strong> → <strong className="text-indigo-400">Edge Middleware</strong> → <strong className="text-purple-400">Database Transaction</strong>
+                      <span className="font-mono text-slate-900 dark:text-slate-200">
+                        Active pipeline: <strong className="text-blue-600 dark:text-blue-400">Client Request</strong> → <strong className="text-indigo-600 dark:text-indigo-400">Edge Middleware</strong> → <strong className="text-purple-600 dark:text-purple-400">Database Transaction</strong>
                       </span>
                     </div>
-                    <span className="text-[11px] font-mono text-slate-400 bg-slate-900 px-2.5 py-1 rounded border border-slate-800">
+                    <span className="text-[11px] font-mono text-slate-700 dark:text-slate-400 bg-slate-100 dark:bg-slate-900 px-2.5 py-1 rounded border border-slate-200 dark:border-slate-800">
                       Mean Transaction Time: <strong>14.2ms</strong>
                     </span>
                   </div>
@@ -348,34 +348,34 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
               {activeTab === 'telemetry' && (
                 <div className="space-y-4 animate-in fade-in duration-200">
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    <div className="p-3.5 rounded-xl bg-[#0f172a] border border-slate-800">
-                      <span className="text-[11px] text-slate-400 font-medium">Core Web Vitals</span>
-                      <div className="text-2xl font-bold text-emerald-400 mt-1">99/100</div>
+                    <div className="p-3.5 rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 shadow-xs">
+                      <span className="text-[11px] text-slate-600 dark:text-slate-400 font-medium">Core Web Vitals</span>
+                      <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">99/100</div>
                       <span className="text-[10px] text-slate-500">LCP 0.6s • CLS 0.00</span>
                     </div>
-                    <div className="p-3.5 rounded-xl bg-[#0f172a] border border-slate-800">
-                      <span className="text-[11px] text-slate-400 font-medium">API Response P99</span>
-                      <div className="text-2xl font-bold text-blue-400 mt-1">18ms</div>
+                    <div className="p-3.5 rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 shadow-xs">
+                      <span className="text-[11px] text-slate-600 dark:text-slate-400 font-medium">API Response P99</span>
+                      <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 mt-1">18ms</div>
                       <span className="text-[10px] text-slate-500">Edge accelerated</span>
                     </div>
-                    <div className="p-3.5 rounded-xl bg-[#0f172a] border border-slate-800">
-                      <span className="text-[11px] text-slate-400 font-medium">System Uptime</span>
-                      <div className="text-2xl font-bold text-indigo-400 mt-1">99.99%</div>
+                    <div className="p-3.5 rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 shadow-xs">
+                      <span className="text-[11px] text-slate-600 dark:text-slate-400 font-medium">System Uptime</span>
+                      <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400 mt-1">99.99%</div>
                       <span className="text-[10px] text-slate-500">Zero unplanned downtime</span>
                     </div>
-                    <div className="p-3.5 rounded-xl bg-[#0f172a] border border-slate-800">
-                      <span className="text-[11px] text-slate-400 font-medium">Security Audits</span>
-                      <div className="text-2xl font-bold text-purple-400 mt-1">0 Vulnerabilities</div>
+                    <div className="p-3.5 rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 shadow-xs">
+                      <span className="text-[11px] text-slate-600 dark:text-slate-400 font-medium">Security Audits</span>
+                      <div className="text-2xl font-bold text-purple-600 dark:text-purple-400 mt-1">0 Vulnerabilities</div>
                       <span className="text-[10px] text-slate-500">OWASP compliance</span>
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#0f172a] border border-slate-800 space-y-2">
-                    <div className="flex justify-between text-xs text-slate-400 font-mono">
+                  <div className="p-4 rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 space-y-2 shadow-xs">
+                    <div className="flex justify-between text-xs text-slate-600 dark:text-slate-400 font-mono">
                       <span>Server-Side Rendering Throughput</span>
-                      <span className="text-emerald-400">4,200 req/sec</span>
+                      <span className="text-emerald-600 dark:text-emerald-400">4,200 req/sec</span>
                     </div>
-                    <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
                       <div className="bg-gradient-to-r from-blue-500 to-emerald-400 h-full w-[88%]" />
                     </div>
                   </div>
@@ -385,26 +385,26 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
               {/* Tab 3: AI Intelligence */}
               {activeTab === 'ai' && (
                 <div className="space-y-4 animate-in fade-in duration-200">
-                  <div className="p-4 rounded-xl bg-[#0f172a] border border-purple-900/40 space-y-3">
+                  <div className="p-4 rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-purple-900/40 space-y-3 shadow-xs">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-purple-300 font-semibold text-sm">
-                        <Sparkles className="w-4 h-4 text-purple-400" />
-                        <span>Domain Knowledge Retrieval & Semantic Pipeline</span>
+                      <div className="flex items-center gap-2 text-purple-700 dark:text-purple-300 font-semibold text-sm">
+                        <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                        <span>Domain Knowledge Retrieval &amp; Semantic Pipeline</span>
                       </div>
-                      <span className="text-xs text-purple-400 font-mono">Gemini 2.5 / pgvector</span>
+                      <span className="text-xs text-purple-600 dark:text-purple-400 font-mono">Gemini 2.5 / pgvector</span>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
-                      <div className="p-3 rounded-lg bg-slate-900 border border-slate-800">
-                        <span className="text-slate-400">Vector Embeddings</span>
-                        <div className="font-semibold text-slate-200 mt-0.5">768-dim HyDE Index</div>
+                      <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                        <span className="text-slate-600 dark:text-slate-400">Vector Embeddings</span>
+                        <div className="font-semibold text-slate-900 dark:text-slate-200 mt-0.5">768-dim HyDE Index</div>
                       </div>
-                      <div className="p-3 rounded-lg bg-slate-900 border border-slate-800">
-                        <span className="text-slate-400">Grounding Accuracy</span>
-                        <div className="font-semibold text-emerald-400 mt-0.5">99.4% Verified Citations</div>
+                      <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                        <span className="text-slate-600 dark:text-slate-400">Grounding Accuracy</span>
+                        <div className="font-semibold text-emerald-600 dark:text-emerald-400 mt-0.5">99.4% Verified Citations</div>
                       </div>
-                      <div className="p-3 rounded-lg bg-slate-900 border border-slate-800">
-                        <span className="text-slate-400">Latency Overhead</span>
-                        <div className="font-semibold text-blue-400 mt-0.5">Streaming 380ms TBT</div>
+                      <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                        <span className="text-slate-600 dark:text-slate-400">Latency Overhead</span>
+                        <div className="font-semibold text-blue-600 dark:text-blue-400 mt-0.5">Streaming 380ms TBT</div>
                       </div>
                     </div>
                   </div>
@@ -414,19 +414,19 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
               {/* Tab 4: Mobile Platform */}
               {activeTab === 'mobile' && (
                 <div className="space-y-4 animate-in fade-in duration-200">
-                  <div className="p-4 rounded-xl bg-[#0f172a] border border-blue-900/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="p-4 rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-blue-900/40 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
                     <div className="space-y-1 text-left">
                       <div className="flex items-center gap-2">
-                        <Smartphone className="w-4 h-4 text-blue-400" />
-                        <span className="font-semibold text-slate-200 text-sm">Unified React Native & Offline Engine</span>
+                        <Smartphone className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                        <span className="font-semibold text-slate-900 dark:text-slate-200 text-sm">Unified React Native &amp; Offline Engine</span>
                       </div>
-                      <p className="text-xs text-slate-400 max-w-md">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 max-w-md">
                         Shared type-safe business logic between web dashboards and native iOS/Android mobile apps with deterministic offline data reconciliation.
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono px-3 py-1.5 rounded-lg bg-blue-950/80 border border-blue-800/60 text-blue-300">
-                        iOS & Android 60fps
+                      <span className="text-xs font-mono px-3 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/60 text-blue-700 dark:text-blue-300">
+                        iOS &amp; Android 60fps
                       </span>
                     </div>
                   </div>

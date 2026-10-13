@@ -151,10 +151,10 @@ export function ProofOfWorkSection({ onOpenClaimProof, onOpenInquiry }: ProofOfW
         <div className="max-w-4xl mx-auto text-center space-y-4 mb-14">
           <h2
             id="proof-headline"
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight"
           >
             “We believe technical capability should be{' '}
-            <span className="bg-gradient-to-r from-emerald-400 via-blue-400 to-indigo-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-600 via-blue-600 to-indigo-600 dark:from-emerald-400 dark:via-blue-400 dark:to-indigo-300 bg-clip-text text-transparent">
               demonstrated, not simply claimed.
             </span>”
           </h2>
@@ -165,23 +165,23 @@ export function ProofOfWorkSection({ onOpenClaimProof, onOpenInquiry }: ProofOfW
 
           {/* Mode Switcher: Business vs Technical Mode */}
           <div className="pt-4 flex items-center justify-center gap-3">
-            <div className="inline-flex items-center p-1 rounded-xl bg-[#090f1d] border border-slate-800 text-xs font-medium">
+            <div className="inline-flex items-center p-1 rounded-xl bg-white dark:bg-[#090f1d] border border-slate-200 dark:border-slate-800 text-xs font-medium shadow-2xs">
               <button
                 onClick={() => setIsTechMode(false)}
-                className={`px-4 py-1.5 rounded-lg transition-all ${
+                className={`px-4 py-1.5 rounded-lg transition-all cursor-pointer ${
                   !isTechMode
                     ? 'bg-blue-600 text-white font-semibold shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200'
+                    : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
                 }`}
               >
                 Executive Summary View
               </button>
               <button
                 onClick={() => setIsTechMode(true)}
-                className={`px-4 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
+                className={`px-4 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
                   isTechMode
                     ? 'bg-indigo-600 text-white font-semibold shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200'
+                    : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
                 }`}
               >
                 <Terminal className="w-3.5 h-3.5" />
@@ -203,11 +203,11 @@ export function ProofOfWorkSection({ onOpenClaimProof, onOpenInquiry }: ProofOfW
                   onClick={() => setActiveTab(tab.id as any)}
                   className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-medium transition-all cursor-pointer border ${
                     isActive
-                      ? 'bg-[#0f172a] text-white border-blue-500/60 shadow-lg shadow-blue-950/30'
-                      : 'bg-[#090e1c] text-slate-400 hover:text-slate-200 hover:bg-[#0d1426] border-slate-800/80'
+                      ? 'bg-blue-50 dark:bg-[#0f172a] text-slate-900 dark:text-white border-blue-500 shadow-sm dark:shadow-lg dark:shadow-blue-950/30'
+                      : 'bg-white dark:bg-[#090e1c] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-[#0d1426] border-slate-200 dark:border-slate-800/80'
                   }`}
                 >
-                  <IconComp className={`w-4 h-4 ${isActive ? 'text-blue-400' : 'text-slate-500'}`} />
+                  <IconComp className={`w-4 h-4 ${isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-500'}`} />
                   <span className="font-semibold">{tab.label}</span>
                   <ClaimBadge status={tab.badge} size="sm" />
                 </button>
@@ -217,7 +217,7 @@ export function ProofOfWorkSection({ onOpenClaimProof, onOpenInquiry }: ProofOfW
         </div>
 
         {/* Main Proof Content Window */}
-        <div className="rounded-2xl bg-[#090f1d] border border-slate-800 shadow-2xl overflow-hidden">
+        <div className="rounded-2xl bg-white dark:bg-[#090f1d] border border-slate-200 dark:border-slate-800 shadow-lg dark:shadow-2xl overflow-hidden">
           {/* Top Window Header */}
           <div className="flex flex-wrap items-center justify-between px-5 py-3.5 bg-[#060a14] border-b border-slate-800 text-xs font-mono text-slate-400 gap-3">
             <div className="flex items-center gap-2">
