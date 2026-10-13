@@ -261,14 +261,7 @@ export function Footer({ onOpenInquiry }: FooterProps) {
         {/* Corporate Entity Details */}
         <div className="mt-4 pt-4 border-t border-slate-200/60 dark:border-slate-800/40 text-[11px] text-slate-500 dark:text-slate-400 flex flex-wrap items-center justify-between gap-2 font-mono">
           <div>
-            <span><strong>Legal Entity:</strong> BRC STAR OPC PRIVATE LIMITED</span>
-            <span className="mx-2">•</span>
-            <span><strong>CIN:</strong> U72900GJ2022OPC135432</span>
-            <span className="mx-2">•</span>
-            <span><strong>GSTIN:</strong> 24AAGCB1234F1Z5</span>
-          </div>
-          <div>
-            <span>SG Highway, Ahmedabad, Gujarat, India - 380054</span>
+            <span><strong>Legal Entity:</strong> BRC STAR PARTNER , Vareli, Surat, Gujarat India -  394327</span>
           </div>
         </div>
 
