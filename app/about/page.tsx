@@ -58,14 +58,16 @@ export default function AboutPage() {
           </div>
 
           {/* Technology Showcase Banner */}
-          <div className="w-full rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl bg-white">
-            <img
-              src="/images/brc-star-technology-partner-hero-banner.webp"
-              alt="BRC STAR Technology Partner Multi-Device Showcase"
-              loading="lazy"
-              decoding="async"
-              className="w-full h-auto object-cover"
-            />
+          <div className="relative mx-auto max-w-[1774px] rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 shadow-xl shadow-slate-200/80 dark:shadow-2xl dark:shadow-blue-950/40">
+            <div className="relative w-full aspect-[1774/887] max-h-[887px] bg-[#FFFFFF] rounded-[calc(1rem-1px)] sm:rounded-[calc(1.5rem-1px)] overflow-hidden flex items-center justify-center">
+              <img
+                src="/images/brc-star-technology-partner-hero-banner.jpg"
+                alt="BRC STAR Technology Partner Multi-Device Showcase"
+                loading="lazy"
+                decoding="async"
+                className="block w-full h-full object-contain object-center"
+              />
+            </div>
           </div>
 
           {/* Company Story & Founder Section */}
