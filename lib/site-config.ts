@@ -1,6 +1,6 @@
 export const SITE = {
   name: 'BRC STAR',
-  legalName: 'BRC STAR OPC PRIVATE LIMITED',
+  legalName: 'BRC STAR PARTNER',
   url: 'https://brcpartner.brcstar.in',
   email: 'contact@brcstar.in',
   phone: '+919913159932',

@@ -42,7 +42,7 @@ export default function TermsAndConditionsPage() {
             </div>
             <div className="text-sm sm:text-base text-slate-300 leading-relaxed pt-2 space-y-3">
               <p>
-                Welcome to BRC STAR OPC PRIVATE LIMITED (”BRC STAR”, ”we”, ”us”, or ”our”).
+                Welcome to BRC STAR PARTNER (”BRC STAR”, ”we”, ”us”, or ”our”).
               </p>
               <p>
                 These Terms &amp; Conditions (”Terms”) govern your access to and use of our website:
@@ -70,7 +70,7 @@ export default function TermsAndConditionsPage() {
                 1. About BRC STAR
               </h2>
               <p>
-                BRC STAR OPC PRIVATE LIMITED is a technology and digital solutions company that may provide services including:
+                BRC STAR PARTNER is a technology and digital solutions company that may provide services including:
               </p>
               <ul className="list-disc pl-5 space-y-1.5 text-slate-300">
                 <li>Website development</li>
@@ -562,7 +562,7 @@ export default function TermsAndConditionsPage() {
                 20. Limitation of Liability
               </h2>
               <p>
-                To the maximum extent permitted by applicable law, BRC STAR OPC PRIVATE LIMITED shall not be liable for indirect, incidental, special, consequential, exemplary, or punitive damages, including loss of:
+                To the maximum extent permitted by applicable law, BRC STAR PARTNER shall not be liable for indirect, incidental, special, consequential, exemplary, or punitive damages, including loss of:
               </p>
               <ul className="list-disc pl-5 space-y-1.5 text-slate-300">
                 <li>Profits;</li>
@@ -593,7 +593,7 @@ export default function TermsAndConditionsPage() {
                 21. Indemnification
               </h2>
               <p>
-                To the extent permitted by applicable law, you agree to indemnify and hold harmless BRC STAR OPC PRIVATE LIMITED, its personnel, contractors, and representatives from claims, losses, liabilities, damages, costs, or expenses arising from:
+                To the extent permitted by applicable law, you agree to indemnify and hold harmless BRC STAR PARTNER, its personnel, contractors, and representatives from claims, losses, liabilities, damages, costs, or expenses arising from:
               </p>
               <ul className="list-disc pl-5 space-y-1.5 text-slate-300">
                 <li>Your unlawful use of our website or services;</li>
@@ -836,7 +836,7 @@ export default function TermsAndConditionsPage() {
                 For questions regarding these Terms or our services, please contact:
               </p>
               <div className="pt-2 text-sm font-mono text-slate-300 space-y-1.5 bg-[#060a14] p-4 rounded-xl border border-slate-800/80">
-                <p><strong className="text-white">BRC STAR OPC PRIVATE LIMITED</strong></p>
+                <p><strong className="text-white">BRC STAR PARTNER</strong></p>
                 <p><strong>Email:</strong> <a href="mailto:contact@brcstar.in" className="text-blue-400 hover:underline">contact@brcstar.in</a></p>
                 <p><strong>Website:</strong> <a href="https://brcpartner.brcstar.in/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">https://brcpartner.brcstar.in/</a></p>
               </div>
@@ -851,7 +851,7 @@ export default function TermsAndConditionsPage() {
                 By accessing or using the BRC STAR website, submitting an enquiry, or engaging our services, you acknowledge that you have read and understood these Terms and agree to comply with them to the extent applicable.
               </p>
               <div className="pt-4 border-t border-slate-800/60 font-mono text-xs text-slate-400 space-y-1">
-                <p className="font-bold text-white">BRC STAR OPC PRIVATE LIMITED</p>
+                <p className="font-bold text-white">BRC STAR PARTNER</p>
                 <p>Terms &amp; Conditions</p>
                 <p>Last Updated: 5 September 2026</p>
               </div>

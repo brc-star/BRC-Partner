@@ -60,7 +60,7 @@ export const emailService = {
     </div>
 
     <div class="footer">
-      BRC STAR (OPC) PRIVATE LIMITED • contact@brcstar.in • SOC2 &amp; GDPR-Aligned Systems
+      BRC STAR PARTNER • contact@brcstar.in • SOC2 &amp; GDPR-Aligned Systems
     </div>
   </div>
 </body>

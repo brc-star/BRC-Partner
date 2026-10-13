@@ -42,7 +42,7 @@ export default function PrivacyPolicyPage() {
             </div>
             <div className="text-sm sm:text-base text-slate-300 leading-relaxed pt-2 space-y-3">
               <p>
-                BRC STAR OPC PRIVATE LIMITED (”BRC STAR”, ”we”, ”us”, or ”our”) respects your privacy and is committed to protecting personal information that you provide to us or that is collected when you use our website, services, and digital platforms.
+                BRC STAR PARTNER (”BRC STAR”, ”we”, ”us”, or ”our”) respects your privacy and is committed to protecting personal information that you provide to us or that is collected when you use our website, services, and digital platforms.
               </p>
               <p>
                 This Privacy Policy explains how we collect, use, disclose, store, and protect personal information when you visit or interact with:
@@ -64,10 +64,10 @@ export default function PrivacyPolicyPage() {
                 1. About BRC STAR
               </h2>
               <p>
-                BRC STAR OPC PRIVATE LIMITED is a technology and digital solutions company providing services that may include website development, web application development, mobile application development, enterprise software, AI and automation solutions, e-commerce solutions, UI/UX and product design, digital consulting, architecture and related technology services.
+                BRC STAR PARTNER is a technology and digital solutions company providing services that may include website development, web application development, mobile application development, enterprise software, AI and automation solutions, e-commerce solutions, UI/UX and product design, digital consulting, architecture and related technology services.
               </p>
               <p>
-                For privacy-related matters, BRC STAR OPC PRIVATE LIMITED acts as the organization responsible for the personal information processed through this website, subject to applicable law.
+                For privacy-related matters, BRC STAR PARTNER acts as the organization responsible for the personal information processed through this website, subject to applicable law.
               </p>
             </section>
 
@@ -424,7 +424,7 @@ export default function PrivacyPolicyPage() {
                 If you have a question, request, concern, or complaint regarding this Privacy Policy or the processing of your personal information, please contact:
               </p>
               <div className="pt-2 text-sm font-mono text-slate-300 space-y-1.5 bg-[#060a14] p-4 rounded-xl border border-slate-800/80">
-                <p><strong className="text-white">BRC STAR OPC PRIVATE LIMITED</strong></p>
+                <p><strong className="text-white">BRC STAR PARTNER</strong></p>
                 <p><strong>Email:</strong> <a href="mailto:contact@brcstar.in" className="text-blue-400 hover:underline">contact@brcstar.in</a></p>
                 <p><strong>Website:</strong> <a href="https://brcpartner.brcstar.in/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">https://brcpartner.brcstar.in/</a></p>
               </div>
@@ -477,7 +477,7 @@ export default function PrivacyPolicyPage() {
                 If you do not agree with the applicable terms of this Privacy Policy, please discontinue use of the website and contact us regarding any information you have previously provided.
               </p>
               <div className="pt-4 border-t border-slate-800/60 font-mono text-xs text-slate-400 space-y-1">
-                <p className="font-bold text-white">BRC STAR OPC PRIVATE LIMITED</p>
+                <p className="font-bold text-white">BRC STAR PARTNER</p>
                 <p>Privacy Policy</p>
                 <p>Last Updated: 5 September 2026</p>
               </div>

@@ -42,7 +42,7 @@ export default function DisclaimerPage() {
             </div>
             <div className="text-sm sm:text-base text-slate-300 leading-relaxed pt-2 space-y-3">
               <p>
-                The information and services provided by BRC STAR OPC PRIVATE LIMITED (”BRC STAR”, ”we”, ”us”, or ”our”) through our website:
+                The information and services provided by BRC STAR PARTNER (”BRC STAR”, ”we”, ”us”, or ”our”) through our website:
               </p>
               <p className="font-mono text-blue-400 text-sm">
                 https://brcpartner.brcstar.in/
@@ -589,7 +589,7 @@ export default function DisclaimerPage() {
                 For questions regarding this Disclaimer, our website, or our services, please contact:
               </p>
               <div className="pt-2 text-sm font-mono text-slate-300 space-y-1.5 bg-[#060a14] p-4 rounded-xl border border-slate-800/80">
-                <p><strong className="text-white">BRC STAR OPC PRIVATE LIMITED</strong></p>
+                <p><strong className="text-white">BRC STAR PARTNER</strong></p>
                 <p><strong>Email:</strong> <a href="mailto:contact@brcstar.in" className="text-blue-400 hover:underline">contact@brcstar.in</a></p>
                 <p><strong>Website:</strong> <a href="https://brcpartner.brcstar.in/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">https://brcpartner.brcstar.in/</a></p>
               </div>
@@ -604,7 +604,7 @@ export default function DisclaimerPage() {
                 By accessing or using the BRC STAR website, you acknowledge that you have read and understood this Disclaimer and agree to use the information and services provided through the website at your own discretion and subject to applicable law.
               </p>
               <div className="pt-4 border-t border-slate-800/60 font-mono text-xs text-slate-400 space-y-1">
-                <p className="font-bold text-white">BRC STAR OPC PRIVATE LIMITED</p>
+                <p className="font-bold text-white">BRC STAR PARTNER</p>
                 <p>Disclaimer</p>
                 <p>Last Updated: 5 September 2026</p>
               </div>

@@ -42,7 +42,7 @@ export default function CookiesPolicyPage() {
             </div>
             <div className="text-sm sm:text-base text-slate-300 leading-relaxed pt-2 space-y-3">
               <p>
-                This Cookies Policy explains how BRC STAR OPC PRIVATE LIMITED (”BRC STAR”, ”we”, ”us”, or ”our”) may use cookies and similar technologies when you visit or interact with our website:
+                This Cookies Policy explains how BRC STAR PARTNER (”BRC STAR”, ”we”, ”us”, or ”our”) may use cookies and similar technologies when you visit or interact with our website:
               </p>
               <p className="font-mono text-blue-400 text-sm">
                 https://brcpartner.brcstar.in/
@@ -474,7 +474,7 @@ export default function CookiesPolicyPage() {
                 If you have questions about this Cookies Policy or the use of cookies on our website, please contact:
               </p>
               <div className="pt-2 text-sm font-mono text-slate-300 space-y-1.5 bg-[#060a14] p-4 rounded-xl border border-slate-800/80">
-                <p><strong className="text-white">BRC STAR OPC PRIVATE LIMITED</strong></p>
+                <p><strong className="text-white">BRC STAR PARTNER</strong></p>
                 <p><strong>Email:</strong> <a href="mailto:contact@brcstar.in" className="text-blue-400 hover:underline">contact@brcstar.in</a></p>
                 <p><strong>Website:</strong> <a href="https://brcpartner.brcstar.in/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">https://brcpartner.brcstar.in/</a></p>
               </div>
@@ -526,7 +526,7 @@ export default function CookiesPolicyPage() {
                 By using the BRC STAR website, you acknowledge this Cookies Policy and understand that cookies and similar technologies may be used as described above, subject to your available choices and applicable law.
               </p>
               <div className="pt-4 border-t border-slate-800/60 font-mono text-xs text-slate-400 space-y-1">
-                <p className="font-bold text-white">BRC STAR OPC PRIVATE LIMITED</p>
+                <p className="font-bold text-white">BRC STAR PARTNER</p>
                 <p>Cookies Policy</p>
                 <p>Last Updated: 5 September 2026</p>
               </div>

@@ -268,7 +268,7 @@ export function Footer({ onOpenInquiry }: FooterProps) {
         {/* Bottom Copyright & Back to Top Bar */}
         <div className="mt-4 pt-4 border-t border-slate-200/40 dark:border-slate-800/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <div>
-            © {new Date().getFullYear()} BRC STAR OPC PRIVATE LIMITED. All rights reserved. Full-Stack Digital Technology Partner.
+            © {new Date().getFullYear()} BRC STAR PARTNER. All rights reserved. Full-Stack Digital Technology Partner.
           </div>
 
           <button
