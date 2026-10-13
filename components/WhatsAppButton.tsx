@@ -1,34 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
-import Image from 'next/image';
+import React from 'react';
 
 export function WhatsAppButton() {
-  const [isHovered, setIsHovered] = useState(false);
   const phoneNumber = '919913159932';
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
     'Hello BRC STAR Partner, I would like to discuss a project.'
   )}`;
 
   return (
-    <div
-      className="fixed bottom-6 right-6 z-50 flex items-center group select-none print:hidden"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Floating Hover Tooltip */}
-      <div
-        className={`hidden sm:flex items-center gap-1.5 mr-3 px-3 py-1.5 rounded-xl bg-slate-900/95 text-white border border-slate-700/80 shadow-xl shadow-black/40 backdrop-blur-md transition-all duration-300 pointer-events-none ${
-          isHovered
-            ? 'opacity-100 translate-x-0'
-            : 'opacity-0 translate-x-2'
-        }`}
-      >
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-        <span className="text-xs font-semibold whitespace-nowrap">Chat on WhatsApp</span>
-        <span className="text-[11px] text-slate-400 font-mono pl-1">+91 99131 59932</span>
-      </div>
-
+    <div className="fixed bottom-6 right-6 z-50 flex items-center group select-none print:hidden">
       {/* Round WhatsApp Floating Button */}
       <a
         href={whatsappUrl}
