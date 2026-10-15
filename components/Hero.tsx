@@ -93,7 +93,7 @@ export function Hero({ onOpenInquiry, onOpenClaimProof }: HeroProps) {
     <section
       ref={heroSectionRef}
       id="hero-section"
-      className="relative pt-[72px] md:pt-[101px] pb-20 md:pb-28 overflow-hidden bg-transparent tech-grid-pattern"
+      className="relative pt-[72px] pb-20 md:pb-28 overflow-hidden bg-transparent tech-grid-pattern"
       aria-labelledby="hero-headline"
     >
       {/* Full-Width Interactive Hero Showcase Slider (No Blank Space Top, Left, Right) */}

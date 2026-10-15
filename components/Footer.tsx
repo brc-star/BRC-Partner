@@ -210,8 +210,8 @@ export function Footer({ onOpenInquiry }: FooterProps) {
         </div>
 
         {/* Legal Links Bar */}
-        <div className="mt-12 pt-6 border-t border-slate-200 dark:border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-2 text-slate-600 dark:text-slate-300 font-medium">
+        <div className="mt-12 pt-6 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-center text-xs">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-slate-600 dark:text-slate-300 font-medium">
             <Link
               href="/privacy-policy"
               className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -246,15 +246,6 @@ export function Footer({ onOpenInquiry }: FooterProps) {
             >
               Cookies Policy
             </Link>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 text-[11px] text-slate-500 dark:text-slate-400">
-            <span className="inline-flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
-              OWASP-Aligned Security
-            </span>
-            <span className="hidden sm:inline text-slate-400 dark:text-slate-700">•</span>
-            <span>Built to WCAG 2.1 AA Guidelines</span>
           </div>
         </div>
 

@@ -8,8 +8,6 @@ import {
   ChevronDown,
   ArrowRight,
   ShieldCheck,
-  CheckCircle2,
-  Clock,
   Terminal,
   Cpu,
   Layers,
@@ -196,42 +194,6 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
       id="main-navigation"
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
     >
-      {/* Top Audited Trust Bar */}
-      <div className="bg-slate-100/95 dark:bg-[#050811]/95 border-b border-slate-200/80 dark:border-slate-800/80 text-[11px] text-slate-600 dark:text-slate-400 py-1.5 px-4 hidden md:block transition-colors">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-5">
-            <span className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
-              <span>Security Best Practices Aligned to OWASP</span>
-            </span>
-            <span className="text-slate-300 dark:text-slate-700">•</span>
-            <span className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
-              <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
-              <span>Built to WCAG 2.1 AA Guidelines</span>
-            </span>
-            <span className="text-slate-300 dark:text-slate-700">•</span>
-            <span className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
-              <Clock className="w-3.5 h-3.5 text-purple-500 dark:text-purple-400" />
-              <span>Typical Response Within 1 Business Day</span>
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 font-mono text-[10px]">
-            <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
-              Accepting Q4 2026 / Q1 2027 projects
-            </span>
-            <span className="text-slate-300 dark:text-slate-600">|</span>
-            <a
-              href="mailto:contact@brcstar.in"
-              className="text-slate-600 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
-            >
-              contact@brcstar.in
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* Main Nav Bar */}
       <div
         className={`${
@@ -498,21 +460,6 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
               id="mobile-nav-drawer"
               className="lg:hidden mt-4 pt-4 pb-6 px-4 bg-white dark:bg-[#0a0f1d] border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl space-y-4 max-h-[85vh] overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-200"
             >
-              {/* Trust Badges in Mobile Menu */}
-              <div className="grid grid-cols-1 gap-2 p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300">
-                <span className="flex items-center gap-2">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
-                  <span>OWASP Security Best Practices</span>
-                </span>
-                <span className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
-                  <span>WCAG 2.1 AA Guidelines</span>
-                </span>
-                <span className="flex items-center gap-2">
-                  <Clock className="w-3.5 h-3.5 text-purple-500 dark:text-purple-400" />
-                  <span>1 Business Day Response</span>
-                </span>
-              </div>
 
               {/* Theme Toggle row in Mobile Drawer */}
               <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
