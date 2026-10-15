@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import './globals.css';
 import { SITE } from '@/lib/site-config';
 import { ThemeProvider } from '@/lib/theme-context';
@@ -111,6 +112,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <WhatsAppButton />
         </ThemeProvider>
+
+        {/* HubSpot CRM Tracking Code */}
+        <Script
+          id="hs-script-loader"
+          strategy="afterInteractive"
+          src="//js-na2.hs-scripts.com/247702711.js"
+        />
       </body>
     </html>
   );
