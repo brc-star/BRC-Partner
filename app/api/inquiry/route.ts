@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { db } from '@/lib/db';
 import { emailService } from '@/lib/email-service';
+import { hubspotService } from '@/lib/hubspot';
 
 const inquirySchema = z.object({
   fullName: z.string().min(2, 'Name must be at least 2 characters'),
@@ -40,7 +41,7 @@ export async function POST(req: NextRequest) {
       requirements: projectDescription.trim(),
     });
 
-    // Create or update customer record
+    // Create or update customer record in internal db
     db.createOrUpdateCustomer({
       name: fullName.trim(),
       email: email.toLowerCase().trim(),
@@ -51,11 +52,19 @@ export async function POST(req: NextRequest) {
     // Dispatch automated confirmation email
     await emailService.sendInquiryReceivedEmail(savedInquiry);
 
+    // Synchronize to HubSpot CRM (server-side; fails gracefully if credentials not set)
+    const hubspotResult = await hubspotService.syncInquiryToHubSpot(savedInquiry);
+
     return NextResponse.json({
       success: true,
       message: 'Inquiry received successfully. Our Lead Systems Architect will review your requirements and respond within 24 business hours.',
       inquiryId: savedInquiry.id,
       data: savedInquiry,
+      hubspot: {
+        synced: hubspotResult.synced,
+        contactId: hubspotResult.contactId,
+        dealId: hubspotResult.dealId,
+      },
     });
   } catch (error) {
     console.error('Error processing inquiry:', error);
