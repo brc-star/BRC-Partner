@@ -181,38 +181,55 @@ export default function NeonParticleBackground() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = window.innerWidth < 768;
-    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+    // Check if WebGL is supported by the client browser / GPU before initializing
+    try {
+      const testCanvas = document.createElement('canvas');
+      const isWebGLSupported = Boolean(
+        window.WebGLRenderingContext &&
+          (testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl'))
+      );
 
-    // Scene & Camera
-    const scene = new THREE.Scene();
+      if (!isWebGLSupported) {
+        console.warn('[NeonParticleBackground] WebGL is not supported on this device/browser.');
+        return;
+      }
+    } catch {
+      return;
+    }
 
-    const camera = new THREE.PerspectiveCamera(
-      60,
-      window.innerWidth / window.innerHeight,
-      1,
-      2500
-    );
-    camera.position.z = 500;
+    try {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isMobile = window.innerWidth < 768;
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
 
-    // WebGL Renderer
-    const renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: !isMobile,
-      powerPreference: 'high-performance',
-      stencil: false,
-      depth: false,
-    });
+      // Scene & Camera
+      const scene = new THREE.Scene();
 
-    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2.0);
-    renderer.setPixelRatio(dpr);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.setClearColor(0x000000, 0);
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        1,
+        2500
+      );
+      camera.position.z = 500;
 
-    const container = containerRef.current;
-    container.appendChild(renderer.domElement);
+      // WebGL Renderer
+      const renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: !isMobile,
+        powerPreference: 'high-performance',
+        stencil: false,
+        depth: false,
+      });
+
+      const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2.0);
+      renderer.setPixelRatio(dpr);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.setClearColor(0x000000, 0);
+
+      const container = containerRef.current;
+      container.appendChild(renderer.domElement);
 
     // Textures
     const sharpParticleTex = createSharpParticleTexture();
@@ -820,6 +837,10 @@ export default function NeonParticleBackground() {
         container.removeChild(renderer.domElement);
       }
     };
+    } catch (err) {
+      console.warn('[NeonParticleBackground] Three.js WebGL error handled safely:', err);
+      return;
+    }
   }, []);
 
   return (

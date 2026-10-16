@@ -8,7 +8,7 @@
  * - Safe error handling with 10s timeouts (never exposes tokens or breaks customer form submissions)
  */
 
-import { ProjectInquiryData } from '@/types/payment';
+import type { ProjectInquiryData } from '@/types/payment';
 
 export interface HubSpotSyncResult {
   synced: boolean;
@@ -40,11 +40,12 @@ interface HubSpotDealProperties {
 class HubSpotService {
   private readonly baseUrl = 'https://api.hubapi.com';
   private readonly timeoutMs = 10000;
+  private readonly pipelineStagesCache = new Map<string, string[]>();
 
   /**
-   * Safe access to server-only environment variables
+   * Safe server-only access to HubSpot access token
    */
-  private get accessToken(): string | undefined {
+  #getAccessToken(): string | undefined {
     return process.env.HUBSPOT_ACCESS_TOKEN?.trim();
   }
 
@@ -61,10 +62,56 @@ class HubSpotService {
   }
 
   /**
+   * Resolves and confirms a valid stage ID for the selected pipeline.
+   * If HUBSPOT_DEFAULT_DEAL_STAGE_ID is explicitly configured, it is used.
+   * Otherwise, retrieves the pipeline's stages from the HubSpot API:
+   * - Confirms whether 'appointmentscheduled' is a valid stage ID for this pipeline.
+   * - If 'appointmentscheduled' is valid, selects it.
+   * - If 'appointmentscheduled' is not a valid stage, selects the pipeline's first active stage.
+   * - Caches results in-memory to prevent repeated API calls.
+   */
+  public async resolveDealStageId(pipelineId: string): Promise<string> {
+    const configuredStage = process.env.HUBSPOT_DEFAULT_DEAL_STAGE_ID?.trim();
+    if (configuredStage) {
+      return configuredStage;
+    }
+
+    const cached = this.pipelineStagesCache.get(pipelineId);
+    if (cached && cached.length > 0) {
+      return cached.includes('appointmentscheduled') ? 'appointmentscheduled' : cached[0];
+    }
+
+    try {
+      const res = await this.hubspotFetch<{ stages: Array<{ id: string; displayOrder?: number }> }>(
+        `/crm/v3/pipelines/deals/${pipelineId}`
+      );
+
+      if (res.ok && res.data?.stages && res.data.stages.length > 0) {
+        const sortedStages = [...res.data.stages].sort(
+          (a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0)
+        );
+        const stageIds = sortedStages.map((s) => s.id);
+        this.pipelineStagesCache.set(pipelineId, stageIds);
+
+        if (stageIds.includes('appointmentscheduled')) {
+          return 'appointmentscheduled';
+        }
+
+        return stageIds[0];
+      }
+    } catch {
+      // Non-fatal network/API fallback
+    }
+
+    return 'appointmentscheduled';
+  }
+
+  /**
    * Check if HubSpot server credentials are configured
    */
   public isConfigured(): boolean {
-    return Boolean(this.accessToken && this.accessToken.length > 5);
+    const token = this.#getAccessToken();
+    return Boolean(token && token.length > 5);
   }
 
   /**
@@ -74,7 +121,8 @@ class HubSpotService {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<{ ok: boolean; status: number; data?: T; error?: string }> {
-    if (!this.accessToken) {
+    const token = this.#getAccessToken();
+    if (!token) {
       return { ok: false, status: 401, error: 'HubSpot access token is not configured.' };
     }
 
@@ -84,7 +132,7 @@ class HubSpotService {
 
     try {
       const headers = {
-        'Authorization': `Bearer ${this.accessToken}`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         ...(options.headers || {}),
@@ -112,20 +160,24 @@ class HubSpotService {
         const errorMsg =
           (data && typeof data === 'object' && data.message) ||
           `HubSpot API error: HTTP ${res.status}`;
+        console.warn(`[HubSpot CRM] ${options.method || 'GET'} ${endpoint.split('?')[0]} -> HTTP ${res.status} (${errorMsg})`);
         return { ok: false, status: res.status, data, error: errorMsg };
       }
 
+      console.info(`[HubSpot CRM] ${options.method || 'GET'} ${endpoint.split('?')[0]} -> HTTP ${res.status}`);
       return { ok: true, status: res.status, data };
     } catch (err: unknown) {
       clearTimeout(timeout);
-      if (err instanceof Error && err.name === 'AbortError') {
-        return { ok: false, status: 408, error: 'HubSpot request timed out after 10s.' };
-      }
-      return {
-        ok: false,
-        status: 500,
-        error: err instanceof Error ? err.message : 'Unknown HubSpot request failure.',
-      };
+      const isTimeout = err instanceof Error && err.name === 'AbortError';
+      const status = isTimeout ? 408 : 500;
+      const error = isTimeout
+        ? 'HubSpot request timed out after 10s.'
+        : err instanceof Error
+        ? err.message
+        : 'Unknown HubSpot request failure.';
+
+      console.warn(`[HubSpot CRM] ${options.method || 'GET'} ${endpoint.split('?')[0]} -> HTTP ${status} (${error})`);
+      return { ok: false, status, error };
     }
   }
 
@@ -300,10 +352,12 @@ class HubSpotService {
       .filter(Boolean)
       .join('\n');
 
+    const resolvedStageId = await this.resolveDealStageId(this.pipelineId);
+
     const dealProperties: HubSpotDealProperties = {
       dealname: dealName,
       pipeline: this.pipelineId,
-      dealstage: this.defaultDealStageId,
+      dealstage: resolvedStageId,
       description,
     };
 
@@ -360,6 +414,7 @@ class HubSpotService {
    */
   public async syncInquiryToHubSpot(inquiry: ProjectInquiryData): Promise<HubSpotSyncResult> {
     if (!this.isConfigured()) {
+      console.info('[HubSpot CRM] Lead sync skipped: HUBSPOT_ACCESS_TOKEN is not configured.');
       return {
         synced: false,
         error: 'HubSpot integration is inactive (HUBSPOT_ACCESS_TOKEN not set).',
@@ -375,8 +430,12 @@ class HubSpotService {
       try {
         dealId = await this.createDealForInquiry(inquiry, contactId);
       } catch (dealErr: unknown) {
-        console.warn('[HubSpot] Could not create deal for inquiry:', dealErr);
+        console.warn('[HubSpot CRM] Could not create deal for inquiry:', dealErr);
       }
+
+      console.info(
+        `[HubSpot CRM] Inquiry sync complete: Contact ${contactId} (${isExisting ? 'existing' : 'new'}), Deal: ${dealId || 'none'}`
+      );
 
       return {
         synced: true,
@@ -386,7 +445,7 @@ class HubSpotService {
       };
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Unknown HubSpot synchronization error.';
-      console.error('[HubSpot] Inquiry sync failed safely:', msg);
+      console.error(`[HubSpot CRM] Inquiry sync failed safely: ${msg}`);
       return {
         synced: false,
         error: msg,
