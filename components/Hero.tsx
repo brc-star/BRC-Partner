@@ -33,13 +33,15 @@ export function Hero({ onOpenInquiry }: HeroProps) {
             <span>BRC STAR PARTNER • FULL-STACK DIGITAL TECHNOLOGY</span>
           </div>
 
-          {/* Primary Main H1 Headline (1st Headline) */}
+          {/* Primary Main H1 Headline (1st Headline - Clean 2-Line Format) */}
           <h1
             id="hero-headline"
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.12]"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.18] max-w-5xl mx-auto"
           >
-            Build Your Digital Presence.{' '}
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-300 dark:to-purple-400 bg-clip-text text-transparent block sm:inline">
+            <span className="block">
+              Build Your Digital Presence.
+            </span>
+            <span className="block bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-300 dark:to-purple-400 bg-clip-text text-transparent mt-1">
               Accelerate Your Business.
             </span>
           </h1>
