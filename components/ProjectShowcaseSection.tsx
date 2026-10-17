@@ -4,23 +4,26 @@ import React, { useState } from 'react';
 import {
   ExternalLink,
   ArrowRight,
-  Shield,
-  Activity,
-  Layers,
-  Cpu,
-  Smartphone,
   Eye,
-  CheckCircle2,
-  Lock,
-  Search,
+  MessageCircle,
   Sparkles,
-  TrendingUp,
   ShieldCheck,
+  CheckCircle2,
 } from 'lucide-react';
-import { SHOWCASE_PROJECTS } from '@/lib/data';
-import { ProjectShowcaseItem } from '@/types';
-import { CaseStudyModal } from './CaseStudyModal';
-import { ClaimBadge } from './ClaimBadge';
+import { getWhatsAppUrl } from '@/lib/whatsapp';
+
+interface PortfolioProject {
+  id: string;
+  title: string;
+  industry: string;
+  badge: string;
+  description: string;
+  imageSrc: string;
+  altText: string;
+  isDemo: boolean;
+  demoUrl?: string;
+  technologies: string[];
+}
 
 interface ProjectShowcaseSectionProps {
   onOpenInquiry: (serviceName?: string) => void;
@@ -29,60 +32,135 @@ interface ProjectShowcaseSectionProps {
 
 export function ProjectShowcaseSection({
   onOpenInquiry,
-  onOpenClaimProof,
 }: ProjectShowcaseSectionProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [activeCaseStudy, setActiveCaseStudy] = useState<ProjectShowcaseItem | null>(null);
+  const [activePreviewImage, setActivePreviewImage] = useState<PortfolioProject | null>(null);
 
-  const categories = ['All', 'Enterprise Systems', 'Financial Technology', 'AI & Automation', 'E-Commerce Solutions', 'Mobile Application', 'Website Development'];
+  const portfolioProjects: PortfolioProject[] = [
+    {
+      id: 'dental-clinic',
+      title: 'Responsive Dental Clinic & Healthcare Website',
+      industry: 'Healthcare & Clinical Dentistry',
+      badge: 'Healthcare Clinic',
+      description:
+        'Patient discovery, treatment showcase, doctor profiles, and direct WhatsApp / online appointment booking flow.',
+      imageSrc: '/images/Responsive Dental Clinic Website Showcase.png',
+      altText: 'Responsive Dental Clinic Website Showcase demo by BRC STAR Partner',
+      isDemo: true,
+      technologies: ['Next.js', 'Tailwind CSS', 'WhatsApp Booking', 'Local SEO'],
+    },
+    {
+      id: 'textile-manufacturing',
+      title: 'BRCtex Global Textile & Fabric Mill Portal',
+      industry: 'Textile & Industrial Manufacturing',
+      badge: 'Textile & Industrial',
+      description:
+        'B2B yarn and fabric catalog, weaving machinery showcase, sample request pipeline, and export certifications display.',
+      imageSrc: '/images/Brctex Responsive Textile Website Showcase.png',
+      altText: 'BRCtex Responsive Textile Website Showcase demo by BRC STAR Partner',
+      isDemo: true,
+      technologies: ['Next.js', 'B2B Catalog', 'Sample Requests', 'Cloud CDN'],
+    },
+    {
+      id: 'fashion-ecommerce',
+      title: 'TEXMO Fashion & Apparel Storefront',
+      industry: 'Fashion, Garments & E-commerce',
+      badge: 'E-commerce & Fashion',
+      description:
+        'High-converting lookbook catalog, fluid responsive filters, multi-device sizing guide, and streamlined checkout.',
+      imageSrc: '/images/TEXMO Fashion Across Every Screen.png',
+      altText: 'TEXMO Fashion Across Every Screen demo by BRC STAR Partner',
+      isDemo: true,
+      technologies: ['Headless E-commerce', 'Razorpay', 'Next.js', 'TypeScript'],
+    },
+    {
+      id: 'saas-logistics',
+      title: 'Enterprise Fleet & Logistics Orchestration Console',
+      industry: 'SaaS & Custom Software',
+      badge: 'SaaS & Custom Software',
+      description:
+        'Real-time fleet telemetry, multi-stop routing optimization algorithms, and automated warehouse dispatch queues.',
+      imageSrc: '/images/brc-star-multi-device-tech-showcase.jpg',
+      altText: 'Enterprise Fleet Logistics SaaS Console demonstration by BRC STAR Partner',
+      isDemo: true,
+      technologies: ['React / Next.js', 'WebSockets', 'PostgreSQL', 'Redis'],
+    },
+    {
+      id: 'luxury-jewellery',
+      title: 'DAXY Diamond & Fine Jewellery Digital Flagship',
+      industry: 'Luxury Retail & E-commerce',
+      badge: 'Luxury E-Commerce',
+      description:
+        'Ultra-luxury catalog browsing, 360 diamond preview ergonomics, private concierge booking, and secure transactions.',
+      imageSrc: '/images/DAXY Diamond Luxury Showcase.png',
+      altText: 'DAXY Diamond Luxury Showcase demonstration by BRC STAR Partner',
+      isDemo: true,
+      technologies: ['Interactive Catalog', 'Next.js App Router', 'Stripe/Razorpay', 'Tailwind'],
+    },
+    {
+      id: 'wellness-beauty',
+      title: 'Pastel Beauty & Organic Wellness Flagship',
+      industry: 'Wellness & Beauty Salon',
+      badge: 'Beauty & Wellness',
+      description:
+        'Clean aesthetic appointment suite, treatment menu navigation, social proof integrations, and WhatsApp client triage.',
+      imageSrc: '/images/Pastel Beauty and Wellness Website Mockup.png',
+      altText: 'Pastel Beauty and Wellness Website Mockup demonstration by BRC STAR Partner',
+      isDemo: true,
+      technologies: ['Responsive Design', 'Direct WhatsApp', 'Local SEO', 'Fast CDN'],
+    },
+  ];
+
+  const categories = ['All', 'Healthcare Clinic', 'Textile & Industrial', 'E-commerce & Fashion', 'SaaS & Custom Software'];
 
   const filteredProjects = selectedCategory === 'All'
-    ? SHOWCASE_PROJECTS
-    : SHOWCASE_PROJECTS.filter((p) => p.category === selectedCategory);
+    ? portfolioProjects
+    : portfolioProjects.filter((p) => p.badge === selectedCategory);
 
   return (
     <section
-      id="showcase"
-      className="py-24 bg-[#f8fafc] dark:bg-[#060911] relative overflow-hidden transition-colors"
-      aria-labelledby="showcase-headline"
+      id="portfolio-section"
+      className="py-20 sm:py-24 bg-[#f8fafc] dark:bg-[#060911] relative overflow-hidden transition-colors border-b border-slate-200 dark:border-slate-800/80"
+      aria-labelledby="portfolio-headline"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/40 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-            <span>Demonstrated Systems &amp; Reference Architectures</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/60 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
+            <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+            <span>Demonstrated Engineering Capabilities</span>
           </div>
 
           <h2
-            id="showcase-headline"
+            id="portfolio-headline"
             className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight"
           >
-            Engineering Showcase &amp; Case Studies
+            Explore Our Website Portfolio
           </h2>
 
           <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-            Transparent walkthroughs of custom enterprise platforms, cloud web applications, AI copilots, and digital flagships engineered by BRC STAR.
+            Explore selected website demonstrations created for different industries and business needs.
           </p>
 
-          {/* Architectural Demonstration Disclaimer */}
-          <div className="mx-auto max-w-2xl p-3.5 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 flex items-center justify-center gap-2.5 text-xs text-slate-700 dark:text-slate-300 shadow-xs dark:shadow-inner">
+          {/* Transparent Demonstration Notice */}
+          <div className="mx-auto max-w-2xl p-3 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 flex items-center justify-center gap-2 text-xs text-slate-600 dark:text-slate-400 shadow-xs">
             <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-            <span className="text-left sm:text-center leading-normal">
-              <strong>Notice:</strong> These are architectural demonstrations built to prove engineering capability — not live client deployments. Real client case studies available on request.
+            <span>
+              <strong>Note:</strong> Demonstration websites engineered by BRC STAR Partner to prove design and technical capability.
             </span>
           </div>
 
           {/* Filter Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-3">
             {categories.map((cat) => (
               <button
                 key={cat}
+                type="button"
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   selectedCategory === cat
                     ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30'
-                    : 'bg-white dark:bg-[#0e1628] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-800 hover:border-blue-300 dark:hover:border-slate-700 shadow-2xs'
+                    : 'bg-white dark:bg-[#0e1628] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-800'
                 }`}
               >
                 {cat}
@@ -92,282 +170,162 @@ export function ProjectShowcaseSection({
         </div>
 
         {/* 6 Visual Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id}
-              id={`project-card-${project.id}`}
-              className="rounded-2xl bg-white dark:bg-[#0a101d] border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500/40 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md dark:shadow-xl group"
-            >
-              {/* Realistic Visual Interface Mockup Header */}
-              <div className="p-4 sm:p-5 bg-slate-50 dark:bg-[#070c17] border-b border-slate-200 dark:border-slate-800/80">
-                {/* Mockup Container */}
-                <div className="rounded-xl bg-white dark:bg-[#0e172a] border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs dark:shadow-inner font-sans">
-                  {/* Mockup Window Chrome */}
-                  <div className="flex items-center justify-between px-3 py-2 bg-slate-100 dark:bg-[#090f1d] border-b border-slate-200 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700" />
-                      <div className="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-700" />
-                      <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400 ml-2">
-                        {project.id}.demo.brcstar.internal
-                      </span>
-                    </div>
-                    <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
-                      {project.demonstrationType.toUpperCase()}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProjects.map((project) => {
+            const waUrl = getWhatsAppUrl({
+              industry: project.industry,
+              requirement: `I am interested in a project similar to ${project.title}`,
+            });
+
+            return (
+              <div
+                key={project.id}
+                id={`portfolio-card-${project.id}`}
+                className="rounded-3xl bg-white dark:bg-[#0a101d] border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500/40 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-xl transition-all duration-300 group"
+              >
+                {/* Visual Image Header */}
+                <div
+                  className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900 cursor-pointer"
+                  onClick={() => setActivePreviewImage(project)}
+                >
+                  <img
+                    src={project.imageSrc}
+                    alt={project.altText}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-contain sm:object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3 left-3 flex items-center gap-2">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-blue-600 text-white shadow-xs">
+                      Demo
+                    </span>
+                    <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-md bg-slate-900/80 backdrop-blur-md text-slate-300 border border-white/10">
+                      {project.badge}
                     </span>
                   </div>
-
-                  {/* Mockup Specific Interactive Body */}
-                  <div className="p-4 bg-white dark:bg-gradient-to-b dark:from-[#0e172a] dark:to-[#0a101e] min-h-[170px] flex flex-col justify-between">
-                    {/* Mockup 1: Logistics Fleet Dashboard */}
-                    {project.mockupType === 'dashboard' && (
-                      <div className="space-y-2.5">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <Activity className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Active Fleet Telemetry (Simulated Dispatch)</span>
-                          </div>
-                          <span className="text-[10px] font-mono text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800">
-                            Latency &lt; 40ms
-                          </span>
-                        </div>
-                        <div className="grid grid-cols-3 gap-2 text-[10px]">
-                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
-                            <span className="text-slate-500">Pipeline Type</span>
-                            <div className="font-bold text-slate-800 dark:text-slate-200 text-xs">WebSocket Stream</div>
-                          </div>
-                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
-                            <span className="text-slate-500">Route Engine</span>
-                            <div className="font-bold text-emerald-600 dark:text-emerald-400 text-xs">Multi-Stop Graph</div>
-                          </div>
-                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
-                            <span className="text-slate-500">Data Model</span>
-                            <div className="font-bold text-indigo-600 dark:text-indigo-400 text-xs">PostGIS Schema</div>
-                          </div>
-                        </div>
-                        <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-                          <div className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 w-3/4" />
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Mockup 2: FinTech Settlement Portal */}
-                    {project.mockupType === 'fintech' && (
-                      <div className="space-y-2.5">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <Lock className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Multi-Currency Settlement Blueprint</span>
-                          </div>
-                          <span className="text-[10px] font-mono text-purple-700 dark:text-purple-400 bg-purple-50 dark:bg-purple-950 px-2 py-0.5 rounded border border-purple-200 dark:border-purple-800">
-                            Zero-Trust Model
-                          </span>
-                        </div>
-                        <div className="grid grid-cols-2 gap-2 text-[10px]">
-                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
-                            <span className="text-slate-500">Ledger Validation</span>
-                            <div className="font-bold text-emerald-600 dark:text-emerald-400 text-sm">Double-Entry ACID</div>
-                          </div>
-                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">
-                            <span className="text-slate-500">Tenant Isolation</span>
-                            <div className="font-bold text-slate-800 dark:text-slate-200 text-sm">Schema-Per-Partner</div>
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 font-mono">
-                          <span>Ledger Checksum: #SHA-256-VERIFIED</span>
-                          <span className="text-emerald-600 dark:text-emerald-400">Reconciliation Blueprint</span>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Mockup 3: AI Document Workspace */}
-                    {project.mockupType === 'ai-workspace' && (
-                      <div className="space-y-2.5">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Semantic RAG Regulatory Query Console</span>
-                          </div>
-                          <span className="text-[10px] font-mono text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800">
-                            pgvector Index
-                          </span>
-                        </div>
-                        <div className="p-2 rounded bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1">
-                          <div className="flex items-center gap-1.5 text-[10px] text-slate-700 dark:text-slate-300 font-mono">
-                            <Search className="w-3 h-3 text-blue-600 dark:text-blue-400" />
-                            <span>&quot;What are the compliance mandates for cross-border data transfer?&quot;</span>
-                          </div>
-                          <div className="text-[10px] text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/30 p-1.5 rounded border border-emerald-200 dark:border-emerald-900/40">
-                            Answer grounded in 4 verified manual bylaws (Citations #8, #14).
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Mockup 4: E-Commerce Wholesale Platform */}
-                    {project.mockupType === 'ecommerce' && (
-                      <div className="space-y-2.5">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <TrendingUp className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Tier-3 Wholesale Contract Price Matrix</span>
-                          </div>
-                          <span className="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
-                            Headless ISR
-                          </span>
-                        </div>
-                        <div className="grid grid-cols-3 gap-2 text-[10px]">
-                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                            <span className="text-slate-500">Catalog Strategy</span>
-                            <div className="font-bold text-slate-800 dark:text-slate-200 text-xs">Edge Caching</div>
-                          </div>
-                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                            <span className="text-slate-500">Pricing Engine</span>
-                            <div className="font-bold text-emerald-600 dark:text-emerald-400 text-xs">Dynamic Micro-API</div>
-                          </div>
-                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                            <span className="text-slate-500">Net Terms</span>
-                            <div className="font-bold text-indigo-600 dark:text-indigo-400 text-xs">Net-30 / 60 Invoicing</div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Mockup 5: Mobile App Field Inspection */}
-                    {project.mockupType === 'mobile-app' && (
-                      <div className="space-y-2.5">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <Smartphone className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Field Diagnostics (Offline-First)</span>
-                          </div>
-                          <span className="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
-                            Local SQLite Sync
-                          </span>
-                        </div>
-                        <div className="p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-[10px]">
-                          <div>
-                            <span className="font-bold text-slate-800 dark:text-slate-200 block">Unit #748B Inspection Completed</span>
-                            <span className="text-slate-500">Signature captured &amp; timestamped</span>
-                          </div>
-                          <span className="text-emerald-600 dark:text-emerald-400 font-mono">100% Synced</span>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Mockup 6: SaaS Web Flagship */}
-                    {project.mockupType === 'saas-web' && (
-                      <div className="space-y-2.5">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <Cpu className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
-                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">Cybersecurity Infrastructure Flagship</span>
-                          </div>
-                          <span className="text-[10px] font-mono text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800">
-                            App Router ISR
-                          </span>
-                        </div>
-                        <div className="grid grid-cols-2 gap-2 text-[10px]">
-                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                            <span className="text-slate-500">Core Web Vitals</span>
-                            <div className="font-bold text-emerald-600 dark:text-emerald-400 text-xs">Sub-Second LCP</div>
-                          </div>
-                          <div className="p-2 rounded bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                            <span className="text-slate-500">Lead Pipeline</span>
-                            <div className="font-bold text-blue-600 dark:text-blue-400 text-xs">Sanitized Validation</div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
                 </div>
-              </div>
 
-              {/* Project Details */}
-              <div className="p-6 sm:p-7 space-y-4">
-                <div className="space-y-1">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 font-mono">
-                        {project.category}
-                      </span>
-                      <ClaimBadge status={project.proofStatus} size="sm" />
-                    </div>
-                    <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
-                      {project.demonstrationType}
+                {/* Content */}
+                <div className="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                  <div className="space-y-2.5">
+                    <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 font-mono block">
+                      {project.industry}
                     </span>
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-snug">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {project.description}
+                    </p>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {project.tagline}
-                  </p>
-                </div>
 
-                {/* Challenge & Solution Summary */}
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#070d18] border border-slate-200 dark:border-slate-800/80 space-y-2 text-xs">
-                  <div>
-                    <strong className="text-amber-600 dark:text-amber-400 font-semibold block mb-0.5 font-mono">Challenge:</strong>
-                    <p className="text-slate-600 dark:text-slate-400 line-clamp-2">{project.challenge}</p>
+                  {/* Tech stack */}
+                  <div className="flex flex-wrap gap-1.5 pt-2">
+                    {project.technologies.map((t) => (
+                      <span
+                        key={t}
+                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400"
+                      >
+                        {t}
+                      </span>
+                    ))}
                   </div>
-                  <div>
-                    <strong className="text-emerald-600 dark:text-emerald-400 font-semibold block mb-0.5 font-mono">Delivered Solution:</strong>
-                    <p className="text-slate-700 dark:text-slate-300 line-clamp-2">{project.solution}</p>
-                  </div>
-                </div>
 
-                {/* Tech Pills */}
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {project.technologies.slice(0, 4).map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400"
+                  {/* Actions */}
+                  <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setActivePreviewImage(project)}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors cursor-pointer"
                     >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.technologies.length > 4 && (
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-500">
-                      +{project.technologies.length - 4} more
-                    </span>
-                  )}
-                </div>
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>View Demo →</span>
+                    </button>
 
-                {/* Bottom Card Action */}
-                <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between">
-                  <button
-                    onClick={() => setActiveCaseStudy(project)}
-                    className="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors cursor-pointer"
-                  >
-                    <Eye className="w-4 h-4" />
-                    <span>View Case Study Breakdown</span>
-                  </button>
-
-                  <button
-                    onClick={() => onOpenInquiry(project.title)}
-                    className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
-                  >
-                    <span>Request Estimate</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                    <a
+                      href={waUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                      <span>Discuss Similar</span>
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Case Study Modal Component */}
-        <CaseStudyModal
-          project={activeCaseStudy}
-          onClose={() => setActiveCaseStudy(null)}
-          onOpenInquiry={onOpenInquiry}
-          onOpenClaimProof={onOpenClaimProof}
-        />
+        {/* View All Projects / Inquiry CTA banner */}
+        <div className="mt-12 text-center">
+          <button
+            type="button"
+            onClick={() => onOpenInquiry('Custom Website Portfolio Inquiry')}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs sm:text-sm font-semibold transition-all cursor-pointer"
+          >
+            <span>Discuss Your Custom Website Requirements With Us</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
       </div>
+
+      {/* Image Preview Modal */}
+      {activePreviewImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+          onClick={() => setActivePreviewImage(null)}
+        >
+          <div
+            className="relative max-w-4xl w-full bg-white dark:bg-[#0c1324] rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-2xl p-4 sm:p-6 space-y-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+              <div>
+                <h4 className="text-base font-bold text-slate-900 dark:text-white">
+                  {activePreviewImage.title}
+                </h4>
+                <p className="text-xs text-blue-600 dark:text-blue-400 font-mono">
+                  {activePreviewImage.industry} • Demo Showcase
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setActivePreviewImage(null)}
+                className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
+
+            <div className="relative aspect-[16/10] w-full bg-slate-900 rounded-xl overflow-hidden">
+              <img
+                src={activePreviewImage.imageSrc}
+                alt={activePreviewImage.altText}
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+              <p className="text-xs text-slate-600 dark:text-slate-300">
+                {activePreviewImage.description}
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  const proj = activePreviewImage;
+                  setActivePreviewImage(null);
+                  onOpenInquiry(proj.title);
+                }}
+                className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shrink-0 cursor-pointer"
+              >
+                Discuss a Similar Project →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
-

@@ -1,59 +1,41 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import {
-  Globe,
-  ShoppingCart,
-  Smartphone,
-  Bot,
-  Layers,
+  CheckCircle2,
   ArrowRight,
   ShieldCheck,
+  MessageCircle,
   Sparkles,
-  CreditCard,
   Lock,
+  Globe,
+  FileText,
+  Clock,
+  Layers,
 } from 'lucide-react';
-import { HOMEPAGE_PRICING_PREVIEW, findPlanById } from '@/lib/pricing-data';
-import { PricingPlan } from '@/types/payment';
-import { RazorpayCheckoutModal } from '@/components/RazorpayCheckoutModal';
-
-// Map preview cards to actual canonical pricing plans in India market
-const PREVIEW_TO_PLAN_ID_MAP: Record<string, string> = {
-  'hp-web-development': 'plan-webdev-basic-in',
-  'hp-ecommerce': 'plan-ecom-starter-in',
-  'hp-mobile-app': 'plan-mobile-basic-in',
-  'hp-ai-automation': 'plan-ai-starter-in',
-  'hp-saas-web-app': 'plan-saas-starter-in',
-};
+import { getWhatsAppUrl } from '@/lib/whatsapp';
 
 export function HomepagePricingPreview() {
-  const [selectedPlanForCheckout, setSelectedPlanForCheckout] = useState<PricingPlan | null>(null);
+  const basicPlanInclusions = [
+    'Up to 5 custom responsive pages',
+    'Mobile-first responsive design',
+    'Modern high-converting UI/UX',
+    'Contact & enquiry forms',
+    'Direct WhatsApp lead capture integration',
+    'Technical SEO setup & XML sitemaps',
+    'Google Maps & business profile linking',
+    'SSL & HTTPS security configuration',
+    'Speed & Core Web Vitals optimization',
+    '30 days post-launch support included',
+  ];
 
-  const getCategoryIcon = (name: string) => {
-    switch (name) {
-      case 'Web Development':
-        return <Globe className="w-5 h-5 text-blue-400" />;
-      case 'E-Commerce':
-        return <ShoppingCart className="w-5 h-5 text-indigo-400" />;
-      case 'Mobile App':
-        return <Smartphone className="w-5 h-5 text-cyan-400" />;
-      case 'AI & Automation':
-        return <Bot className="w-5 h-5 text-purple-400" />;
-      case 'SaaS / Web Application':
-        return <Layers className="w-5 h-5 text-emerald-400" />;
-      default:
-        return <Sparkles className="w-5 h-5 text-blue-400" />;
-    }
-  };
+  const gstStatement = 'Pricing is subject to applicable taxes (18% GST). Transparent milestone invoicing with zero hidden charges.';
 
-  const handlePayNow = (previewItemId: string) => {
-    const planId = PREVIEW_TO_PLAN_ID_MAP[previewItemId] || 'plan-webdev-basic-in';
-    const plan = findPlanById(planId, 'india');
-    if (plan) {
-      setSelectedPlanForCheckout(plan);
-    }
-  };
+  const pricingWhatsAppUrl = getWhatsAppUrl({
+    industry: 'Basic Website Package (₹29,999)',
+    requirement: 'Check My Website Requirements for Basic Website Package (₹29,999)',
+  });
 
   return (
     <section
@@ -66,111 +48,121 @@ export function HomepagePricingPreview() {
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-12 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-300 text-xs font-semibold uppercase tracking-wider font-mono">
             <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>Pricing / Investment</span>
+            <span>Clear Starting Prices</span>
           </div>
 
           <h2
             id="pricing-preview-heading"
             className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight"
           >
-            Transparent Starting Prices
+            Clear Starting Prices
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed">
-            Transparent starting prices for every stage of your digital journey.
+            Transparent milestone pricing with no recurring template lock-in and complete source code ownership.
           </p>
         </div>
 
-        {/* 5 Compact Pricing Preview Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 mb-10">
-          {HOMEPAGE_PRICING_PREVIEW.map((item) => (
-            <div
-              key={item.id}
-              id={`hp-pricing-${item.id}`}
-              className="group rounded-2xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-slate-800/90 hover:border-blue-400 dark:hover:border-blue-500/50 p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:bg-slate-50 dark:hover:bg-[#0e172d] hover:-translate-y-1 shadow-sm hover:shadow-md dark:shadow-lg"
-            >
-              <div className="space-y-4">
-                {/* Category Icon & Name */}
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-slate-900/90 border border-blue-200 dark:border-slate-800 flex items-center justify-center shrink-0 group-hover:border-blue-400 dark:group-hover:border-blue-500/40 text-blue-600 dark:text-blue-400 transition-colors">
-                    {getCategoryIcon(item.name)}
-                  </div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
-                    {item.name}
-                  </h3>
-                </div>
+        {/* Featured Price Card: Basic Website Package (₹29,999) */}
+        <div className="max-w-4xl mx-auto rounded-3xl bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-blue-500/40 p-6 sm:p-10 shadow-xl dark:shadow-2xl relative overflow-hidden">
+          {/* Top highlight bar */}
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
 
-                {/* Tagline */}
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed min-h-[32px]">
-                  {item.tagline}
-                </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left: Package Info & Price */}
+            <div className="lg:col-span-5 space-y-5 text-left border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 pb-6 lg:pb-0 lg:pr-8">
+              <div className="space-y-2">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                  Featured Starting Package
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                  Basic Website Package
+                </h3>
+              </div>
 
-                {/* Price Display */}
-                <div className="pt-3 border-t border-slate-200 dark:border-slate-800/60 space-y-1">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono block">
-                    From
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                A professional website foundation for businesses ready to establish their online presence.
+              </p>
+
+              <div className="pt-2">
+                <span className="text-[11px] font-mono font-bold uppercase text-slate-500 dark:text-slate-400 block">
+                  Starting Investment
+                </span>
+                <div className="flex items-baseline gap-2 mt-1">
+                  <span className="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white font-mono tracking-tight">
+                    ₹29,999
                   </span>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight font-mono">
-                    {item.formattedStartingPrice}
-                  </div>
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
+                    one-time
+                  </span>
                 </div>
               </div>
 
-              {/* Pay Now & Detail Actions */}
-              <div className="pt-5 mt-4 border-t border-slate-200 dark:border-slate-800/80 space-y-2.5">
-                <button
-                  type="button"
-                  id={`pay-now-btn-${item.id}`}
-                  onClick={() => handlePayNow(item.id)}
-                  className="w-full py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-md shadow-blue-600/30 hover:shadow-blue-600/50 hover:-translate-y-0.5 transition-all cursor-pointer group/btn"
+              <div className="space-y-3 pt-2">
+                <a
+                  href={pricingWhatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 hover:-translate-y-0.5 transition-all duration-200"
                 >
-                  <CreditCard className="w-3.5 h-3.5 text-blue-200" />
-                  <span>Pay Now</span>
-                </button>
+                  <span>Check My Website Requirements →</span>
+                </a>
 
-                <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono">
-                  <span className="flex items-center gap-1 text-[10px] text-emerald-600 dark:text-emerald-400">
-                    <ShieldCheck className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-                    <span>Secure Checkout</span>
-                  </span>
-                  <span className="flex items-center gap-1 text-[10px] text-slate-500 dark:text-slate-400">
-                    <Lock className="w-2.5 h-2.5 text-slate-500 dark:text-slate-400" />
-                    <span>Razorpay</span>
-                  </span>
-                </div>
+                <Link
+                  href="/pricing"
+                  className="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-800 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                >
+                  <span>View All Packages &amp; Add-ons</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+
+              <div className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400 pt-1">
+                <Clock className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                <span>Typical Delivery: 1 to 2 Weeks</span>
               </div>
             </div>
-          ))}
-        </div>
 
-        {/* Supporting Message & CTA Action Area */}
-        <div className="flex flex-col items-center justify-center space-y-5 text-center">
-          {/* Supporting Message */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-[#0a101e] border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium shadow-xs">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-            <span>Transparent milestone-based pricing with zero hidden fees.</span>
-          </div>
+            {/* Right: Inclusions & Terms */}
+            <div className="lg:col-span-7 space-y-4">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 font-mono block">
+                What&apos;s Included in This Package:
+              </span>
 
-          {/* Primary CTA button linking to /pricing */}
-          <div>
-            <Link
-              href="/pricing"
-              id="hp-view-detailed-pricing-cta"
-              className="inline-flex items-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm sm:text-base font-bold shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 hover:-translate-y-0.5 transition-all duration-200"
-            >
-              <span>View Detailed Pricing</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {basicPlanInclusions.map((inc, i) => (
+                  <div key={i} className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                    <span>{inc}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* GST and Transparency Notice */}
+              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#070d18] border border-slate-200 dark:border-slate-800/80 space-y-1.5 text-xs">
+                <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300 font-semibold">
+                  <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
+                  <span>GST &amp; Milestone Terms</span>
+                </div>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                  {gstStatement} Work commences with 50% deposit and 50% upon completed staging approval before deployment.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 text-[11px] text-slate-500 font-mono">
+                <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <span>100% Full Code Ownership</span>
+                </span>
+                <span className="flex items-center gap-1 text-blue-600 dark:text-blue-400">
+                  <Globe className="w-3.5 h-3.5" />
+                  <span>Zero Monthly Host Lock-In</span>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Razorpay Checkout Modal */}
-      <RazorpayCheckoutModal
-        isOpen={Boolean(selectedPlanForCheckout)}
-        onClose={() => setSelectedPlanForCheckout(null)}
-        selectedPlan={selectedPlanForCheckout}
-      />
     </section>
   );
 }
