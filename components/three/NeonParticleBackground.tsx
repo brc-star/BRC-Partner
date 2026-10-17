@@ -197,10 +197,21 @@ export default function NeonParticleBackground() {
       return;
     }
 
-    try {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const isMobile = window.innerWidth < 768;
-      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+    let isDisposed = false;
+    let cleanupFn: (() => void) | null = null;
+
+    // Use requestIdleCallback or setTimeout to defer heavy WebGL initialization until after initial page paint and hydration
+    const scheduleInit = typeof window !== 'undefined' && 'requestIdleCallback' in window
+      ? (cb: () => void) => (window as unknown as { requestIdleCallback: (fn: () => void) => number }).requestIdleCallback(cb)
+      : (cb: () => void) => setTimeout(cb, 250);
+
+    scheduleInit(() => {
+      if (isDisposed || !containerRef.current) return;
+
+      try {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobile = window.innerWidth < 768;
+        const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
 
       // Scene & Camera
       const scene = new THREE.Scene();
@@ -807,7 +818,7 @@ export default function NeonParticleBackground() {
     // =========================================================================
     // CLEANUP DISPOSAL
     // =========================================================================
-    return () => {
+    cleanupFn = () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
@@ -839,8 +850,13 @@ export default function NeonParticleBackground() {
     };
     } catch (err) {
       console.warn('[NeonParticleBackground] Three.js WebGL error handled safely:', err);
-      return;
     }
+    });
+
+    return () => {
+      isDisposed = true;
+      if (cleanupFn) cleanupFn();
+    };
   }, []);
 
   return (

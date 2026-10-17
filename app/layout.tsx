@@ -118,10 +118,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           id="hs-script-loader"
           strategy="afterInteractive"
           src="https://js-na2.hs-scripts.com/247702711.js"
-          onError={() => {
-            // Failsafe: tracking blocked by browser adblocker / extension
-            console.warn('[HubSpot Script] Tracking script blocked or unavailable.');
-          }}
         />
       </body>
     </html>

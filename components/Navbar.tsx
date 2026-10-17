@@ -443,7 +443,7 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
                 onClick={() => onOpenInquiry()}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-sm font-medium shadow-md shadow-blue-600/25 hover:shadow-blue-600/40 border border-blue-400/30 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-[#060911]"
               >
-                <span>Start a Project</span>
+                <span>Get a Free Consultation</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -618,7 +618,7 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
                 </Link>
               </div>
 
-              {/* Start a Project CTA Button */}
+              {/* Start a Project / Free Consultation CTA Button */}
               <div className="pt-3 border-t border-slate-200 dark:border-slate-800/80">
                 <button
                   onClick={() => {
@@ -627,7 +627,7 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
                   }}
                   className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 cursor-pointer"
                 >
-                  <span>Start a Project</span>
+                  <span>Get a Free Consultation</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
