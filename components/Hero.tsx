@@ -27,13 +27,13 @@ export function Hero({ onOpenInquiry }: HeroProps) {
       {/* 1. Value Proposition, Approved Headline & Primary Conversion Actions */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-14 pb-8 text-center">
         <div className="max-w-4xl mx-auto space-y-6">
-          {/* Eyebrow / Alternative Supporting Statement */}
+          {/* Eyebrow Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-700/60 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider shadow-inner font-mono">
             <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse" />
-            <span>Turn Your Business Into a Stronger Digital Brand</span>
+            <span>BRC STAR PARTNER • FULL-STACK DIGITAL TECHNOLOGY</span>
           </div>
 
-          {/* Primary Main H1 Headline */}
+          {/* Primary Main H1 Headline (1st Headline) */}
           <h1
             id="hero-headline"
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.12]"
@@ -43,6 +43,11 @@ export function Hero({ onOpenInquiry }: HeroProps) {
               Accelerate Your Business.
             </span>
           </h1>
+
+          {/* Supporting 2nd Headline */}
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400 tracking-tight max-w-3xl mx-auto">
+            Turn Your Business Into a Stronger Digital Brand.
+          </h2>
 
           {/* Subtitle */}
           <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
