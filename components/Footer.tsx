@@ -198,6 +198,11 @@ export function Footer({ onOpenInquiry }: FooterProps) {
                 </Link>
               </li>
               <li>
+                <Link href="/contact" className="hover:text-blue-400 transition-colors">
+                  Contact Us
+                </Link>
+              </li>
+              <li>
                 <button
                   onClick={onOpenInquiry}
                   className="text-blue-600 dark:text-blue-400 hover:underline font-semibold text-left cursor-pointer"

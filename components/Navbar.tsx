@@ -102,7 +102,7 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
     { label: 'Portfolio', href: '/#showcase' },
     { label: 'Process', href: '/#process' },
     // Technology dropdown is rendered here
-    { label: 'Contact', href: '/#final-conversion' },
+    { label: 'Contact', href: '/contact' },
   ];
 
   // Real existing sections and pages mapped under Technology dropdown
@@ -419,16 +419,7 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
 
               {/* Contact */}
               <Link
-                href="/#final-conversion"
-                onClick={(e) => {
-                  if (typeof window !== 'undefined' && window.location.pathname === '/') {
-                    const el = document.getElementById('final-conversion');
-                    if (el) {
-                      e.preventDefault();
-                      el.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }
-                }}
+                href="/contact"
                 className="px-3 py-1.5 text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/40 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 Contact
@@ -601,17 +592,8 @@ export function Navbar({ onOpenInquiry }: NavbarProps) {
 
                 {/* Contact */}
                 <Link
-                  href="/#final-conversion"
-                  onClick={(e) => {
-                    handleLinkClick();
-                    if (typeof window !== 'undefined' && window.location.pathname === '/') {
-                      const el = document.getElementById('final-conversion');
-                      if (el) {
-                        e.preventDefault();
-                        el.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }
-                  }}
+                  href="/contact"
+                  onClick={() => handleLinkClick()}
                   className="px-3 py-2.5 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800/60 dark:hover:text-blue-400 font-medium text-sm transition-colors"
                 >
                   Contact
