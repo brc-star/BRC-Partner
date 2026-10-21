@@ -21,6 +21,7 @@ export interface PromotionalCampaign {
   countdownMinutes: number;
   popupDelayMs: number;
   frequencyDays: number;
+  isActive: boolean;
   storageKeyTimer: string;
   storageKeyDismissed: string;
   excludedRoutes: string[];
@@ -45,6 +46,7 @@ export const NAVRATRI_CAMPAIGN: PromotionalCampaign = {
   countdownMinutes: 5,
   popupDelayMs: 3500, // Show after 3.5 seconds on eligible pages
   frequencyDays: 3, // Frequency cap: once every 3 days if dismissed
+  isActive: false, // Campaign closed
   storageKeyTimer: 'brc_navratri_timer_expiry',
   storageKeyDismissed: 'brc_navratri_promo_dismissed',
   excludedRoutes: [

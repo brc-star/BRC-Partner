@@ -4,7 +4,6 @@ import './globals.css';
 import { SITE } from '@/lib/site-config';
 import { ThemeProvider } from '@/lib/theme-context';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
-import { NavratriPromoModal } from '@/components/NavratriPromoModal';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -112,7 +111,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           {children}
           <WhatsAppButton />
-          <NavratriPromoModal />
         </ThemeProvider>
 
         {/* HubSpot CRM Tracking Code */}

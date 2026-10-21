@@ -21,6 +21,11 @@ export function NavratriPromoModal() {
   const [secondsRemaining, setSecondsRemaining] = useState<number | null>(null);
   const [isExpired, setIsExpired] = useState(false);
 
+  // If campaign is closed/inactive, do not mount or run timers
+  if (!NAVRATRI_CAMPAIGN.isActive) {
+    return null;
+  }
+
   // Check route exclusion
   const isExcludedRoute = useCallback((path: string) => {
     return NAVRATRI_CAMPAIGN.excludedRoutes.some((route) => path.startsWith(route));
