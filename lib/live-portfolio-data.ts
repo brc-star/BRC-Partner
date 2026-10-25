@@ -1,3 +1,18 @@
+export interface ProjectFeatureCard {
+  icon:
+    | 'ShoppingCart'
+    | 'Laptop'
+    | 'Layers'
+    | 'Gauge'
+    | 'Calendar'
+    | 'Cloud'
+    | 'Shield'
+    | 'Cpu'
+    | 'Sparkles'
+    | 'Globe';
+  title: string;
+}
+
 export interface LiveProject {
   id: string;
   name: string;
@@ -11,9 +26,14 @@ export interface LiveProject {
     | 'Textile & Manufacturing'
     | 'Business Advisory'
     | 'AI & FinTech';
+  badgeLabel: string;
+  headlineMain: string;
+  headlineSub: string;
   tagline: string;
   description: string;
+  featureCards: ProjectFeatureCard[];
   technologies: string[];
+  screenshotSrc: string;
   imageSrc: string;
   altText: string;
   badge: string;
@@ -23,15 +43,25 @@ export interface LiveProject {
 export const LIVE_PROJECTS: LiveProject[] = [
   {
     id: 'dental-clinic',
-    name: 'Apex Dental Clinic & Healthcare Portal',
+    name: 'Apex Dental Clinic Healthcare Portal',
     domain: 'dentalclinic.brcstar.in',
     url: 'https://dentalclinic.brcstar.in/',
     category: 'Healthcare',
+    badgeLabel: 'CLINICAL HEALTHCARE & DENTISTRY',
+    headlineMain: 'Apex Dental Clinic',
+    headlineSub: 'Healthcare Portal',
     tagline: 'Modern Clinical Dentistry, Treatment Catalogs & Direct Patient Scheduling Flow',
     description:
-      'A high-conversion digital clinic website built for modern dental practices. Features interactive treatment catalogs, doctor profiles, procedure guides, smile gallery showcases, and friction-free direct WhatsApp and online appointment triage.',
+      'A fully responsive digital healthcare portal for Apex Dental Clinic showcasing treatments, doctor profiles, patient discovery and smile gallery with seamless WhatsApp booking and real-time appointment scheduling.',
+    featureCards: [
+      { icon: 'Calendar', title: 'Online Appointments' },
+      { icon: 'Laptop', title: 'Responsive Design' },
+      { icon: 'Layers', title: 'Treatment Catalog' },
+      { icon: 'Gauge', title: 'Fast Loading Speed' },
+    ],
     technologies: ['Next.js 15', 'Tailwind CSS', 'WhatsApp Booking', 'Local SEO', 'Interactive UI'],
-    imageSrc: '/images/Responsive Dental Clinic Website Showcase.png',
+    screenshotSrc: '/images/live-showcase/dentalclinic.png',
+    imageSrc: '/images/live-showcase/dentalclinic.png',
     altText: 'Apex Dental Clinic & Healthcare Website live showcase by BRC STAR Partner',
     badge: 'Clinical Healthcare',
     highlights: [
@@ -42,15 +72,25 @@ export const LIVE_PROJECTS: LiveProject[] = [
   },
   {
     id: 'tech-portal',
-    name: 'BRC STAR Technology Solutions & Cloud Services',
+    name: 'BRC Tech Cloud & IT Solutions',
     domain: 'tech.brcstar.in',
     url: 'https://tech.brcstar.in/',
     category: 'Technology & IT',
+    badgeLabel: 'ENTERPRISE CLOUD ARCHITECTURE',
+    headlineMain: 'BRC Tech',
+    headlineSub: 'Cloud Solutions Portal',
     tagline: 'Enterprise Cloud Architecture, IT Consulting & Custom Systems Engineering',
     description:
-      'The specialized technology engineering wing of BRC STAR, presenting end-to-end cloud migration, microservices architecture, API integrations, DevOps CI/CD pipelines, and enterprise software infrastructure solutions.',
+      'The specialized technology engineering portal of BRC STAR, delivering modern cloud migrations, microservices architectures, DevOps CI/CD automation, and high-security enterprise API systems.',
+    featureCards: [
+      { icon: 'Cloud', title: 'Cloud Architecture' },
+      { icon: 'Laptop', title: 'Responsive Design' },
+      { icon: 'Cpu', title: 'DevOps & CI/CD' },
+      { icon: 'Gauge', title: 'Fast Loading Speed' },
+    ],
     technologies: ['Next.js', 'TypeScript', 'Cloud Architecture', 'DevOps CI/CD', 'API Gateway'],
-    imageSrc: '/images/brc-star-technology-partner-hero-banner.jpg',
+    screenshotSrc: '/images/live-showcase/tech.png',
+    imageSrc: '/images/live-showcase/tech.png',
     altText: 'BRC STAR Technology Solutions and Cloud Infrastructure live portal',
     badge: 'Enterprise Tech',
     highlights: [
@@ -61,15 +101,25 @@ export const LIVE_PROJECTS: LiveProject[] = [
   },
   {
     id: 'corporate-flagship',
-    name: 'BRC STAR Corporate & Flagship Enterprise Portal',
+    name: 'BRC STAR Corporate Flagship Portal',
     domain: 'brcstar.in',
     url: 'https://brcstar.in',
     category: 'Enterprise',
+    badgeLabel: 'CORPORATE FLAGSHIP ECOSYSTEM',
+    headlineMain: 'BRC STAR',
+    headlineSub: 'Corporate Enterprise Portal',
     tagline: 'Multi-Industry Corporate Ecosystem & Strategic Business Solutions',
     description:
-      'The corporate flagship digital portal representing the BRC STAR parent ecosystem. Showcases strategic business verticals, corporate leadership, cross-domain capabilities, multi-device digital products, and investor relations.',
+      'The parent corporate flagship portal for BRC STAR, presenting multi-industry capabilities, executive leadership, institutional digital products, and high-performance brand architecture.',
+    featureCards: [
+      { icon: 'Globe', title: 'Multi-Industry Vertical' },
+      { icon: 'Laptop', title: 'Multi-Screen UI' },
+      { icon: 'Shield', title: 'Enterprise Security' },
+      { icon: 'Gauge', title: 'Sub-2.5s LCP Speed' },
+    ],
     technologies: ['Next.js', 'Tailwind CSS', 'Responsive Multi-Device', 'Enterprise Security', 'Performance Optimized'],
-    imageSrc: '/images/BRC STAR Multi-Device Tech Showcase.png',
+    screenshotSrc: '/images/live-showcase/brcstar.png',
+    imageSrc: '/images/live-showcase/brcstar.png',
     altText: 'BRC STAR Corporate Flagship Enterprise Portal live preview',
     badge: 'Corporate Flagship',
     highlights: [
@@ -80,15 +130,25 @@ export const LIVE_PROJECTS: LiveProject[] = [
   },
   {
     id: 'cloud-app',
-    name: 'BRC STAR Cloud SaaS & Enterprise App Platform',
+    name: 'BRC STAR Cloud SaaS Console',
     domain: 'app.brcstar.in',
     url: 'https://app.brcstar.in/',
     category: 'SaaS & Web Apps',
+    badgeLabel: 'ENTERPRISE SAAS CONSOLE',
+    headlineMain: 'BRC STAR App',
+    headlineSub: 'Cloud SaaS Platform',
     tagline: 'Centralized Workflow Automation, Telemetry Dashboards & Multi-Tenant SaaS',
     description:
-      'A scalable, multi-tenant cloud application console engineered for high-throughput operations. Features real-time analytical telemetry, role-based access management, modular dashboards, and automated workflow triggers.',
+      'An enterprise cloud application console engineered for high-throughput workflows, providing real-time telemetry metrics, role-based authorization, modular dashboards, and automated pipeline triggers.',
+    featureCards: [
+      { icon: 'Layers', title: 'Multi-Tenant SaaS' },
+      { icon: 'Laptop', title: 'Interactive Console' },
+      { icon: 'Shield', title: 'Role-Based Access' },
+      { icon: 'Gauge', title: 'Real-Time Telemetry' },
+    ],
     technologies: ['React 19', 'Next.js App Router', 'REST & GraphQL', 'State Management', 'RBAC Security'],
-    imageSrc: '/images/brc-star-multi-device-tech-showcase.jpg',
+    screenshotSrc: '/images/live-showcase/app.png',
+    imageSrc: '/images/live-showcase/app.png',
     altText: 'BRC STAR Cloud SaaS Console and Enterprise Web Application',
     badge: 'SaaS Application',
     highlights: [
@@ -99,15 +159,25 @@ export const LIVE_PROJECTS: LiveProject[] = [
   },
   {
     id: 'texon-textile',
-    name: 'Texon B2B Textile & Industrial Manufacturing Portal',
+    name: 'TEXON Textile E-Commerce Platform',
     domain: 'texon.brcstar.in',
     url: 'https://texon.brcstar.in',
     category: 'Textile & Manufacturing',
-    tagline: 'Industrial Weaving Machinery, Fabric Catalogs & B2B Global Export Network',
+    badgeLabel: 'TEXTILE & INDUSTRIAL E-COMMERCE',
+    headlineMain: 'TEXON',
+    headlineSub: 'E-Commerce Website',
+    tagline: 'Modern, Elegant & User-Friendly Textile E-Commerce Platform',
     description:
-      'An industrial-grade B2B web platform connecting textile mills, fabric distributors, and global buyers. Includes digital swatch lookbooks, loom machinery specifications, bulk quotation engines, and international export tracking.',
+      'A fully responsive e-commerce website for TEXON showcasing sarees, dress materials, suits, kurtis and home textiles with a modern design, easy navigation and seamless shopping experience.',
+    featureCards: [
+      { icon: 'ShoppingCart', title: 'E-Commerce Store' },
+      { icon: 'Laptop', title: 'Responsive Design' },
+      { icon: 'Layers', title: 'Modern UI/UX' },
+      { icon: 'Gauge', title: 'Fast Loading Performance' },
+    ],
     technologies: ['Next.js', 'B2B Catalog', 'Bulk Inquiry Engine', 'Export Logistics', 'Cloud CDN'],
-    imageSrc: '/images/Brctex Responsive Textile Website Showcase.png',
+    screenshotSrc: '/images/live-showcase/texon.png',
+    imageSrc: '/images/live-showcase/texon.png',
     altText: 'Texon B2B Textile and Industrial Manufacturing platform live showcase',
     badge: 'Industrial B2B',
     highlights: [
@@ -118,15 +188,25 @@ export const LIVE_PROJECTS: LiveProject[] = [
   },
   {
     id: 'bizguru-advisory',
-    name: 'BizGuru Strategic Business Advisory & Mentorship',
+    name: 'BizGuru Strategic Business Advisory',
     domain: 'bizguru.brcstar.in',
     url: 'https://bizguru.brcstar.in',
     category: 'Business Advisory',
+    badgeLabel: 'STRATEGIC ADVISORY & EDTECH',
+    headlineMain: 'BizGuru AI',
+    headlineSub: 'Executive Advisory Hub',
     tagline: 'Executive Coaching, Growth Mentorship, Market Strategy & EdTech Hub',
     description:
-      'An interactive business advisory platform tailored for founders, startups, and SMEs. Provides strategic growth playbooks, curated executive mentorship sessions, actionable roadmaps, and automated diagnostic scorecards.',
+      'An interactive business advisory portal for founders and executives, delivering structured venture validation roadmaps, 1-on-1 mentorship bookings, business health scorecards, and strategy frameworks.',
+    featureCards: [
+      { icon: 'Calendar', title: 'Executive Coaching' },
+      { icon: 'Laptop', title: 'Responsive Design' },
+      { icon: 'Layers', title: 'EdTech Modules' },
+      { icon: 'Gauge', title: 'Fast Loading Speed' },
+    ],
     technologies: ['Next.js', 'Tailwind CSS', 'Booking Engine', 'EdTech Modules', 'Analytics Tracker'],
-    imageSrc: '/images/slider/brcstar-slider-07.webp',
+    screenshotSrc: '/images/live-showcase/bizguru.png',
+    imageSrc: '/images/live-showcase/bizguru.png',
     altText: 'BizGuru Strategic Business Advisory and Executive Mentorship platform',
     badge: 'Business Advisory',
     highlights: [
@@ -137,15 +217,25 @@ export const LIVE_PROJECTS: LiveProject[] = [
   },
   {
     id: 'funding-ai',
-    name: 'FundingAI Investor Intelligence & Capital Readiness',
+    name: 'FundingAI Investor Intelligence Platform',
     domain: 'funding-ai.brcstar.in',
     url: 'https://funding-ai.brcstar.in',
     category: 'AI & FinTech',
+    badgeLabel: 'AI & FINTECH INTELLIGENCE',
+    headlineMain: 'Funding AI',
+    headlineSub: 'Investor Intelligence Portal',
     tagline: 'AI-Powered Pitch Evaluation, VC Matchmaking & Capital Readiness Analytics',
     description:
-      'An intelligent FinTech platform utilizing AI algorithms to analyze startup pitch decks, model financial projections, benchmark key traction metrics, and connect investment-ready ventures with targeted venture capital partners.',
+      'An intelligent AI-driven venture intelligence platform analyzing founder pitch decks, assessing capital readiness, benchmarking financial unit metrics, and connecting ventures with prospective investors.',
+    featureCards: [
+      { icon: 'Cpu', title: 'AI Pitch Scoring' },
+      { icon: 'Laptop', title: 'Responsive Design' },
+      { icon: 'Layers', title: 'VC Matchmaking' },
+      { icon: 'Gauge', title: 'Instant Analytics' },
+    ],
     technologies: ['Next.js 15', 'AI Models', 'FinTech Analytics', 'Interactive Scorecards', 'Tailwind CSS'],
-    imageSrc: '/images/slider/brcstar-slider-09.webp',
+    screenshotSrc: '/images/live-showcase/funding-ai.png',
+    imageSrc: '/images/live-showcase/funding-ai.png',
     altText: 'FundingAI Investor Intelligence and Capital Readiness platform',
     badge: 'AI & FinTech',
     highlights: [

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { ProjectInquiryModal } from '@/components/ProjectInquiryModal';
+import { LiveProjectsHeroCarousel } from '@/components/LiveProjectsHeroCarousel';
 import {
   LIVE_PROJECTS,
   PORTFOLIO_CATEGORIES,
@@ -137,6 +138,11 @@ export default function PortfolioPage() {
               </div>
             </div>
           </header>
+
+          {/* Dynamic Live Projects Hero Carousel (Reference Design Showcase) */}
+          <section aria-label="Featured Live Project Showcase Carousel" className="pt-2">
+            <LiveProjectsHeroCarousel onOpenInquiry={handleOpenInquiry} />
+          </section>
 
           {/* Interactive Category Filter Bar */}
           <section aria-label="Portfolio Category Filters" className="space-y-4">
