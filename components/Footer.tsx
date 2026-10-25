@@ -168,6 +168,11 @@ export function Footer({ onOpenInquiry }: FooterProps) {
                 </Link>
               </li>
               <li>
+                <Link href="/portfolio" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold transition-colors">
+                  Live Projects Portfolio →
+                </Link>
+              </li>
+              <li>
                 <Link href="/login" className="text-emerald-600 dark:text-emerald-400 hover:underline font-semibold transition-colors">
                   Client Login →
                 </Link>
@@ -188,8 +193,8 @@ export function Footer({ onOpenInquiry }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link href="/#showcase" className="hover:text-blue-400 transition-colors">
-                  Visual Case Studies
+                <Link href="/portfolio" className="hover:text-blue-400 transition-colors">
+                  Live Projects Portfolio
                 </Link>
               </li>
               <li>
