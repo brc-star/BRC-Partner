@@ -247,12 +247,12 @@ export const LIVE_PROJECTS: LiveProject[] = [
 ];
 
 export const PORTFOLIO_CATEGORIES = [
-  'All',
-  'Healthcare',
-  'Technology & IT',
-  'Enterprise',
+  'All Projects',
   'SaaS & Web Apps',
   'Textile & Manufacturing',
   'Business Advisory',
+  'Healthcare',
+  'Technology & IT',
+  'Enterprise',
   'AI & FinTech',
 ] as const;
