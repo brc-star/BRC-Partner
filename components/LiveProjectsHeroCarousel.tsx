@@ -37,6 +37,16 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
   const touchStartXRef = useRef<number | null>(null);
   const touchEndXRef = useRef<number | null>(null);
 
+  // Preload all 7 project screenshots on mount for instantaneous, flicker-free transitions
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      LIVE_PROJECTS.forEach((proj) => {
+        const img = new window.Image();
+        img.src = proj.screenshotSrc;
+      });
+    }
+  }, []);
+
   // Transition handlers
   const goToNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % totalProjects);
@@ -56,7 +66,6 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
 
   // 1-second auto-transition with pause-on-hover & reduced motion check
   useEffect(() => {
-    // Check for prefers-reduced-motion
     if (typeof window !== 'undefined') {
       const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
       if (mediaQuery.matches) {
@@ -69,12 +78,12 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
 
     const interval = setInterval(() => {
       goToNext();
-    }, 1000); // 1-second transition interval per request
+    }, 1000); // 1-second auto-transition per user specification
 
     return () => clearInterval(interval);
   }, [isPaused, goToNext]);
 
-  // Touch handlers for mobile
+  // Touch handlers for mobile swipe
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartXRef.current = e.touches[0].clientX;
   };
@@ -109,9 +118,9 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
     }
   };
 
-  // Icon renderer for feature cards
+  // Icon renderer for the 4 feature cards
   const renderFeatureIcon = (iconName: ProjectFeatureCard['icon']) => {
-    const iconClass = 'w-5 h-5 text-[#b47e28] dark:text-[#d99e38]';
+    const iconClass = 'w-5 h-5 text-[#b47e28] dark:text-[#e0a94e]';
     switch (iconName) {
       case 'ShoppingCart':
         return <ShoppingCart className={iconClass} />;
@@ -148,53 +157,56 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="relative w-full rounded-2xl sm:rounded-3xl border border-[#e6d5bc] dark:border-[#b47e28]/30 bg-gradient-to-br from-[#faf7f2] via-[#ffffff] to-[#f4ede2] dark:from-[#060c1c] dark:via-[#09132b] dark:to-[#040813] shadow-2xl shadow-black/10 dark:shadow-black/60 overflow-hidden focus:outline-none focus:ring-2 focus:ring-[#b47e28] transition-colors duration-300"
+      className="relative w-full rounded-2xl sm:rounded-3xl border border-[#e6d5bc] dark:border-[#b47e28]/35 bg-gradient-to-br from-[#faf7f2] via-[#ffffff] to-[#f4ede2] dark:from-[#060c1c] dark:via-[#09132b] dark:to-[#040813] shadow-2xl shadow-black/10 dark:shadow-black/70 overflow-hidden focus:outline-none focus:ring-2 focus:ring-[#b47e28] transition-colors duration-300"
     >
-      {/* Decorative Warm Luxury Background Elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#b47e28]/10 via-[#d99e38]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-600/10 via-indigo-600/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+      {/* Decorative Luxury Lighting & Ambient Glows */}
+      <div className="absolute top-0 right-0 w-[420px] h-[420px] bg-gradient-to-br from-[#b47e28]/12 via-[#d99e38]/6 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[420px] h-[420px] bg-gradient-to-tr from-blue-600/10 via-indigo-600/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
       {/* Top Header Control Strip */}
-      <div className="relative z-20 px-4 sm:px-8 pt-5 sm:pt-6 flex items-center justify-between border-b border-[#e6d5bc]/60 dark:border-slate-800/80 pb-3">
-        {/* Left: Project Count & Sequence */}
-        <div className="flex items-center gap-3">
+      <div className="relative z-20 px-4 sm:px-8 pt-5 sm:pt-6 flex items-center justify-between border-b border-[#e6d5bc]/70 dark:border-slate-800/80 pb-3">
+        {/* Left: Project Sequence & Live Domain Pill */}
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <span className="font-mono text-xs font-bold text-[#b47e28] dark:text-[#d99e38] tracking-widest uppercase">
             Project {String(currentIndex + 1).padStart(2, '0')} / {String(totalProjects).padStart(2, '0')}
           </span>
-          <span className="hidden sm:inline-block h-3 w-px bg-slate-300 dark:bg-slate-700" />
-          <span className="hidden sm:inline-block text-xs font-medium text-slate-500 dark:text-slate-400">
+          <span className="h-3 w-px bg-slate-300 dark:bg-slate-700" />
+          <span className="text-xs font-medium text-slate-700 dark:text-slate-300 truncate max-w-[180px] sm:max-w-none">
             {currentProject.name}
           </span>
         </div>
 
-        {/* Right: Autoplay Status & Pause/Resume Control */}
+        {/* Right: Autoplay Status & Navigation Arrows */}
         <div className="flex items-center gap-2">
+          {/* Pause / Resume Button */}
           <button
             type="button"
             onClick={togglePause}
-            aria-label={isPaused ? 'Resume autoplay (1s)' : 'Pause autoplay'}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white/80 dark:bg-slate-900/80 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:border-[#b47e28] shadow-sm transition-all cursor-pointer"
+            aria-label={isPaused ? 'Resume 1s autoplay' : 'Pause autoplay'}
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:border-[#b47e28] shadow-sm transition-all cursor-pointer"
           >
             {isPaused ? (
               <>
                 <Play className="w-3 h-3 text-[#b47e28]" fill="currentColor" />
-                <span className="font-mono text-[11px]">Paused (Play)</span>
+                <span className="font-mono text-[11px] font-semibold">Paused (Play)</span>
               </>
             ) : (
               <>
                 <Pause className="w-3 h-3 text-emerald-500" fill="currentColor" />
-                <span className="font-mono text-[11px] text-emerald-600 dark:text-emerald-400">1s Live Auto</span>
+                <span className="font-mono text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                  1s Live Auto
+                </span>
               </>
             )}
           </button>
 
-          {/* Nav Arrows */}
+          {/* Navigation Arrows */}
           <div className="flex items-center gap-1">
             <button
               type="button"
               onClick={goToPrev}
               aria-label="Previous live project"
-              className="p-1.5 rounded-lg bg-white/80 dark:bg-slate-900/80 hover:bg-[#b47e28] hover:text-white text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg bg-white/90 dark:bg-slate-900/90 hover:bg-[#b47e28] hover:text-white text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors cursor-pointer"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -202,7 +214,7 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
               type="button"
               onClick={goToNext}
               aria-label="Next live project"
-              className="p-1.5 rounded-lg bg-white/80 dark:bg-slate-900/80 hover:bg-[#b47e28] hover:text-white text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg bg-white/90 dark:bg-slate-900/90 hover:bg-[#b47e28] hover:text-white text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition-colors cursor-pointer"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -214,7 +226,7 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 p-5 sm:p-8 lg:p-10 items-center">
         
         {/* Left-Side Content Panel (5 cols on lg) */}
-        <div className="lg:col-span-5 space-y-5 transition-opacity duration-300">
+        <div className="lg:col-span-5 space-y-5">
           
           {/* Featured Project Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#07132e] text-white border border-[#b47e28]/60 shadow-md">
@@ -224,9 +236,9 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
             </span>
           </div>
 
-          {/* Project Title (Editorial Serif Typography matching reference image) */}
+          {/* Editorial Display Headline (Inspired directly by the reference image) */}
           <div className="space-y-1">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#07132e] dark:text-white leading-[1.1]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#07132e] dark:text-white leading-[1.08]">
               <span className="block font-serif tracking-tight">{currentProject.headlineMain}</span>
               <span className="block font-serif text-[#0c2356] dark:text-slate-200 font-bold text-2xl sm:text-3xl md:text-4xl mt-0.5">
                 {currentProject.headlineSub}
@@ -242,14 +254,14 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
             {currentProject.description}
           </p>
 
-          {/* 4 Feature & Technology Icon Cards (Exact 4-Box Row Layout from Reference) */}
+          {/* 4 Feature & Technology Icon Cards (Exact 4-Box Row Layout) */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
             {currentProject.featureCards.map((card, idx) => (
               <div
                 key={idx}
-                className="bg-[#f2ecdf]/80 dark:bg-slate-900/80 border border-[#e3d5be] dark:border-slate-800 rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5 shadow-sm hover:border-[#b47e28] transition-colors"
+                className="bg-[#f4efe6]/90 dark:bg-[#0c1630]/90 border border-[#e2d5c0] dark:border-[#b47e28]/25 rounded-xl p-2.5 flex flex-col items-center justify-center text-center gap-1.5 shadow-sm hover:border-[#b47e28] transition-colors"
               >
-                <div className="p-1 rounded-lg bg-white/70 dark:bg-slate-800/80">
+                <div className="p-1.5 rounded-lg bg-white/80 dark:bg-slate-800/80 shadow-xs">
                   {renderFeatureIcon(card.icon)}
                 </div>
                 <span className="text-[11px] font-bold text-slate-800 dark:text-slate-200 leading-tight">
@@ -259,7 +271,7 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
             ))}
           </div>
 
-          {/* Dual CTAs (Matching Gold Button & Outline Button from Reference Image) */}
+          {/* Dual CTAs (Matching Gold Button & Outline Button from Reference) */}
           <div className="pt-3 flex flex-wrap items-center gap-3">
             {/* Primary Gold Button: View Live Project */}
             <a
@@ -288,20 +300,20 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
         {/* Right-Side Content Panel: Large Front-Facing Laptop Mockup (7 cols on lg) */}
         <div className="lg:col-span-7 flex flex-col items-center justify-center">
           
-          {/* Laptop Mockup Wrapper */}
+          {/* Laptop Mockup Wrapper with Correct Scaling & Proper Screen Alignment */}
           <div className="relative w-full max-w-2xl mx-auto select-none">
             
             {/* Laptop Screen Bezel */}
-            <div className="relative bg-[#0d1117] rounded-t-2xl sm:rounded-t-3xl p-2.5 sm:p-3.5 pt-3 sm:pt-4 shadow-2xl border-t border-x border-slate-700/80">
+            <div className="relative bg-[#0a0d14] rounded-t-[20px] sm:rounded-t-[28px] p-2 sm:p-3 pb-0 shadow-2xl border-t border-x border-slate-700/80">
               
               {/* Webcam Dot */}
-              <div className="absolute top-1.5 left-1/2 -translate-x-1/2 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-slate-900 border border-slate-700" />
-                <span className="w-0.5 h-0.5 rounded-full bg-blue-400 opacity-60" />
+              <div className="absolute top-1 sm:top-1.5 left-1/2 -translate-x-1/2 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-950 border border-slate-700" />
+                <span className="w-0.5 h-0.5 rounded-full bg-emerald-400 opacity-80" />
               </div>
 
-              {/* Browser Chrome Bar */}
-              <div className="flex items-center justify-between px-3 py-1.5 bg-[#161b22] rounded-t-lg sm:rounded-t-xl border-b border-slate-800 text-xs font-mono text-slate-400 mb-1">
+              {/* Browser Chrome Header Bar */}
+              <div className="flex items-center justify-between px-3 py-1.5 bg-[#141824] rounded-t-lg sm:rounded-t-xl border-b border-slate-800 text-xs font-mono text-slate-400 mb-0.5">
                 {/* Window Control Dots */}
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
@@ -310,40 +322,53 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
                 </div>
 
                 {/* HTTPS Live Domain Address Bar */}
-                <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-[#0d1117] text-slate-300 text-[10px] sm:text-[11px] border border-slate-700/60 max-w-xs truncate">
+                <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-[#0a0d14] text-slate-200 text-[10px] sm:text-[11px] border border-slate-700/60 max-w-xs truncate shadow-inner">
                   <Lock className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
                   <span className="truncate">{currentProject.url}</span>
                 </div>
 
-                {/* Status indicator */}
+                {/* Live Online Badge */}
                 <div className="flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-[9px] uppercase tracking-wider text-emerald-400 font-semibold hidden sm:inline">
+                  <span className="text-[9px] uppercase tracking-wider text-emerald-400 font-bold hidden sm:inline">
                     LIVE
                   </span>
                 </div>
               </div>
 
-              {/* Laptop Screen Content Display (16:10 ratio) */}
-              <div className="relative w-full aspect-[16/10] bg-slate-950 overflow-hidden rounded-b-lg sm:rounded-b-xl border border-slate-800/80 group">
-                <img
-                  key={currentProject.id}
-                  src={currentProject.screenshotSrc}
-                  alt={currentProject.altText}
-                  className="w-full h-full object-cover object-top transition-all duration-700 ease-out animate-fadeIn"
-                />
+              {/* Laptop Screen Content Display (Exact 16:10 Ratio, Zero Blank Flash) */}
+              <div className="relative w-full aspect-[16/10] bg-[#050810] overflow-hidden rounded-b-md sm:rounded-b-lg border border-slate-800/90 group">
+                {/* Preloaded Multi-Layered Slide Stack */}
+                {LIVE_PROJECTS.map((proj, idx) => {
+                  const isActive = idx === currentIndex;
+                  return (
+                    <div
+                      key={proj.id}
+                      className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                        isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                      }`}
+                    >
+                      <img
+                        src={proj.screenshotSrc}
+                        alt={proj.altText}
+                        loading={idx === 0 || idx === 1 ? 'eager' : 'lazy'}
+                        className="w-full h-full object-cover object-top"
+                      />
+                    </div>
+                  );
+                })}
 
-                {/* Subtle Screen Glare Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.08] pointer-events-none" />
+                {/* Screen Glare Highlight */}
+                <div className="absolute inset-0 z-20 bg-gradient-to-tr from-transparent via-white/[0.02] to-white/[0.05] pointer-events-none" />
 
-                {/* Hover Clickable Overlay with Direct Link */}
+                {/* Clickable Overlay Link to Live Website */}
                 <a
                   href={currentProject.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute inset-0 bg-slate-950/40 opacity-0 hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-2 text-white font-semibold text-xs sm:text-sm backdrop-blur-[2px]"
+                  className="absolute inset-0 z-30 bg-slate-950/40 opacity-0 hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-2 text-white font-semibold text-xs sm:text-sm backdrop-blur-[2px]"
                 >
-                  <span className="px-4 py-2 rounded-xl bg-[#b47e28] text-white shadow-lg inline-flex items-center gap-2">
+                  <span className="px-4 py-2 rounded-xl bg-[#b47e28] text-white shadow-xl inline-flex items-center gap-2 font-bold">
                     <span>Visit {currentProject.domain}</span>
                     <ExternalLink className="w-4 h-4" />
                   </span>
@@ -351,20 +376,20 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
               </div>
             </div>
 
-            {/* Laptop Bottom Chassis / Keyboard Base */}
+            {/* Laptop Bottom Chassis / Keyboard Base with Front Edge Perspective */}
             <div className="relative h-3 sm:h-4 bg-gradient-to-b from-[#3a3d45] via-[#2a2d34] to-[#1c1e24] rounded-b-xl sm:rounded-b-2xl shadow-xl flex items-center justify-center border-t border-slate-600/50">
               {/* Thumb Notch Indent */}
               <div className="w-14 sm:w-20 h-1 sm:h-1.5 rounded-b-md bg-[#16181d] border-b border-slate-500/30" />
             </div>
 
-            {/* Laptop Base Shadow / Table Surface Reflection */}
-            <div className="w-11/12 mx-auto h-2 sm:h-3 bg-black/40 blur-md rounded-full mt-0.5" />
+            {/* Laptop Base Surface Shadow / Ambient Reflection */}
+            <div className="w-11/12 mx-auto h-2.5 sm:h-3.5 bg-black/40 blur-md rounded-full mt-0.5" />
           </div>
         </div>
       </div>
 
-      {/* Bottom Interactive Project Quick-Jump Strip (7 Projects) */}
-      <div className="relative z-20 px-4 sm:px-8 py-4 bg-[#ede4d5]/70 dark:bg-[#070e22]/90 border-t border-[#e6d5bc]/80 dark:border-slate-800/80 flex flex-wrap items-center justify-between gap-3">
+      {/* Bottom Interactive Quick-Jump Strip (7 Live Projects) */}
+      <div className="relative z-20 px-4 sm:px-8 py-3.5 bg-[#ede4d5]/75 dark:bg-[#070e22]/95 border-t border-[#e6d5bc]/80 dark:border-slate-800/80 flex flex-wrap items-center justify-between gap-3">
         {/* Clickable Project Tabs */}
         <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
           {LIVE_PROJECTS.map((proj, idx) => {
@@ -378,7 +403,7 @@ export function LiveProjectsHeroCarousel({ onOpenInquiry }: LiveProjectsHeroCaro
                 className={`px-2.5 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${
                   isActive
                     ? 'bg-[#b47e28] text-white shadow-md shadow-[#b47e28]/25 ring-2 ring-[#b47e28] ring-offset-1 ring-offset-white dark:ring-offset-[#070e22]'
-                    : 'bg-white/80 dark:bg-slate-900/70 text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700'
+                    : 'bg-white/90 dark:bg-slate-900/80 text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700'
                 }`}
               >
                 <span>{String(idx + 1).padStart(2, '0')}. </span>
