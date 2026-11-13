@@ -56,16 +56,24 @@ export function Footer({ onOpenInquiry }: FooterProps) {
               We design, build, deploy and support high-performance digital products, custom web applications, mobile platforms, and AI architectures for ambitious businesses.
             </p>
 
-            <div className="space-y-1.5 pt-2 font-mono text-[11px] text-slate-600 dark:text-slate-400">
+            <div className="space-y-2 pt-2 font-mono text-[11px] text-slate-600 dark:text-slate-400">
               <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
+                <Mail className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400 shrink-0" />
                 <a href={`mailto:${BRC_STAR_INFO.contactEmail}`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                   {BRC_STAR_INFO.contactEmail}
                 </a>
               </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
-                <span>{BRC_STAR_INFO.location}</span>
+              <div className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400 shrink-0 mt-0.5" />
+                <div className="leading-snug">
+                  <span className="font-semibold text-slate-700 dark:text-slate-300">HQ:</span> SG Highway, Ahmedabad, Gujarat – 380054
+                </div>
+              </div>
+              <div className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-purple-500 dark:text-purple-400 shrink-0 mt-0.5" />
+                <div className="leading-snug">
+                  <span className="font-semibold text-slate-700 dark:text-slate-300">Office:</span> 7SJM-A, Anupgarh, Rajasthan – 335701
+                </div>
               </div>
             </div>
 

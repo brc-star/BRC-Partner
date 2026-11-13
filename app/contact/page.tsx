@@ -18,6 +18,7 @@ import {
   Loader2,
   Send,
   Building,
+  Building2,
   User,
   Sparkles,
 } from 'lucide-react';
@@ -421,16 +422,39 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  {/* Location */}
+                  {/* Registered Corporate Headquarters */}
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-950/80 border border-purple-200 dark:border-purple-800 flex items-center justify-center text-purple-600 dark:text-purple-400 shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-950/80 border border-purple-200 dark:border-purple-800 flex items-center justify-center text-purple-600 dark:text-purple-400 shrink-0 mt-0.5">
+                      <Building2 className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-1.5 mb-0.5">
+                        <span className="text-[11px] font-mono text-slate-500">Corporate Location</span>
+                        <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-semibold border border-blue-200 dark:border-blue-800/40">
+                          Registered HQ
+                        </span>
+                      </div>
+                      <p className="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+                        {SITE.addresses.headquarters.display}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Regional Office */}
+                  <div className="flex items-start gap-3 pt-1">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5">
                       <MapPin className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="text-[11px] font-mono text-slate-500 block">Engineering Hub</span>
-                      <span className="text-slate-700 dark:text-slate-300 font-medium">
-                        Surat &amp; Ahmedabad, Gujarat, India
-                      </span>
+                      <div className="flex items-center gap-1.5 mb-0.5">
+                        <span className="text-[11px] font-mono text-slate-500">Company Office</span>
+                        <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-semibold border border-emerald-200 dark:border-emerald-800/40">
+                          Regional Office
+                        </span>
+                      </div>
+                      <p className="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+                        {SITE.addresses.regionalOffice.display}
+                      </p>
                     </div>
                   </div>
                 </div>

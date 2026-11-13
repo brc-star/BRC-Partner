@@ -115,11 +115,18 @@ export default function AboutPage() {
                   <span className="text-slate-500 dark:text-slate-400">GST Registration:</span>
                   <span className="font-mono font-semibold text-slate-800 dark:text-slate-200">{SITE.gstin}</span>
                 </div>
-                <div className="flex justify-between py-1">
-                  <span className="text-slate-500 dark:text-slate-400">Headquarters:</span>
+                <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/60">
+                  <span className="text-slate-500 dark:text-slate-400">Registered HQ:</span>
                   <span className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1">
                     <MapPin className="w-3 h-3 text-red-500" />
                     Ahmedabad, Gujarat, India
+                  </span>
+                </div>
+                <div className="flex justify-between py-1">
+                  <span className="text-slate-500 dark:text-slate-400">Regional Office:</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1">
+                    <MapPin className="w-3 h-3 text-emerald-500" />
+                    Anupgarh, Rajasthan, India
                   </span>
                 </div>
               </div>

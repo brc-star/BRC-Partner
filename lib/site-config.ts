@@ -14,6 +14,28 @@ export const SITE = {
     postalCode: '380054',
     country: 'India',
   },
+  addresses: {
+    headquarters: {
+      type: 'Registered Corporate Headquarters',
+      street: 'BRC STAR Headquarters, SG Highway',
+      city: 'Ahmedabad',
+      state: 'Gujarat',
+      postalCode: '380054',
+      country: 'India',
+      display: 'BRC STAR Headquarters, SG Highway, Ahmedabad, Gujarat – 380054, India',
+    },
+    regionalOffice: {
+      type: 'Regional Office',
+      street: '7SJM-A',
+      locality: 'Anupgarh',
+      district: 'Ganganagar',
+      city: 'Anupgarh',
+      state: 'Rajasthan',
+      postalCode: '335701',
+      country: 'India',
+      display: '7SJM-A, Anupgarh, Ganganagar, Rajasthan – 335701, India',
+    },
+  },
   projectSeason: 'Accepting Q4 2026 / Q1 2027 projects',
   stack: {
     nextjs: '15',

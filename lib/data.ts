@@ -15,7 +15,19 @@ export const BRC_STAR_INFO = {
   subheadline:
     'From high-performance websites and web applications to mobile apps, enterprise platforms, AI solutions and custom business systems — BRC STAR designs and develops technology around your real business needs.',
   contactEmail: 'contact@brcstar.in',
-  location: 'Engineering Hub • Surat, Gujarat, India',
+  location: 'Ahmedabad, Gujarat & Anupgarh, Rajasthan, India',
+  locations: [
+    {
+      title: 'Corporate Headquarters',
+      city: 'Ahmedabad, Gujarat',
+      full: 'BRC STAR Headquarters, SG Highway, Ahmedabad, Gujarat – 380054, India',
+    },
+    {
+      title: 'Regional Office',
+      city: 'Anupgarh, Rajasthan',
+      full: '7SJM-A, Anupgarh, Ganganagar, Rajasthan – 335701, India',
+    },
+  ],
   availability: 'Accepting select new projects for Q4 2026 / Q1 2027',
 };
 

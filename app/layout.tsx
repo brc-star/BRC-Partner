@@ -65,14 +65,26 @@ const orgJsonLd = {
   url: SITE.url,
   email: SITE.email,
   telephone: SITE.phone,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: SITE.address.street,
-    addressLocality: SITE.address.city,
-    addressRegion: SITE.address.state,
-    postalCode: SITE.address.postalCode,
-    addressCountry: 'IN',
-  },
+  address: [
+    {
+      '@type': 'PostalAddress',
+      name: 'Registered Corporate Headquarters',
+      streetAddress: SITE.addresses.headquarters.street,
+      addressLocality: SITE.addresses.headquarters.city,
+      addressRegion: SITE.addresses.headquarters.state,
+      postalCode: SITE.addresses.headquarters.postalCode,
+      addressCountry: 'IN',
+    },
+    {
+      '@type': 'PostalAddress',
+      name: 'Regional Office',
+      streetAddress: SITE.addresses.regionalOffice.street,
+      addressLocality: SITE.addresses.regionalOffice.city,
+      addressRegion: SITE.addresses.regionalOffice.state,
+      postalCode: SITE.addresses.regionalOffice.postalCode,
+      addressCountry: 'IN',
+    },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
